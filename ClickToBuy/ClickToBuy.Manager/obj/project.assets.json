@@ -1282,7 +1282,8 @@
         "type": "project",
         "framework": ".NETCoreApp,Version=v3.1",
         "dependencies": {
-          "ClickToBuy.Database": "1.0.0"
+          "ClickToBuy.Database": "1.0.0",
+          "ClickToBuy.Model": "1.0.0"
         },
         "compile": {
           "bin/placeholder/ClickToBuy.Repository.dll": {}
@@ -4929,6 +4930,7 @@
   },
   "projectFileDependencyGroups": {
     ".NETCoreApp,Version=v3.1": [
+      "ClickToBuy.Model >= 1.0.0",
       "ClickToBuy.Repository >= 1.0.0"
     ]
   },
@@ -4965,6 +4967,9 @@
       "frameworks": {
         "netcoreapp3.1": {
           "projectReferences": {
+            "F:\\C# Project\\Web Application - CORE\\Click-To-Buy\\ClickToBuy\\ClickToBuy.Model\\ClickToBuy.Model.csproj": {
+              "projectPath": "F:\\C# Project\\Web Application - CORE\\Click-To-Buy\\ClickToBuy\\ClickToBuy.Model\\ClickToBuy.Model.csproj"
+            },
             "F:\\C# Project\\Web Application - CORE\\Click-To-Buy\\ClickToBuy\\ClickToBuy.Repository\\ClickToBuy.Repository.csproj": {
               "projectPath": "F:\\C# Project\\Web Application - CORE\\Click-To-Buy\\ClickToBuy\\ClickToBuy.Repository\\ClickToBuy.Repository.csproj"
             }

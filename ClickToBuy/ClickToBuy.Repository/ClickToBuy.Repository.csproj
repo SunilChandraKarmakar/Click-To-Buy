@@ -6,6 +6,7 @@
 
   <ItemGroup>
     <ProjectReference Include="..\ClickToBuy.Database\ClickToBuy.Database.csproj" />
+    <ProjectReference Include="..\ClickToBuy.Model\ClickToBuy.Model.csproj" />
   </ItemGroup>
 
 </Project>

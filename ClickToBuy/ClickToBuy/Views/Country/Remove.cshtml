@@ -1,0 +1,26 @@
+﻿@model ClickToBuy.Model.Country
+
+@{
+    ViewData["Title"] = "Remove";
+    Layout = "~/Views/Shared/_AdminLayout.cshtml";
+}
+
+<h2 id="hadertitle">Country Delete</h2>
+<hr />
+
+<div>
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.Name)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.Name)
+        </dd>
+    </dl>
+
+    <form asp-action="Remove" id="createandeditfrom">
+        <input type="hidden" asp-for="Id" />
+        <input type="submit" value="Remove" class="btn btn-danger" />
+        <a asp-action="Index" class="btn btn-info"><i class="fas fa-list"></i> Back To List</a>
+    </form>
+</div>

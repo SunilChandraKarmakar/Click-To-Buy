@@ -12,6 +12,10 @@ using ClickToBuy.Data;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
+using ClickToBuy.Manager.Contracts;
+using ClickToBuy.Manager;
+using ClickToBuy.Repository.Contracts;
+using ClickToBuy.Repository;
 
 namespace ClickToBuy
 {
@@ -34,6 +38,9 @@ namespace ClickToBuy
                 .AddEntityFrameworkStores<ApplicationDbContext>();
             services.AddControllersWithViews();
             services.AddRazorPages();
+
+            services.AddTransient<ICountryManager, CountryManager>();
+            services.AddTransient<ICountryRepository, CountryRepository>();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.

@@ -8,6 +8,7 @@
     ".NETCoreApp,Version=v3.1": {
       "ClickToBuy.Manager/1.0.0": {
         "dependencies": {
+          "ClickToBuy.Model": "1.0.0",
           "ClickToBuy.Repository": "1.0.0"
         },
         "runtime": {
@@ -851,7 +852,8 @@
       },
       "ClickToBuy.Repository/1.0.0": {
         "dependencies": {
-          "ClickToBuy.Database": "1.0.0"
+          "ClickToBuy.Database": "1.0.0",
+          "ClickToBuy.Model": "1.0.0"
         },
         "runtime": {
           "ClickToBuy.Repository.dll": {}

@@ -4911,7 +4911,8 @@
   },
   "projectFileDependencyGroups": {
     ".NETCoreApp,Version=v3.1": [
-      "ClickToBuy.Database >= 1.0.0"
+      "ClickToBuy.Database >= 1.0.0",
+      "ClickToBuy.Model >= 1.0.0"
     ]
   },
   "packageFolders": {
@@ -4949,6 +4950,9 @@
           "projectReferences": {
             "F:\\C# Project\\Web Application - CORE\\Click-To-Buy\\ClickToBuy\\ClickToBuy.Database\\ClickToBuy.Database.csproj": {
               "projectPath": "F:\\C# Project\\Web Application - CORE\\Click-To-Buy\\ClickToBuy\\ClickToBuy.Database\\ClickToBuy.Database.csproj"
+            },
+            "F:\\C# Project\\Web Application - CORE\\Click-To-Buy\\ClickToBuy\\ClickToBuy.Model\\ClickToBuy.Model.csproj": {
+              "projectPath": "F:\\C# Project\\Web Application - CORE\\Click-To-Buy\\ClickToBuy\\ClickToBuy.Model\\ClickToBuy.Model.csproj"
             }
           }
         }

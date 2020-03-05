@@ -5,6 +5,7 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <ProjectReference Include="..\ClickToBuy.Model\ClickToBuy.Model.csproj" />
     <ProjectReference Include="..\ClickToBuy.Repository\ClickToBuy.Repository.csproj" />
   </ItemGroup>
 

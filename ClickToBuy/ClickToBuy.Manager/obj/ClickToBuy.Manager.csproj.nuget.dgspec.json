@@ -115,6 +115,9 @@
         "frameworks": {
           "netcoreapp3.1": {
             "projectReferences": {
+              "F:\\C# Project\\Web Application - CORE\\Click-To-Buy\\ClickToBuy\\ClickToBuy.Model\\ClickToBuy.Model.csproj": {
+                "projectPath": "F:\\C# Project\\Web Application - CORE\\Click-To-Buy\\ClickToBuy\\ClickToBuy.Model\\ClickToBuy.Model.csproj"
+              },
               "F:\\C# Project\\Web Application - CORE\\Click-To-Buy\\ClickToBuy\\ClickToBuy.Repository\\ClickToBuy.Repository.csproj": {
                 "projectPath": "F:\\C# Project\\Web Application - CORE\\Click-To-Buy\\ClickToBuy\\ClickToBuy.Repository\\ClickToBuy.Repository.csproj"
               }
@@ -235,6 +238,9 @@
             "projectReferences": {
               "F:\\C# Project\\Web Application - CORE\\Click-To-Buy\\ClickToBuy\\ClickToBuy.Database\\ClickToBuy.Database.csproj": {
                 "projectPath": "F:\\C# Project\\Web Application - CORE\\Click-To-Buy\\ClickToBuy\\ClickToBuy.Database\\ClickToBuy.Database.csproj"
+              },
+              "F:\\C# Project\\Web Application - CORE\\Click-To-Buy\\ClickToBuy\\ClickToBuy.Model\\ClickToBuy.Model.csproj": {
+                "projectPath": "F:\\C# Project\\Web Application - CORE\\Click-To-Buy\\ClickToBuy\\ClickToBuy.Model\\ClickToBuy.Model.csproj"
               }
             }
           }

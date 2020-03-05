@@ -4,6 +4,274 @@
     "F:\\C# Project\\Web Application - CORE\\Click-To-Buy\\ClickToBuy\\ClickToBuy\\ClickToBuy.csproj": {}
   },
   "projects": {
+    "F:\\C# Project\\Web Application - CORE\\Click-To-Buy\\ClickToBuy\\ClickToBuy.Database\\ClickToBuy.Database.csproj": {
+      "version": "1.0.0",
+      "restore": {
+        "projectUniqueName": "F:\\C# Project\\Web Application - CORE\\Click-To-Buy\\ClickToBuy\\ClickToBuy.Database\\ClickToBuy.Database.csproj",
+        "projectName": "ClickToBuy.Database",
+        "projectPath": "F:\\C# Project\\Web Application - CORE\\Click-To-Buy\\ClickToBuy\\ClickToBuy.Database\\ClickToBuy.Database.csproj",
+        "packagesPath": "C:\\Users\\Sunil\\.nuget\\packages\\",
+        "outputPath": "F:\\C# Project\\Web Application - CORE\\Click-To-Buy\\ClickToBuy\\ClickToBuy.Database\\obj\\",
+        "projectStyle": "PackageReference",
+        "fallbackFolders": [
+          "C:\\Microsoft\\Xamarin\\NuGet\\",
+          "C:\\Program Files\\dotnet\\sdk\\NuGetFallbackFolder"
+        ],
+        "configFilePaths": [
+          "C:\\Users\\Sunil\\AppData\\Roaming\\NuGet\\NuGet.Config",
+          "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config",
+          "C:\\Program Files (x86)\\NuGet\\Config\\Xamarin.Offline.config"
+        ],
+        "originalTargetFrameworks": [
+          "netcoreapp3.1"
+        ],
+        "sources": {
+          "C:\\Program Files (x86)\\Microsoft SDKs\\NuGetPackages\\": {},
+          "https://api.nuget.org/v3/index.json": {}
+        },
+        "frameworks": {
+          "netcoreapp3.1": {
+            "projectReferences": {
+              "F:\\C# Project\\Web Application - CORE\\Click-To-Buy\\ClickToBuy\\ClickToBuy.Model\\ClickToBuy.Model.csproj": {
+                "projectPath": "F:\\C# Project\\Web Application - CORE\\Click-To-Buy\\ClickToBuy\\ClickToBuy.Model\\ClickToBuy.Model.csproj"
+              }
+            }
+          }
+        },
+        "warningProperties": {
+          "warnAsError": [
+            "NU1605"
+          ]
+        }
+      },
+      "frameworks": {
+        "netcoreapp3.1": {
+          "dependencies": {
+            "Microsoft.EntityFrameworkCore": {
+              "target": "Package",
+              "version": "[3.1.2, )"
+            },
+            "Microsoft.EntityFrameworkCore.Design": {
+              "include": "Runtime, Build, Native, ContentFiles, Analyzers, BuildTransitive",
+              "suppressParent": "All",
+              "target": "Package",
+              "version": "[3.1.2, )"
+            },
+            "Microsoft.EntityFrameworkCore.SqlServer": {
+              "target": "Package",
+              "version": "[3.1.2, )"
+            },
+            "Microsoft.EntityFrameworkCore.Tools": {
+              "include": "Runtime, Build, Native, ContentFiles, Analyzers, BuildTransitive",
+              "suppressParent": "All",
+              "target": "Package",
+              "version": "[3.1.2, )"
+            }
+          },
+          "imports": [
+            "net461",
+            "net462",
+            "net47",
+            "net471",
+            "net472",
+            "net48"
+          ],
+          "assetTargetFallback": true,
+          "warn": true,
+          "frameworkReferences": {
+            "Microsoft.NETCore.App": {
+              "privateAssets": "all"
+            }
+          },
+          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\3.1.101\\RuntimeIdentifierGraph.json"
+        }
+      }
+    },
+    "F:\\C# Project\\Web Application - CORE\\Click-To-Buy\\ClickToBuy\\ClickToBuy.Manager\\ClickToBuy.Manager.csproj": {
+      "version": "1.0.0",
+      "restore": {
+        "projectUniqueName": "F:\\C# Project\\Web Application - CORE\\Click-To-Buy\\ClickToBuy\\ClickToBuy.Manager\\ClickToBuy.Manager.csproj",
+        "projectName": "ClickToBuy.Manager",
+        "projectPath": "F:\\C# Project\\Web Application - CORE\\Click-To-Buy\\ClickToBuy\\ClickToBuy.Manager\\ClickToBuy.Manager.csproj",
+        "packagesPath": "C:\\Users\\Sunil\\.nuget\\packages\\",
+        "outputPath": "F:\\C# Project\\Web Application - CORE\\Click-To-Buy\\ClickToBuy\\ClickToBuy.Manager\\obj\\",
+        "projectStyle": "PackageReference",
+        "fallbackFolders": [
+          "C:\\Microsoft\\Xamarin\\NuGet\\",
+          "C:\\Program Files\\dotnet\\sdk\\NuGetFallbackFolder"
+        ],
+        "configFilePaths": [
+          "C:\\Users\\Sunil\\AppData\\Roaming\\NuGet\\NuGet.Config",
+          "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config",
+          "C:\\Program Files (x86)\\NuGet\\Config\\Xamarin.Offline.config"
+        ],
+        "originalTargetFrameworks": [
+          "netcoreapp3.1"
+        ],
+        "sources": {
+          "C:\\Program Files (x86)\\Microsoft SDKs\\NuGetPackages\\": {},
+          "https://api.nuget.org/v3/index.json": {}
+        },
+        "frameworks": {
+          "netcoreapp3.1": {
+            "projectReferences": {
+              "F:\\C# Project\\Web Application - CORE\\Click-To-Buy\\ClickToBuy\\ClickToBuy.Model\\ClickToBuy.Model.csproj": {
+                "projectPath": "F:\\C# Project\\Web Application - CORE\\Click-To-Buy\\ClickToBuy\\ClickToBuy.Model\\ClickToBuy.Model.csproj"
+              },
+              "F:\\C# Project\\Web Application - CORE\\Click-To-Buy\\ClickToBuy\\ClickToBuy.Repository\\ClickToBuy.Repository.csproj": {
+                "projectPath": "F:\\C# Project\\Web Application - CORE\\Click-To-Buy\\ClickToBuy\\ClickToBuy.Repository\\ClickToBuy.Repository.csproj"
+              }
+            }
+          }
+        },
+        "warningProperties": {
+          "warnAsError": [
+            "NU1605"
+          ]
+        }
+      },
+      "frameworks": {
+        "netcoreapp3.1": {
+          "imports": [
+            "net461",
+            "net462",
+            "net47",
+            "net471",
+            "net472",
+            "net48"
+          ],
+          "assetTargetFallback": true,
+          "warn": true,
+          "frameworkReferences": {
+            "Microsoft.NETCore.App": {
+              "privateAssets": "all"
+            }
+          },
+          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\3.1.101\\RuntimeIdentifierGraph.json"
+        }
+      }
+    },
+    "F:\\C# Project\\Web Application - CORE\\Click-To-Buy\\ClickToBuy\\ClickToBuy.Model\\ClickToBuy.Model.csproj": {
+      "version": "1.0.0",
+      "restore": {
+        "projectUniqueName": "F:\\C# Project\\Web Application - CORE\\Click-To-Buy\\ClickToBuy\\ClickToBuy.Model\\ClickToBuy.Model.csproj",
+        "projectName": "ClickToBuy.Model",
+        "projectPath": "F:\\C# Project\\Web Application - CORE\\Click-To-Buy\\ClickToBuy\\ClickToBuy.Model\\ClickToBuy.Model.csproj",
+        "packagesPath": "C:\\Users\\Sunil\\.nuget\\packages\\",
+        "outputPath": "F:\\C# Project\\Web Application - CORE\\Click-To-Buy\\ClickToBuy\\ClickToBuy.Model\\obj\\",
+        "projectStyle": "PackageReference",
+        "fallbackFolders": [
+          "C:\\Microsoft\\Xamarin\\NuGet\\",
+          "C:\\Program Files\\dotnet\\sdk\\NuGetFallbackFolder"
+        ],
+        "configFilePaths": [
+          "C:\\Users\\Sunil\\AppData\\Roaming\\NuGet\\NuGet.Config",
+          "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config",
+          "C:\\Program Files (x86)\\NuGet\\Config\\Xamarin.Offline.config"
+        ],
+        "originalTargetFrameworks": [
+          "netcoreapp3.1"
+        ],
+        "sources": {
+          "C:\\Program Files (x86)\\Microsoft SDKs\\NuGetPackages\\": {},
+          "https://api.nuget.org/v3/index.json": {}
+        },
+        "frameworks": {
+          "netcoreapp3.1": {
+            "projectReferences": {}
+          }
+        },
+        "warningProperties": {
+          "warnAsError": [
+            "NU1605"
+          ]
+        }
+      },
+      "frameworks": {
+        "netcoreapp3.1": {
+          "imports": [
+            "net461",
+            "net462",
+            "net47",
+            "net471",
+            "net472",
+            "net48"
+          ],
+          "assetTargetFallback": true,
+          "warn": true,
+          "frameworkReferences": {
+            "Microsoft.NETCore.App": {
+              "privateAssets": "all"
+            }
+          },
+          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\3.1.101\\RuntimeIdentifierGraph.json"
+        }
+      }
+    },
+    "F:\\C# Project\\Web Application - CORE\\Click-To-Buy\\ClickToBuy\\ClickToBuy.Repository\\ClickToBuy.Repository.csproj": {
+      "version": "1.0.0",
+      "restore": {
+        "projectUniqueName": "F:\\C# Project\\Web Application - CORE\\Click-To-Buy\\ClickToBuy\\ClickToBuy.Repository\\ClickToBuy.Repository.csproj",
+        "projectName": "ClickToBuy.Repository",
+        "projectPath": "F:\\C# Project\\Web Application - CORE\\Click-To-Buy\\ClickToBuy\\ClickToBuy.Repository\\ClickToBuy.Repository.csproj",
+        "packagesPath": "C:\\Users\\Sunil\\.nuget\\packages\\",
+        "outputPath": "F:\\C# Project\\Web Application - CORE\\Click-To-Buy\\ClickToBuy\\ClickToBuy.Repository\\obj\\",
+        "projectStyle": "PackageReference",
+        "fallbackFolders": [
+          "C:\\Microsoft\\Xamarin\\NuGet\\",
+          "C:\\Program Files\\dotnet\\sdk\\NuGetFallbackFolder"
+        ],
+        "configFilePaths": [
+          "C:\\Users\\Sunil\\AppData\\Roaming\\NuGet\\NuGet.Config",
+          "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config",
+          "C:\\Program Files (x86)\\NuGet\\Config\\Xamarin.Offline.config"
+        ],
+        "originalTargetFrameworks": [
+          "netcoreapp3.1"
+        ],
+        "sources": {
+          "C:\\Program Files (x86)\\Microsoft SDKs\\NuGetPackages\\": {},
+          "https://api.nuget.org/v3/index.json": {}
+        },
+        "frameworks": {
+          "netcoreapp3.1": {
+            "projectReferences": {
+              "F:\\C# Project\\Web Application - CORE\\Click-To-Buy\\ClickToBuy\\ClickToBuy.Database\\ClickToBuy.Database.csproj": {
+                "projectPath": "F:\\C# Project\\Web Application - CORE\\Click-To-Buy\\ClickToBuy\\ClickToBuy.Database\\ClickToBuy.Database.csproj"
+              },
+              "F:\\C# Project\\Web Application - CORE\\Click-To-Buy\\ClickToBuy\\ClickToBuy.Model\\ClickToBuy.Model.csproj": {
+                "projectPath": "F:\\C# Project\\Web Application - CORE\\Click-To-Buy\\ClickToBuy\\ClickToBuy.Model\\ClickToBuy.Model.csproj"
+              }
+            }
+          }
+        },
+        "warningProperties": {
+          "warnAsError": [
+            "NU1605"
+          ]
+        }
+      },
+      "frameworks": {
+        "netcoreapp3.1": {
+          "imports": [
+            "net461",
+            "net462",
+            "net47",
+            "net471",
+            "net472",
+            "net48"
+          ],
+          "assetTargetFallback": true,
+          "warn": true,
+          "frameworkReferences": {
+            "Microsoft.NETCore.App": {
+              "privateAssets": "all"
+            }
+          },
+          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\3.1.101\\RuntimeIdentifierGraph.json"
+        }
+      }
+    },
     "F:\\C# Project\\Web Application - CORE\\Click-To-Buy\\ClickToBuy\\ClickToBuy\\ClickToBuy.csproj": {
       "version": "1.0.0",
       "restore": {
@@ -31,7 +299,14 @@
         },
         "frameworks": {
           "netcoreapp3.1": {
-            "projectReferences": {}
+            "projectReferences": {
+              "F:\\C# Project\\Web Application - CORE\\Click-To-Buy\\ClickToBuy\\ClickToBuy.Manager\\ClickToBuy.Manager.csproj": {
+                "projectPath": "F:\\C# Project\\Web Application - CORE\\Click-To-Buy\\ClickToBuy\\ClickToBuy.Manager\\ClickToBuy.Manager.csproj"
+              },
+              "F:\\C# Project\\Web Application - CORE\\Click-To-Buy\\ClickToBuy\\ClickToBuy.Model\\ClickToBuy.Model.csproj": {
+                "projectPath": "F:\\C# Project\\Web Application - CORE\\Click-To-Buy\\ClickToBuy\\ClickToBuy.Model\\ClickToBuy.Model.csproj"
+              }
+            }
           }
         },
         "warningProperties": {
@@ -64,6 +339,10 @@
               "suppressParent": "All",
               "target": "Package",
               "version": "[3.1.2, )"
+            },
+            "Microsoft.VisualStudio.Web.CodeGeneration.Design": {
+              "target": "Package",
+              "version": "[3.1.1, )"
             }
           },
           "imports": [
