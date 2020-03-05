@@ -1,0 +1,13 @@
+F:\C# Project\Web Application - CORE\Click-To-Buy\ClickToBuy\ClickToBuy.Database\bin\Debug\netcoreapp3.1\ClickToBuy.Database.deps.json
+F:\C# Project\Web Application - CORE\Click-To-Buy\ClickToBuy\ClickToBuy.Database\bin\Debug\netcoreapp3.1\ClickToBuy.Database.dll
+F:\C# Project\Web Application - CORE\Click-To-Buy\ClickToBuy\ClickToBuy.Database\obj\Debug\netcoreapp3.1\ClickToBuy.Database.csprojAssemblyReference.cache
+F:\C# Project\Web Application - CORE\Click-To-Buy\ClickToBuy\ClickToBuy.Database\obj\Debug\netcoreapp3.1\ClickToBuy.Database.AssemblyInfoInputs.cache
+F:\C# Project\Web Application - CORE\Click-To-Buy\ClickToBuy\ClickToBuy.Database\obj\Debug\netcoreapp3.1\ClickToBuy.Database.AssemblyInfo.cs
+F:\C# Project\Web Application - CORE\Click-To-Buy\ClickToBuy\ClickToBuy.Database\bin\Debug\netcoreapp3.1\ClickToBuy.Database.runtimeconfig.json
+F:\C# Project\Web Application - CORE\Click-To-Buy\ClickToBuy\ClickToBuy.Database\bin\Debug\netcoreapp3.1\ClickToBuy.Database.runtimeconfig.dev.json
+F:\C# Project\Web Application - CORE\Click-To-Buy\ClickToBuy\ClickToBuy.Database\bin\Debug\netcoreapp3.1\ClickToBuy.Database.pdb
+F:\C# Project\Web Application - CORE\Click-To-Buy\ClickToBuy\ClickToBuy.Database\bin\Debug\netcoreapp3.1\ClickToBuy.Model.dll
+F:\C# Project\Web Application - CORE\Click-To-Buy\ClickToBuy\ClickToBuy.Database\bin\Debug\netcoreapp3.1\ClickToBuy.Model.pdb
+F:\C# Project\Web Application - CORE\Click-To-Buy\ClickToBuy\ClickToBuy.Database\obj\Debug\netcoreapp3.1\ClickToBuy.Database.csproj.CopyComplete
+F:\C# Project\Web Application - CORE\Click-To-Buy\ClickToBuy\ClickToBuy.Database\obj\Debug\netcoreapp3.1\ClickToBuy.Database.dll
+F:\C# Project\Web Application - CORE\Click-To-Buy\ClickToBuy\ClickToBuy.Database\obj\Debug\netcoreapp3.1\ClickToBuy.Database.pdb
