@@ -14,6 +14,7 @@ namespace ClickToBuy.Model
         public string Name { get; set; }
 
         [Required(ErrorMessage = "Select Country name.")]
+        [Display(Name = "Country")]
         public int CountryId { get; set; }
 
         public Country Country { get; set; }

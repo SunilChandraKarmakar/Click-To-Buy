@@ -41,6 +41,8 @@ namespace ClickToBuy
 
             services.AddTransient<ICountryManager, CountryManager>();
             services.AddTransient<ICountryRepository, CountryRepository>();
+            services.AddTransient<ICityManager, CityManager>();
+            services.AddTransient<ICityRepository, CityRepository>();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.

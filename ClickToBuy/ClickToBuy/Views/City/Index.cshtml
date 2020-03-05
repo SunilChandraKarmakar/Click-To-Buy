@@ -1,17 +1,17 @@
 ﻿@using ClickToBuy.Model
-@model IEnumerable<Country>
+@model IEnumerable<City>
 
 @{
     ViewData["Title"] = "Index";
     Layout = "~/Views/Shared/_AdminLayout.cshtml";
 }
 
-<h2 id="hadertitle">Country Details</h2>
+<h2 id="hadertitle">City Details</h2>
 <hr />
 
 <div class="row">
     <div class="col-md-4">
-        <a asp-action="Create" class="btn btn-primary"><i class="fas fa-plus"></i> Create Country</a>
+        <a asp-action="Create" class="btn btn-primary"><i class="fas fa-plus"></i> Create City</a>
     </div>
 </div>
 
@@ -20,23 +20,17 @@
         <table id="myTable" class="display table table-bordered table-striped">
             <thead>
                 <tr>
-                    <th>Name</th>
+                    <th>City</th>
+                    <th>Country</th>
                     <th>Action</th>
                 </tr>
             </thead>
             <tbody>
-                @foreach (Country item in Model)
+                @foreach (City item in Model)
                 {
                     <tr>
                         <td>@item.Name</td>
-                        @*<td>
-                            <a href="../City/Index?country=@item.Id" title="@{ 
-                                foreach (City itemForCity in item.Cities)
-                                {
-                                    Html.Raw(itemForCity.Name + "\n");   
-                                }
-                            }">@item.Cities.Count</a>
-                        </td>*@
+                        <td>@item.Country.Name</td>
                         <td>
                             <a asp-route-id="@item.Id" asp-action="Update" class="btn btn-info"><i class="far fa-edit"></i> Update</a>
                             <a asp-route-id="@item.Id" asp-action="Remove" class="btn btn-danger"><i class="far fa-trash-alt"></i> Remove</a>
