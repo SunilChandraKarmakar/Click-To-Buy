@@ -1,0 +1,15 @@
+F:\C# Project\Web Application - CORE\Click-To-Buy\ClickToBuy\ClickToBuy.Manager\bin\Debug\netcoreapp3.1\ClickToBuy.Manager.deps.json
+F:\C# Project\Web Application - CORE\Click-To-Buy\ClickToBuy\ClickToBuy.Manager\bin\Debug\netcoreapp3.1\ClickToBuy.Manager.dll
+F:\C# Project\Web Application - CORE\Click-To-Buy\ClickToBuy\ClickToBuy.Manager\bin\Debug\netcoreapp3.1\ClickToBuy.Manager.pdb
+F:\C# Project\Web Application - CORE\Click-To-Buy\ClickToBuy\ClickToBuy.Manager\bin\Debug\netcoreapp3.1\ClickToBuy.Database.dll
+F:\C# Project\Web Application - CORE\Click-To-Buy\ClickToBuy\ClickToBuy.Manager\bin\Debug\netcoreapp3.1\ClickToBuy.Model.dll
+F:\C# Project\Web Application - CORE\Click-To-Buy\ClickToBuy\ClickToBuy.Manager\bin\Debug\netcoreapp3.1\ClickToBuy.Repository.dll
+F:\C# Project\Web Application - CORE\Click-To-Buy\ClickToBuy\ClickToBuy.Manager\bin\Debug\netcoreapp3.1\ClickToBuy.Repository.pdb
+F:\C# Project\Web Application - CORE\Click-To-Buy\ClickToBuy\ClickToBuy.Manager\bin\Debug\netcoreapp3.1\ClickToBuy.Database.pdb
+F:\C# Project\Web Application - CORE\Click-To-Buy\ClickToBuy\ClickToBuy.Manager\bin\Debug\netcoreapp3.1\ClickToBuy.Model.pdb
+F:\C# Project\Web Application - CORE\Click-To-Buy\ClickToBuy\ClickToBuy.Manager\obj\Debug\netcoreapp3.1\ClickToBuy.Manager.csprojAssemblyReference.cache
+F:\C# Project\Web Application - CORE\Click-To-Buy\ClickToBuy\ClickToBuy.Manager\obj\Debug\netcoreapp3.1\ClickToBuy.Manager.AssemblyInfoInputs.cache
+F:\C# Project\Web Application - CORE\Click-To-Buy\ClickToBuy\ClickToBuy.Manager\obj\Debug\netcoreapp3.1\ClickToBuy.Manager.AssemblyInfo.cs
+F:\C# Project\Web Application - CORE\Click-To-Buy\ClickToBuy\ClickToBuy.Manager\obj\Debug\netcoreapp3.1\ClickToBuy.Manager.csproj.CopyComplete
+F:\C# Project\Web Application - CORE\Click-To-Buy\ClickToBuy\ClickToBuy.Manager\obj\Debug\netcoreapp3.1\ClickToBuy.Manager.dll
+F:\C# Project\Web Application - CORE\Click-To-Buy\ClickToBuy\ClickToBuy.Manager\obj\Debug\netcoreapp3.1\ClickToBuy.Manager.pdb
