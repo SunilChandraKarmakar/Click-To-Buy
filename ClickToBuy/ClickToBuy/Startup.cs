@@ -45,6 +45,8 @@ namespace ClickToBuy
             services.AddTransient<ICityRepository, CityRepository>();
             services.AddTransient<IBrandManager, BrandManager>();
             services.AddTransient<IBrandRepository, BrandRepository>();
+            services.AddTransient<ICategoryManager, CategoryManager>();
+            services.AddTransient<ICategoryRepository, CategoryRepository>();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.

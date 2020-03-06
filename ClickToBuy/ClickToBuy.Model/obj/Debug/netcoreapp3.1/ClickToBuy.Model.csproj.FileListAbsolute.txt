@@ -1,7 +1,6 @@
 F:\C# Project\Web Application - CORE\Click-To-Buy\ClickToBuy\ClickToBuy.Model\bin\Debug\netcoreapp3.1\ClickToBuy.Model.deps.json
 F:\C# Project\Web Application - CORE\Click-To-Buy\ClickToBuy\ClickToBuy.Model\bin\Debug\netcoreapp3.1\ClickToBuy.Model.dll
 F:\C# Project\Web Application - CORE\Click-To-Buy\ClickToBuy\ClickToBuy.Model\bin\Debug\netcoreapp3.1\ClickToBuy.Model.pdb
-F:\C# Project\Web Application - CORE\Click-To-Buy\ClickToBuy\ClickToBuy.Model\obj\Debug\netcoreapp3.1\ClickToBuy.Model.csprojAssemblyReference.cache
 F:\C# Project\Web Application - CORE\Click-To-Buy\ClickToBuy\ClickToBuy.Model\obj\Debug\netcoreapp3.1\ClickToBuy.Model.AssemblyInfoInputs.cache
 F:\C# Project\Web Application - CORE\Click-To-Buy\ClickToBuy\ClickToBuy.Model\obj\Debug\netcoreapp3.1\ClickToBuy.Model.AssemblyInfo.cs
 F:\C# Project\Web Application - CORE\Click-To-Buy\ClickToBuy\ClickToBuy.Model\obj\Debug\netcoreapp3.1\ClickToBuy.Model.dll

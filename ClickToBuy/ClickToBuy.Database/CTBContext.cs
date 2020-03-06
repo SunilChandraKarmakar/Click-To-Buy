@@ -11,12 +11,14 @@ namespace ClickToBuy.Database
         public DbSet<Country> Countries { get; set; }
         public DbSet<City> Cities { get; set; }
         public DbSet<Brand> Brands { get; set; }
+        public DbSet<Category> Categories { get; set; }
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
             modelBuilder.Entity<Country>().HasIndex(c=>c.Name).IsUnique();
             modelBuilder.Entity<City>().HasIndex(c=>c.Name).IsUnique();
             modelBuilder.Entity<Brand>().HasIndex(b=>b.Name).IsUnique();
+            modelBuilder.Entity<Category>().HasIndex(c=>c.Name).IsUnique();
         }
 
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
