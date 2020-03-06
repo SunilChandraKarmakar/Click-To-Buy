@@ -12,6 +12,7 @@ namespace ClickToBuy.Database
         public DbSet<City> Cities { get; set; }
         public DbSet<Brand> Brands { get; set; }
         public DbSet<Category> Categories { get; set; }
+        public DbSet<Gender> Genders { get; set; }
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
@@ -19,6 +20,7 @@ namespace ClickToBuy.Database
             modelBuilder.Entity<City>().HasIndex(c=>c.Name).IsUnique();
             modelBuilder.Entity<Brand>().HasIndex(b=>b.Name).IsUnique();
             modelBuilder.Entity<Category>().HasIndex(c=>c.Name).IsUnique();
+            modelBuilder.Entity<Gender>().HasIndex(g=>g.Name).IsUnique();
         }
 
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)

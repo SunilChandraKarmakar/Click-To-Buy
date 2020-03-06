@@ -4,14 +4,16 @@ using ClickToBuy.Database;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 namespace ClickToBuy.Database.Migrations
 {
     [DbContext(typeof(CTBContext))]
-    partial class CTBContextModelSnapshot : ModelSnapshot
+    [Migration("20200306190357_AddModel_Gender")]
+    partial class AddModel_Gender
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
