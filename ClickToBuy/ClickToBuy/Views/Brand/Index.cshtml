@@ -1,0 +1,47 @@
+﻿@using ClickToBuy.Model
+@model IEnumerable<Brand>
+
+@{
+    ViewData["Title"] = "Index";
+    Layout = "~/Views/Shared/_AdminLayout.cshtml";
+}
+
+<h2 id="hadertitle">Brand Details</h2>
+<hr />
+
+<div class="row">
+    <div class="col-md-4">
+        <a asp-action="Create" class="btn btn-primary"><i class="fas fa-plus"></i> Create Brand</a>
+    </div>
+</div>
+
+<div class="row" id="datatables">
+    <div class="col-md-8">
+        <table id="myTable" class="display table table-bordered table-striped">
+            <thead>
+                <tr>
+                    <th>Name</th>
+                    <th>Origin and Description</th>
+                    <th>Action</th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (Brand item in Model)
+                {
+                    <tr>
+                        <td>@item.Name</td>
+                        <td>
+                            Origin: @item.Origin <br />
+                            Description: @item.Description <br />
+                        </td>
+                        <td>
+                            <a asp-route-id="@item.Id" asp-action="Update" class="btn btn-info"><i class="far fa-edit"></i> Update</a>
+                            <a asp-route-id="@item.Id" asp-action="Remove" class="btn btn-danger"><i class="far fa-trash-alt"></i> Remove</a>
+                        </td>
+                    </tr>
+                }
+            </tbody>
+        </table>
+    </div>
+</div>
+
