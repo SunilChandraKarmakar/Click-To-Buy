@@ -35,5 +35,28 @@
 
 @section Scripts {
     @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+
+    <script>
+        $(document).ready(function () {
+            $("#Name").change(function () {
+                var name = $("#Name").val();
+                var serverUrl = '/api/City/CheckName?name=' + name;
+
+                $.ajax({
+                    url: serverUrl,
+                    success: function (response) {
+
+                        if (response == 1) {
+                            alert("City is exist! Please try new one.");
+                            $('#Name').val('');
+                        }
+                    },
+                    error: function (response) {
+                        alert(response);
+                    }
+                });
+             });
+        });
+    </script>
 }
 

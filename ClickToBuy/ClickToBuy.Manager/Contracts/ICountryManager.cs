@@ -7,6 +7,6 @@ namespace ClickToBuy.Manager.Contracts
 {
     public interface ICountryManager : IBaseManager<Country>
     {
-
+        public Country CheckName(string name);
     }
 }

@@ -17,9 +17,9 @@ namespace ClickToBuy.Manager
             _iCategoryRepository = iCategoryRepository;
         }
 
-        public override ICollection<Category> GetAll()
+        public Category CheckName(string name)
         {
-            return _iCategoryRepository.GetAll();
+            return _iCategoryRepository.CheckName(name);
         }
     }
 }

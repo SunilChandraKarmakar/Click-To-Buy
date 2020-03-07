@@ -7,5 +7,6 @@ namespace ClickToBuy.Repository.Contracts
 {
     public interface ICategoryRepository : IBaseRepository<Category> 
     {
+        public Category CheckName(string name);
     }
 }

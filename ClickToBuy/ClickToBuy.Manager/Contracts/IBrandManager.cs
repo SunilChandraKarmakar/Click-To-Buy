@@ -7,5 +7,6 @@ namespace ClickToBuy.Manager.Contracts
 {
     public interface IBrandManager : IBaseManager<Brand> 
     {
+        public Brand CheckName(string name);
     }
 }

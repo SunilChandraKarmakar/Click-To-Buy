@@ -21,5 +21,10 @@ namespace ClickToBuy.Manager
         {
             return _iCityRepository.GetAll();
         }
+
+        public City CheckName(string name)
+        {
+            return _iCityRepository.CheckName(name);
+        }
     }
 }

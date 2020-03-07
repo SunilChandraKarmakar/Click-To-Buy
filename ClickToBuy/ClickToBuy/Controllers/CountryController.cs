@@ -29,6 +29,17 @@ namespace ClickToBuy.Controllers
             return View();
         }
 
+        [Route("api/[controller]/[action]")]
+        public JsonResult CheckName(string name)
+        {
+            Country checkName = _iCountryManager.CheckName(name);
+
+            if (checkName != null)
+                return Json(1);
+            else
+                return Json(0);
+        }
+
         [HttpPost]
         public IActionResult Create(Country aCountry)
         {

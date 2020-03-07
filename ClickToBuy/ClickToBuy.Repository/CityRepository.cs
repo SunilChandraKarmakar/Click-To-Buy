@@ -16,5 +16,11 @@ namespace ClickToBuy.Repository
             List<City> includeCityList = ctbContext.Cities.Include(c => c.Country).ToList();
             return includeCityList;
         }
+
+        public City CheckName(string name)
+        {
+            City checkName = ctbContext.Cities.Where(c => c.Name == name).FirstOrDefault();
+            return checkName;
+        }
     }
 }

@@ -29,6 +29,17 @@ namespace ClickToBuy.Controllers
             return View();
         }
 
+        [Route("api/[controller]/[action]")]
+        public JsonResult CheckName(string name)
+        {
+            Brand checkName = _iBrandManager.CheckName(name);
+
+            if (checkName != null)
+                return Json(1);
+            else
+                return Json(0);
+        }
+
         [HttpPost]
         public IActionResult Create(Brand aBrand)
         {

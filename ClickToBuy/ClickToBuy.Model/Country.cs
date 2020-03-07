@@ -14,5 +14,6 @@ namespace ClickToBuy.Model
         public string Name { get; set; }
 
         public ICollection<City> Cities { get; set; }
+        public ICollection<Customer> Customers { get; set; }
     }
 }

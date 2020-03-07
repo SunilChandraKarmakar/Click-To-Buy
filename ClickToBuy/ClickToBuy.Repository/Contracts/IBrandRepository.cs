@@ -7,5 +7,6 @@ namespace ClickToBuy.Repository.Contracts
 {
     public interface IBrandRepository : IBaseRepository<Brand>
     {
+        public Brand CheckName(string name);
     }
 }

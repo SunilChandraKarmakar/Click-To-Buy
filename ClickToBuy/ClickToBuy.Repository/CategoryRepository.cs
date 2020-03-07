@@ -11,11 +11,10 @@ namespace ClickToBuy.Repository
 {
     public class CategoryRepository : BaseRepository<Category>, ICategoryRepository 
     {
-        public override ICollection<Category> GetAll()
+        public Category CheckName(string name)
         {
-            List<Category> categoryList = ctbContext.Categories
-                                          .Include(c => c.Categoryy).ToList();
-            return categoryList;
+            Category checkName = ctbContext.Categories.Where(c => c.Name == name).FirstOrDefault();
+            return checkName;
         }
     }
 }

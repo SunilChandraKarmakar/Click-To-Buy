@@ -21,7 +21,8 @@ namespace ClickToBuy.Controllers
         [HttpGet]
         public IActionResult Index()
         {
-            return View(_iCategoryManager.GetAll());
+            ICollection<Category> categoryList = _iCategoryManager.GetAll();
+            return View(categoryList);
         }
 
         private List<SelectListItem> CategoryList()
@@ -43,9 +44,20 @@ namespace ClickToBuy.Controllers
             return View();
         }
 
+        [Route("api/[controller]/[action]")]
+        public JsonResult CheckName(string name)
+        {
+            Category checkName = _iCategoryManager.CheckName(name);
+
+            if (checkName != null)
+                return Json(1);
+            else
+                return Json(0);
+        }
+
         [HttpPost]
         public IActionResult Create(Category aCategory)
-        {
+        {                                               
             if(ModelState.IsValid)
             {
                 bool isAdd = _iCategoryManager.Add(aCategory);

@@ -16,6 +16,7 @@ using ClickToBuy.Manager.Contracts;
 using ClickToBuy.Manager;
 using ClickToBuy.Repository.Contracts;
 using ClickToBuy.Repository;
+using Microsoft.AspNetCore.Http;
 
 namespace ClickToBuy
 {
@@ -47,6 +48,11 @@ namespace ClickToBuy
             services.AddTransient<IBrandRepository, BrandRepository>();
             services.AddTransient<ICategoryManager, CategoryManager>();
             services.AddTransient<ICategoryRepository, CategoryRepository>();
+            services.AddTransient<IGenderManager, GenderManager>();
+            services.AddTransient<IGenderRepository, GenderRepository>();
+            services.AddTransient<ICustomerManager, CustomerManager>();
+            services.AddTransient<ICustomerRepository, CustomerRepository>();
+            services.AddSingleton<IHttpContextAccessor, HttpContextAccessor>();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.

@@ -16,5 +16,10 @@ namespace ClickToBuy.Manager
         {
             _iCountryRepository = iCountryRepository;
         }
+
+        public Country CheckName(string name)
+        {
+            return _iCountryRepository.CheckName(name);
+        }
     }
 }

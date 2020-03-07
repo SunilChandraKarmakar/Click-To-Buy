@@ -3,11 +3,17 @@ using ClickToBuy.Repository.Base;
 using ClickToBuy.Repository.Contracts;
 using System;
 using System.Collections.Generic;
+using System.Linq;
 using System.Text;
 
 namespace ClickToBuy.Repository
 {
     public class BrandRepository : BaseRepository<Brand>, IBrandRepository 
     {
+        public Brand CheckName(string name)
+        {
+            Brand checkName = ctbContext.Brands.Where(b => b.Name == name).FirstOrDefault();
+            return checkName;
+        }
     }
 }

@@ -12,5 +12,7 @@ namespace ClickToBuy.Model
         [Required(ErrorMessage = "Provide name.")]
         [StringLength(6, MinimumLength = 4)]
         public string Name { get; set; }
+
+        public ICollection<Customer> Customers { get; set; }
     }
 }

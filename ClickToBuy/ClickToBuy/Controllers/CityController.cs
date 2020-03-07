@@ -44,6 +44,17 @@ namespace ClickToBuy.Controllers
             return View();
         }
 
+        [Route("api/[controller]/[action]")]
+        public JsonResult CheckName(string name)
+        {
+            City checkName = _iCityManager.CheckName(name);
+
+            if (checkName != null)
+                return Json(1);
+            else
+                return Json(0);
+        }
+
         [HttpPost]
         public IActionResult Create(City aCity)
         {

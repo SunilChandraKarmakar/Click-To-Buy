@@ -7,6 +7,6 @@ namespace ClickToBuy.Repository.Contracts
 {
     public interface ICountryRepository : IBaseRepository<Country>
     {
-
+        public Country CheckName(string name);
     }
 }

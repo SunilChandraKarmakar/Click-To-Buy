@@ -16,5 +16,10 @@ namespace ClickToBuy.Manager
         {
             _iBrandRepository = iBrandRepository;
         }
+
+        public Brand CheckName(string name)
+        {
+            return _iBrandRepository.CheckName(name);
+        }
     }
 }
