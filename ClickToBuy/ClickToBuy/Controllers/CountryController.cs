@@ -11,16 +11,25 @@ namespace ClickToBuy.Controllers
     public class CountryController : Controller
     {
         private readonly ICountryManager _iCountryManager;
+        private readonly ICityManager _iCityManager;
 
-        public CountryController(ICountryManager iCountryManager)
+        public CountryController(ICountryManager iCountryManager, ICityManager iCityManager)
         {
             _iCountryManager = iCountryManager;
+            _iCityManager = iCityManager;
         }
 
         [HttpGet]
         public IActionResult Index()
-        {
+        {               
             return View(_iCountryManager.GetAll());
+        }
+
+        [HttpGet]
+        public IActionResult CityByCountryId(int? id)
+        {
+            ICollection<City> cityList = _iCityManager.GetAll().Where(c => c.CountryId == id).ToList();
+            return View(cityList);
         }
 
         [HttpGet]

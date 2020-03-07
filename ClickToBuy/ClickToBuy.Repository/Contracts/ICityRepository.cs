@@ -8,5 +8,6 @@ namespace ClickToBuy.Repository.Contracts
     public interface ICityRepository : IBaseRepository<City>
     {
         public City CheckName(string name);
+        public List<Customer> CustomerList();
     }
 }

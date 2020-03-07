@@ -17,6 +17,11 @@ namespace ClickToBuy.Manager
             _iCountryRepository = iCountryRepository;
         }
 
+        public override ICollection<Country> GetAll()
+        {
+            return _iCountryRepository.GetAll();
+        }
+
         public Country CheckName(string name)
         {
             return _iCountryRepository.CheckName(name);

@@ -13,7 +13,10 @@ namespace ClickToBuy.Repository
     {
         public override ICollection<City> GetAll()
         {
-            List<City> includeCityList = ctbContext.Cities.Include(c => c.Country).ToList();
+            List<City> includeCityList = ctbContext.Cities
+                                         .Include(c => c.Country)
+                                         .Include(c => c.Customers)
+                                         .ToList();
             return includeCityList;
         }
 
@@ -21,6 +24,12 @@ namespace ClickToBuy.Repository
         {
             City checkName = ctbContext.Cities.Where(c => c.Name == name).FirstOrDefault();
             return checkName;
+        }
+
+        public List<Customer> CustomerList()
+        {
+            List<Customer> customerList = ctbContext.Customers.ToList();
+            return customerList;
         }
     }
 }

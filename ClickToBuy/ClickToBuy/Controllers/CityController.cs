@@ -13,11 +13,14 @@ namespace ClickToBuy.Controllers
     {
         private readonly ICityManager _iCityManager;
         private readonly ICountryManager _iCountryManager;
+        private readonly ICustomerManager _iCustomerManager;
 
-        public CityController(ICityManager iCityManager, ICountryManager iCountryManager)
+        public CityController(ICityManager iCityManager, ICountryManager iCountryManager,
+                              ICustomerManager iCustomerManager)
         {
             _iCityManager = iCityManager;
             _iCountryManager = iCountryManager;
+            _iCustomerManager = iCustomerManager;
         }
 
         private List<SelectListItem> CountryList()
@@ -33,8 +36,15 @@ namespace ClickToBuy.Controllers
 
         [HttpGet]
         public IActionResult Index()
-        {
+        {               
             return View(_iCityManager.GetAll());
+        }
+
+        [HttpGet]
+        public IActionResult CustomerByCityId(int? id)
+        {
+            List<Customer> customerByCity = _iCustomerManager.GetAll().Where(c => c.CityId == id).ToList();
+            return View(customerByCity);
         }
 
         [HttpGet]

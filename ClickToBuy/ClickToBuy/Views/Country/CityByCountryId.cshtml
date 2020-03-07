@@ -2,27 +2,20 @@
 @model IEnumerable<City>
 
 @{
-    ViewData["Title"] = "Index";
+    ViewData["Title"] = "City By Country";
     Layout = "~/Views/Shared/_AdminLayout.cshtml";
 }
 
 <h2 id="hadertitle">City Details</h2>
 <hr />
 
-<div class="row">
-    <div class="col-md-4">
-        <a asp-action="Create" class="btn btn-primary"><i class="fas fa-plus"></i> Create City</a>
-    </div>
-</div>
-
 <div class="row" id="datatables">
-    <div class="col-md-8">
+    <div class="col-md-6">
         <table id="myTable" class="display table table-bordered table-striped">
             <thead>
                 <tr>
                     <th>City</th>
                     <th>Country</th>
-                    <th>Customer List</th>
                     <th>Action</th>
                 </tr>
             </thead>
@@ -32,10 +25,9 @@
                     <tr>
                         <td>@item.Name</td>
                         <td>@item.Country.Name</td>
-                        <td><a asp-route-id="@item.Id" asp-action="CustomerByCityId">@item.Customers.Count</a></td>
                         <td>
-                            <a asp-route-id="@item.Id" asp-action="Update" class="btn btn-info"><i class="far fa-edit"></i> Update</a>
-                            <a asp-route-id="@item.Id" asp-action="Remove" class="btn btn-danger"><i class="far fa-trash-alt"></i> Remove</a>
+                            <a asp-route-id="@item.Id" asp-action="Update" asp-controller="City" class="btn btn-info"><i class="far fa-edit"></i> Update</a>
+                            <a asp-route-id="@item.Id" asp-action="Remove" asp-controller="City" class="btn btn-danger"><i class="far fa-trash-alt"></i> Remove</a>
                         </td>
                     </tr>
                 }
@@ -43,5 +35,4 @@
         </table>
     </div>
 </div>
-
 

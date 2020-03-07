@@ -17,6 +17,7 @@ using ClickToBuy.Manager;
 using ClickToBuy.Repository.Contracts;
 using ClickToBuy.Repository;
 using Microsoft.AspNetCore.Http;
+using ClickToBuy.Database;
 
 namespace ClickToBuy
 {

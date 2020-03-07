@@ -21,6 +21,7 @@
             <thead>
                 <tr>
                     <th>Name</th>
+                    <th>City List</th>
                     <th>Action</th>
                 </tr>
             </thead>
@@ -28,15 +29,12 @@
                 @foreach (Country item in Model)
                 {
                     <tr>
-                        <td>@item.Name</td>
-                        @*<td>
-                            <a href="../City/Index?country=@item.Id" title="@{ 
-                                foreach (City itemForCity in item.Cities)
-                                {
-                                    Html.Raw(itemForCity.Name + "\n");   
-                                }
-                            }">@item.Cities.Count</a>
-                        </td>*@
+                        <td>
+                            @item.Name                           
+                        </td>
+                        <td>
+                            <a asp-route-id="@item.Id" asp-action="CityByCountryId">@item.Cities.Count</a>
+                        </td>
                         <td>
                             <a asp-route-id="@item.Id" asp-action="Update" class="btn btn-info"><i class="far fa-edit"></i> Update</a>
                             <a asp-route-id="@item.Id" asp-action="Remove" class="btn btn-danger"><i class="far fa-trash-alt"></i> Remove</a>
