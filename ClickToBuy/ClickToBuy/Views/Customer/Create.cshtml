@@ -18,44 +18,14 @@
                 <span asp-validation-for="Name" class="text-danger"></span>
             </div>
             <div class="form-group">
-                <label asp-for="Contact" class="control-lable"></label>
-                <input type="number" asp-for="Contact" class="form-control" />
-                <span asp-validation-for="Contact" class="text-danger"></span>
-            </div>            
-            <div class="form-group">
-                <label asp-for="Password" class="control-lable"></label>
-                <input type="password" asp-for="Password" class="form-control" />
-                <span asp-validation-for="Password" class="text-danger"></span>
-            </div>             
-            <div class="form-group">
-                <label asp-for="GenderId" class="control-label">Gender</label>
-                <select asp-for="GenderId" asp-items="@ViewBag.GenderList" class="form-control">
-                    <option value="">-- Select Gender --</option>
-                </select>
-                <span asp-validation-for="GenderId" class="text-danger"></span>
-            </div>            
-            <div class="form-group">
-                <label asp-for="CityId" class="control-label">City</label>
-                <select asp-for="CityId" asp-items="@ViewBag.CityList" class="form-control">
-                    <option value="">-- Select City --</option>
-                </select>
-                <span asp-validation-for="CityId" class="text-danger"></span>
-            </div>
-        </div>
-        <div class="col-md-4">
-            <div class="form-group">
-                <label asp-for="Pictuer" class="control-lable"></label>
-                <input type="file" name="Pictuer" asp-for="Pictuer" class="form-control" />
-            </div>
-            <div class="form-group">
                 <label asp-for="Email" class="control-lable"></label>
                 <input type="email" asp-for="Email" class="form-control" />
                 <span asp-validation-for="Email" class="text-danger"></span>
             </div>
             <div class="form-group">
-                <label asp-for="ConfirmPassword" class="control-lable"></label>
-                <input type="password" asp-for="ConfirmPassword" class="form-control" />
-                <span asp-validation-for="ConfirmPassword" class="text-danger"></span>
+                <label asp-for="Password" class="control-lable"></label>
+                <input type="password" asp-for="Password" class="form-control" />
+                <span asp-validation-for="Password" class="text-danger"></span>
             </div>
             <div class="form-group">
                 <label asp-for="CountryId" class="control-label">Country</label>
@@ -63,6 +33,36 @@
                     <option value="">-- Select Country --</option>
                 </select>
                 <span asp-validation-for="CountryId" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Pictuer" class="control-lable"></label>
+                <input type="file" name="Pictuer" asp-for="Pictuer" class="form-control" />
+            </div>            
+        </div>
+        <div class="col-md-4">
+            <div class="form-group">
+                <label asp-for="Contact" class="control-lable"></label>
+                <input type="number" asp-for="Contact" class="form-control" />
+                <span asp-validation-for="Contact" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="GenderId" class="control-label">Gender</label>
+                <select asp-for="GenderId" asp-items="@ViewBag.GenderList" class="form-control">
+                    <option value="">-- Select Gender --</option>
+                </select>
+                <span asp-validation-for="GenderId" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="ConfirmPassword" class="control-lable"></label>
+                <input type="password" asp-for="ConfirmPassword" class="form-control" />
+                <span asp-validation-for="ConfirmPassword" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="CityId" class="control-label">City</label>
+                <select asp-for="CityId" class="form-control">
+                    <option value="">-- Select City --</option>
+                </select>
+                <span asp-validation-for="CityId" class="text-danger"></span>
             </div>
             <div class="form-group">
                 <label asp-for="Address" class="control-lable"></label>
@@ -87,7 +87,8 @@
     @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
     
     <script>
-        $(document).ready(function () {
+        $(document).ready(function () {              
+
             $("#Contact").change(function () {
                 var contactNo = $("#Contact").val();
                 var serverUrl = '/api/Customer/CheckContact?contactno=' + contactNo;
@@ -100,15 +101,10 @@
                             alert("Contact is exist! Please try new one.");
                             $('#Contact').val('');                            
                         }
-                    },
-                    error: function (response) {
-                        alert(response);
                     }
                 });
             });
-        });
 
-        $(document).ready(function () {
             $("#Email").change(function () {
                 var email = $("#Email").val();
                 var serverUrl = '/api/Customer/CheckEmail?email=' + email;
@@ -121,11 +117,27 @@
                             alert("email is exist! Please try new one.");
                             $('#Email').val('');                            
                         }
-                    },
-                    error: function (response) {
-                        alert(response);
                     }
                 });
+            });
+
+             $("#CountryId").change(function () {
+                var countryId = $("#CountryId").val();
+                $("#CityId").empty();
+                $("#CityId").append('<option value="">-- Select City --</option>');
+                var serverUrl = '/api/Customer/GetCityByCountry?countryId=' + countryId;
+
+                 $.ajax({
+                     url: serverUrl,
+                     success: function (response) {
+                         $.each(response, (key, value) => {
+                             $("#CityId").append('<option value=' + value.id + '>' + value.name + '</option>');
+                         });
+                     },
+                     error: function (response) {
+                         alert("Error Happend");
+                     }
+                 });   
             });
         });
     </script>

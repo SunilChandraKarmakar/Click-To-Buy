@@ -26,5 +26,10 @@ namespace ClickToBuy.Manager
         {
             return _iCityRepository.CheckName(name);
         }
+
+        public List<City> FindCityByCountryId(int countryId)
+        {
+            return _iCityRepository.FindCityByCountryId(countryId);
+        }
     }
 }

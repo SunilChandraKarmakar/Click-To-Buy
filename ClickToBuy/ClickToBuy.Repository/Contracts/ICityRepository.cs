@@ -9,5 +9,6 @@ namespace ClickToBuy.Repository.Contracts
     {
         public City CheckName(string name);
         public List<Customer> CustomerList();
+        public List<City> FindCityByCountryId(int countryId);
     }
 }

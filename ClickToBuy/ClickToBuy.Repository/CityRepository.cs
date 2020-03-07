@@ -31,5 +31,11 @@ namespace ClickToBuy.Repository
             List<Customer> customerList = ctbContext.Customers.ToList();
             return customerList;
         }
+
+        public List<City> FindCityByCountryId(int countryId)
+        {
+            List<City> cityByCountryId = ctbContext.Cities.Where(c => c.CountryId == countryId).ToList();
+            return cityByCountryId;
+        }
     }
 }

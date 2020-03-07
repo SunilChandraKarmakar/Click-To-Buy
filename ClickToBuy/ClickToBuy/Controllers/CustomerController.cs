@@ -80,7 +80,6 @@ namespace ClickToBuy.Controllers
         public IActionResult Create()
         {
             ViewBag.CountryList = CountryList();
-            ViewBag.CityList = CityList();
             ViewBag.GenderList = GenderList();
             return View();
         }
@@ -105,6 +104,13 @@ namespace ClickToBuy.Controllers
                 return Json(1);
             else
                 return Json(0);
+        }
+
+        [Route("api/[controller]/[action]")]
+        public JsonResult GetCityByCountry(int countryId)
+        {
+            List<City> cityByCountryId = _iCityManager.FindCityByCountryId(countryId);
+            return Json(cityByCountryId);
         }
 
         [HttpPost]
@@ -137,7 +143,6 @@ namespace ClickToBuy.Controllers
             }
 
             ViewBag.CountryList = CountryList();
-            ViewBag.CityList = CityList();
             ViewBag.GenderList = GenderList();
             return View(aCustomer);
         }
