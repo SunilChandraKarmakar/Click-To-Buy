@@ -11,6 +11,7 @@
 
     <link href="~/css/custom.css" rel="stylesheet" />
     <link href="https://fonts.googleapis.com/css?family=Libre+Baskerville&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />
     <link href="~/font-awesome/css/all.css" rel="stylesheet" />
     <link href="~/datatables/css/jquery.dataTables.css" rel="stylesheet" />
 
@@ -48,12 +49,12 @@
                 <div class="fa fa-bars tooltips" data-placement="right" data-original-title="Toggle Navigation"></div>
             </div>
             <!--logo start-->
-            <a href="index.html" class="logo"><b>DASH<span>IO</span></b></a>
+            <a href="#" class="logo"><b>Click To<span> Buy</span></b></a>
             <!--logo end-->
-            <div class="nav notify-row" id="top_menu">
-                <!--  notification start -->
+            @*<div class="nav notify-row" id="top_menu">
+                  notification start 
                 <ul class="nav top-menu">
-                    <!-- settings start -->
+                     settings start 
                     <li class="dropdown">
                         <a data-toggle="dropdown" class="dropdown-toggle" href="index.html#">
                             <i class="fa fa-tasks"></i>
@@ -121,8 +122,8 @@
                             </li>
                         </ul>
                     </li>
-                    <!-- settings end -->
-                    <!-- inbox dropdown start-->
+                     settings end 
+                     inbox dropdown start
                     <li id="header_inbox_bar" class="dropdown">
                         <a data-toggle="dropdown" class="dropdown-toggle" href="index.html#">
                             <i class="fa fa-envelope-o"></i>
@@ -186,8 +187,8 @@
                             </li>
                         </ul>
                     </li>
-                    <!-- inbox dropdown end -->
-                    <!-- notification dropdown start-->
+                     inbox dropdown end 
+                     notification dropdown start
                     <li id="header_notification_bar" class="dropdown">
                         <a data-toggle="dropdown" class="dropdown-toggle" href="index.html#">
                             <i class="fa fa-bell-o"></i>
@@ -231,10 +232,10 @@
                             </li>
                         </ul>
                     </li>
-                    <!-- notification dropdown end -->
+                     notification dropdown end 
                 </ul>
-                <!--  notification end -->
-            </div>
+                  notification end 
+            </div>*@
             <div class="top-menu">
                 <ul class="nav pull-right top-menu">
                     <li><a class="logout" href="login.html">Logout</a></li>
@@ -253,7 +254,7 @@
                     <p class="centered"><a href="~/adminLayout/profile.html"><img src="~/adminLayout/img/ui-sam.jpg" class="img-circle" width="80"></a></p>
                     <h5 class="centered">Sam Soffes</h5>
                     <li class="mt">
-                        <a class="active" href="index.html">
+                        <a class="active" asp-action="DashboardView" asp-controller="Dashboard">
                             <i class="fa fa-dashboard"></i>
                             <span>Dashboard</span>
                         </a>

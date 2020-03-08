@@ -27,9 +27,11 @@ namespace ClickToBuy.Model
 
         [Required(ErrorMessage = "Provide regular price.")]
         [DataType(DataType.Currency)]
+        [Range(1, 1000000)]
         public float RegularPrice { get; set; }
 
         [DataType(DataType.Currency)]
+        [Range(1, 1000000)]
         public float? OfferPrice { get; set; }
 
         [DataType(DataType.ImageUrl)]

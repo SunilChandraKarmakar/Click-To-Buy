@@ -1,0 +1,87 @@
+﻿
+@{
+    ViewData["Title"] = "Dashboard View";
+    Layout = "~/Views/Shared/_AdminLayout.cshtml";
+}
+
+
+<div class="row" style="margin-top:30px; font-size: 28px">
+    <div class="col-md-12">
+        <div class="col-md-4">
+            <div class="card border-secondary mb-3 text-center" style="max-width: 28rem;">
+                <div class="card-header">Brand Details</div>
+                <div class="card-body text-secondary">
+                    <h3 class="card-title">Total Brand</h3>
+                    <p>@ViewBag.BrandCount</p>
+                    <a asp-action="Index" asp-controller="Brand" class="btn btn-primary">Go To Brand</a>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-4"> 
+            <div class="card border-primary mb-3 text-center" style="max-width: 28rem;">
+                <div class="card-header">Category Details</div>
+                <div class="card-body text-success">
+                    <h3 class="card-title">Total Category</h3>
+                    <p>@ViewBag.CategoryCount</p>
+                    <a asp-action="Index" asp-controller="Category" class="btn btn-primary">Go To Category</a>
+                </div>                
+            </div>
+        </div>
+        <div class="col-md-4">
+            <div class="card border-success mb-3 text-center" style="max-width: 28rem;">
+                <div class="card-header">Product Details</div>
+                <div class="card-body text-primary">
+                    <h3 class="card-title">Total Product</h3>
+                    <p>@ViewBag.ProductCount</p>
+                    <a asp-action="Index" asp-controller="Product" class="btn btn-primary">Go To Product</a>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="row" style="font-size:28px; margin-top: 10px">
+    <div class="col-md-12">
+        <div class="col-md-4">
+            <div class="card border-danger mb-3 text-center" style="max-width: 28rem;">
+                <div class="card-header">Customer Details</div>
+                <div class="card-body text-danger">
+                    <h3 class="card-title">Total Customer</h3>
+                    <p>@ViewBag.CustomerCount</p>
+                    <a asp-action="Index" asp-controller="Customer" class="btn btn-primary">Go To Customer</a>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+@*
+<div class="card border-warning mb-3" style="max-width: 18rem;">
+    <div class="card-header">Header</div>
+    <div class="card-body text-warning">
+        <h5 class="card-title">Warning card title</h5>
+        <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
+    </div>
+</div>
+<div class="card border-info mb-3" style="max-width: 18rem;">
+    <div class="card-header">Header</div>
+    <div class="card-body text-info">
+        <h5 class="card-title">Info card title</h5>
+        <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
+    </div>
+</div>
+<div class="card border-light mb-3" style="max-width: 18rem;">
+    <div class="card-header">Header</div>
+    <div class="card-body">
+        <h5 class="card-title">Light card title</h5>
+        <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
+    </div>
+</div>
+<div class="card border-dark mb-3" style="max-width: 18rem;">
+    <div class="card-header">Header</div>
+    <div class="card-body text-dark">
+        <h5 class="card-title">Dark card title</h5>
+        <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
+    </div>
+</div>*@
+
