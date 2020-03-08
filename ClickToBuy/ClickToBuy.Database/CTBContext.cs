@@ -15,6 +15,7 @@ namespace ClickToBuy.Database
         public DbSet<Category> Categories { get; set; }
         public DbSet<Gender> Genders { get; set; }
         public DbSet<Customer> Customers { get; set; }
+        public DbSet<Condition> Conditions { get; set; }
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
@@ -24,6 +25,7 @@ namespace ClickToBuy.Database
             modelBuilder.Entity<Category>().HasIndex(c=>c.Name).IsUnique();
             modelBuilder.Entity<Gender>().HasIndex(g=>g.Name).IsUnique();
             modelBuilder.Entity<Customer>().HasIndex(c=> new { c.Email, c.Name }).IsUnique();
+            modelBuilder.Entity<Condition>().HasIndex(c => c.Name).IsUnique();
 
             foreach (var relationship in modelBuilder.Model.GetEntityTypes().SelectMany(e => e.GetForeignKeys()))
             {

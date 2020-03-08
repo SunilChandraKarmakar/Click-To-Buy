@@ -54,6 +54,8 @@ namespace ClickToBuy
             services.AddTransient<ICustomerManager, CustomerManager>();
             services.AddTransient<ICustomerRepository, CustomerRepository>();
             services.AddSingleton<IHttpContextAccessor, HttpContextAccessor>();
+            services.AddTransient<IConditionManager, ConditionManager>();
+            services.AddSingleton<IConditionRepository, ConditionRepository>();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.

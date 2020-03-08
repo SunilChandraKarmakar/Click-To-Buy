@@ -1,0 +1,33 @@
+﻿@using ClickToBuy.Model
+@model Condition
+
+@{
+    ViewData["Title"] = "Update";
+    Layout = "~/Views/Shared/_AdminLayout.cshtml";
+}
+
+<h2 id="hadertitle">Update Condition</h2>
+<hr />
+
+<div class="row" id="createandeditfrom">
+    <div class="col-md-4">
+        <form method="post" asp-action="Update">
+            <div class="form-group">
+                <label asp-for="Name" class="control-lable"></label>
+                <input type="text" asp-for="Name" value="@Model.Name" class="form-control" />
+                <span asp-validation-for="Name" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Description" class="control-lable"></label>
+                <textarea asp-for="Description" class="form-control" placeholder="Description Box">@Model.Description</textarea>
+                <span asp-validation-for="Description" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <span class="text-danger">@ViewBag.ErrorMessage</span>
+                <input type="submit" value="Update" class="btn btn-success" />
+                <a asp-action="Index" class="btn btn-info"><i class="fas fa-list"></i> Back To List</a>
+            </div>
+        </form>
+    </div>
+</div>
+
