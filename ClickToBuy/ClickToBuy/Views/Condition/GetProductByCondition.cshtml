@@ -1,0 +1,54 @@
+﻿@using ClickToBuy.Model
+@model IEnumerable<Product>
+
+@{
+    ViewData["Title"] = "Get Product By Condition";
+    Layout = "~/Views/Shared/_AdminLayout.cshtml";
+}
+
+<h2 id="hadertitle">Product Details</h2>
+<hr />
+
+<div class="row" style="margin-top: 30px">
+    <div class="col-md-12">
+        <table id="myTable" class="display table table-bordered table-striped">
+            <thead>
+                <tr>
+                    <th>Basic Info</th>
+                    <th>Activity</th>
+                    <th>Price</th>
+                    <th>Picture</th>
+                    <th>Action</th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (Product item in Model)
+                {
+                    <tr>
+                        <td>
+                            Name : @item.Name <br />
+                            Category : @item.Category.Name <br />
+                            Brand : @item.Brand.Name <br />
+                        </td>
+                        <td>
+                            Condition : @item.Condition.Name <br />
+                            Status : @item.CloseType.Name <br />
+                            Link : @item.Link <br />
+                            Details : @item.ProductDetails
+                        </td>
+                        <td>
+                            Regular Price : @item.RegularPrice <br />
+                            Offer Price : @item.OfferPrice <br />
+                        </td>
+                        <td><img src="~/@item.Picture" height="100" width="90" /></td>
+                        <td>
+                            <a asp-route-id="@item.Id" asp-action="Update" asp-controller="Product" class="btn btn-info"><i class="far fa-edit"></i> Update</a>
+                            <a asp-route-id="@item.Id" asp-action="Remove" asp-controller="Product" class="btn btn-danger"><i class="far fa-trash-alt"></i> Remove</a>
+                        </td>
+                    </tr>
+                }
+            </tbody>
+        </table>
+    </div>
+</div>
+

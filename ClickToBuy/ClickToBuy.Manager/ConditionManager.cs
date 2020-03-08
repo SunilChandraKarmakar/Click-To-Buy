@@ -16,5 +16,10 @@ namespace ClickToBuy.Manager
         {
             _iConditionRepository = iConditionRepository;
         }
+
+        public override ICollection<Condition> GetAll()
+        {
+            return _iConditionRepository.GetAll();
+        }
     }
 }

@@ -11,16 +11,25 @@ namespace ClickToBuy.Controllers
     public class CloseTypeController : Controller
     {
         private readonly ICloseTypeManager _iCloseTypeManager;
+        private readonly IProductManager _iProductManager;
 
-        public CloseTypeController(ICloseTypeManager iCloseTypeManager)
+        public CloseTypeController(ICloseTypeManager iCloseTypeManager, IProductManager iProductManager)
         {
             _iCloseTypeManager = iCloseTypeManager;
+            _iProductManager = iProductManager;
         }
 
         [HttpGet]
         public IActionResult Index()
         {
             return View(_iCloseTypeManager.GetAll());
+        }
+
+        [HttpGet]
+        public IActionResult GetProductByCloseType(int id)
+        {
+            List<Product> productList = _iProductManager.GetAll().Where(p => p.CloseTypeId == id).ToList();
+            return View(productList);
         }
 
         [HttpGet]

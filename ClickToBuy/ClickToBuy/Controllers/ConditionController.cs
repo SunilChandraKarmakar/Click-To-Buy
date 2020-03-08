@@ -11,16 +11,25 @@ namespace ClickToBuy.Controllers
     public class ConditionController : Controller
     {
         private readonly IConditionManager _iConditionManager;
+        private readonly IProductManager _iProductManager;
 
-        public ConditionController(IConditionManager iConditionManager)
+        public ConditionController(IConditionManager iConditionManager, IProductManager iProductManager)
         {
             _iConditionManager = iConditionManager;
+            _iProductManager = iProductManager;
         }
 
         [HttpGet]
         public IActionResult Index()
         {
             return View(_iConditionManager.GetAll());
+        }
+
+        [HttpGet]
+        public IActionResult GetProductByCondition(int id)
+        {
+            List<Product> productList = _iProductManager.GetAll().Where(p => p.ConditionId == id).ToList();
+            return View(productList);
         }
 
         [HttpGet]

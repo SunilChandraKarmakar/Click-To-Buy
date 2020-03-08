@@ -12,10 +12,12 @@ namespace ClickToBuy.Controllers
     public class CategoryController : Controller
     {
         private readonly ICategoryManager _iCategoryManager;
+        private readonly IProductManager _iProductManager;
 
-        public CategoryController(ICategoryManager iCategoryManager)
+        public CategoryController(ICategoryManager iCategoryManager, IProductManager iProductManager)
         {
             _iCategoryManager = iCategoryManager;
+            _iProductManager = iProductManager;
         }
 
         [HttpGet]
@@ -23,6 +25,13 @@ namespace ClickToBuy.Controllers
         {
             ICollection<Category> categoryList = _iCategoryManager.GetAll();
             return View(categoryList);
+        }
+
+        [HttpGet]
+        public IActionResult GetProductByCategoryId(int id)
+        {
+            List<Product> productList = _iProductManager.GetAll().Where(p => p.CategoryId == id).ToList();
+            return View(productList);
         }
 
         private List<SelectListItem> CategoryList()

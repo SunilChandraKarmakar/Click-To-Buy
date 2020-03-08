@@ -11,10 +11,12 @@ namespace ClickToBuy.Controllers
     public class BrandController : Controller
     {
         private readonly IBrandManager _iBrandManager;
+        private readonly IProductManager _iProductManager;
         
-        public BrandController(IBrandManager iBrandManager)
+        public BrandController(IBrandManager iBrandManager, IProductManager iProductManager)
         {
             _iBrandManager = iBrandManager;
+            _iProductManager = iProductManager;
         }
 
         [HttpGet]
@@ -23,11 +25,12 @@ namespace ClickToBuy.Controllers
             return View(_iBrandManager.GetAll());
         }
 
-        //[HttpGet]
-        //public IActionResult GetProductByBrand(int id)
-        //{
-        //    List<Product>  productList = 
-        //}
+        [HttpGet]
+        public IActionResult GetProductByBrand(int id)
+        {
+            List<Product> productList = _iProductManager.GetAll().Where(p => p.BrandId == id).ToList();
+            return View(productList);
+        }
 
         [HttpGet]
         public IActionResult Create()

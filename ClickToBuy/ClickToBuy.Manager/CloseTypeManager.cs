@@ -16,5 +16,10 @@ namespace ClickToBuy.Manager
         {
             _iCloseTypeRepository = iCloseTypeRepository;
         }
+
+        public override ICollection<CloseType> GetAll()
+        {
+            return _iCloseTypeRepository.GetAll();
+        }
     }
 }
