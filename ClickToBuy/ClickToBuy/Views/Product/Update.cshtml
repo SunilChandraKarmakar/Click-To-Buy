@@ -1,0 +1,83 @@
+﻿@using ClickToBuy.Model
+@model Product
+
+@{
+    ViewData["Title"] = "Update";
+    Layout = "~/Views/Shared/_AdminLayout.cshtml";
+}
+
+<h2 id="hadertitle">Update Product</h2>
+<hr />
+
+<form method="post" asp-action="Update" enctype="multipart/form-data" asp-route-pic="@Model.Picture">
+    <div class="row" id="createandeditfrom">
+        <div class="col-md-4">
+            <div class="form-group">
+                <label asp-for="Name" class="control-lable"></label>
+                <input type="text" asp-for="Name" value="@Model.Name" class="form-control" />
+                <span asp-validation-for="Name" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="CategoryId" class="control-lable">Category</label>
+                <select asp-for="CategoryId" asp-items="@ViewBag.CategoryList" class="form-control">
+                </select>
+                <span asp-validation-for="CategoryId" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="ConditionId" class="control-lable">Condition</label>
+                <select asp-for="ConditionId" asp-items="@ViewBag.ConditionList" class="form-control">
+                </select>
+                <span asp-validation-for="ConditionId" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="RegularPrice" class="control-lable">Regular Price</label>
+                <input type="number" asp-for="RegularPrice" value="@Model.RegularPrice" class="form-control" />
+                <span asp-validation-for="RegularPrice" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Link" class="control-lable"></label>
+                <textarea asp-for="Link" class="form-control" placeholder="Link hare">@Model.Link</textarea>
+                <span asp-validation-for="Link" class="text-danger"></span>
+            </div>
+        </div>
+        <div class="col-md-4">
+            <div class="form-group">
+                <label asp-for="Picture" class="control-lable"></label>
+                <input type="file" name="Picture" asp-for="Picture" value="@Model.Picture" class="form-control" />
+                <span asp-validation-for="Picture" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="BrandId" class="control-label">Brand</label>
+                <select asp-for="BrandId" asp-items="@ViewBag.BrandList" class="form-control">
+                </select>
+                <span asp-validation-for="BrandId" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="CloseTypeId" class="control-lable">Status</label>
+                <select asp-for="CloseTypeId" asp-items="@ViewBag.CloseTypeList" class="form-control">
+                </select>
+                <span asp-validation-for="CloseTypeId" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="OfferPrice" class="control-lable">Offre Price</label>
+                <input type="number" asp-for="OfferPrice" value="@Model.OfferPrice" class="form-control" />
+                <span asp-validation-for="OfferPrice" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="ProductDetails" class="control-lable">Product Details</label>
+                <textarea asp-for="ProductDetails" class="form-control" placeholder="Type Details">@Model.ProductDetails</textarea>
+                <span asp-validation-for="ProductDetails" class="text-danger"></span>
+            </div>
+        </div>
+    </div>
+    <div class="row" style="margin-left: 320px">
+        <div class="col-md-12">
+            <div class="form-group">
+                <span class="text-danger">@ViewBag.ErrorMessage</span>
+                <input type="submit" value="Update" class="btn btn-success" />
+                <a asp-action="Index" class="btn btn-info"><i class="fas fa-list"></i> Back To List</a>
+            </div>
+        </div>
+    </div>
+</form>
+

@@ -17,6 +17,11 @@ namespace ClickToBuy.Manager
             _iBrandRepository = iBrandRepository;
         }
 
+        public override ICollection<Brand> GetAll()
+        {
+            return _iBrandRepository.GetAll();
+        }
+
         public Brand CheckName(string name)
         {
             return _iBrandRepository.CheckName(name);

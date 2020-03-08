@@ -58,6 +58,8 @@ namespace ClickToBuy
             services.AddSingleton<IConditionRepository, ConditionRepository>();
             services.AddTransient<ICloseTypeManager, CloseTypeManager>();
             services.AddSingleton<ICloseTypeRepository, CloseTypeRepository>();
+            services.AddTransient<IProductManager, ProductManager>();
+            services.AddTransient<IProductRepository, ProductRepository>();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.

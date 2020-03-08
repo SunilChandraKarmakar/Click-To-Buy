@@ -25,5 +25,6 @@ namespace ClickToBuy.Model
 
         public ICollection<Category> Categories { get; set; }
         public Category Categoryy { get; set; }
+        public ICollection<Product> Products { get; set; }
     }
 }

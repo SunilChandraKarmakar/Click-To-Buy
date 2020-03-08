@@ -17,6 +17,7 @@ namespace ClickToBuy.Database
         public DbSet<Customer> Customers { get; set; }
         public DbSet<Condition> Conditions { get; set; }
         public DbSet<CloseType> CloseTypes { get; set; }
+        public DbSet<Product> Products { get; set; }
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
@@ -28,6 +29,7 @@ namespace ClickToBuy.Database
             modelBuilder.Entity<Customer>().HasIndex(c=> new { c.Email, c.Name }).IsUnique();
             modelBuilder.Entity<Condition>().HasIndex(c => c.Name).IsUnique();
             modelBuilder.Entity<CloseType>().HasIndex(c => c.Name).IsUnique();
+            modelBuilder.Entity<Product>().HasIndex(p => p.Name).IsUnique();
 
             foreach (var relationship in modelBuilder.Model.GetEntityTypes().SelectMany(e => e.GetForeignKeys()))
             {
