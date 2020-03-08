@@ -104,6 +104,31 @@ namespace ClickToBuy.Database.Migrations
                     b.ToTable("Cities");
                 });
 
+            modelBuilder.Entity("ClickToBuy.Model.CloseType", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int")
+                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+
+                    b.Property<string>("Description")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(500)")
+                        .HasMaxLength(500);
+
+                    b.Property<string>("Name")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(50)")
+                        .HasMaxLength(50);
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("Name")
+                        .IsUnique();
+
+                    b.ToTable("CloseTypes");
+                });
+
             modelBuilder.Entity("ClickToBuy.Model.Condition", b =>
                 {
                     b.Property<int>("Id")
