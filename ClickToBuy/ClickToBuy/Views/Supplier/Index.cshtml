@@ -1,0 +1,51 @@
+﻿@using ClickToBuy.Model
+@model IEnumerable<Supplier>
+
+@{
+    ViewData["Title"] = "Index";
+    Layout = "~/Views/Shared/_AdminLayout.cshtml";
+}
+
+<h2 id="hadertitle">Supplier Details</h2>
+<hr />
+
+<div class="row">
+    <div class="col-md-4">
+        <a asp-action="Create" class="btn btn-primary"><i class="fas fa-plus"></i> Create Supplier</a>
+    </div>
+</div>
+
+<div class="row" id="datatables">
+    <div class="col-md-10">
+        <table id="myTable" class="display table table-bordered table-striped">
+            <thead>
+                <tr>
+                    <th>Name</th>
+                    <th>Contact</th>
+                    <th>Address</th>
+                    <th>Action</th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (Supplier item in Model)
+                {
+                    <tr>
+                        <td>@item.Name</td>
+                        <td>
+                            Contact : @item.ContactNo <br />
+                            Email : @item.Email <br />
+                        </td>
+                        <td>
+                            <address> @item.Address </address>
+                        </td>
+                        <td>
+                            <a asp-route-id="@item.Id" asp-action="Update" class="btn btn-info"><i class="far fa-edit"></i> Update</a>
+                            <a asp-route-id="@item.Id" asp-action="Remove" class="btn btn-danger"><i class="far fa-trash-alt"></i> Remove</a>
+                        </td>
+                    </tr>
+                }
+            </tbody>
+        </table>
+    </div>
+</div>
+

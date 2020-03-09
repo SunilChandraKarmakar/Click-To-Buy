@@ -62,6 +62,8 @@ namespace ClickToBuy
             services.AddTransient<IProductRepository, ProductRepository>();
             services.AddTransient<IStockProductManager, StockProductManager>();
             services.AddTransient<IStockProductRepository, StockProductRepository>();
+            services.AddTransient<ISupplierManager, SupplierManager>();
+            services.AddTransient<ISupplierRepository, SupplierRepository>();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.

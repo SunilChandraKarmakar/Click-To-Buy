@@ -20,6 +20,7 @@ namespace ClickToBuy.Database
         public DbSet<CloseType> CloseTypes { get; set; }
         public DbSet<Product> Products { get; set; }
         public DbSet<StockProduct> StockProducts { get; set; }
+        public DbSet<Supplier> Suppliers { get; set; }
 
         [Obsolete]
         public DbQuery<NonProductInStock> NonProductInStocks { get; set; }
@@ -37,6 +38,7 @@ namespace ClickToBuy.Database
             modelBuilder.Entity<CloseType>().HasIndex(c => c.Name).IsUnique();
             modelBuilder.Entity<Product>().HasIndex(p => p.Name).IsUnique();
             modelBuilder.Entity<StockProduct>().HasIndex(s => s.ProductId).IsUnique();
+            modelBuilder.Entity<Supplier>().HasIndex(s => new { s.Email, s.ContactNo }).IsUnique();
             modelBuilder.Query<NonProductInStock>().ToView("NonProductInStock");
 
             foreach (var relationship in modelBuilder.Model.GetEntityTypes().SelectMany(e => e.GetForeignKeys()))
