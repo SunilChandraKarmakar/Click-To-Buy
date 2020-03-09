@@ -21,6 +21,9 @@ namespace ClickToBuy.Database
         public DbSet<Product> Products { get; set; }
         public DbSet<StockProduct> StockProducts { get; set; }
         public DbSet<Supplier> Suppliers { get; set; }
+        public DbSet<Purchase> Purchases { get; set; }
+        public DbSet<PurchaseItem> PurchaseItems { get; set; }
+        public DbSet<PurchasePayment> PurchasePayments { get; set; }
 
         [Obsolete]
         public DbQuery<NonProductInStock> NonProductInStocks { get; set; }
@@ -39,6 +42,7 @@ namespace ClickToBuy.Database
             modelBuilder.Entity<Product>().HasIndex(p => p.Name).IsUnique();
             modelBuilder.Entity<StockProduct>().HasIndex(s => s.ProductId).IsUnique();
             modelBuilder.Entity<Supplier>().HasIndex(s => new { s.Email, s.ContactNo }).IsUnique();
+            modelBuilder.Entity<Purchase>().HasIndex(p => p.PurchaseNumber).IsUnique();
             modelBuilder.Query<NonProductInStock>().ToView("NonProductInStock");
 
             foreach (var relationship in modelBuilder.Model.GetEntityTypes().SelectMany(e => e.GetForeignKeys()))
