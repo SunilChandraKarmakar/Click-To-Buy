@@ -1,0 +1,33 @@
+﻿@model ClickToBuy.Model.StockProduct
+
+@{
+    ViewData["Title"] = "Remove";
+    Layout = "~/Views/Shared/_AdminLayout.cshtml";
+}
+
+<h2 id="hadertitle">Remove Stock</h2>
+<hr />
+
+<div>
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.Quantity)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.Quantity)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.Product)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.Product.Name)
+        </dd>
+    </dl>
+
+    <form asp-action="Delete" id="createandeditfrom">
+        <input type="hidden" asp-for="Id" />
+        <span class="text-danger">@ViewBag.ErrorMessage</span>
+        <input type="submit" value="Remove" class="btn btn-danger" />
+        <a asp-action="Index" class="btn btn-info"><i class="fas fa-list"></i> Back To List</a>
+    </form>
+</div>

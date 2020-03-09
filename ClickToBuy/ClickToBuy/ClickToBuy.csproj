@@ -5,6 +5,10 @@
     <UserSecretsId>aspnet-ClickToBuy-3235F9C0-33B3-44F0-A263-81FDA23420A6</UserSecretsId>
   </PropertyGroup>
 
+  <ItemGroup>
+    <None Include="..\.editorconfig" Link=".editorconfig" />
+  </ItemGroup>
+
 
   <ItemGroup>
     <PackageReference Include="Microsoft.AspNetCore.Diagnostics.EntityFrameworkCore" Version="3.1.2" />

@@ -17,7 +17,9 @@ namespace ClickToBuy.Repository
                                         .Include(p => p.Brand)
                                         .Include(p => p.Category)
                                         .Include(p => p.CloseType)
-                                        .Include(p => p.Condition).ToList();
+                                        .Include(p => p.Condition)
+                                        .Include(p=> p.StockProducts)
+                                        .ToList();
             return productList;
         }
 

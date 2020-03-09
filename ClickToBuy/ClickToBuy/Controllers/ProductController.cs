@@ -19,6 +19,7 @@ namespace ClickToBuy.Controllers
         private readonly IBrandManager _iBrandManager;
         private readonly IConditionManager _iConditionManager;
         private readonly ICloseTypeManager _iCloseTypeManager;
+        private readonly IStockProductManager _iStockProductManager;
         [Obsolete]
         private readonly IHostingEnvironment _iHostingEnvironment;
 
@@ -27,7 +28,8 @@ namespace ClickToBuy.Controllers
                                 ICategoryManager iCategoryManager,
                                 IBrandManager iBrandManager,
                                 IConditionManager iConditionManager,
-                                ICloseTypeManager iCloseTypeManager, IHostingEnvironment iHostingEnvironment)
+                                ICloseTypeManager iCloseTypeManager, 
+                                IHostingEnvironment iHostingEnvironment, IStockProductManager iStockProductManager)
         {
             _iProductManager = iProductManager;
             _iCategoryManager = iCategoryManager;
@@ -35,6 +37,7 @@ namespace ClickToBuy.Controllers
             _iConditionManager = iConditionManager;
             _iCloseTypeManager = iCloseTypeManager;
             _iHostingEnvironment = iHostingEnvironment;
+            _iStockProductManager = iStockProductManager;
         }
 
         [HttpGet]
@@ -85,6 +88,13 @@ namespace ClickToBuy.Controllers
                                                     Text = c.Name
                                                 }).ToList();
             return closeTypeList;
+        }
+
+        [HttpGet]
+        public IActionResult GetStockByProduct(int id)
+        {
+            List<StockProduct> stockProducts = _iStockProductManager.GetAll().Where(s => s.ProductId == id).ToList();
+            return View(stockProducts);
         }
 
         [HttpGet]

@@ -5,13 +5,18 @@ VisualStudioVersion = 16.0.29806.167
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ClickToBuy", "ClickToBuy\ClickToBuy.csproj", "{E8F66B09-AAAB-4AEB-8074-978F215A75A5}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ClickToBuy.Model", "ClickToBuy.Model\ClickToBuy.Model.csproj", "{871A300C-D7BA-4551-B79A-17C8BA895D4C}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ClickToBuy.Model", "ClickToBuy.Model\ClickToBuy.Model.csproj", "{871A300C-D7BA-4551-B79A-17C8BA895D4C}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ClickToBuy.Database", "ClickToBuy.Database\ClickToBuy.Database.csproj", "{565DCD4E-9EDB-407F-A7BF-FD6BE5BE0ABA}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ClickToBuy.Database", "ClickToBuy.Database\ClickToBuy.Database.csproj", "{565DCD4E-9EDB-407F-A7BF-FD6BE5BE0ABA}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ClickToBuy.Repository", "ClickToBuy.Repository\ClickToBuy.Repository.csproj", "{BCA8AB8B-5662-4404-8A52-5E5DA8831B9B}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ClickToBuy.Repository", "ClickToBuy.Repository\ClickToBuy.Repository.csproj", "{BCA8AB8B-5662-4404-8A52-5E5DA8831B9B}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ClickToBuy.Manager", "ClickToBuy.Manager\ClickToBuy.Manager.csproj", "{DE693D33-754B-44F9-9B55-77B54409D518}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ClickToBuy.Manager", "ClickToBuy.Manager\ClickToBuy.Manager.csproj", "{DE693D33-754B-44F9-9B55-77B54409D518}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{4EB2B433-749E-4101-98DA-29C3254B0CFA}"
+	ProjectSection(SolutionItems) = preProject
+		.editorconfig = .editorconfig
+	EndProjectSection
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

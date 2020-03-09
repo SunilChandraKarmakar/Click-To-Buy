@@ -60,6 +60,8 @@ namespace ClickToBuy
             services.AddSingleton<ICloseTypeRepository, CloseTypeRepository>();
             services.AddTransient<IProductManager, ProductManager>();
             services.AddTransient<IProductRepository, ProductRepository>();
+            services.AddTransient<IStockProductManager, StockProductManager>();
+            services.AddTransient<IStockProductRepository, StockProductRepository>();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.

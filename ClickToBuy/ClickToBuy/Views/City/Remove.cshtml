@@ -26,6 +26,7 @@
 
     <form asp-action="Delete" id="createandeditfrom">
         <input type="hidden" asp-for="Id" />
+        <span class="text-danger">@ViewBag.ErrorMessage</span>
         <input type="submit" value="Remove" class="btn btn-danger" />
         <a asp-action="Index" class="btn btn-info"><i class="fas fa-list"></i> Back To List</a>
     </form>

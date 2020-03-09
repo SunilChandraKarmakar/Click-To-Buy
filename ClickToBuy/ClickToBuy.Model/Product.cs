@@ -49,5 +49,6 @@ namespace ClickToBuy.Model
         public Brand Brand { get; set; }
         public Condition Condition { get; set; }
         public CloseType CloseType { get; set; }
+        public ICollection<StockProduct> StockProducts { get; set; }
     }
 }

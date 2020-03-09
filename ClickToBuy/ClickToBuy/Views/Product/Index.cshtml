@@ -4,6 +4,7 @@
 @{
     ViewData["Title"] = "Index";
     Layout = "~/Views/Shared/_AdminLayout.cshtml";
+    int totalStockProduct = 0;
 }
 
 <h2 id="hadertitle">Product Details</h2>
@@ -37,6 +38,22 @@
                             Brand : @item.Brand.Name <br />
                         </td>
                         <td>
+                            Stock : <a asp-route-id="@item.Id" asp-action="GetStockByProduct">
+                                        @{
+                                            var matchStockProduct = item.StockProducts.Where(s => s.ProductId == item.Id)
+                                                                                      .FirstOrDefault();
+                                            if (matchStockProduct != null)
+                                            {
+                                                totalStockProduct = matchStockProduct.Quantity;
+                                            }
+                                            else
+                                            {
+                                                totalStockProduct = 0;
+                                            }
+
+                                            @totalStockProduct 
+                                         }
+                                    </a> <br />
                             Condition : @item.Condition.Name <br />
                             Status : @item.CloseType.Name <br />
                             Link : @item.Link <br />

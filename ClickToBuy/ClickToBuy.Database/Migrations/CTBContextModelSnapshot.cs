@@ -315,6 +315,27 @@ namespace ClickToBuy.Database.Migrations
                     b.ToTable("Products");
                 });
 
+            modelBuilder.Entity("ClickToBuy.Model.StockProduct", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int")
+                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+
+                    b.Property<int>("ProductId")
+                        .HasColumnType("int");
+
+                    b.Property<int>("Quantity")
+                        .HasColumnType("int");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("ProductId")
+                        .IsUnique();
+
+                    b.ToTable("StockProducts");
+                });
+
             modelBuilder.Entity("ClickToBuy.Model.Category", b =>
                 {
                     b.HasOne("ClickToBuy.Model.Category", "Categoryy")
@@ -376,6 +397,15 @@ namespace ClickToBuy.Database.Migrations
                     b.HasOne("ClickToBuy.Model.Condition", "Condition")
                         .WithMany("Products")
                         .HasForeignKey("ConditionId")
+                        .OnDelete(DeleteBehavior.Restrict)
+                        .IsRequired();
+                });
+
+            modelBuilder.Entity("ClickToBuy.Model.StockProduct", b =>
+                {
+                    b.HasOne("ClickToBuy.Model.Product", "Product")
+                        .WithMany("StockProducts")
+                        .HasForeignKey("ProductId")
                         .OnDelete(DeleteBehavior.Restrict)
                         .IsRequired();
                 });
