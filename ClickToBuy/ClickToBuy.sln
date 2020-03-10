@@ -13,11 +13,6 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ClickToBuy.Repository", "Cl
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ClickToBuy.Manager", "ClickToBuy.Manager\ClickToBuy.Manager.csproj", "{DE693D33-754B-44F9-9B55-77B54409D518}"
 EndProject
-Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{4EB2B433-749E-4101-98DA-29C3254B0CFA}"
-	ProjectSection(SolutionItems) = preProject
-		.editorconfig = .editorconfig
-	EndProjectSection
-EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU

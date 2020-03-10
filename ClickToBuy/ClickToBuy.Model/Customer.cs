@@ -34,23 +34,30 @@ namespace ClickToBuy.Model
         [StringLength(50, MinimumLength = 5)]
         [DataType(DataType.Password)]
         [Compare("Password", ErrorMessage = "Not match in password!")]
+        [Display(Name = "Confirm Password")]
         public string ConfirmPassword { get; set; }
 
+        [DataType(DataType.ImageUrl)]
         public string Pictuer { get; set; }
 
-        [Required]
+        [Required(ErrorMessage = "Select your gender.")]
+        [Display(Name = "Gender")]
         public int GenderId { get; set; }
 
         [Required]
         [DataType(DataType.Date)]
+        [Display(Name = "Join Date")]
         public DateTime JoinDate { get; set; }
 
+        [Display(Name = "Customer IP Address")]
         public string CustomerIPAddress { get; set; }
 
         [Required]
+        [Display(Name = "Country")]
         public int CountryId { get; set; }
 
         [Required]
+        [Display(Name = "City")]
         public int CityId { get; set; }
 
         [Required]
@@ -61,5 +68,10 @@ namespace ClickToBuy.Model
         public Gender Gender { get; set; }
         public Country Country { get; set; }
         public City City { get; set; }
+        public ICollection<CustomerBillingAddress> CustomerBillingAddresses { get; set; }
+        public ICollection<Coupon> Coupons { get; set; }
+        public ICollection<Order> Orders { get; set; }
+
+
     }
 }

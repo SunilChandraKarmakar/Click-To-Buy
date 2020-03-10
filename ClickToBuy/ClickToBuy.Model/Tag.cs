@@ -5,18 +5,19 @@ using System.Text;
 
 namespace ClickToBuy.Model
 {
-    public class StockProduct
+    public class Tag
     {
         public int Id { get; set; }
 
-        [Required( ErrorMessage = "Provide product name.")]
+        [Required(ErrorMessage = "Select Product")] 
         [Display(Name = "Product")]
         public int ProductId { get; set; }
 
         [Required]
-        [DataType(DataType.PhoneNumber)]
-        [Range(1, 5000)]
-        public int Quantity { get; set; }
+        [StringLength(2000, MinimumLength = 2)]
+        [DataType(DataType.MultilineText)]
+        [Display(Name = "Product Tag")]
+        public string TagName { get; set; }
 
         public Product Product { get; set; }
     }

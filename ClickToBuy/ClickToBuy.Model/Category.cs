@@ -6,17 +6,14 @@ using System.Text;
 namespace ClickToBuy.Model
 {
     public class Category
-    {
-        public Category()
-        {
-            Categories = new List<Category>();
-        }
-
+    {  
         public int Id { get; set; }
 
         [Required(ErrorMessage = "Provide category name")]
         [StringLength(30, MinimumLength = 2)]
         public string Name { get; set; }
+
+        [Display(Name = "Sub Categort")]
         public int? CategoryId { get; set; }
 
         [Required(ErrorMessage = "Provide description of category")]

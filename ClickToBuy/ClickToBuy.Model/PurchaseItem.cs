@@ -10,9 +10,11 @@ namespace ClickToBuy.Model
         public int Id { get; set; }
 
         [Required]
+        [Display(Name = "Purchase Number")]
         public int PurchaseId { get; set; }
 
         [Required]
+        [Display(Name = "Product")]
         public int ProductId { get; set; }
 
         [Required]
@@ -21,5 +23,6 @@ namespace ClickToBuy.Model
         public float Price { get; set; }
 
         public Purchase Purchase { get; set; }
+        public Product Product { get; set; }
     }
 }

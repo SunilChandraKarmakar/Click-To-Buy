@@ -5,26 +5,24 @@ using System.Text;
 
 namespace ClickToBuy.Model
 {
-    public class ReturnProduct
+    public class OrderDetails
     {
         public int Id { get; set; }
 
-        [Required] 
-        [Display(Name = "Provied order number.")]
+        [Required]
+        [Display(Name = "Order number")]
         public int OrderId { get; set; }
 
         [Required]
-        [Display(Name = "Provied product name.")]
+        [Display(Name = "Product Name")]
         public int ProductId { get; set; }
 
         [Required]
-        [Display(Name = "Provied quantity.")]
-        [Range(1, 5)]
+        [Display(Name = "Quantity")]
+        [Range(1, 20)]
         public int Quantity { get; set; }
 
         public Order Order { get; set; }
         public Product Product { get; set; }
-
-
     }
 }

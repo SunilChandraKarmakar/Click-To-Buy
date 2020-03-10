@@ -19,5 +19,7 @@ namespace ClickToBuy.Model
 
         public Country Country { get; set; }
         public ICollection<Customer> Customers { get; set; }
+        public ICollection<DeliveryCharge> DeliveryCharges { get; set; }
+
     }
 }

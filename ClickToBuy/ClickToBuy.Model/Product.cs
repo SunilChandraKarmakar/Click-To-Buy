@@ -14,24 +14,30 @@ namespace ClickToBuy.Model
         public string Name { get; set; }
 
         [Required(ErrorMessage = "Provide category name.")]
+        [Display(Name = "Category")]
         public int CategoryId { get; set; }
 
         [Required(ErrorMessage = "Provide brand name.")]
+        [Display(Name = "Brand")]
         public int BrandId { get; set; }
 
         [Required(ErrorMessage = "Provide condition type.")]
+        [Display(Name = "Condition")]
         public int ConditionId { get; set; }
 
         [Required(ErrorMessage = "Provide Close Type.")]
+        [Display(Name = "Status")]
         public int CloseTypeId { get; set; }
 
         [Required(ErrorMessage = "Provide regular price.")]
         [DataType(DataType.Currency)]
+        [Display(Name = "Regular Price")]
         [Range(1, 1000000)]
         public float RegularPrice { get; set; }
 
         [DataType(DataType.Currency)]
-        [Range(1, 1000000)]
+        [Display(Name = "Offer Price")]
+        [Range(0, 1000000)]
         public float? OfferPrice { get; set; }
 
         [DataType(DataType.ImageUrl)]
@@ -43,6 +49,7 @@ namespace ClickToBuy.Model
         [Required(ErrorMessage = "Provide product details.")]
         [StringLength(2000, MinimumLength = 2)]
         [DataType(DataType.MultilineText)]
+        [Display(Name = "Product Details")]
         public string ProductDetails { get; set; }
 
         public Category Category { get; set; }
@@ -50,5 +57,9 @@ namespace ClickToBuy.Model
         public Condition Condition { get; set; }
         public CloseType CloseType { get; set; }
         public ICollection<StockProduct> StockProducts { get; set; }
+        public ICollection<Tag> Tags { get; set; }
+        public ICollection<OrderDetails> OrderDetails { get; set; }
+        public ICollection<ReturnProduct> ReturnProducts { get; set; }
+        public ICollection<PurchaseItem> PurchaseItems { get; set; }
     }
 }

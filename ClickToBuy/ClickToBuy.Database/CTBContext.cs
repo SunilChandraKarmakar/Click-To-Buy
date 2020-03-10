@@ -23,8 +23,14 @@ namespace ClickToBuy.Database
         public DbSet<Supplier> Suppliers { get; set; }
         public DbSet<Purchase> Purchases { get; set; }
         public DbSet<PurchaseItem> PurchaseItems { get; set; }
-        public DbSet<PurchasePayment> PurchasePayments { get; set; }
-
+        public DbSet<PurchasePayment> PurchasePayments { get; set; }   
+        public DbSet<Coupon> Coupons { get; set; }
+        public DbSet<CustomerBillingAddress> CustomerBillingAddresses { get; set; }
+        public DbSet<DeliveryCharge> DeliveryCharges { get; set; }
+        public DbSet<Order> Orders { get; set; }
+        public DbSet<OrderDetails> OrderDetails { get; set; }
+        public DbSet<ReturnProduct> ReturnProducts { get; set; }
+        public DbSet<Tag> Tags{ get; set; }   
         [Obsolete]
         public DbQuery<NonProductInStock> NonProductInStocks { get; set; }
 
@@ -43,6 +49,9 @@ namespace ClickToBuy.Database
             modelBuilder.Entity<StockProduct>().HasIndex(s => s.ProductId).IsUnique();
             modelBuilder.Entity<Supplier>().HasIndex(s => new { s.Email, s.ContactNo }).IsUnique();
             modelBuilder.Entity<Purchase>().HasIndex(p => p.PurchaseNumber).IsUnique();
+            modelBuilder.Entity<Coupon>().HasIndex(c => c.CouponNumber).IsUnique();
+            modelBuilder.Entity<Order>().HasIndex(o => o.OrderNo).IsUnique();
+            modelBuilder.Entity<Tag>().HasIndex(t => t.TagName).IsUnique();
             modelBuilder.Query<NonProductInStock>().ToView("NonProductInStock");
 
             foreach (var relationship in modelBuilder.Model.GetEntityTypes().SelectMany(e => e.GetForeignKeys()))

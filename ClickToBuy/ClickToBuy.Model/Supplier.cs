@@ -27,5 +27,7 @@ namespace ClickToBuy.Model
         [StringLength(2000, MinimumLength = 2)]
         [DataType(DataType.MultilineText)]
         public string Address { get; set; }
+
+        public ICollection<Purchase> Purchases { get; set; }
     }
 }
