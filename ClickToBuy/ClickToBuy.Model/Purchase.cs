@@ -10,7 +10,7 @@ namespace ClickToBuy.Model
         public int Id { get; set; }
 
         [Required]
-        [StringLength(10, MinimumLength = 10)]
+        [StringLength(10, MinimumLength = 6)]
         [Display(Name = "Purchase Number")]
         public string PurchaseNumber { get; set; }
 
@@ -24,6 +24,7 @@ namespace ClickToBuy.Model
 
         public Supplier Supplier { get; set; }
         public ICollection<PurchaseItem> PurchaseItems { get; set; }
-        public ICollection<PurchasePayment> PurchasePayments { get; set; }
+        public PurchasePayment PurchasePayment { get; set; }
+        public ICollection<StockProduct> StockProducts { get; set; } 
     }
 }

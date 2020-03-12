@@ -15,13 +15,20 @@ namespace ClickToBuy.Model
 
         [Required]
         [DataType(DataType.Currency)]
-        [Range(1, 100000)]
-        public float Amount { get; set; }
+        [Range(0, 100000)]
+        [Display(Name = "Pay Amount")]
+        public float PayAmount { get; set; }
+
+        [Required]
+        [DataType(DataType.Currency)]
+        [Range(0, 100000)]
+        [Display(Name = "Due Amount")]
+        public float DueAmount { get; set; }
 
         [Required]
         [DataType(DataType.Date)]
         public DateTime Date { get; set; }
 
-        public Purchase Purchase { get; set; }
+        public ICollection<Purchase> Purchases { get; set; }
     }
 }

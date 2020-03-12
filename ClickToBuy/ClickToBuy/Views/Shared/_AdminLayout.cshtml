@@ -14,6 +14,7 @@
     <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />
     <link href="~/font-awesome/css/all.css" rel="stylesheet" />
     <link href="~/datatables/css/jquery.dataTables.css" rel="stylesheet" />
+    <link href="~/jqueryui/jquery-ui.css" rel="stylesheet" />
 
     <!-- Favicons -->
     <link href="~/adminLayout/img/favicon.png" rel="icon">
@@ -93,7 +94,8 @@
                             <span>Supplier</span>
                         </a>
                         <ul class="sub">
-                            <li><a asp-action="Index" asp-controller="Supplier">Supplier</a></li>
+                            <li><a asp-action="Index" asp-controller="Supplier">Supplier</a></li>   
+                            <li><a asp-action="Index" asp-controller="Purchase">Purchase Product</a></li>
                         </ul>
                     </li>
                     <li class="sub-menu">
@@ -149,11 +151,10 @@
     <script type="text/javascript" src="~/adminLayout/lib/gritter-conf.js"></script>
     <!--script for this page-->
     <script src="~/adminLayout/lib/sparkline-chart.js"></script>
-    <script src="~/adminLayout/lib/zabuto_calendar.js"></script>
+    <script src="~/adminLayout/lib/zabuto_calendar.js"></script>  
+    <script src="~/jqueryui/jquery-ui.js"></script>
     <script type="text/javascript">
-        $(document).ready(function () {
-
-
+        $(document).ready(function () {   
             return false;
         });
     </script>

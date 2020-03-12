@@ -462,6 +462,9 @@ namespace ClickToBuy.Database.Migrations
                         .HasColumnType("nvarchar(10)")
                         .HasMaxLength(10);
 
+                    b.Property<int?>("PurchasePaymentId")
+                        .HasColumnType("int");
+
                     b.Property<int>("SupplierId")
                         .HasColumnType("int");
 
@@ -469,6 +472,8 @@ namespace ClickToBuy.Database.Migrations
 
                     b.HasIndex("PurchaseNumber")
                         .IsUnique();
+
+                    b.HasIndex("PurchasePaymentId");
 
                     b.HasIndex("SupplierId");
 
@@ -488,7 +493,10 @@ namespace ClickToBuy.Database.Migrations
                     b.Property<int>("ProductId")
                         .HasColumnType("int");
 
-                    b.Property<int>("PurchaseId")
+                    b.Property<int?>("PurchaseId")
+                        .HasColumnType("int");
+
+                    b.Property<int>("Quantity")
                         .HasColumnType("int");
 
                     b.HasKey("Id");
@@ -507,18 +515,19 @@ namespace ClickToBuy.Database.Migrations
                         .HasColumnType("int")
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
-                    b.Property<float>("Amount")
-                        .HasColumnType("real");
-
                     b.Property<DateTime>("Date")
                         .HasColumnType("datetime2");
+
+                    b.Property<float>("DueAmount")
+                        .HasColumnType("real");
+
+                    b.Property<float>("PayAmount")
+                        .HasColumnType("real");
 
                     b.Property<int>("PurchaseId")
                         .HasColumnType("int");
 
                     b.HasKey("Id");
-
-                    b.HasIndex("PurchaseId");
 
                     b.ToTable("PurchasePayments");
                 });
@@ -558,13 +567,17 @@ namespace ClickToBuy.Database.Migrations
                     b.Property<int>("ProductId")
                         .HasColumnType("int");
 
+                    b.Property<int?>("PurchaseId")
+                        .HasColumnType("int");
+
                     b.Property<int>("Quantity")
                         .HasColumnType("int");
 
                     b.HasKey("Id");
 
-                    b.HasIndex("ProductId")
-                        .IsUnique();
+                    b.HasIndex("ProductId");
+
+                    b.HasIndex("PurchaseId");
 
                     b.ToTable("StockProducts");
                 });
@@ -753,6 +766,11 @@ namespace ClickToBuy.Database.Migrations
 
             modelBuilder.Entity("ClickToBuy.Model.Purchase", b =>
                 {
+                    b.HasOne("ClickToBuy.Model.PurchasePayment", "PurchasePayment")
+                        .WithMany("Purchases")
+                        .HasForeignKey("PurchasePaymentId")
+                        .OnDelete(DeleteBehavior.Restrict);
+
                     b.HasOne("ClickToBuy.Model.Supplier", "Supplier")
                         .WithMany("Purchases")
                         .HasForeignKey("SupplierId")
@@ -771,17 +789,7 @@ namespace ClickToBuy.Database.Migrations
                     b.HasOne("ClickToBuy.Model.Purchase", "Purchase")
                         .WithMany("PurchaseItems")
                         .HasForeignKey("PurchaseId")
-                        .OnDelete(DeleteBehavior.Restrict)
-                        .IsRequired();
-                });
-
-            modelBuilder.Entity("ClickToBuy.Model.PurchasePayment", b =>
-                {
-                    b.HasOne("ClickToBuy.Model.Purchase", "Purchase")
-                        .WithMany("PurchasePayments")
-                        .HasForeignKey("PurchaseId")
-                        .OnDelete(DeleteBehavior.Restrict)
-                        .IsRequired();
+                        .OnDelete(DeleteBehavior.Restrict);
                 });
 
             modelBuilder.Entity("ClickToBuy.Model.ReturnProduct", b =>
@@ -806,6 +814,11 @@ namespace ClickToBuy.Database.Migrations
                         .HasForeignKey("ProductId")
                         .OnDelete(DeleteBehavior.Restrict)
                         .IsRequired();
+
+                    b.HasOne("ClickToBuy.Model.Purchase", "Purchase")
+                        .WithMany("StockProducts")
+                        .HasForeignKey("PurchaseId")
+                        .OnDelete(DeleteBehavior.Restrict);
                 });
 
             modelBuilder.Entity("ClickToBuy.Model.Tag", b =>

@@ -1,0 +1,209 @@
+﻿@using ClickToBuy.Model.ViewModels
+@model PurchaseCreateView
+
+@{
+    ViewData["Title"] = "Create";
+    Layout = "~/Views/Shared/_AdminLayout.cshtml";
+}
+
+<h2 id="hadertitle">Purchase Product</h2>
+<hr />
+
+<form method="post" asp-action="Create" asp-controller="Purchase" enctype="multipart/form-data">
+    <div class="row">
+        <div class="col-md-12">
+            <div class="col-md-4">
+                <div class="form-group">
+                    <label asp-for="PurchaseNumber" class="control-lable"></label>
+                    <input type="text" asp-for="PurchaseNumber" class="form-control" readonly="readonly"/>
+                    <span asp-validation-for="PurchaseNumber" class="text-danger"></span>
+                </div>
+            </div>
+            <div class="col-md-4">
+                <div class="form-group">
+                    <label asp-for="SupplierId" class="control-lable"></label>
+                    <select asp-for="SupplierId" asp-items="@ViewBag.SupplierList" class="form-control">
+                        <option value="">-- Select Supplier --</option>
+                    </select>
+                    <span asp-validation-for="SupplierId" class="text-danger"></span>
+                </div>
+            </div>
+            <div class="col-md-4">
+                <div class="form-group">
+                    <label asp-for="Date" class="control-lable"></label>
+                    <input type="text" asp-for="Date" class="form-control" />
+                    <span asp-validation-for="Date" class="text-danger"></span>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-md-12">
+            <div class="col-md-3">
+                <h3 id="hadertitle">Add Product</h3>
+                <hr />
+                <div class="form-group">
+                    <label asp-for="CategoryId" class="control-lable"></label>
+                    <select asp-for="CategoryId" asp-items="@ViewBag.CategoryList" class="form-control">
+                        <option value="">-- Select Category --</option>
+                    </select>
+                    <span asp-validation-for="CategoryId" class="text-danger"></span>
+                </div>
+                <div class="form-group">
+                    <label asp-for="ProductId" class="control-lable"></label>
+                    <select asp-for="ProductId" class="form-control">
+                        <option value="">-- Select Category --</option>
+                    </select>
+                    <span asp-validation-for="ProductId" class="text-danger"></span>
+                </div>
+                <div class="form-group">
+                    <label asp-for="Price" class="control-lable"></label>
+                    <input type="number" asp-for="Price" class="form-control" />
+                    <span asp-validation-for="Price" class="text-danger"></span>
+                </div>
+                <div class="form-group">
+                    <label asp-for="Quantity" class="control-lable"></label>
+                    <input type="number" asp-for="Quantity" class="form-control" />
+                    <span asp-validation-for="Quantity" class="text-danger"></span>
+                </div>
+                <div class="form-group" style="text-align:center">
+                    <input type="button" id="addToCart" class="btn btn-info" value="Add To Cart"/>
+                </div>
+            </div>
+            <div class="col-md-9">                  
+                <div class="form-group">
+                    <h3 id="hadertitle">Product List</h3>
+                    <hr />
+                    <table class="table table-striped table-bordered" id="calculateamount">
+                        <thead>
+                            <tr>
+                                <th>Product Name</th>
+                                <th>Price</th>
+                                <th>Quantity</th>
+                                <th>Ammount</th>
+                                <th>Action</th>
+                            </tr>
+                        </thead>
+                        <tbody id="purchaseproducttable">
+                        </tbody>
+                    </table>
+                    <span id="val"></span>
+                </div>
+               <div class="row">
+                   <div class="col-md-12">
+                       <div class="col-md-6">
+                           <div class="form-group">
+                               <label class="control-lable">Total Amount</label>
+                               <input type="number" id="totalAmount" class="form-control" readonly="readonly" style="font-weight:bold" />
+                           </div>
+                           <div class="form-group">
+                               <label asp-for="PayAmount" class="control-lable"></label>
+                               <input type="number" asp-for="PayAmount" class="form-control" style="font-weight:bold"/>
+                               <span asp-validation-for="PayAmount" class="text-danger"></span>
+                           </div>
+                           <div class="form-group">
+                               <label asp-for="DueAmount" class="control-lable"></label>
+                               <input type="number" asp-for="DueAmount" class="form-control" readonly="readonly" style="font-weight:bold"/>
+                               <span asp-validation-for="DueAmount" class="text-danger"></span>
+                           </div>
+                       </div>
+                       <div class="col-md-6">
+                           <div class="form-group">
+                               <input type="submit" value="Save Purchase" class="btn btn-success" style="float:right; margin-top: 50px"/>
+                           </div>
+                       </div>
+                   </div>
+               </div>
+            </div>
+        </div>
+    </div>
+</form>
+
+
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+
+    <script>
+        $(document).ready(function () {            
+
+            $("#Date").datepicker(function () {
+                changeMonth: true;
+                changeYear: true;
+                showButtonPanel: true;
+                showOn: "button";
+            });
+
+            var urlForPurchaseNumber = '/api/Purchase/GetPurchaseNumber'
+
+            $.ajax({
+                url: urlForPurchaseNumber,
+                success: function (response) {
+                    $("#PurchaseNumber").val(response);
+                },
+                error: function (response) {
+                    alert("Purchase number generate has been failed!");
+                }
+            });
+
+            $("#CategoryId").change(function () {
+                var categoryId = $("#CategoryId").val();
+                $("#ProductId").empty();
+                $("#ProductId").append('<option value="">-- Select Product --</option>');
+                var serverUrl = '/api/Purchase/GetProductByCategoryId?categoryId=' + categoryId;
+
+                 $.ajax({
+                     url: serverUrl,
+                     success: function (response) {
+                         $.each(response, (key, value) => {
+                             $("#ProductId").append('<option value=' + value.id + '>' + value.name + '</option>');
+                         });
+                     },
+                     error: function (response) {
+                         alert("Error Happend");
+                     }
+                 });   
+            });
+
+            function claculateTotalAmount() {
+                var sumOfAmount = 0
+                var table = document.getElementById("calculateamount");             
+                for (var i = 1; i < table.rows.length; i++)
+                    sumOfAmount = sumOfAmount + parseInt(table.rows[i].cells[3].innerHTML);
+                $("#totalAmount").val(sumOfAmount);  
+            }
+
+            var Id = 0;
+            $("#addToCart").click(function () {
+                var productId = $("#ProductId").val();
+                var productName = $("#ProductId option:selected").text();
+                var price = $("#Price").val();
+                var quantity = $("#Quantity").val();
+                var amount = price * quantity;
+
+                var tr = "<tr>";
+                var productTd = '<td> <input type="hidden" name="PurchaseItems[' + Id + '].ProductId" value="' + productId + '"/> <input type="hidden" name="StockProducts[' + Id + '].ProductId" value="' + productId + '"/>' + productName + '</td>';
+                var priceTd = '<td> <input type="hidden" name="PurchaseItems[' + Id + '].Price" value="' + price + '"/>' + price + '</td>';
+                var quantityTd = '<td> <input type="hidden" name="PurchaseItems[' + Id + '].Quantity" value="' + quantity + '"/> <input type="hidden" name="StockProducts[' + Id + '].Quantity" value="' + quantity + '"/>' + quantity + '</td>';
+                var amountTd = "<td>" + amount + "</td>";
+                var removeButton = '<td><button type="button" id="remove" name="remove" class="btn btn-danger btn-sm remove"><span class="glyphicon glyphicon-minus"></span></button></td>';
+                tr += productTd + priceTd + quantityTd + amountTd + removeButton + "</tr>";
+                $("#purchaseproducttable").append(tr);
+                Id = Id + 1;  
+                claculateTotalAmount();  
+            }); 
+
+            $(document).on('click', '.remove', function(){
+                $(this).closest('tr').remove();    
+                claculateTotalAmount();                 
+            });
+
+            $("#PayAmount").change(function () {
+                var totalAmount = $("#totalAmount").val();
+                var payAmount = $("#PayAmount").val();
+                var dueAmount = totalAmount - payAmount;
+                $("#DueAmount").val(dueAmount);
+            });
+        });           
+    </script>
+}
+

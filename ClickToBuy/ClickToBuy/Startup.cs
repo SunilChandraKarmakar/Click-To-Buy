@@ -18,6 +18,7 @@ using ClickToBuy.Repository.Contracts;
 using ClickToBuy.Repository;
 using Microsoft.AspNetCore.Http;
 using ClickToBuy.Database;
+using AutoMapper;
 
 namespace ClickToBuy
 {
@@ -41,6 +42,7 @@ namespace ClickToBuy
             services.AddControllersWithViews();
             services.AddRazorPages();
 
+            services.AddAutoMapper(typeof(Startup));
             services.AddTransient<ICountryManager, CountryManager>();
             services.AddTransient<ICountryRepository, CountryRepository>();
             services.AddTransient<ICityManager, CityManager>();
@@ -64,6 +66,12 @@ namespace ClickToBuy
             services.AddTransient<IStockProductRepository, StockProductRepository>();
             services.AddTransient<ISupplierManager, SupplierManager>();
             services.AddTransient<ISupplierRepository, SupplierRepository>();
+            services.AddTransient<IPurchaseManager, PurchaseManager>();
+            services.AddTransient<IPurchaseRepository, PurchaseRepository>();
+            services.AddTransient<IPurchaseItemManager, PurchaseItemManager>();
+            services.AddTransient<IPurchaseItemRepository, PurchaseItemRepository>();
+            services.AddTransient<IPurchasePaymentManager, PurchasePaymentManager>();
+            services.AddTransient<IPurchasePaymentRepository, PurchasePaymentRepository>();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.

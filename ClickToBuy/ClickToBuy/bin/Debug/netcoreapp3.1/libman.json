@@ -9,6 +9,10 @@
     {
       "library": "datatables@1.10.19",
       "destination": "wwwroot/datatables/"
+    },
+    {
+      "library": "jqueryui@1.12.1",
+      "destination": "wwwroot/jqueryui/"
     }
   ]
 }

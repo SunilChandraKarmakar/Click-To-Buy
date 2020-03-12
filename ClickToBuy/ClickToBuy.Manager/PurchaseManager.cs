@@ -16,5 +16,20 @@ namespace ClickToBuy.Manager
         {
             _iPurchaseRepository = iPurchaseRepository;
         }
+
+        public List<Product> GetProductByCategory(int categoryId)
+        {
+            return _iPurchaseRepository.GetProductByCategory(categoryId);
+        }
+
+        public List<Product> GetProductByBrand(int brandId)
+        {
+            return _iPurchaseRepository.GetProductByBrand(brandId);
+        }
+
+        public Purchase LastPurchaseInfo()
+        {
+            return _iPurchaseRepository.LastPurchaseInfo();
+        }
     }
 }

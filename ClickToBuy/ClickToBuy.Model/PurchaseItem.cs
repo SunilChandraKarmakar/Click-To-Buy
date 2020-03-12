@@ -10,12 +10,13 @@ namespace ClickToBuy.Model
         public int Id { get; set; }
 
         [Required]
-        [Display(Name = "Purchase Number")]
-        public int PurchaseId { get; set; }
-
-        [Required]
         [Display(Name = "Product")]
         public int ProductId { get; set; }
+
+        [Required(ErrorMessage = "Provied quantity")]
+        [DataType(DataType.PhoneNumber)]
+        [Range(1, 100)]
+        public int Quantity { get; set; }
 
         [Required]
         [DataType(DataType.Currency)]
