@@ -16,5 +16,10 @@ namespace ClickToBuy.Manager
         {
             _iPurchasePaymentRepository = iPurchasePaymentRepository;
         }
+
+        public override ICollection<PurchasePayment> GetAll()
+        {
+            return _iPurchasePaymentRepository.GetAll();
+        }
     }
 }

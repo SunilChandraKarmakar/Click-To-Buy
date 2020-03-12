@@ -7,6 +7,11 @@ namespace ClickToBuy.Model
 {
     public class Purchase
     {
+        public Purchase()
+        {
+            PurchasePayment = new PurchasePayment();
+        }
+
         public int Id { get; set; }
 
         [Required]

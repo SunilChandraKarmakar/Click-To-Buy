@@ -75,6 +75,7 @@ namespace ClickToBuy.Controllers
         [HttpGet]
         public IActionResult Index()
         {
+            ViewBag.PurchasePaymentList = _iPurchasePaymentManager.GetAll();
             return View(_iPurchaseManager.GetAll());
         }
 

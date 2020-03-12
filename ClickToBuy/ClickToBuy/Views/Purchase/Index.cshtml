@@ -1,0 +1,56 @@
+﻿@using ClickToBuy.Model
+@model IEnumerable<Purchase>
+
+@{
+    ViewData["Title"] = "Index";
+    Layout = "~/Views/Shared/_AdminLayout.cshtml";
+    List<PurchasePayment> purchasePaymentList = ViewBag.PurchasePaymentList;
+}
+
+<h2 id="hadertitle">Purchase Details</h2>
+<hr />
+
+<div class="row">
+    <div class="col-md-4">
+        <a asp-action="Create" class="btn btn-primary"><i class="fas fa-plus"></i> Create Purchase</a>
+    </div>
+</div>
+
+<div class="row" id="datatables">
+    <div class="col-md-8">
+        <table id="myTable" class="display table table-bordered table-striped">
+            <thead>
+                <tr>
+                    <th>Purchase Info</th>
+                    <th>Payment Info</th>
+                    <th>Action</th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (Purchase item in Model)
+                {
+                    <tr>
+                        <td>
+                            Purchase Number : @item.PurchaseNumber <br />
+                            Supplier Name : @item.Supplier.Name <br />
+                            Purchase Date : @item.Date
+                        </td>
+                        <td>
+                            Total Item : @item.PurchaseItems.Count <br />
+                            @{ 
+                                PurchasePayment aPurchasePaymentDetails  = purchasePaymentList.Where(p => p.PurchaseId == item.Id).FirstOrDefault();
+                            }
+                            Pay Amount : @aPurchasePaymentDetails.PayAmount <br />
+                            Due Amount : @aPurchasePaymentDetails.DueAmount
+                        </td>
+                        <td>
+                            <a asp-route-id="@item.Id" asp-action="Update" class="btn btn-info"><i class="far fa-edit"></i> Update</a>
+                            <a asp-route-id="@item.Id" asp-action="Remove" class="btn btn-danger"><i class="far fa-trash-alt"></i> Remove</a>
+                        </td>
+                    </tr>
+                }
+            </tbody>
+        </table>
+    </div>
+</div>
+
