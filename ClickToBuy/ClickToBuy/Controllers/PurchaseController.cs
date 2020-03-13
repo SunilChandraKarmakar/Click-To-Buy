@@ -79,6 +79,12 @@ namespace ClickToBuy.Controllers
             return View(_iPurchaseManager.GetAll());
         }
 
+        public IActionResult GetPurchaseItemByPurchaseId(int id)
+        {
+            ICollection<PurchaseItem> purchaseItem = _iPurchaseItemManager.GetPurchaseItemByPurchaseId(id);
+            return View(purchaseItem);
+        }
+
         [Route("api/[controller]/[action]")]
         public JsonResult GetProductByCategoryId(int categoryId)
         {
@@ -126,6 +132,36 @@ namespace ClickToBuy.Controllers
             ViewBag.CategoryList = CategoryList();
             ViewBag.BrandList = BrandList();
             return View(purchaseCreateView);
+        }
+
+        [HttpGet]
+        public IActionResult Update(int? id)
+        {
+            if (id == null)
+                return NotFound();
+
+            PurchasePayment aPurchasePaymentDetails = _iPurchasePaymentManager.GetAll().Where(p => p.PurchaseId == id)
+                                                                                .FirstOrDefault();
+            if (aPurchasePaymentDetails == null)
+                return NotFound();
+
+            return View(aPurchasePaymentDetails);
+        }
+
+        [HttpPost]
+        public IActionResult Update(PurchasePayment aPurchasePayment)
+        {
+            if(ModelState.IsValid)
+            {
+                bool isUpdate = _iPurchasePaymentManager.Update(aPurchasePayment);
+
+                if (isUpdate)
+                    return RedirectToAction("Index", "Purchase");
+                else
+                    return ViewBag.ErrorMessage = "Purchase update has been failed!";
+            }
+
+            return View(aPurchasePayment);
         }
     }
 }

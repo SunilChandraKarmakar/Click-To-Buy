@@ -16,5 +16,10 @@ namespace ClickToBuy.Manager
         {
             _iPurchaseItemRepository = iPurchaseItemRepository;
         }
+
+        public ICollection<PurchaseItem> GetPurchaseItemByPurchaseId(int id)
+        {
+            return _iPurchaseItemRepository.GetPurchaseItemByPurchaseId(id);
+        }
     }
 }

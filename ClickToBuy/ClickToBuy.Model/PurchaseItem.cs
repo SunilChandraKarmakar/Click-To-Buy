@@ -6,7 +6,7 @@ using System.Text;
 namespace ClickToBuy.Model
 {
     public class PurchaseItem
-    {
+    {      
         public int Id { get; set; }
 
         [Required]

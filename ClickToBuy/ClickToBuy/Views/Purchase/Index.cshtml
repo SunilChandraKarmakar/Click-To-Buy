@@ -36,7 +36,7 @@
                             Purchase Date : @item.Date
                         </td>
                         <td>
-                            Total Item : @item.PurchaseItems.Count <br />
+                            Total Item : <a asp-route-id="@item.Id" asp-action="GetPurchaseItemByPurchaseId">@item.PurchaseItems.Count</a> <br />
                             @{ 
                                 PurchasePayment aPurchasePaymentDetails  = purchasePaymentList.Where(p => p.PurchaseId == item.Id).FirstOrDefault();
                             }

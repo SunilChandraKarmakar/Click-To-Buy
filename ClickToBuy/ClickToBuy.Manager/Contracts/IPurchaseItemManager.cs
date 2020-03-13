@@ -7,5 +7,6 @@ namespace ClickToBuy.Manager.Contracts
 {
     public interface IPurchaseItemManager : IBaseManager<PurchaseItem>
     {
+        public ICollection<PurchaseItem> GetPurchaseItemByPurchaseId(int id);
     }
 }

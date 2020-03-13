@@ -7,5 +7,6 @@ namespace ClickToBuy.Repository.Contracts
 {
     public interface IPurchaseItemRepository : IBaseRepository<PurchaseItem> 
     {
+        public ICollection<PurchaseItem> GetPurchaseItemByPurchaseId(int id);
     }
 }

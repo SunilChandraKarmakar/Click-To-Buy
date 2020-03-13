@@ -1,0 +1,35 @@
+﻿@using ClickToBuy.Model
+@model IEnumerable<PurchaseItem>
+
+@{
+    ViewData["Title"] = "GetPurchaseItemByPurchaseId";
+    Layout = "~/Views/Shared/_AdminLayout.cshtml";
+}
+
+<h2 id="hadertitle">Purchase Item Details</h2>
+<hr />
+
+<div class="row" id="datatables">
+    <div class="col-md-8">
+        <table id="myTable" class="display table table-bordered table-striped">
+            <thead>
+                <tr>
+                    <th>Product Name</th>
+                    <th>Quantity</th>
+                    <th>Price</th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (PurchaseItem item in Model)
+                {
+                    <tr>
+                        <td>@item.Product.Name</td>
+                        <td>@item.Quantity</td>
+                        <td>@item.Price</td>
+                    </tr>
+                }
+            </tbody>
+        </table>
+    </div>
+</div>
+
