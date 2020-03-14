@@ -4,7 +4,9 @@
 @{
     ViewData["Title"] = "Index";
     Layout = "~/Views/Shared/_AdminLayout.cshtml";
+    List<StockProduct> stockProductList = ViewBag.StockProductList;
     int totalStockProduct = 0;
+    int b = 0;
 }
 
 <h2 id="hadertitle">Product Details</h2>
@@ -40,20 +42,16 @@
                         <td>
                             Stock : <a asp-route-id="@item.Id" asp-action="GetStockByProduct">
                                         @{
-                                            var matchStockProduct = item.StockProducts.Where(s => s.ProductId == item.Id)
-                                                                                      .FirstOrDefault();
-                                            if (matchStockProduct != null)
+                                            List<StockProduct> stockProducts =stockProductList.Where(s => s.ProductId == item.Id).ToList();
+                                            foreach (StockProduct itemForStock in stockProducts)
                                             {
-                                                totalStockProduct = matchStockProduct.Quantity;
+                                                totalStockProduct = totalStockProduct + itemForStock.Quantity;    
                                             }
-                                            else
-                                            {
-                                                totalStockProduct = 0;
-                                            }
-
-                                            @totalStockProduct 
                                          }
-                                    </a> <br />
+                                    @totalStockProduct</a><br /> 
+                            @{ 
+                                totalStockProduct = 0;
+                            }
                             Condition : @item.Condition.Name <br />
                             Status : @item.CloseType.Name <br />
                             Link : @item.Link <br />

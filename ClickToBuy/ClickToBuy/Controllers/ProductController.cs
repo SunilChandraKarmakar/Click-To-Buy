@@ -43,6 +43,7 @@ namespace ClickToBuy.Controllers
         [HttpGet]
         public IActionResult Index()
         {
+            ViewBag.StockProductList = _iStockProductManager.GetAll();
             return View(_iProductManager.GetAll());
         }
 

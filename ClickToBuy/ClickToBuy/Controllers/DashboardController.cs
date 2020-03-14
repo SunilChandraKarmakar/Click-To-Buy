@@ -15,17 +15,20 @@ namespace ClickToBuy.Controllers
         private readonly ICategoryManager _iCategoryManager;
         private readonly ICustomerManager _iCustomerManager;
         private readonly IStockProductManager _iStockProductManager;
+        private readonly IPurchaseManager _iPurchaseManager;
 
         public DashboardController(IProductManager iProductManager,
                                     IBrandManager iBrandManager,
                                     ICategoryManager iCategoryManager, 
-                                    ICustomerManager iCustomerManager, IStockProductManager iStockProductManager)
+                                    ICustomerManager iCustomerManager, IStockProductManager iStockProductManager,
+                                    IPurchaseManager iPurchaseManager)
         {
             _iProductManager = iProductManager;
             _iBrandManager = iBrandManager;
             _iCategoryManager = iCategoryManager;
             _iCustomerManager = iCustomerManager;
             _iStockProductManager = iStockProductManager;
+            _iPurchaseManager = iPurchaseManager;
         }
 
         [HttpGet]
@@ -36,6 +39,7 @@ namespace ClickToBuy.Controllers
             ICollection<Category> categories = _iCategoryManager.GetAll();
             ICollection<Customer> customers = _iCustomerManager.GetAll();
             ICollection<StockProduct> stockProducts = _iStockProductManager.GetAll();
+            ICollection<Purchase> purchasesList = _iPurchaseManager.GetAll();
 
             int toralQuantityOfProduct = 0;
             foreach (StockProduct item in stockProducts)
@@ -49,6 +53,7 @@ namespace ClickToBuy.Controllers
             ViewBag.CategoryCount = categories.Count();
             ViewBag.CustomerCount = customers.Count();
             ViewBag.StockProductCount = toralQuantityOfProduct;
+            ViewBag.PurchaseCount = purchasesList.Count();
             return View();
         }
     }
