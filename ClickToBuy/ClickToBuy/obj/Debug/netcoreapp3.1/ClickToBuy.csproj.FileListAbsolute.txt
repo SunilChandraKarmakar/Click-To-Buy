@@ -210,8 +210,6 @@ F:\C# Project\Web Application - CORE\Click-To-Buy\ClickToBuy\ClickToBuy\obj\Debu
 F:\C# Project\Web Application - CORE\Click-To-Buy\ClickToBuy\ClickToBuy\obj\Debug\netcoreapp3.1\Razor\Views\Purchase\Create.cshtml.g.cs
 F:\C# Project\Web Application - CORE\Click-To-Buy\ClickToBuy\ClickToBuy\bin\Debug\netcoreapp3.1\AutoMapper.dll
 F:\C# Project\Web Application - CORE\Click-To-Buy\ClickToBuy\ClickToBuy\bin\Debug\netcoreapp3.1\AutoMapper.Extensions.Microsoft.DependencyInjection.dll
-F:\C# Project\Web Application - CORE\Click-To-Buy\ClickToBuy\ClickToBuy\obj\Debug\netcoreapp3.1\ClickToBuy.MvcApplicationPartsAssemblyInfo.cs
-F:\C# Project\Web Application - CORE\Click-To-Buy\ClickToBuy\ClickToBuy\obj\Debug\netcoreapp3.1\ClickToBuy.MvcApplicationPartsAssemblyInfo.cache
 F:\C# Project\Web Application - CORE\Click-To-Buy\ClickToBuy\ClickToBuy\obj\Debug\netcoreapp3.1\Razor\Views\Purchase\Index.cshtml.g.cs
 F:\C# Project\Web Application - CORE\Click-To-Buy\ClickToBuy\ClickToBuy\obj\Debug\netcoreapp3.1\Razor\Views\Purchase\GetPurchaseItemByPurchaseId.cshtml.g.cs
 F:\C# Project\Web Application - CORE\Click-To-Buy\ClickToBuy\ClickToBuy\obj\Debug\netcoreapp3.1\Razor\Views\Purchase\Update.cshtml.g.cs
@@ -219,3 +217,7 @@ F:\C# Project\Web Application - CORE\Click-To-Buy\ClickToBuy\ClickToBuy\obj\Debu
 F:\C# Project\Web Application - CORE\Click-To-Buy\ClickToBuy\ClickToBuy\obj\Debug\netcoreapp3.1\Razor\Views\Admin\Create.cshtml.g.cs
 F:\C# Project\Web Application - CORE\Click-To-Buy\ClickToBuy\ClickToBuy\obj\Debug\netcoreapp3.1\Razor\Views\Admin\Update.cshtml.g.cs
 F:\C# Project\Web Application - CORE\Click-To-Buy\ClickToBuy\ClickToBuy\obj\Debug\netcoreapp3.1\Razor\Views\Admin\Remove.cshtml.g.cs
+F:\C# Project\Web Application - CORE\Click-To-Buy\ClickToBuy\ClickToBuy\bin\Debug\netcoreapp3.1\System.Security.Cryptography.Pkcs.dll
+F:\C# Project\Web Application - CORE\Click-To-Buy\ClickToBuy\ClickToBuy\bin\Debug\netcoreapp3.1\runtimes\win\lib\netcoreapp2.1\System.Security.Cryptography.Pkcs.dll
+F:\C# Project\Web Application - CORE\Click-To-Buy\ClickToBuy\ClickToBuy\obj\Debug\netcoreapp3.1\ClickToBuy.MvcApplicationPartsAssemblyInfo.cs
+F:\C# Project\Web Application - CORE\Click-To-Buy\ClickToBuy\ClickToBuy\obj\Debug\netcoreapp3.1\ClickToBuy.MvcApplicationPartsAssemblyInfo.cache
