@@ -215,3 +215,7 @@ F:\C# Project\Web Application - CORE\Click-To-Buy\ClickToBuy\ClickToBuy\obj\Debu
 F:\C# Project\Web Application - CORE\Click-To-Buy\ClickToBuy\ClickToBuy\obj\Debug\netcoreapp3.1\Razor\Views\Purchase\Index.cshtml.g.cs
 F:\C# Project\Web Application - CORE\Click-To-Buy\ClickToBuy\ClickToBuy\obj\Debug\netcoreapp3.1\Razor\Views\Purchase\GetPurchaseItemByPurchaseId.cshtml.g.cs
 F:\C# Project\Web Application - CORE\Click-To-Buy\ClickToBuy\ClickToBuy\obj\Debug\netcoreapp3.1\Razor\Views\Purchase\Update.cshtml.g.cs
+F:\C# Project\Web Application - CORE\Click-To-Buy\ClickToBuy\ClickToBuy\obj\Debug\netcoreapp3.1\Razor\Views\Admin\Index.cshtml.g.cs
+F:\C# Project\Web Application - CORE\Click-To-Buy\ClickToBuy\ClickToBuy\obj\Debug\netcoreapp3.1\Razor\Views\Admin\Create.cshtml.g.cs
+F:\C# Project\Web Application - CORE\Click-To-Buy\ClickToBuy\ClickToBuy\obj\Debug\netcoreapp3.1\Razor\Views\Admin\Update.cshtml.g.cs
+F:\C# Project\Web Application - CORE\Click-To-Buy\ClickToBuy\ClickToBuy\obj\Debug\netcoreapp3.1\Razor\Views\Admin\Remove.cshtml.g.cs

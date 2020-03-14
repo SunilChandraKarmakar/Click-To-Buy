@@ -30,7 +30,9 @@ namespace ClickToBuy.Database
         public DbSet<Order> Orders { get; set; }
         public DbSet<OrderDetails> OrderDetails { get; set; }
         public DbSet<ReturnProduct> ReturnProducts { get; set; }
-        public DbSet<Tag> Tags{ get; set; }   
+        public DbSet<Tag> Tags{ get; set; }
+        public DbSet<Admin> Admins { get; set; }
+
         [Obsolete]
         public DbQuery<NonProductInStock> NonProductInStocks { get; set; }
 
@@ -51,6 +53,7 @@ namespace ClickToBuy.Database
             modelBuilder.Entity<Coupon>().HasIndex(c => c.CouponNumber).IsUnique();
             modelBuilder.Entity<Order>().HasIndex(o => o.OrderNo).IsUnique();
             modelBuilder.Entity<Tag>().HasIndex(t => t.TagName).IsUnique();
+            modelBuilder.Entity<Admin>().HasIndex(a => new { a.ContactNo, a.Email }).IsUnique();
             modelBuilder.Query<NonProductInStock>().ToView("NonProductInStock");
 
             foreach (var relationship in modelBuilder.Model.GetEntityTypes().SelectMany(e => e.GetForeignKeys()))

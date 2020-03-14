@@ -19,6 +19,59 @@ namespace ClickToBuy.Database.Migrations
                 .HasAnnotation("Relational:MaxIdentifierLength", 128)
                 .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
+            modelBuilder.Entity("ClickToBuy.Model.Admin", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int")
+                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+
+                    b.Property<string>("Address")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(500)")
+                        .HasMaxLength(500);
+
+                    b.Property<int>("CityId")
+                        .HasColumnType("int");
+
+                    b.Property<string>("ContactNo")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(14)")
+                        .HasMaxLength(14);
+
+                    b.Property<int>("CountryId")
+                        .HasColumnType("int");
+
+                    b.Property<string>("Email")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(50)")
+                        .HasMaxLength(50);
+
+                    b.Property<string>("Name")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(50)")
+                        .HasMaxLength(50);
+
+                    b.Property<string>("Password")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(14)")
+                        .HasMaxLength(14);
+
+                    b.Property<string>("Picture")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("CityId");
+
+                    b.HasIndex("CountryId");
+
+                    b.HasIndex("ContactNo", "Email")
+                        .IsUnique();
+
+                    b.ToTable("Admins");
+                });
+
             modelBuilder.Entity("ClickToBuy.Model.Brand", b =>
                 {
                     b.Property<int>("Id")
@@ -640,6 +693,21 @@ namespace ClickToBuy.Database.Migrations
                         .IsUnique();
 
                     b.ToTable("Tags");
+                });
+
+            modelBuilder.Entity("ClickToBuy.Model.Admin", b =>
+                {
+                    b.HasOne("ClickToBuy.Model.City", "City")
+                        .WithMany("Admins")
+                        .HasForeignKey("CityId")
+                        .OnDelete(DeleteBehavior.Restrict)
+                        .IsRequired();
+
+                    b.HasOne("ClickToBuy.Model.Country", "Country")
+                        .WithMany("Admins")
+                        .HasForeignKey("CountryId")
+                        .OnDelete(DeleteBehavior.Restrict)
+                        .IsRequired();
                 });
 
             modelBuilder.Entity("ClickToBuy.Model.Category", b =>
