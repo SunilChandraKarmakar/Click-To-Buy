@@ -4,6 +4,7 @@ using System.Linq;
 using System.Threading.Tasks;
 using ClickToBuy.Manager.Contracts;
 using ClickToBuy.Model;
+using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
 
@@ -23,7 +24,10 @@ namespace ClickToBuy.Controllers
         [HttpGet]
         public IActionResult Index()
         {
-            return View(_iStockProductManager.GetAll());
+            if (HttpContext.Session.GetString("AdminId") != null)
+                return View(_iStockProductManager.GetAll());
+            else
+                return RedirectToAction("AdminLogin", "LoginPurchase");
         }
 
         private List<SelectListItem> NonProductInStockList()
@@ -53,8 +57,13 @@ namespace ClickToBuy.Controllers
         [HttpGet]
         public IActionResult Create()
         {
-            ViewBag.ProductList = NonProductInStockList();
-            return View();
+            if (HttpContext.Session.GetString("AdminId") != null)
+            {
+                ViewBag.ProductList = NonProductInStockList();
+                return View();
+            }
+            else
+                return RedirectToAction("AdminLogin", "LoginProcess");
         }
 
         [HttpPost]
@@ -77,16 +86,21 @@ namespace ClickToBuy.Controllers
         [HttpGet]
         public IActionResult Update(int? id)
         {
-            if (id == null)
-                return NotFound();
+            if (HttpContext.Session.GetString("AdminId") != null)
+            {
+                if (id == null)
+                    return NotFound();
 
-            StockProduct aStockProduct = _iStockProductManager.GetById(id);
+                StockProduct aStockProduct = _iStockProductManager.GetById(id);
 
-            if (aStockProduct == null)
-                return NotFound();
+                if (aStockProduct == null)
+                    return NotFound();
 
-            ViewBag.ProductList = ProductList();
-            return View(aStockProduct);
+                ViewBag.ProductList = ProductList();
+                return View(aStockProduct);
+            }
+            else
+                return RedirectToAction("AdminLogin", "LoginProcess");
         }
 
         [HttpPost]
@@ -109,15 +123,20 @@ namespace ClickToBuy.Controllers
         [HttpGet]
         public IActionResult Remove(int? id)
         {
-            if (id == null)
-                return NotFound();
+            if (HttpContext.Session.GetString("AdminId") != null)
+            {
+                if (id == null)
+                    return NotFound();
 
-            StockProduct aStockProduct = _iStockProductManager.GetAll().Where(s => s.Id == id).FirstOrDefault();
+                StockProduct aStockProduct = _iStockProductManager.GetAll().Where(s => s.Id == id).FirstOrDefault();
 
-            if (aStockProduct == null)
-                return NotFound();
+                if (aStockProduct == null)
+                    return NotFound();
 
-            return View(aStockProduct);
+                return View(aStockProduct);
+            }
+            else
+                return RedirectToAction("AdminLogin", "LoginProcess");
         }
 
         [HttpPost]

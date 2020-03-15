@@ -7,5 +7,6 @@ namespace ClickToBuy.Repository.Contracts
 {
     public interface IAdminRepository : IBaseRepository<Admin>
     {
+        public Admin MatchLoginAdminDetails(string email, string password);
     }
 }

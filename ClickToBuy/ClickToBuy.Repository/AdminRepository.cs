@@ -18,5 +18,12 @@ namespace ClickToBuy.Repository
                                     .Include(a => a.City).ToList();
             return adminList;
         }
+
+        public Admin MatchLoginAdminDetails(string email, string password)
+        {
+            Admin loginAdminDetails = ctbContext.Admins.Where(a => a.Email == email && a.Password == password)
+                                                       .FirstOrDefault();
+            return loginAdminDetails;
+        }
     }
 }

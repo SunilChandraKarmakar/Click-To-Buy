@@ -1,4 +1,6 @@
-﻿<!DOCTYPE html>
+﻿@using Microsoft.AspNetCore.Http
+
+<!DOCTYPE html>
 <html lang="en">
 
 <head>
@@ -51,12 +53,16 @@
             </div>
             <!--logo start-->
             <a href="#" class="logo"><b>Click To<span> Buy</span></b></a>
-            
-            <div class="top-menu">
-                <ul class="nav pull-right top-menu">
-                    <li><a class="logout" href="login.html">Logout</a></li>
-                </ul>
-            </div>
+
+            @if (Context.Session.GetString("AdminId") != null)
+            {
+                <div class="top-menu">
+                    <ul class="nav pull-right top-menu">
+                        <li><a class="logout" asp-action="AdminLogout" asp-controller="LoginProcess">Logout</a></li>
+                    </ul>
+                </div>
+            }
+
         </header>
         <!--header end-->
         <!-- **********************************************************************************************************************************************************
@@ -67,8 +73,7 @@
             <div id="sidebar" class="nav-collapse ">
                 <!-- sidebar menu start-->
                 <ul class="sidebar-menu" id="nav-accordion">
-                    <p class="centered"><a href="~/adminLayout/profile.html"><img src="~/adminLayout/img/ui-sam.jpg" class="img-circle" width="80"></a></p>
-                    <h5 class="centered">Sam Soffes</h5>
+
                     <li class="mt">
                         <a class="active" asp-action="DashboardView" asp-controller="Dashboard">
                             <i class="fa fa-dashboard"></i>

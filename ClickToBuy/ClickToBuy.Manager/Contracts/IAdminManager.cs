@@ -7,5 +7,6 @@ namespace ClickToBuy.Manager.Contracts
 {
     public interface IAdminManager : IBaseManager<Admin> 
     {
+        public Admin MatchLoginAdminDetails(string email, string password);
     }
 }

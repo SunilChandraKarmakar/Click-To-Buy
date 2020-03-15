@@ -4,6 +4,7 @@ using System.Linq;
 using System.Threading.Tasks;
 using ClickToBuy.Manager.Contracts;
 using ClickToBuy.Model;
+using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 
 namespace ClickToBuy.Controllers
@@ -22,20 +23,31 @@ namespace ClickToBuy.Controllers
         [HttpGet]
         public IActionResult Index()
         {
-            return View(_iConditionManager.GetAll());
+            if (HttpContext.Session.GetString("AdminId") != null)
+                return View(_iConditionManager.GetAll());
+            else
+                return RedirectToAction("AdminLogin", "LoginProcess");
         }
 
         [HttpGet]
         public IActionResult GetProductByCondition(int id)
         {
-            List<Product> productList = _iProductManager.GetAll().Where(p => p.ConditionId == id).ToList();
-            return View(productList);
+            if (HttpContext.Session.GetString("AdminId") != null)
+            {
+                List<Product> productList = _iProductManager.GetAll().Where(p => p.ConditionId == id).ToList();
+                return View(productList);
+            }
+            else
+                return RedirectToAction("AdminLogin", "LoginProcess");
         }
 
         [HttpGet]
         public IActionResult Create()
         {
-            return View();
+            if (HttpContext.Session.GetString("AdminId") != null)
+                return View();
+            else
+                return RedirectToAction("AdminLogin", "LoginProcess");
         }
 
         [Route("api/[controller]/[action]")]
@@ -68,15 +80,20 @@ namespace ClickToBuy.Controllers
         [HttpGet]
         public IActionResult Update(int? id)
         {
-            if (id == null)
-                return NotFound();
+            if (HttpContext.Session.GetString("AdminId") != null)
+            {
+                if (id == null)
+                    return NotFound();
 
-            Condition aConditionDetails = _iConditionManager.GetById(id);
+                Condition aConditionDetails = _iConditionManager.GetById(id);
 
-            if (aConditionDetails == null)
-                return NotFound();
+                if (aConditionDetails == null)
+                    return NotFound();
 
-            return View(aConditionDetails);
+                return View(aConditionDetails);
+            }
+            else
+                return RedirectToAction("AdminLogin", "LoginProcess");
         }
 
         [HttpPost]
@@ -98,15 +115,20 @@ namespace ClickToBuy.Controllers
         [HttpGet]
         public IActionResult Remove(int? id)
         {
-            if (id == null)
-                return NotFound();
+            if (HttpContext.Session.GetString("AdminId") != null)
+            {
+                if (id == null)
+                    return NotFound();
 
-            Condition aConditionDetails = _iConditionManager.GetById(id);
+                Condition aConditionDetails = _iConditionManager.GetById(id);
 
-            if (aConditionDetails == null)
-                return NotFound();
+                if (aConditionDetails == null)
+                    return NotFound();
 
-            return View(aConditionDetails);
+                return View(aConditionDetails);
+            }
+            else
+                return RedirectToAction("AdminLogin", "LoginProcess");
         }
 
         [HttpPost]

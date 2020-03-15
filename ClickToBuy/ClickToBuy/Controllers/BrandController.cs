@@ -4,6 +4,7 @@ using System.Linq;
 using System.Threading.Tasks;
 using ClickToBuy.Manager.Contracts;
 using ClickToBuy.Model;
+using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 
 namespace ClickToBuy.Controllers
@@ -22,7 +23,11 @@ namespace ClickToBuy.Controllers
         [HttpGet]
         public IActionResult Index()
         {
-            return View(_iBrandManager.GetAll());
+            if (HttpContext.Session.GetString("AdminId") != null)
+                return View(_iBrandManager.GetAll());
+            else
+                return RedirectToAction("AdminLogin", "LoginProcess");
+
         }
 
         [HttpGet]
@@ -35,7 +40,10 @@ namespace ClickToBuy.Controllers
         [HttpGet]
         public IActionResult Create()
         {
-            return View();
+            if (HttpContext.Session.GetString("AdminId") != null)
+                return View();
+            else
+                return RedirectToAction("AdminLogin", "LoginProcess");
         }
 
         [Route("api/[controller]/[action]")]
@@ -68,15 +76,20 @@ namespace ClickToBuy.Controllers
         [HttpGet]
         public IActionResult Update(int? id)
         {
-            if (id == null)
-                return NotFound();
+            if (HttpContext.Session.GetString("AdminId") != null)
+            {
+                if (id == null)
+                    return NotFound();
 
-            Brand aBrand = _iBrandManager.GetById(id);
+                Brand aBrand = _iBrandManager.GetById(id);
 
-            if (aBrand == null)
-                return NotFound();
+                if (aBrand == null)
+                    return NotFound();
 
-            return View(aBrand);
+                return View(aBrand);
+            }
+            else   
+                return RedirectToAction("AdminLogin", "LoginProcess");               
         }
 
         [HttpPost]
@@ -98,15 +111,20 @@ namespace ClickToBuy.Controllers
         [HttpGet]
         public IActionResult Remove(int? id)
         {
-            if (id == null)
-                return NotFound();
+            if (HttpContext.Session.GetString("AdminId") != null)
+            {
+                if (id == null)
+                    return NotFound();
 
-            Brand aBrand = _iBrandManager.GetById(id);
+                Brand aBrand = _iBrandManager.GetById(id);
 
-            if (aBrand == null)
-                return NotFound();
+                if (aBrand == null)
+                    return NotFound();
 
-            return View(aBrand);
+                return View(aBrand);
+            }
+            else
+                return RedirectToAction("AdminLogin", "LoginProcess");
         }
 
         [HttpPost]

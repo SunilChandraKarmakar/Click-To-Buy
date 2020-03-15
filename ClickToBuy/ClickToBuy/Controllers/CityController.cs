@@ -4,6 +4,7 @@ using System.Linq;
 using System.Threading.Tasks;
 using ClickToBuy.Manager.Contracts;
 using ClickToBuy.Model;
+using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
 
@@ -36,22 +37,35 @@ namespace ClickToBuy.Controllers
 
         [HttpGet]
         public IActionResult Index()
-        {               
-            return View(_iCityManager.GetAll());
+        {
+            if (HttpContext.Session.GetString("AdminId") != null)
+                return View(_iCityManager.GetAll());
+            else
+                return RedirectToAction("AdminLogin", "LoginProcess");
         }
 
         [HttpGet]
         public IActionResult CustomerByCityId(int? id)
         {
-            List<Customer> customerByCity = _iCustomerManager.GetAll().Where(c => c.CityId == id).ToList();
-            return View(customerByCity);
+            if (HttpContext.Session.GetString("AdminId") != null)
+            {
+                List<Customer> customerByCity = _iCustomerManager.GetAll().Where(c => c.CityId == id).ToList();
+                return View(customerByCity);
+            }
+            else
+                return RedirectToAction("AdminLogin", "LoginProcess");
         }
 
         [HttpGet]
         public IActionResult Create()
         {
-            ViewBag.CountryList = CountryList();
-            return View();
+            if (HttpContext.Session.GetString("AdminId") != null)
+            {
+                ViewBag.CountryList = CountryList();
+                return View();
+            }
+            else
+                return RedirectToAction("AdminLogin", "LoginProcess");
         }
 
         [Route("api/[controller]/[action]")]
@@ -85,16 +99,21 @@ namespace ClickToBuy.Controllers
         [HttpGet]
         public IActionResult Update(int? id)
         {
-            if (id == null)
-                return NotFound();
+            if (HttpContext.Session.GetString("AdminId") != null)
+            {
+                if (id == null)
+                    return NotFound();
 
-            City aCity = _iCityManager.GetById(id);
+                City aCity = _iCityManager.GetById(id);
 
-            if (aCity == null)
-                return NotFound();
+                if (aCity == null)
+                    return NotFound();
 
-            ViewBag.CountryList = CountryList();
-            return View(aCity);
+                ViewBag.CountryList = CountryList();
+                return View(aCity);
+            }
+            else
+                return RedirectToAction("AdminLogin", "LoginProcess");
         }
 
         [HttpPost]
@@ -117,16 +136,21 @@ namespace ClickToBuy.Controllers
         [HttpGet]
         public IActionResult Remove(int? id)
         {
-            if (id == null)
-                return NotFound();
+            if (HttpContext.Session.GetString("AdminId") != null)
+            {
+                if (id == null)
+                    return NotFound();
 
-            City aCity = _iCityManager.GetAll().Where(c => c.Id == id).FirstOrDefault();
+                City aCity = _iCityManager.GetById(id);
 
-            if (aCity == null)
-                return NotFound();
+                if (aCity == null)
+                    return NotFound();
 
-            ViewBag.CountryList = CountryList();
-            return View(aCity);
+                ViewBag.CountryList = CountryList();
+                return View(aCity);
+            }
+            else
+                return RedirectToAction("AdminLogin", "LoginProcess");
         }
 
         [HttpPost]

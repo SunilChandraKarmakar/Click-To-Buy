@@ -21,5 +21,10 @@ namespace ClickToBuy.Manager
         {
             return _iAdminRepository.GetAll();
         }
+
+        public Admin MatchLoginAdminDetails(string email, string password)
+        {
+            return _iAdminRepository.MatchLoginAdminDetails(email, password);
+        }
     }
 }

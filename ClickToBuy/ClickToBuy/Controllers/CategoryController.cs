@@ -4,6 +4,7 @@ using System.Linq;
 using System.Threading.Tasks;
 using ClickToBuy.Manager.Contracts;
 using ClickToBuy.Model;
+using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
 
@@ -23,15 +24,25 @@ namespace ClickToBuy.Controllers
         [HttpGet]
         public IActionResult Index()
         {
-            ICollection<Category> categoryList = _iCategoryManager.GetAll();
-            return View(categoryList);
+            if (HttpContext.Session.GetString("AdminId") != null)
+            {
+                ICollection<Category> categoryList = _iCategoryManager.GetAll();
+                return View(categoryList);
+            }
+            else
+                return RedirectToAction("AdminLogin", "LoginProcess");
         }
 
         [HttpGet]
         public IActionResult GetProductByCategoryId(int id)
         {
-            List<Product> productList = _iProductManager.GetAll().Where(p => p.CategoryId == id).ToList();
-            return View(productList);
+            if (HttpContext.Session.GetString("AdminId") != null)
+            {
+                List<Product> productList = _iProductManager.GetAll().Where(p => p.CategoryId == id).ToList();
+                return View(productList);
+            }
+            else
+                return RedirectToAction("AdminLogin", "LoginProcess");
         }
 
         private List<SelectListItem> CategoryList()
@@ -49,8 +60,13 @@ namespace ClickToBuy.Controllers
         [HttpGet]
         public IActionResult Create()
         {
-            ViewBag.CategoryList = CategoryList();
-            return View();
+            if (HttpContext.Session.GetString("AdminId") != null)
+            {
+                ViewBag.CategoryList = CategoryList();
+                return View();
+            }
+            else
+                return RedirectToAction("AdminLogin", "LoginProcess");
         }
 
         [Route("api/[controller]/[action]")]
@@ -84,16 +100,21 @@ namespace ClickToBuy.Controllers
         [HttpGet]
         public IActionResult Update(int? id)
         {
-            if (id == null)
-                return NotFound();
+            if (HttpContext.Session.GetString("AdminId") != null)
+            {
+                if (id == null)
+                    return NotFound();
 
-            Category aCategory = _iCategoryManager.GetById(id);
+                Category aCategory = _iCategoryManager.GetById(id);
 
-            if (aCategory == null)
-                return NotFound();
+                if (aCategory == null)
+                    return NotFound();
 
-            ViewBag.CategoryList = CategoryList();
-            return View(aCategory);
+                ViewBag.CategoryList = CategoryList();
+                return View(aCategory);
+            }
+            else
+                return RedirectToAction("AdminLogin", "LoginProcess");
         }
 
         [HttpPost]
@@ -116,16 +137,21 @@ namespace ClickToBuy.Controllers
         [HttpGet]
         public IActionResult Remove(int? id)
         {
-            if (id == null)
-                return NotFound();
+            if (HttpContext.Session.GetString("AdminId") != null)
+            {
+                if (id == null)
+                    return NotFound();
 
-            Category aCategory = _iCategoryManager.GetById(id);
+                Category aCategory = _iCategoryManager.GetById(id);
 
-            if (aCategory == null)
-                return NotFound();
+                if (aCategory == null)
+                    return NotFound();
 
-            ViewBag.CategoryList = CategoryList();
-            return View(aCategory);
+                ViewBag.CategoryList = CategoryList();
+                return View(aCategory);
+            }
+            else
+                return RedirectToAction("AdminLogin", "LoginProcess");
         }
 
         [HttpPost]

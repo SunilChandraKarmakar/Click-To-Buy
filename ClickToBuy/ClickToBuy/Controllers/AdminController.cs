@@ -33,7 +33,10 @@ namespace ClickToBuy.Controllers
         [HttpGet]
         public IActionResult Index()
         {
-            return View(_iAdminManager.GetAll());
+            if (HttpContext.Session.GetString("AdminId") != null)
+                return View(_iAdminManager.GetAll());
+            else
+                return RedirectToAction("AdminLogin", "LoginProcess");
         }
 
         private List<SelectListItem> CountryList()
@@ -50,8 +53,13 @@ namespace ClickToBuy.Controllers
         [HttpGet]
         public IActionResult Create()
         {
-            ViewBag.CountryList = CountryList();
-            return View();
+            if (HttpContext.Session.GetString("AdminId") != null)
+            {
+                ViewBag.CountryList = CountryList();
+                return View();
+            }
+            else
+                return RedirectToAction("AdminLogin", "LoginProcess");
         }
 
         [Route("api/[controller]/[action]")]
@@ -116,16 +124,21 @@ namespace ClickToBuy.Controllers
         [HttpGet]
         public IActionResult Update(int? id)
         {
-            if (id == null)
-                return NotFound();
+            if (HttpContext.Session.GetString("AdminId") != null)
+            {
+                if (id == null)
+                    return NotFound();
 
-            Admin aAdminDetails = _iAdminManager.GetById(id);
+                Admin aAdminDetails = _iAdminManager.GetById(id);
 
-            if (aAdminDetails == null)
-                return NotFound();
+                if (aAdminDetails == null)
+                    return NotFound();
 
-            ViewBag.CountryList = CountryList();
-            return View(aAdminDetails);
+                ViewBag.CountryList = CountryList();
+                return View(aAdminDetails);
+            }
+            else
+                return RedirectToAction("AdminLogin", "LoginProcess");
         }
 
         [HttpPost]
@@ -161,16 +174,21 @@ namespace ClickToBuy.Controllers
         [HttpGet]
         public IActionResult Remove(int? id)
         {
-            if (id == null)
-                return NotFound();
+            if (HttpContext.Session.GetString("AdminId") != null)
+            {
+                if (id == null)
+                    return NotFound();
 
-            Admin aAdminDetails = _iAdminManager.GetById(id);
+                Admin aAdminDetails = _iAdminManager.GetById(id);
 
-            if (aAdminDetails == null)
-                return NotFound();
+                if (aAdminDetails == null)
+                    return NotFound();
 
-            ViewBag.CountryList = CountryList();
-            return View(aAdminDetails);
+                ViewBag.CountryList = CountryList();
+                return View(aAdminDetails);
+            }
+            else
+                return RedirectToAction("AdminLogin", "LoginProcess");
         }
 
         [HttpPost]

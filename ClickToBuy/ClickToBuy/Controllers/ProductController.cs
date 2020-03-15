@@ -43,8 +43,13 @@ namespace ClickToBuy.Controllers
         [HttpGet]
         public IActionResult Index()
         {
-            ViewBag.StockProductList = _iStockProductManager.GetAll();
-            return View(_iProductManager.GetAll());
+            if (HttpContext.Session.GetString("AdminId") != null)
+            {
+                ViewBag.StockProductList = _iStockProductManager.GetAll();
+                return View(_iProductManager.GetAll());
+            }
+            else
+                return RedirectToAction("AdminLogin", "LoginProcess");
         }
 
         private List<SelectListItem> CategoryList()
@@ -94,18 +99,28 @@ namespace ClickToBuy.Controllers
         [HttpGet]
         public IActionResult GetStockByProduct(int id)
         {
-            List<StockProduct> stockProducts = _iStockProductManager.GetAll().Where(s => s.ProductId == id).ToList();
-            return View(stockProducts);
+            if (HttpContext.Session.GetString("AdminId") != null)
+            {
+                List<StockProduct> stockProducts = _iStockProductManager.GetAll().Where(s => s.ProductId == id).ToList();
+                return View(stockProducts);
+            }
+            else
+                return RedirectToAction("AdminLogin", "LoginProcess");
         }
 
         [HttpGet]
         public IActionResult Create()
         {
-            ViewBag.CategoryList = CategoryList();
-            ViewBag.BrandList = BrandList();
-            ViewBag.ConditionList = ConditionList();
-            ViewBag.CloseTypeList = CloseTypeList();
-            return View();
+            if (HttpContext.Session.GetString("AdminId") != null)
+            {
+                ViewBag.CategoryList = CategoryList();
+                ViewBag.BrandList = BrandList();
+                ViewBag.ConditionList = ConditionList();
+                ViewBag.CloseTypeList = CloseTypeList();
+                return View();
+            }
+            else
+                return RedirectToAction("AdminLogin", "LoginProcess");
         }
 
         [Route("api/[controller]/[action]")]
@@ -155,19 +170,24 @@ namespace ClickToBuy.Controllers
         [HttpGet]
         public IActionResult Update(int? id)
         {
-            if (id == null)
-                return NotFound();
+            if (HttpContext.Session.GetString("AdminId") != null)
+            {
+                if (id == null)
+                    return NotFound();
 
-            Product aProductDetails = _iProductManager.GetById(id);
+                Product aProductDetails = _iProductManager.GetById(id);
 
-            if (aProductDetails == null)
-                return NotFound();
+                if (aProductDetails == null)
+                    return NotFound();
 
-            ViewBag.CategoryList = CategoryList();
-            ViewBag.BrandList = BrandList();
-            ViewBag.ConditionList = ConditionList();
-            ViewBag.CloseTypeList = CloseTypeList();
-            return View(aProductDetails);
+                ViewBag.CategoryList = CategoryList();
+                ViewBag.BrandList = BrandList();
+                ViewBag.ConditionList = ConditionList();
+                ViewBag.CloseTypeList = CloseTypeList();
+                return View(aProductDetails);
+            }
+            else
+                return RedirectToAction("AdminLogin", "LoginProcess");
         }
 
         [HttpPost]
@@ -206,19 +226,24 @@ namespace ClickToBuy.Controllers
         [HttpGet]
         public IActionResult Remove(int? id)
         {
-            if (id == null)
-                return NotFound();
+            if (HttpContext.Session.GetString("AdminId") != null)
+            {
+                if (id == null)
+                    return NotFound();
 
-            Product aProductDetails = _iProductManager.GetAll().Where(p => p.Id == id).FirstOrDefault();
+                Product aProductDetails = _iProductManager.GetAll().Where(p => p.Id == id).FirstOrDefault();
 
-            if (aProductDetails == null)
-                return NotFound();
+                if (aProductDetails == null)
+                    return NotFound();
 
-            ViewBag.CategoryList = CategoryList();
-            ViewBag.BrandList = BrandList();
-            ViewBag.ConditionList = ConditionList();
-            ViewBag.CloseTypeList = CloseTypeList();
-            return View(aProductDetails);
+                ViewBag.CategoryList = CategoryList();
+                ViewBag.BrandList = BrandList();
+                ViewBag.ConditionList = ConditionList();
+                ViewBag.CloseTypeList = CloseTypeList();
+                return View(aProductDetails);
+            }
+            else
+                return RedirectToAction("AdminLogin", "LoginProcess");
         }
 
         [HttpPost]

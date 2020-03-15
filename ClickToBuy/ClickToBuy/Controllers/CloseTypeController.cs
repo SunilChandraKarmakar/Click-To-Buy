@@ -4,6 +4,7 @@ using System.Linq;
 using System.Threading.Tasks;
 using ClickToBuy.Manager.Contracts;
 using ClickToBuy.Model;
+using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 
 namespace ClickToBuy.Controllers
@@ -22,20 +23,33 @@ namespace ClickToBuy.Controllers
         [HttpGet]
         public IActionResult Index()
         {
-            return View(_iCloseTypeManager.GetAll());
+            if (HttpContext.Session.GetString("AdminId") != null)
+            {
+                return View(_iCloseTypeManager.GetAll());
+            }
+            else
+                return RedirectToAction("AdminLogin", "LoginProcess");
         }
 
         [HttpGet]
         public IActionResult GetProductByCloseType(int id)
         {
-            List<Product> productList = _iProductManager.GetAll().Where(p => p.CloseTypeId == id).ToList();
-            return View(productList);
+            if (HttpContext.Session.GetString("AdminId") != null)
+            {
+                List<Product> productList = _iProductManager.GetAll().Where(p => p.CloseTypeId == id).ToList();
+                return View(productList);
+            }
+            else
+                return RedirectToAction("AdminLogin", "LoginProcess");
         }
 
         [HttpGet]
         public IActionResult Create()
         {
-            return View();
+            if (HttpContext.Session.GetString("AdminId") != null)
+                return View();
+            else
+                return RedirectToAction("AdminLogin", "LoginProcess");
         }
 
         [Route("api/[controller]/[action]")]
@@ -68,15 +82,20 @@ namespace ClickToBuy.Controllers
         [HttpGet]
         public IActionResult Update(int? id)
         {
-            if (id == null)
-                return NotFound();
+            if (HttpContext.Session.GetString("AdminId") != null)
+            {
+                if (id == null)
+                    return NotFound();
 
-            CloseType aCloseTypeDetails = _iCloseTypeManager.GetById(id);
+                CloseType aCloseTypeDetails = _iCloseTypeManager.GetById(id);
 
-            if (aCloseTypeDetails == null)
-                return NotFound();
+                if (aCloseTypeDetails == null)
+                    return NotFound();
 
-            return View(aCloseTypeDetails);
+                return View(aCloseTypeDetails);
+            }
+            else
+                return RedirectToAction("AdminLogin", "LoginProcess");
         }
 
         [HttpPost]
@@ -98,15 +117,20 @@ namespace ClickToBuy.Controllers
         [HttpGet]
         public IActionResult Remove(int? id)
         {
-            if (id == null)
-                return NotFound();
+            if (HttpContext.Session.GetString("AdminId") != null)
+            {
+                if (id == null)
+                    return NotFound();
 
-            CloseType aCloseTypeDetails = _iCloseTypeManager.GetById(id);
+                CloseType aCloseTypeDetails = _iCloseTypeManager.GetById(id);
 
-            if (aCloseTypeDetails == null)
-                return NotFound();
+                if (aCloseTypeDetails == null)
+                    return NotFound();
 
-            return View(aCloseTypeDetails);
+                return View(aCloseTypeDetails);
+            }
+            else
+                return RedirectToAction("AdminLogin", "LoginProcess");
         }
 
         [HttpPost]

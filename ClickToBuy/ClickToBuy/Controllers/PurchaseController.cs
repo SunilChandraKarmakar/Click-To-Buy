@@ -6,6 +6,7 @@ using AutoMapper;
 using ClickToBuy.Manager.Contracts;
 using ClickToBuy.Model;
 using ClickToBuy.Model.ViewModels;
+using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
 
@@ -75,14 +76,24 @@ namespace ClickToBuy.Controllers
         [HttpGet]
         public IActionResult Index()
         {
-            ViewBag.PurchasePaymentList = _iPurchasePaymentManager.GetAll();
-            return View(_iPurchaseManager.GetAll());
+            if (HttpContext.Session.GetString("AdminId") != null)
+            {
+                ViewBag.PurchasePaymentList = _iPurchasePaymentManager.GetAll();
+                return View(_iPurchaseManager.GetAll());
+            }
+            else
+                return RedirectToAction("AdminLogin", "LoginProcess");
         }
 
         public IActionResult GetPurchaseItemByPurchaseId(int id)
         {
-            ICollection<PurchaseItem> purchaseItem = _iPurchaseItemManager.GetPurchaseItemByPurchaseId(id);
-            return View(purchaseItem);
+            if (HttpContext.Session.GetString("AdminId") != null)
+            {
+                ICollection<PurchaseItem> purchaseItem = _iPurchaseItemManager.GetPurchaseItemByPurchaseId(id);
+                return View(purchaseItem);
+            }
+            else
+                return RedirectToAction("AdminLogin", "LoginProcess");
         }
 
         [Route("api/[controller]/[action]")]
@@ -103,10 +114,15 @@ namespace ClickToBuy.Controllers
         [HttpGet]
         public IActionResult Create()
         {
-            ViewBag.SupplierList = SupplierList();
-            ViewBag.CategoryList = CategoryList();
-            ViewBag.BrandList = BrandList();
-            return View();
+            if (HttpContext.Session.GetString("AdminId") != null)
+            {
+                ViewBag.SupplierList = SupplierList();
+                ViewBag.CategoryList = CategoryList();
+                ViewBag.BrandList = BrandList();
+                return View();
+            }
+            else
+                return RedirectToAction("AdminLogin", "LoginProcess");
         }
 
         [HttpPost]
@@ -137,15 +153,21 @@ namespace ClickToBuy.Controllers
         [HttpGet]
         public IActionResult Update(int? id)
         {
-            if (id == null)
-                return NotFound();
+            if (HttpContext.Session.GetString("AdminId") != null)
+            {
+                if (id == null)
+                    return NotFound();
 
-            PurchasePayment aPurchasePaymentDetails = _iPurchasePaymentManager.GetAll().Where(p => p.PurchaseId == id)
-                                                                                .FirstOrDefault();
-            if (aPurchasePaymentDetails == null)
-                return NotFound();
+                PurchasePayment aPurchasePaymentDetails = _iPurchasePaymentManager.GetAll()
+                                                                                  .Where(p => p.PurchaseId == id)
+                                                                                  .FirstOrDefault();
+                if (aPurchasePaymentDetails == null)
+                    return NotFound();
 
-            return View(aPurchasePaymentDetails);
+                return View(aPurchasePaymentDetails);
+            }
+            else
+                return RedirectToAction("AdminLogin", "LoginProcess");
         }
 
         [HttpPost]

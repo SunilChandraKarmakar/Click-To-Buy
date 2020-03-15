@@ -73,15 +73,23 @@ namespace ClickToBuy.Controllers
         [HttpGet]
         public IActionResult Index()
         {
-            return View(_iCustomerManager.GetAll());
+            if (HttpContext.Session.GetString("AdminId") != null)
+                return View(_iCustomerManager.GetAll());
+            else
+                return RedirectToAction("AdminLogin", "LoginProcess");
         }
 
         [HttpGet]
         public IActionResult Create()
         {
-            ViewBag.CountryList = CountryList();
-            ViewBag.GenderList = GenderList();
-            return View();
+            if (HttpContext.Session.GetString("AdminId") != null)
+            {
+                ViewBag.CountryList = CountryList();
+                ViewBag.GenderList = GenderList();
+                return View();
+            }
+            else
+                return RedirectToAction("AdminLogin", "LoginProcess");
         }
 
         [Route("api/[controller]/[action]")]
