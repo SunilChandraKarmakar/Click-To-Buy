@@ -154,5 +154,35 @@ namespace ClickToBuy.Controllers
             ViewBag.GenderList = GenderList();
             return View(aCustomer);
         }
+
+        [HttpGet]
+        public IActionResult Remove(int? id)
+        {
+            if (HttpContext.Session.GetString("AdminId") != null)
+            {
+                if (id == null)
+                    return NotFound();
+
+                Customer aCustomerDetails = _iCustomerManager.GetById(id);
+
+                if (aCustomerDetails == null)
+                    return NotFound();
+
+                return View(aCustomerDetails);
+            }
+            else
+                return RedirectToAction("AdminLogin", "LoginProcess");
+        }
+
+        [HttpPost]
+        public IActionResult Remove(Customer aCustomerDetails)
+        {
+            bool isRemove = _iCustomerManager.Remove(aCustomerDetails);
+
+            if (isRemove)
+                return RedirectToAction("Index");
+            else
+                return ViewBag.ErrorMessage = "Customer remove has been failed!";
+        }
     }
 }

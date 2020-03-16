@@ -1,4 +1,12 @@
 ﻿@using Microsoft.AspNetCore.Http
+@using ClickToBuy.Model
+@using ClickToBuy.Database
+@{ 
+    CTBContext ctbContext = new CTBContext();
+    string adminId = Context.Session.GetString("AdminId");
+    int convertIntAdminId = Convert.ToInt32(adminId);
+    Admin loginAdminDetails = ctbContext.Admins.Where(a => a.Id == convertIntAdminId).FirstOrDefault();
+}
 
 <!DOCTYPE html>
 <html lang="en">
@@ -73,7 +81,8 @@
             <div id="sidebar" class="nav-collapse ">
                 <!-- sidebar menu start-->
                 <ul class="sidebar-menu" id="nav-accordion">
-
+                    <p class="centered"><a asp-action="Update" asp-controller="Admin" asp-route-id="@loginAdminDetails.Id"><img src="~/@loginAdminDetails.Picture" class="img-circle" width="80"></a></p>
+                    <h5 class="centered">@loginAdminDetails.Name</h5>
                     <li class="mt">
                         <a class="active" asp-action="DashboardView" asp-controller="Dashboard">
                             <i class="fa fa-dashboard"></i>
@@ -103,7 +112,7 @@
                             <li><a asp-action="Index" asp-controller="Purchase">Purchase Product</a></li>
                         </ul>
                     </li>
-                    <li><a asp-action="Index" asp-controller="StockProduct"><i class="fas fa-store-alt"></i> Stock Details</a></li>                  
+                    <li><a asp-action="Index" asp-controller="StockProduct"><i class="fas fa-store-alt"></i> Stock Details</a></li>
                     <li class="sub-menu">
                         <a href="~/adminLayout/javascript:;">
                             <i class="fas fa-user-tie"></i>

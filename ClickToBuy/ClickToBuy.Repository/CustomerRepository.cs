@@ -19,6 +19,16 @@ namespace ClickToBuy.Repository
                              .Include(c => c.Gender).ToList();
         }
 
+        public override Customer GetById(int? id)
+        {
+            Customer aCustomerDetails = ctbContext.Customers
+                                                  .Include(c => c.City)
+                                                  .Include(c => c.Country)
+                                                  .Include(c => c.Gender)
+                                                  .Include(c => c.Coupons).FirstOrDefault();
+            return aCustomerDetails;
+        }
+
         public Customer CheckContact(string contact)
         {
             Customer checkContact = ctbContext.Customers.Where(c => c.Contact == contact).FirstOrDefault();

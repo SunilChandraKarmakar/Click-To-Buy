@@ -37,7 +37,7 @@
                         </td>
                         <td>
                             <a asp-route-id="@item.Id" asp-action="Update" class="btn btn-info"><i class="far fa-edit"></i> Update</a>
-                            <a asp-route-id="@item.Id" asp-action="Remove" class="btn btn-danger"><i class="far fa-trash-alt"></i> Remove</a>
+                            <a asp-route-id="@item.Id" asp-action="Remove" class="btn btn-danger" onclick="return confirm('Are you sure?')"><i class="far fa-trash-alt"></i> Remove</a>
                         </td>
                     </tr>
                 }

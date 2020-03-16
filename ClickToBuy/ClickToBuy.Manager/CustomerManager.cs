@@ -22,6 +22,11 @@ namespace ClickToBuy.Manager
             return _iCustomerRepository.GetAll();
         }
 
+        public override Customer GetById(int? id)
+        {
+            return _iCustomerRepository.GetById(id);
+        }
+
         public Customer CheckContact(string contact)
         {
             return _iCustomerRepository.CheckContact(contact);
