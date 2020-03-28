@@ -12,23 +12,31 @@
     <!-- for-mobile-apps -->
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+
     <script type="application/x-javascript">
         addEventListener("load", function() { setTimeout(hideURLbar, 0); }, false);
-               function hideURLbar(){ window.scrollTo(0,1); } </script>
-    <!-- //for-mobile-apps -->
+               function hideURLbar(){ window.scrollTo(0,1); } 
+    </script>
+
+    <!-- //for-mobile-apps -->  
     <link href="~/ClientLayout/css/bootstrap.css" rel="stylesheet" type="text/css" media="all" />
     <link href="~/ClientLayout/css/style.css" rel="stylesheet" type="text/css" media="all" />
+
     <!-- font-awesome icons -->
     <link href="~/ClientLayout/css/font-awesome.css" rel="stylesheet" type="text/css" media="all" />
     <!-- //font-awesome icons -->
+    
     <!-- js -->
     <script src="~/ClientLayout/js/jquery-1.11.1.min.js"></script>
     <!-- //js -->
+
     <link href='//fonts.googleapis.com/css?family=Ubuntu:400,300,300italic,400italic,500,500italic,700,700italic' rel='stylesheet' type='text/css'>
     <link href='//fonts.googleapis.com/css?family=Open+Sans:400,300,300italic,400italic,600,600italic,700,700italic,800,800italic' rel='stylesheet' type='text/css'>
+    
     <!-- start-smoth-scrolling -->
     <script type="text/javascript" src="~/ClientLayout/js/move-top.js"></script>
     <script type="text/javascript" src="~/ClientLayout/js/easing.js"></script>
+
     <script type="text/javascript">
         jQuery(document).ready(function ($) {
             $(".scroll").click(function (event) {
@@ -37,12 +45,11 @@
             });
         });
     </script>
-    <!-- start-smoth-scrolling -->
+    <!-- start-smoth-scrolling -->     
 </head>
 
 <body>
-    <!-- header -->
-
+    <!-- header --> 
     <div class="agileits_header">
         <div class="w3l_offers">
             <a href="#">Provied special Offers !</a>
@@ -82,6 +89,7 @@
         </div>
         <div class="clearfix"> </div>
     </div>
+
     <!-- script-for sticky-nav -->
     <script>
         $(document).ready(function () {
@@ -98,6 +106,7 @@
         });
     </script>
     <!-- //script-for sticky-nav -->
+
     <div class="logo_products">
         <div class="container">
             <div class="w3ls_logo_products_left">
@@ -121,10 +130,11 @@
         </div>
     </div>
     <!-- //header -->
+
     <!-- banner -->
     <div class="banner">
         <div class="w3l_banner_nav_left">
-            <nav class="navbar nav_bottom">
+            <nav class="navbar nav_bottom">       
                 <!-- Brand and toggle get grouped for better mobile display -->
                 <div class="navbar-header nav_2">
                     <button type="button" class="navbar-toggle collapsed navbar-toggle1" data-toggle="collapse" data-target="#bs-megadropdown-tabs">
@@ -134,19 +144,20 @@
                         <span class="icon-bar"></span>
                     </button>
                 </div>
+
                 <!-- Collect the nav links, forms, and other content for toggling -->
                 <div class="collapse navbar-collapse" id="bs-megadropdown-tabs">
                     <ul class="nav navbar-nav nav_1">
                         <li class="dropdown mega-dropdown active">
                             <a href="#" class="dropdown-toggle" data-toggle="dropdown">Brands<span class="caret"></span></a>
                             <div class="dropdown-menu mega-dropdown-menu w3ls_vegetables_menu">
-                                <div class="w3ls_vegetables">
-                                    <ul>                                        
-                                        @foreach (Brand brand in brands)
-                                        {
+                                <div class="w3ls_vegetables">                                                                               
+                                    @foreach (Brand brand in brands)
+                                    {
+                                        <ul>
                                             <li><a href="#">@brand.Name ( @brand.Products.Count() )</a></li>
-                                        }
-                                    </ul>
+                                        </ul>
+                                    }                                                               
                                 </div>
                             </div>
                         </li>
@@ -162,13 +173,13 @@
                                 <li class="dropdown mega-dropdown active">
                                     <a href="#" class="dropdown-toggle" data-toggle="dropdown">@category.Name<span class="caret"></span></a>
                                     <div class="dropdown-menu mega-dropdown-menu w3ls_vegetables_menu">
-                                        <div class="w3ls_vegetables">
-                                            <ul>
-                                                @foreach (Category subCategory in category.Categories)
-                                                {
+                                        <div class="w3ls_vegetables">                                            
+                                            @foreach (Category subCategory in category.Categories)
+                                            {
+                                                <ul>
                                                     <li><a href="#">@subCategory.Name</a></li>
-                                                }
-                                            </ul>
+                                                </ul>
+                                            }                                            
                                         </div>
                                     </div>
                                 </li>    
@@ -179,10 +190,10 @@
                             }
                         }
                     </ul>
-                </div>
-
+                </div>   
             </nav>
         </div>
+
         <div class="w3l_banner_nav_right">
             <section class="slider">
                 <div class="flexslider">
@@ -214,9 +225,11 @@
                     </ul>
                 </div>
             </section>
+
             <!-- flexSlider -->
             <link rel="stylesheet" href="~/ClientLayout/css/flexslider.css" type="text/css" media="screen" property="" />
             <script defer src="~/ClientLayout/js/jquery.flexslider.js"></script>
+
             <script type="text/javascript">
                 $(window).load(function () {
                     $('.flexslider').flexslider({
@@ -229,12 +242,13 @@
             </script>
             <!-- //flexSlider -->
         </div>
+
         <div class="clearfix"></div>
     </div>
+
     <!-- banner -->
     <div class="banner_bottom">
-        <div class="wthree_banner_bottom_left_grid_sub">
-        </div>
+        <div class="wthree_banner_bottom_left_grid_sub"></div>
         <div class="wthree_banner_bottom_left_grid_sub1">
             <div class="col-md-4 wthree_banner_bottom_left">
                 <div class="wthree_banner_bottom_left_grid">
@@ -259,11 +273,12 @@
                         <h3>Save <span>Upto</span> $10</h3>
                     </div>
                 </div>
-            </div>
+            </div>  
             <div class="clearfix"> </div>
         </div>
         <div class="clearfix"> </div>
     </div>
+
     <!-- top-brands -->
     <div class="top-brands">
         <div class="container">
@@ -414,92 +429,7 @@
             </div>
         </div>
     </div>
-    <!-- //top-brands -->
-    <!-- fresh-vegetables -->
-    @*<div class="fresh-vegetables">
-            <div class="container">
-                <h3>Top Products</h3>
-                <div class="w3l_fresh_vegetables_grids">
-                    <div class="col-md-3 w3l_fresh_vegetables_grid w3l_fresh_vegetables_grid_left">
-                        <div class="w3l_fresh_vegetables_grid2">
-                            <ul>
-                                <li><i class="fa fa-check" aria-hidden="true"></i><a href="products.html">All Brands</a></li>
-                                <li><i class="fa fa-check" aria-hidden="true"></i><a href="vegetables.html">Vegetables</a></li>
-                                <li><i class="fa fa-check" aria-hidden="true"></i><a href="vegetables.html">Fruits</a></li>
-                                <li><i class="fa fa-check" aria-hidden="true"></i><a href="drinks.html">Juices</a></li>
-                                <li><i class="fa fa-check" aria-hidden="true"></i><a href="pet.html">Pet Food</a></li>
-                                <li><i class="fa fa-check" aria-hidden="true"></i><a href="bread.html">Bread & Bakery</a></li>
-                                <li><i class="fa fa-check" aria-hidden="true"></i><a href="household.html">Cleaning</a></li>
-                                <li><i class="fa fa-check" aria-hidden="true"></i><a href="products.html">Spices</a></li>
-                                <li><i class="fa fa-check" aria-hidden="true"></i><a href="products.html">Dry Fruits</a></li>
-                                <li><i class="fa fa-check" aria-hidden="true"></i><a href="products.html">Dairy Products</a></li>
-                            </ul>
-                        </div>
-                    </div>
-                    <div class="col-md-9 w3l_fresh_vegetables_grid_right">
-                        <div class="col-md-4 w3l_fresh_vegetables_grid">
-                            <div class="w3l_fresh_vegetables_grid1">
-                                <img src="~/ClientLayout/images/8.jpg" alt=" " class="img-responsive" />
-                            </div>
-                        </div>
-                        <div class="col-md-4 w3l_fresh_vegetables_grid">
-                            <div class="w3l_fresh_vegetables_grid1">
-                                <div class="w3l_fresh_vegetables_grid1_rel">
-                                    <img src="~/ClientLayout/images/7.jpg" alt=" " class="img-responsive" />
-                                    <div class="w3l_fresh_vegetables_grid1_rel_pos">
-                                        <div class="more m1">
-                                            <a href="products.html" class="button--saqui button--round-l button--text-thick" data-text="Shop now">Shop now</a>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="w3l_fresh_vegetables_grid1_bottom">
-                                <img src="~/ClientLayout/images/10.jpg" alt=" " class="img-responsive" />
-                                <div class="w3l_fresh_vegetables_grid1_bottom_pos">
-                                    <h5>Special Offers</h5>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="col-md-4 w3l_fresh_vegetables_grid">
-                            <div class="w3l_fresh_vegetables_grid1">
-                                <img src="~/ClientLayout/images/9.jpg" alt=" " class="img-responsive" />
-                            </div>
-                            <div class="w3l_fresh_vegetables_grid1_bottom">
-                                <img src="~/ClientLayout/images/11.jpg" alt=" " class="img-responsive" />
-                            </div>
-                        </div>
-                        <div class="clearfix"> </div>
-                        <div class="agileinfo_move_text">
-                            <div class="agileinfo_marquee">
-                                <h4>get <span class="blink_me">25% off</span> on first order and also get gift voucher</h4>
-                            </div>
-                            <div class="agileinfo_breaking_news">
-                                <span> </span>
-                            </div>
-                            <div class="clearfix"></div>
-                        </div>
-                    </div>
-                    <div class="clearfix"> </div>
-                </div>
-            </div>
-        </div>*@
-    <!-- //fresh-vegetables -->
-    <!-- newsletter -->
-    <div class="newsletter">
-        <div class="container">
-            <div class="w3agile_newsletter_left">
-                <h3>sign up for our newsletter</h3>
-            </div>
-            <div class="w3agile_newsletter_right">
-                <form action="#" method="post">
-                    <input type="email" name="Email" value="Email" onfocus="this.value = '';" onblur="if (this.value == '') {this.value = 'Email';}" required="">
-                    <input type="submit" value="subscribe now">
-                </form>
-            </div>
-            <div class="clearfix"> </div>
-        </div>
-    </div>
-    <!-- //newsletter -->
+
     <!-- footer -->
     <div class="footer">
         <div class="container">
@@ -573,13 +503,15 @@
                 <div class="clearfix"> </div>
             </div>
             <div class="wthree_footer_copy">
-                <p>@DateTime.Now.Year Click To Buy Store. All rights reserved | Design by Sunil Chandra Karmakar</p>
+                <p>@DateTime.Now.Year Click To Buy Store. All rights reserved | Develop by Sunil Chandra Karmakar</p>
             </div>
         </div>
     </div>
     <!-- //footer -->
+
     <!-- Bootstrap Core JavaScript -->
     <script src="~/ClientLayout/js/bootstrap.min.js"></script>
+
     <script>
         $(document).ready(function () {
             $(".dropdown").hover(
@@ -594,6 +526,7 @@
             );
         });
     </script>
+
     <!-- here stars scrolling icon -->
     <script type="text/javascript">
         $(document).ready(function () {
@@ -611,6 +544,7 @@
         });
     </script>
     <!-- //here ends scrolling icon -->
+
     <script src="~/ClientLayout/js/minicart.js"></script>
     <script>
         paypal.minicart.render();

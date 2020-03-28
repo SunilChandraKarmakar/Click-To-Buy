@@ -16,18 +16,22 @@ namespace ClickToBuy.Controllers
         private readonly ILogger<HomeController> _logger;
         private readonly IBrandManager _iBrandManager;
         private readonly ICategoryManager _iCategoryManager;
+        private readonly IProductManager _iProductManager;
 
-        public HomeController(ILogger<HomeController> logger, IBrandManager iBrandManager, ICategoryManager iCategoryManager)
+        public HomeController(ILogger<HomeController> logger, IBrandManager iBrandManager, 
+                             ICategoryManager iCategoryManager, IProductManager iProductManager)
         {
             _logger = logger;
             _iBrandManager = iBrandManager;
             _iCategoryManager = iCategoryManager;
+            _iProductManager = iProductManager;
         }
 
         public IActionResult Index()
         {
             ViewBag.BrandList = _iBrandManager.GetAll();
             ViewBag.CategoryList = _iCategoryManager.GetAll().Where(c => c.Categoryy == null).ToList();
+            ViewBag.ProductList = _iProductManager.GetAll();
             return View();
         }
 
