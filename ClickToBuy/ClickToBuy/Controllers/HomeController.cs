@@ -27,12 +27,40 @@ namespace ClickToBuy.Controllers
             _iProductManager = iProductManager;
         }
 
+        private ICollection<Brand> BrandList()
+        {
+            ICollection<Brand> brandList = _iBrandManager.GetAll();
+            return brandList;
+        }
+
+        private ICollection<Category> CategoryList()
+        {
+            ICollection<Category> categoryList = _iCategoryManager.GetAll().Where(c => c.Categoryy == null).ToList();
+            return categoryList;
+        }
+
+        private ICollection<Product> ProductList()
+        {
+            ICollection<Product> productList = _iProductManager.GetAll();
+            return productList;
+        }
+
         public IActionResult Index()
         {
-            ViewBag.BrandList = _iBrandManager.GetAll();
-            ViewBag.CategoryList = _iCategoryManager.GetAll().Where(c => c.Categoryy == null).ToList();
-            ViewBag.ProductList = _iProductManager.GetAll();
+            ViewBag.BrandList = BrandList();
+            ViewBag.CategoryList = CategoryList();
+            ViewBag.ProductList = ProductList();
             return View();
+        }
+
+        public IActionResult GetProductByBrand(int id)
+        {                
+            ICollection<Product> getProductsByBrand = ProductList().Where(p => p.BrandId == id).ToList();
+            ViewBag.BrandInfo = _iBrandManager.GetById(id); ;
+            ViewBag.BrandList = BrandList();
+            ViewBag.CategoryList = CategoryList();
+            ViewBag.ProductList = ProductList();
+            return View(getProductsByBrand);
         }
 
         public IActionResult Privacy()
