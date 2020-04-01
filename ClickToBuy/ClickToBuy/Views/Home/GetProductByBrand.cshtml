@@ -5,7 +5,6 @@
     Brand brandInfo = ViewBag.BrandInfo;
     List<Brand> brands = ViewBag.BrandList;
     List<Category> categories = ViewBag.CategoryList;
-    List<Product> products = ViewBag.ProductList;
 }    
 
 <!DOCTYPE html>
@@ -138,6 +137,7 @@
         </div>
     </div>
     <!-- //header -->
+
     <!-- products-breadcrumb -->
     <div class="products-breadcrumb">
         <div class="container">
@@ -148,6 +148,7 @@
         </div>
     </div>
     <!-- //products-breadcrumb -->
+
     <!-- banner -->
     <div class="banner">
         <div class="w3l_banner_nav_left">
@@ -194,7 +195,7 @@
                                             @foreach (Category subCategory in category.Categories)
                                             {
                                                 <ul>
-                                                    <li><a href="#">@subCategory.Name</a></li>
+                                                    <li><a asp-route-id="@subCategory.Id" asp-action="GetProductByCategory" asp-controller="Home">@subCategory.Name</a></li>
                                                 </ul>
                                             }
                                         </div>
@@ -204,7 +205,7 @@
                             }
                             else
                             {
-                                <li><a href="">@category.Name</a></li>
+                                <li><a asp-route-id="@category.Id" asp-action="GetProductByCategory" asp-controller="Home">@category.Name</a></li>
                             }
                         }
                     </ul>
@@ -227,7 +228,7 @@
                                                 <div class="snipcart-thumb">
                                                     <a href="single.html"><img title=" " alt=" " src="~/@product.Picture" class="img-responsive" /></a>
                                                     <p>@product.Name</p>
-                                                    <h4>$@product.RegularPrice <span>$@product.RegularPrice</span></h4>
+                                                    <h4>Regular Price : $@product.RegularPrice </h4>
                                                 </div>
                                                 <div class="snipcart-details top_brand_home_details">
                                                     <form action="#" method="post">
@@ -338,6 +339,7 @@
         </div>
     </div>
     <!-- //footer -->
+
     <!-- Bootstrap Core JavaScript -->
     <script src="~/ClientLayout/js/bootstrap.min.js"></script>
 
