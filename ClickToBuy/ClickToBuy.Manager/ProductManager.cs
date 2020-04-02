@@ -22,6 +22,11 @@ namespace ClickToBuy.Manager
             return _iProductRepository.GetAll();
         }
 
+        public override Product GetById(int? id)
+        {
+            return _iProductRepository.GetById(id);
+        }
+
         public Product CheckName(string name)
         {
             return _iProductRepository.CheckName(name);

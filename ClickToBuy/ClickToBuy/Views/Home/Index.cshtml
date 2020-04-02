@@ -297,7 +297,7 @@
                                     <figure>
                                         <div class="snipcart-item block">
                                             <div class="snipcart-thumb">
-                                                <a href="single.html"><img title=" " alt=" " src="~/@product.Picture" class="img-responsive" /></a>
+                                                <a asp-route-id="@product.Id" asp-action="GetProductInfoByProductId" asp-controller="Home"><img title=" " alt=" " src="~/@product.Picture" class="img-responsive" /></a>
                                                 <p>@product.Name</p>
                                                 <h4>$@product.RegularPrice <span>$@product.RegularPrice</span></h4>
                                             </div>

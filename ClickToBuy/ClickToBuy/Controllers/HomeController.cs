@@ -71,6 +71,14 @@ namespace ClickToBuy.Controllers
             return View(getProductByCategory);
         }
 
+        public IActionResult GetProductInfoByProductId(int id)
+        {
+            ViewBag.ProductInfo = _iProductManager.GetById(id);
+            ViewBag.BrandList = BrandList();
+            ViewBag.CategoryList = CategoryList();
+            return View();
+        }
+
         public IActionResult Privacy()
         {
             return View();
