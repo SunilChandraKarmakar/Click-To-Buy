@@ -1,50 +1,53 @@
 ﻿@using ClickToBuy.Model
+@model ICollection<Product>
 @{
     Layout = null;
-    List<Brand> brands = ViewBag.BrandList;
-    List<Category> categories = ViewBag.CategoryList;
-    List<Product> products = ViewBag.ProductList;
+    ICollection<Brand> brands = ViewBag.BrandList;
+    ICollection<Category> categories = ViewBag.CategoryList;
 }
 
 <!DOCTYPE html>
 <html>
 <head>
-    <title>Click To Buy</title>
+    <title>All Product</title>
 
     <!-- for-mobile-apps -->
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-
+    <meta name="keywords" content="Grocery Store Responsive web template, Bootstrap Web Templates, Flat Web Templates, Android Compatible web template,
+    Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, SonyEricsson, Motorola web design" />
+    
     <script type="application/x-javascript">
         addEventListener("load", function() { setTimeout(hideURLbar, 0); }, false);
-               function hideURLbar(){ window.scrollTo(0,1); }
+               function hideURLbar(){ window.scrollTo(0,1); } 
     </script>
-
     <!-- //for-mobile-apps -->
+    
     <link href="~/ClientLayout/css/bootstrap.css" rel="stylesheet" type="text/css" media="all" />
     <link href="~/ClientLayout/css/style.css" rel="stylesheet" type="text/css" media="all" />
 
     <!-- font-awesome icons -->
     <link href="~/ClientLayout/css/font-awesome.css" rel="stylesheet" type="text/css" media="all" />
     <!-- //font-awesome icons -->
+
     <!-- js -->
     <script src="~/ClientLayout/js/jquery-1.11.1.min.js"></script>
     <!-- //js -->
 
     <link href='//fonts.googleapis.com/css?family=Ubuntu:400,300,300italic,400italic,500,500italic,700,700italic' rel='stylesheet' type='text/css'>
     <link href='//fonts.googleapis.com/css?family=Open+Sans:400,300,300italic,400italic,600,600italic,700,700italic,800,800italic' rel='stylesheet' type='text/css'>
-
+    
     <!-- start-smoth-scrolling -->
     <script type="text/javascript" src="~/ClientLayout/js/move-top.js"></script>
     <script type="text/javascript" src="~/ClientLayout/js/easing.js"></script>
 
     <script type="text/javascript">
-        jQuery(document).ready(function ($) {
-            $(".scroll").click(function (event) {
-                event.preventDefault();
-                $('html,body').animate({ scrollTop: $(this.hash).offset().top }, 1000);
-            });
-        });
+	    jQuery(document).ready(function($) {
+		    $(".scroll").click(function(event){
+			    event.preventDefault();
+			    $('html,body').animate({scrollTop:$(this.hash).offset().top},1000);
+		    });
+	    });
     </script>
     <!-- start-smoth-scrolling -->
 </head>
@@ -132,6 +135,17 @@
     </div>
     <!-- //header -->
 
+    <!-- products-breadcrumb -->
+    <div class="products-breadcrumb">
+        <div class="container">
+            <ul>
+                <li><i class="fa fa-home" aria-hidden="true"></i><a asp-action="Index" asp-controller="Home">Home</a><span>|</span></li>
+                <li>Branded Products</li>
+            </ul>
+        </div>
+    </div>
+    <!-- //products-breadcrumb -->
+
     <!-- banner -->
     <div class="banner">
         <div class="w3l_banner_nav_left">
@@ -164,7 +178,6 @@
                         </li>
                     </ul>
                 </div><!-- /.navbar-collapse -->
-
                 <div class="collapse navbar-collapse" id="bs-megadropdown-tabs">
                     <ul class="nav navbar-nav nav_1">
                         @foreach (Category category in categories)
@@ -183,7 +196,8 @@
                                             }
                                         </div>
                                     </div>
-                                </li>     
+                                </li>
+
                             }
                             else
                             {
@@ -196,138 +210,60 @@
         </div>
 
         <div class="w3l_banner_nav_right">
-            <section class="slider">
-                <div class="flexslider">
-                    <ul class="slides">
-                        <li>
-                            <div class="w3l_banner_nav_right_banner">
-                                <h3>Make your <span>food</span> with Spicy.</h3>
-                                <div class="more">
-                                    <a asp-action="GetAllProduct" asp-controller="Home" class="button--saqui button--round-l button--text-thick" data-text="Shop now">Shop now</a>
-                                </div>
-                            </div>
-                        </li>
-                        <li>
-                            <div class="w3l_banner_nav_right_banner1">
-                                <h3>Make your <span>food</span> with Spicy.</h3>
-                                <div class="more">
-                                    <a asp-action="GetAllProduct" asp-controller="Home" class="button--saqui button--round-l button--text-thick" data-text="Shop now">Shop now</a>
-                                </div>
-                            </div>
-                        </li>
-                        <li>
-                            <div class="w3l_banner_nav_right_banner2">
-                                <h3>upto <i>50%</i> off.</h3>
-                                <div class="more">
-                                    <a asp-action="GetAllProduct" asp-controller="Home" class="button--saqui button--round-l button--text-thick" data-text="Shop now">Shop now</a>
-                                </div>
-                            </div>
-                        </li>
-                    </ul>
-                </div>
-            </section>
-
-            <!-- flexSlider -->
-            <link rel="stylesheet" href="~/ClientLayout/css/flexslider.css" type="text/css" media="screen" property="" />
-            <script defer src="~/ClientLayout/js/jquery.flexslider.js"></script>
-
-            <script type="text/javascript">
-                $(window).load(function () {
-                    $('.flexslider').flexslider({
-                        animation: "slide",
-                        start: function (slider) {
-                            $('body').removeClass('loading');
-                        }
-                    });
-                });
-            </script>
-            <!-- //flexSlider -->
-        </div>
-
-        <div class="clearfix"></div>
-    </div>
-
-    <!-- banner -->
-    <div class="banner_bottom">
-        <div class="wthree_banner_bottom_left_grid_sub"></div>
-        <div class="wthree_banner_bottom_left_grid_sub1">
-            <div class="col-md-4 wthree_banner_bottom_left">
-                <div class="wthree_banner_bottom_left_grid">
-                    <img src="~/ClientLayout/images/4.jpg" alt=" " class="img-responsive" />
-                    <div class="wthree_banner_bottom_left_grid_pos">
-                        <h4>Discount Offer <span>25%</span></h4>
-                    </div>
-                </div>
-            </div>
-            <div class="col-md-4 wthree_banner_bottom_left">
-                <div class="wthree_banner_bottom_left_grid">
-                    <img src="~/ClientLayout/images/5.jpg" alt=" " class="img-responsive" />
-                    <div class="wthree_banner_btm_pos">
-                        <h3>introducing <span>best store</span> for <i>groceries</i></h3>
-                    </div>
-                </div>
-            </div>
-            <div class="col-md-4 wthree_banner_bottom_left">
-                <div class="wthree_banner_bottom_left_grid">
-                    <img src="~/ClientLayout/images/6.jpg" alt=" " class="img-responsive" />
-                    <div class="wthree_banner_btm_pos1">
-                        <h3>Save <span>Upto</span> $10</h3>
-                    </div>
-                </div>
-            </div>
-            <div class="clearfix"> </div>
-        </div>
-        <div class="clearfix"> </div>
-    </div>
-
-    <!-- top-brands -->
-    <div class="top-brands">
-        <div class="container">
-            <h3>Hot Offers</h3>
-            <div class="agile_top_brands_grids">
-                @foreach (Product product in products)
+            <div class="clearfix"></div>
+            <div class="w3ls_w3l_banner_nav_right_grid">
+                <h3 style="margin-top: 30px">Popular Brands</h3> 
+                @foreach (Brand brandItem in brands)                             
                 {
-                    <div class="col-md-3 top_brand_left" style="margin-bottom: 20px">
-                        <div class="hover14 column">
-                            <div class="agile_top_brand_left_grid">
-                                <div class="agile_top_brand_left_grid_pos">
-                                    <img src="~/ClientLayout/images/offer.png" alt=" " class="img-responsive" />
-                                </div>
-                                <div class="agile_top_brand_left_grid1">
-                                    <figure>
-                                        <div class="snipcart-item block">
-                                            <div class="snipcart-thumb">
-                                                <a asp-route-id="@product.Id" asp-action="GetProductInfoByProductId" asp-controller="Home"><img title=" " alt=" " src="~/@product.Picture" class="img-responsive" /></a>
-                                                <p>@product.Name</p>
-                                                <h4>$@product.RegularPrice <span>$@product.RegularPrice</span></h4>
-                                            </div>
-                                            <div class="snipcart-details top_brand_home_details">
-                                                <form action="#" method="post">
-                                                    <fieldset>
-                                                        <input type="hidden" name="cmd" value="_cart" />
-                                                        <input type="hidden" name="add" value="1" />
-                                                        <input type="hidden" name="business" value=" " />
-                                                        <input type="hidden" name="item_name" value="@product.Name.ToString()" />
-                                                        <input type="hidden" name="amount" value="@Convert.ToDouble(product.RegularPrice)" />
-                                                        <input type="hidden" name="discount_amount" value=" " />
-                                                        <input type="hidden" name="currency_code" value="USD" />
-                                                        <input type="hidden" name="return" value=" " />
-                                                        <input type="hidden" name="cancel_return" value=" " />
-                                                        <input type="submit" name="submit" value="Add to cart" class="button" />
-                                                    </fieldset>
-                                                </form>
+                    if (brandItem.Products.Count() > 0)
+                    {
+                        <div class="w3ls_w3l_banner_nav_right_grid1">
+                            <h6>@brandItem.Name</h6>                 
+                            @foreach (Product productItem in brandItem.Products)
+                            {
+                                <div class="col-md-3 w3ls_w3l_banner_left">
+                                    <div class="hover14 column">
+                                        <div class="agile_top_brand_left_grid w3l_agile_top_brand_left_grid">
+                                            <div class="agile_top_brand_left_grid1">
+                                                <figure>
+                                                    <div class="snipcart-item block">
+                                                        <div class="snipcart-thumb">
+                                                            <a asp-route-id="@productItem.Id" asp-action="GetProductInfoByProductId" asp-controller="Home"><img src="~/@productItem.Picture" alt=" " class="img-responsive" /></a>
+                                                            <p>@productItem.Name</p>
+                                                            <h4>Price : @productItem.RegularPrice BDT</h4>
+                                                        </div>
+                                                        <div class="snipcart-details">
+                                                            <form action="#" method="post">
+                                                                <fieldset>
+                                                                    <input type="hidden" name="cmd" value="_cart" />
+                                                                    <input type="hidden" name="add" value="1" />
+                                                                    <input type="hidden" name="business" value=" " />
+                                                                    <input type="hidden" name="item_name" value="@productItem.Name.ToString()" />
+                                                                    <input type="hidden" name="amount" value="@Convert.ToDouble(productItem.RegularPrice)" />
+                                                                    <input type="hidden" name="discount_amount" value=" " />
+                                                                    <input type="hidden" name="currency_code" value="USD" />
+                                                                    <input type="hidden" name="return" value=" " />
+                                                                    <input type="hidden" name="cancel_return" value=" " />
+                                                                    <input type="submit" name="submit" value="Add to cart" class="button" />
+                                                                </fieldset>
+                                                            </form>
+                                                        </div>
+                                                    </div>
+                                                </figure>
                                             </div>
                                         </div>
-                                    </figure>
+                                    </div>
                                 </div>
-                            </div>
-                        </div>
-                    </div>
-                }
-                <div class="clearfix"> </div>
+                            }
+                            <div class="clearfix"> </div>
+                         </div>
+                    }
+                }   
             </div>
         </div>
+        <div class="clearfix"></div>
     </div>
+    <!-- //banner -->
 
     <!-- footer -->
     <div class="footer">
@@ -445,7 +381,6 @@
     <!-- //here ends scrolling icon -->
 
     <script src="~/ClientLayout/js/minicart.js"></script>
-
     <script>
         paypal.minicart.render();
 

@@ -79,6 +79,13 @@ namespace ClickToBuy.Controllers
             return View();
         }
 
+        public IActionResult GetAllProduct()
+        {
+            ViewBag.BrandList = BrandList();
+            ViewBag.CategoryList = CategoryList();
+            return View(ProductList());
+        }
+
         public IActionResult Privacy()
         {
             return View();
