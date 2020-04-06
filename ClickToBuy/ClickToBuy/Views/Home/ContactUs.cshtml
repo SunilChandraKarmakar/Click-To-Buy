@@ -1,8 +1,6 @@
 ﻿@using ClickToBuy.Model
-@model ICollection<Product>
 @{
     Layout = null;
-    Category categoryInfo = ViewBag.CategoryInfo;
     List<Brand> brands = ViewBag.BrandList;
     List<Category> categories = ViewBag.CategoryList;
 }
@@ -11,7 +9,7 @@
 <html>
 <head>
 
-    <title>Get Product By Category</title>
+    <title>Contact Us</title>
 
     <!-- for-mobile-apps -->
     <meta name="viewport" content="width=device-width, initial-scale=1">
@@ -31,7 +29,6 @@
     <!-- font-awesome icons -->
     <link href="~/ClientLayout/css/font-awesome.css" rel="stylesheet" type="text/css" media="all" />
     <!-- //font-awesome icons -->
-
     <!-- js -->
     <script src="~/ClientLayout/js/jquery-1.11.1.min.js"></script>
     <!-- //js -->
@@ -44,12 +41,12 @@
     <script type="text/javascript" src="~/ClientLayout/js/easing.js"></script>
 
     <script type="text/javascript">
-	    jQuery(document).ready(function($) {
-		    $(".scroll").click(function(event){
-			    event.preventDefault();
-			    $('html,body').animate({scrollTop:$(this.hash).offset().top},1000);
-		    });
-	});
+        jQuery(document).ready(function ($) {
+            $(".scroll").click(function (event) {
+                event.preventDefault();
+                $('html,body').animate({ scrollTop: $(this.hash).offset().top }, 1000);
+            });
+        });
     </script>
     <!-- start-smoth-scrolling -->
 
@@ -143,7 +140,7 @@
         <div class="container">
             <ul>
                 <li><i class="fa fa-home" aria-hidden="true"></i><a asp-action="Index" asp-controller="Home">Home</a><span>|</span></li>
-                <li>@categoryInfo.Name</li>
+                <li>Contact Us</li>
             </ul>
         </div>
     </div>
@@ -200,7 +197,8 @@
                                             }
                                         </div>
                                     </div>
-                                </li> 
+                                </li>
+
                             }
                             else
                             {
@@ -213,48 +211,44 @@
         </div>
 
         <div class="w3l_banner_nav_right">
-            <div class="w3ls_w3l_banner_nav_right_grid w3ls_w3l_banner_nav_right_grid_sub">
-                <h3 class="w3l_fruit">@categoryInfo.Name Product</h3>
-                <div class="w3ls_w3l_banner_nav_right_grid1 w3ls_w3l_banner_nav_right_grid1_veg">
-                    @foreach (Product product in Model)
-                    {
-                        <div class="col-md-3 top_brand_left" style="margin-bottom: 20px">
-                            <div class="hover14 column">
-                                <div class="agile_top_brand_left_grid">
-                                    <div class="agile_top_brand_left_grid1">
-                                        <figure>
-                                            <div class="snipcart-item block">
-                                                <div class="snipcart-thumb">
-                                                    <a asp-route-id="@product.Id" asp-action="GetProductInfoByProductId" asp-controller="Home"><img title=" " alt=" " src="~/@product.Picture" class="img-responsive" /></a>
-                                                    <p>@product.Name</p>
-                                                    <h4>Price : @product.RegularPrice BDT</h4>
-                                                </div>
-                                                <div class="snipcart-details top_brand_home_details">
-                                                    <form action="#" method="post">
-                                                        <fieldset>
-                                                            <input type="hidden" name="cmd" value="_cart" />
-                                                            <input type="hidden" name="add" value="1" />
-                                                            <input type="hidden" name="business" value=" " />
-                                                            <input type="hidden" name="item_name" value="@product.Name.ToString()" />
-                                                            <input type="hidden" name="amount" value="@Convert.ToDouble(product.RegularPrice)" />
-                                                            <input type="hidden" name="discount_amount" value=" " />
-                                                            <input type="hidden" name="currency_code" value="USD" />
-                                                            <input type="hidden" name="return" value=" " />
-                                                            <input type="hidden" name="cancel_return" value=" " />
-                                                            <input type="submit" name="submit" value="Add to cart" class="button" />
-                                                        </fieldset>
-                                                    </form>
-                                                </div>
-                                            </div>
-                                        </figure>
-                                    </div>
-                                </div>
+            <!-- mail -->
+            <div class="mail">
+                <h3>Mail Us</h3>
+                <div class="agileinfo_mail_grids">
+                    <div class="col-md-4 agileinfo_mail_grid_left">
+                        <ul>
+                            <li><i class="fa fa-home" aria-hidden="true"></i></li>
+                            <li>address<span>H# 880, Adarsho road,<br /> Moddho monipur, <br />Mirpur 2, Dhaka, <br />Bangladesh</span></li>
+                        </ul>
+                        <ul>
+                            <li><i class="fa fa-envelope" aria-hidden="true"></i></li>
+                            <li>email<span><a href="#">clicktobuy@ymail.com</a></span></li>
+                        </ul>
+                        <ul>
+                            <li><i class="fa fa-phone" aria-hidden="true"></i></li>
+                            <li>call to us<span>(+880) 1743909840</span></li>
+                        </ul>
+                    </div>
+                    <div class="col-md-8 agileinfo_mail_grid_right">
+                        <form action="#" method="post">
+                            <div class="col-md-6 wthree_contact_left_grid">
+                                <input type="text" name="Name" value="Name*" onfocus="this.value = '';" onblur="if (this.value == '') {this.value = 'Name*';}" required="">
+                                <input type="email" name="Email" value="Email*" onfocus="this.value = '';" onblur="if (this.value == '') {this.value = 'Email*';}" required="">
                             </div>
-                        </div>
-                    }
+                            <div class="col-md-6 wthree_contact_left_grid">
+                                <input type="text" name="Telephone" value="Telephone*" onfocus="this.value = '';" onblur="if (this.value == '') {this.value = 'Telephone*';}" required="">
+                                <input type="text" name="Subject" value="Subject*" onfocus="this.value = '';" onblur="if (this.value == '') {this.value = 'Subject*';}" required="">
+                            </div>
+                            <div class="clearfix"> </div>
+                            <textarea name="Message" onfocus="this.value = '';" onblur="if (this.value == '') {this.value = 'Message...';}" required="">Message...</textarea>
+                            <input type="submit" value="Submit">
+                            <input type="reset" value="Clear">
+                        </form>
+                    </div>
                     <div class="clearfix"> </div>
                 </div>
             </div>
+            <!-- //mail -->
         </div>
         <div class="clearfix"></div>
     </div>
