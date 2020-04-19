@@ -95,6 +95,9 @@ namespace ClickToBuy.Controllers
 
         public IActionResult Checkout()
         {
+            ViewBag.BrandList = BrandList();
+            ViewBag.CategoryList = CategoryList();
+            ViewBag.ProductList = ProductList();
             return View();
         }
 
