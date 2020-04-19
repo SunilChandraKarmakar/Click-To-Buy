@@ -86,7 +86,7 @@
             </ul>
         </div>
         <div class="w3l_header_right1">
-            <h2><a asp-action="ContactUs" asp-controller="Home">Contact Us</a></h2>
+            <h2><a href="../Home/ContactUs">Contact Us</a></h2>
         </div>
         <div class="clearfix"> </div>
     </div>
@@ -460,13 +460,12 @@
                 total += items[i].get('quantity');
             }
 
-            if (total < 3) {
-                alert('The minimum order quantity is 3. Please add more to your shopping cart before checking out');
+            if (total < 1) {
+                alert('The minimum order quantity is 1. Please add more to your shopping cart before checking out');
                 evt.preventDefault();
             }
         });
 
     </script>
 </body>
-</html>
-
+</html>             

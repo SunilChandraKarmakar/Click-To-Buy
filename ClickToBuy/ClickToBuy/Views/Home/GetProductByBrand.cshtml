@@ -391,8 +391,8 @@
                 total += items[i].get('quantity');
             }
 
-            if (total < 3) {
-                alert('The minimum order quantity is 3. Please add more to your shopping cart before checking out');
+            if (total < 1) {
+                alert('The minimum order quantity is 1. Please add more to your shopping cart before checking out');
                 evt.preventDefault();
             }
         });
