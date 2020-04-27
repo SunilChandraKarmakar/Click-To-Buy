@@ -11,3 +11,5 @@ F:\C# Project\Web Application - CORE\Click-To-Buy\ClickToBuy\ClickToBuy.Database
 F:\C# Project\Web Application - CORE\Click-To-Buy\ClickToBuy\ClickToBuy.Database\obj\Debug\netcoreapp3.1\ClickToBuy.Database.csproj.CopyComplete
 F:\C# Project\Web Application - CORE\Click-To-Buy\ClickToBuy\ClickToBuy.Database\obj\Debug\netcoreapp3.1\ClickToBuy.Database.dll
 F:\C# Project\Web Application - CORE\Click-To-Buy\ClickToBuy\ClickToBuy.Database\obj\Debug\netcoreapp3.1\ClickToBuy.Database.pdb
+F:\C# Project\Web Application - CORE\Click-To-Buy\ClickToBuy\ClickToBuy.Database\obj\Debug\netcoreapp3.1\ClickToBuy.Database.csproj.CoreCompileInputs.cache
+F:\C# Project\Web Application - CORE\Click-To-Buy\ClickToBuy\ClickToBuy.Database\obj\Debug\netcoreapp3.1\ClickToBuy.Database.genruntimeconfig.cache

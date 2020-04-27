@@ -11,3 +11,4 @@ F:\C# Project\Web Application - CORE\Click-To-Buy\ClickToBuy\ClickToBuy.Reposito
 F:\C# Project\Web Application - CORE\Click-To-Buy\ClickToBuy\ClickToBuy.Repository\obj\Debug\netcoreapp3.1\ClickToBuy.Repository.csproj.CopyComplete
 F:\C# Project\Web Application - CORE\Click-To-Buy\ClickToBuy\ClickToBuy.Repository\obj\Debug\netcoreapp3.1\ClickToBuy.Repository.dll
 F:\C# Project\Web Application - CORE\Click-To-Buy\ClickToBuy\ClickToBuy.Repository\obj\Debug\netcoreapp3.1\ClickToBuy.Repository.pdb
+F:\C# Project\Web Application - CORE\Click-To-Buy\ClickToBuy\ClickToBuy.Repository\obj\Debug\netcoreapp3.1\ClickToBuy.Repository.csproj.CoreCompileInputs.cache

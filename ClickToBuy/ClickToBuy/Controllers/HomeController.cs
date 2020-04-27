@@ -45,6 +45,7 @@ namespace ClickToBuy.Controllers
             return productList;
         }
 
+        [HttpGet]
         public IActionResult Index()
         {
             ViewBag.BrandList = BrandList();
@@ -53,6 +54,7 @@ namespace ClickToBuy.Controllers
             return View();
         }
 
+        [HttpGet]
         public IActionResult GetProductByBrand(int id)
         {                
             ICollection<Product> getProductsByBrand = ProductList().Where(p => p.BrandId == id).ToList();
@@ -62,6 +64,7 @@ namespace ClickToBuy.Controllers
             return View(getProductsByBrand);
         }
 
+        [HttpGet]
         public IActionResult GetProductByCategory(int id)
         {
             ICollection<Product> getProductByCategory = ProductList().Where(p => p.CategoryId == id).ToList();
@@ -71,6 +74,7 @@ namespace ClickToBuy.Controllers
             return View(getProductByCategory);
         }
 
+        [HttpGet]
         public IActionResult GetProductInfoByProductId(int id)
         {
             ViewBag.ProductInfo = _iProductManager.GetById(id);
@@ -79,6 +83,7 @@ namespace ClickToBuy.Controllers
             return View();
         }
 
+        [HttpGet]
         public IActionResult GetAllProduct()
         {
             ViewBag.BrandList = BrandList();
@@ -86,6 +91,7 @@ namespace ClickToBuy.Controllers
             return View(ProductList());
         }
 
+        [HttpGet]
         public IActionResult ContactUs()
         {
             ViewBag.BrandList = BrandList();
@@ -93,12 +99,19 @@ namespace ClickToBuy.Controllers
             return View();
         }
 
+        [HttpPost]
         public IActionResult Checkout()
         {
             ViewBag.BrandList = BrandList();
             ViewBag.CategoryList = CategoryList();
             ViewBag.ProductList = ProductList();
             return View();
+        }
+
+        public string AddToCardProductList(int id)
+        {
+            
+            return "";
         }
 
         public IActionResult Privacy()

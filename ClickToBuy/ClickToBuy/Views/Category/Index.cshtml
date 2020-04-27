@@ -15,12 +15,13 @@
     </div>
 </div>
 
-<div class="row" id="datatables">
-    <div class="col-md-10">
+<div class="row" style="margin-left: 50px">
+    <div class="col-md-12">
         <table id="myTable" class="display table table-bordered table-striped">
             <thead>
                 <tr>
                     <th>Name</th>
+                    <th>Parent Category</th>
                     <th>Description</th>
                     <th>Product List</th>
                     <th>Action</th>
@@ -31,6 +32,7 @@
                 {
                     <tr>
                         <td>@item.Name</td>
+                        <td>@(item.Categoryy == null ? "NA" : item.Categoryy.Name)</td>
                         <td>
                             Description: @item.Description <br />
                         </td>
