@@ -11,37 +11,57 @@
 
 <div class="row">
     <div class="col-md-4">
-        <a asp-action="Create" class="btn btn-primary"><i class="fas fa-plus"></i> Create Category</a>
+        <a asp-action="AddParentCategory" class="btn btn-primary"><i class="fas fa-plus"></i> Add Parent Category</a>
     </div>
 </div>
 
-<div class="row" style="margin-left: 50px">
+<div class="row" style="margin-left: 20px; margin-top: 30px;">
     <div class="col-md-12">
-        <table id="myTable" class="display table table-bordered table-striped">
+        <table class="display table table-bordered table-striped">
             <thead>
                 <tr>
                     <th>Name</th>
-                    <th>Parent Category</th>
-                    <th>Description</th>
-                    <th>Product List</th>
+                    <th>Parent Name</th>
+                    <th>Information</th>
                     <th>Action</th>
                 </tr>
-            </thead>
+            </thead>  
             <tbody>
-                @foreach (Category item in Model)
+                @foreach (Category parentCategory in Model)
                 {
-                    <tr>
-                        <td>@item.Name</td>
-                        <td>@(item.Categoryy == null ? "NA" : item.Categoryy.Name)</td>
-                        <td>
-                            Description: @item.Description <br />
-                        </td>
-                        <td><a asp-route-id="@item.Id" asp-action="GetProductByCategoryId">@item.Products.Count</a></td>
-                        <td>
-                            <a asp-route-id="@item.Id" asp-action="Update" class="btn btn-info"><i class="far fa-edit"></i> Update</a>
-                            <a asp-route-id="@item.Id" asp-action="Remove" class="btn btn-danger"><i class="far fa-trash-alt"></i> Remove</a>
-                        </td>
-                    </tr>
+                     <tr>
+                         <td>@parentCategory.Name</td>
+                         <td>@(parentCategory.Categoryy == null ? "" : parentCategory.Categoryy.Name)</td>
+                         <td>
+                             Status : @(parentCategory.Status == true ? "Show" : "Hide") <br />
+                             Description : @parentCategory.Description
+                         </td>
+                         <td>
+                             <a asp-action="AddSubCategory" asp-route-id="@parentCategory.Id" class="btn btn-success"><i class="fas fa-plus"></i> Add Sub Category</a> |
+                             <a asp-action="Update" asp-route-id="@parentCategory.Id" class="btn btn-info"><i class="far fa-edit"></i> Update</a>
+                             @if(parentCategory.Categories.Count() <= 0 && parentCategory.Categoryy == null)
+                             {    
+                                 <a> | </a>
+                                <a asp-action="Remove" asp-route-id="@parentCategory.Id" class="btn btn-danger"><i class="far fa-trash-alt"></i> Remove</a>
+                             }
+                         </td>
+                     </tr>
+
+                     @foreach (Category subCategory in parentCategory.Categories)
+                     {
+                         <tr>
+                             <td>&nbsp; &nbsp; &nbsp; &nbsp; @subCategory.Name</td>
+                             <td>@(subCategory.Categoryy == null ? "" : subCategory.Categoryy.Name)</td>
+                             <td>
+                                 Status : @(subCategory.Status == true ? "Show" : "Hide") <br />
+                                 Description : @parentCategory.Description
+                             </td>
+                             <td>
+                                 <a asp-action="Update" asp-route-id="@subCategory.Id" class="btn btn-info"><i class="far fa-edit"></i> Update</a> |
+                                 <a asp-action="Remove" asp-route-id="@subCategory.Id" class="btn btn-danger"><i class="far fa-trash-alt"></i> Remove</a>
+                             </td>
+                        </tr>
+                     }
                 }
             </tbody>
         </table>

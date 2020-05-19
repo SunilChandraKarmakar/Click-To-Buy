@@ -26,7 +26,8 @@ namespace ClickToBuy.Controllers
         {
             if (HttpContext.Session.GetString("AdminId") != null)
             {
-                ICollection<Category> categoryList = _iCategoryManager.GetAll();
+                ICollection<Category> categoryList = _iCategoryManager.GetAll()
+                                                    .Where(c => c.Categoryy == null).ToList();
                 return View(categoryList);
             }
             else
@@ -58,13 +59,10 @@ namespace ClickToBuy.Controllers
         }
 
         [HttpGet]
-        public IActionResult Create()
+        public IActionResult AddParentCategory()
         {
             if (HttpContext.Session.GetString("AdminId") != null)
-            {
-                ViewBag.CategoryList = CategoryList();
                 return View();
-            }
             else
                 return RedirectToAction("AdminLogin", "LoginProcess");
         }
@@ -81,20 +79,44 @@ namespace ClickToBuy.Controllers
         }
 
         [HttpPost]
-        public IActionResult Create(Category aCategory)
+        public IActionResult AddParentCategory(Category aParentCategory)
         {                                               
             if(ModelState.IsValid)
             {
-                bool isAdd = _iCategoryManager.Add(aCategory);
+                bool isAddParentCategory = _iCategoryManager.Add(aParentCategory);
 
-                if (isAdd)
+                if (isAddParentCategory)
                     return RedirectToAction("Index");
                 else
-                    return ViewBag.ErrorMessage = "Category save has been failed!";
+                    return ViewBag.ErrorMessage = "Parent category save has been failed! Try again.";
             }
 
-            ViewBag.CategoryList = CategoryList();
-            return View(aCategory);
+            return View(aParentCategory);
+        }
+
+        [HttpGet]
+        public IActionResult AddSubCategory(int? id)
+        {
+            if(HttpContext.Session.GetString("AdminId") != null)
+            {
+                if (id == null)
+                    return NotFound();
+
+                Category getParemtCategoryInfo = _iCategoryManager.GetById(id);
+
+                if (getParemtCategoryInfo == null)
+                    return NotFound();
+
+                return View(getParemtCategoryInfo);
+            }
+
+            return RedirectToAction("AdminLogin", "LoginProcess");
+        }
+
+        [HttpPost]
+        public IActionResult AddSubCategory(Category aParentCategory, string subCategory)
+        {
+            return View();
         }
 
         [HttpGet]

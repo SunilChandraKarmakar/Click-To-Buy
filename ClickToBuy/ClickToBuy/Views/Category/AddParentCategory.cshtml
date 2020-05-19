@@ -1,33 +1,31 @@
 ﻿@using ClickToBuy.Model
 @model Category
 
+
 @{
-    ViewData["Title"] = "Create";
+    ViewData["Title"] = "AddParentCategory";
     Layout = "~/Views/Shared/_AdminLayout.cshtml";
 }
 
-<h2 id="hadertitle">Create Category</h2>
+
+<h2 id="hadertitle"> Add Parent Category</h2>
 <hr />
 
 <div class="row" id="createandeditfrom">
     <div class="col-md-4">
-        <form method="post" asp-action="Create">
+        <form method="post" asp-action="AddParentCategory">
             <div class="form-group">
                 <label asp-for="Name" class="control-lable"></label>
                 <input type="text" asp-for="Name" class="form-control" />
                 <span asp-validation-for="Name" class="text-danger"></span>
             </div>
             <div class="form-group">
-                <label asp-for="CategoryId" class="control-label">Sub Category</label>
-                <select asp-for="CategoryId" asp-items="@ViewBag.CategoryList" class="form-control">
-                    <option value="">-- Select Country --</option>
-                </select>
-                <span asp-validation-for="CategoryId" class="text-danger"></span>
-            </div>
-            <div class="form-group">
                 <label asp-for="Description" class="control-lable"></label>
                 <textarea asp-for="Description" class="form-control" placeholder="Write Description"></textarea>
                 <span asp-validation-for="Description" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <input type="checkbox" asp-for="@Model.Status"/> Status
             </div>
             <div class="form-group">
                 <span class="text-danger">@ViewBag.ErrorMessage</span>
@@ -50,7 +48,6 @@
                 $.ajax({
                     url: serverUrl,
                     success: function (response) {
-
                         if (response == 1) {
                             alert("Category is exist! Please try new one.");
                             $('#Name').val('');
@@ -60,8 +57,10 @@
                         alert(response);
                     }
                 });
-             });
+            });
         });
     </script>
 }
+
+
 
