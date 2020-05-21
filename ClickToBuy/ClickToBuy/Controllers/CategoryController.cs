@@ -7,6 +7,7 @@ using ClickToBuy.Model;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
+using X.PagedList;
 
 namespace ClickToBuy.Controllers
 {
@@ -22,12 +23,13 @@ namespace ClickToBuy.Controllers
         }
 
         [HttpGet]
-        public IActionResult Index()
+        public IActionResult Index(int? page)
         {
             if (HttpContext.Session.GetString("AdminId") != null)
             {
-                ICollection<Category> categoryList = _iCategoryManager.GetAll()
-                                                    .Where(c => c.Categoryy == null).ToList();
+                IPagedList<Category> categoryList = _iCategoryManager.GetAll()
+                                                    .Where(c => c.Categoryy == null).ToList()
+                                                    .ToPagedList(page ?? 1, 2);
                 return View(categoryList);
             }
             else
@@ -55,6 +57,7 @@ namespace ClickToBuy.Controllers
                                                     Text = c.Name
 
                                                 }).ToList();
+
             return categoryList;
         }
 
@@ -116,11 +119,32 @@ namespace ClickToBuy.Controllers
         [HttpPost]
         public IActionResult AddSubCategory(Category aParentCategory, string subCategory)
         {
-            return View();
+            if(ModelState.IsValid)
+            {
+                Category addSubCategory = new Category()
+                {
+                    Name = subCategory,
+                    CategoryId = aParentCategory.Id,
+                    Description = aParentCategory.Description,
+                    Status = aParentCategory.Status
+                };
+
+                bool isAddSubCategory = _iCategoryManager.Add(addSubCategory);
+
+                if (isAddSubCategory)
+                    return RedirectToAction("Index");
+                else
+                {
+                    ViewBag.ErrorMessage = "Sub category add has been failed! Try again";
+                    return View(aParentCategory);
+                }
+            }
+
+            return View(aParentCategory);
         }
 
         [HttpGet]
-        public IActionResult Update(int? id)
+        public IActionResult UpdateParentCategory(int? id)
         {
             if (HttpContext.Session.GetString("AdminId") != null)
             {
@@ -132,7 +156,6 @@ namespace ClickToBuy.Controllers
                 if (aCategory == null)
                     return NotFound();
 
-                ViewBag.CategoryList = CategoryList();
                 return View(aCategory);
             }
             else
@@ -140,20 +163,58 @@ namespace ClickToBuy.Controllers
         }
 
         [HttpPost]
-        public IActionResult Update(Category aCategory)
+        public IActionResult UpdateParentCategory(Category aParentCategoryCategory)
         {
             if (ModelState.IsValid)
             {
-                bool isUpdate = _iCategoryManager.Update(aCategory);
+                bool isUpdateParentCategory = _iCategoryManager.Update(aParentCategoryCategory);
 
-                if (isUpdate)
+                if (isUpdateParentCategory)
                     return RedirectToAction("Index");
                 else
-                    return ViewBag.ErrorMessage = "Category update has been failed!";
+                    return ViewBag.ErrorMessage = "Parent category update has been failed! Try again.";
             }
 
-            ViewBag.CountryList = CategoryList();
-            return View(aCategory);
+            return View(aParentCategoryCategory);
+        }
+
+        [HttpGet]
+        public IActionResult UpdateSubCategory(int? id)
+        {
+            if(HttpContext.Session.GetString("AdminId") != null)
+            {
+                if (id == null)
+                    return NotFound();
+
+                Category getSubCategory = _iCategoryManager.GetById(id);
+
+                if (getSubCategory == null)
+                    return NotFound();
+
+                ViewBag.ParentCategory = CategoryList();
+                return View(getSubCategory);
+            }
+
+            return RedirectToAction("AdminLogin", "LoginProcess");
+        }
+
+        [HttpPost]
+        public IActionResult UpdateSubCategory(Category aSubCategory)
+        {
+            if(ModelState.IsValid)
+            {
+                bool isUpdateSubCategory = _iCategoryManager.Update(aSubCategory);
+
+                if (isUpdateSubCategory)
+                    return RedirectToAction("Index");
+                else
+                {
+                    ViewBag.ErrorMessage = "Sub category update has been failed! Try again.";
+                    return View(aSubCategory);
+                }
+            }
+
+            return View(aSubCategory);
         }
 
         [HttpGet]

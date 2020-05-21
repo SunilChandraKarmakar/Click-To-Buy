@@ -1,70 +1,94 @@
-﻿@using ClickToBuy.Model
-@model IEnumerable<Category>
+﻿@using X.PagedList.Mvc.Core.Common;
+@using X.PagedList.Mvc.Core;
+@using X.PagedList;
+@using ClickToBuy.Model
+@model IPagedList<Category>
 
 @{
     ViewData["Title"] = "Index";
     Layout = "~/Views/Shared/_AdminLayout.cshtml";
 }
 
-<h2 id="hadertitle">Category Details</h2>
-<hr />
+<div class="row content-panel mt mb">
+    <h2 id="hadertitle">Category Details</h2>
+</div>
 
 <div class="row">
     <div class="col-md-4">
-        <a asp-action="AddParentCategory" class="btn btn-primary"><i class="fas fa-plus"></i> Add Parent Category</a>
+        <a asp-action="AddParentCategory" class="btn btn-success btn-lg btn-block"><i class="fas fa-plus"></i> Add Parent Category</a>
     </div>
 </div>
 
-<div class="row" style="margin-left: 20px; margin-top: 30px;">
-    <div class="col-md-12">
-        <table class="display table table-bordered table-striped">
-            <thead>
-                <tr>
-                    <th>Name</th>
-                    <th>Parent Name</th>
-                    <th>Information</th>
-                    <th>Action</th>
-                </tr>
-            </thead>  
-            <tbody>
-                @foreach (Category parentCategory in Model)
-                {
-                     <tr>
-                         <td>@parentCategory.Name</td>
-                         <td>@(parentCategory.Categoryy == null ? "" : parentCategory.Categoryy.Name)</td>
-                         <td>
-                             Status : @(parentCategory.Status == true ? "Show" : "Hide") <br />
-                             Description : @parentCategory.Description
-                         </td>
-                         <td>
-                             <a asp-action="AddSubCategory" asp-route-id="@parentCategory.Id" class="btn btn-success"><i class="fas fa-plus"></i> Add Sub Category</a> |
-                             <a asp-action="Update" asp-route-id="@parentCategory.Id" class="btn btn-info"><i class="far fa-edit"></i> Update</a>
-                             @if(parentCategory.Categories.Count() <= 0 && parentCategory.Categoryy == null)
-                             {    
-                                 <a> | </a>
-                                <a asp-action="Remove" asp-route-id="@parentCategory.Id" class="btn btn-danger"><i class="far fa-trash-alt"></i> Remove</a>
-                             }
-                         </td>
-                     </tr>
-
-                     @foreach (Category subCategory in parentCategory.Categories)
-                     {
-                         <tr>
-                             <td>&nbsp; &nbsp; &nbsp; &nbsp; @subCategory.Name</td>
-                             <td>@(subCategory.Categoryy == null ? "" : subCategory.Categoryy.Name)</td>
-                             <td>
-                                 Status : @(subCategory.Status == true ? "Show" : "Hide") <br />
-                                 Description : @parentCategory.Description
-                             </td>
-                             <td>
-                                 <a asp-action="Update" asp-route-id="@subCategory.Id" class="btn btn-info"><i class="far fa-edit"></i> Update</a> |
-                                 <a asp-action="Remove" asp-route-id="@subCategory.Id" class="btn btn-danger"><i class="far fa-trash-alt"></i> Remove</a>
-                             </td>
+<div class="col-lg-12" style="margin-top: 20px">
+    <div class="content-panel">
+        <section id="unseen">
+            <table class="table table-bordered table-striped table-condensed">
+                <thead>
+                    <tr>
+                        <th>Name</th>
+                        <th>Parent Name</th>
+                        <th>Information</th>
+                        <th>Action</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @foreach (Category parentCategory in Model)
+                    {
+                        <tr>
+                            <td><b>@parentCategory.Name</b></td>
+                            <td>@(parentCategory.Categoryy == null ? "" : parentCategory.Categoryy.Name)</td>
+                            <td>
+                                Status : @(parentCategory.Status == true ? "Show" : "Hide") <br />
+                                Description : @parentCategory.Description
+                            </td>
+                            <td>
+                                <a asp-action="AddSubCategory" asp-route-id="@parentCategory.Id" class="btn btn-theme btn-xs"><i class=" fa fa-check"></i> Add Sub Category</a> |
+                                <a asp-action="UpdateParentCategory" asp-route-id="@parentCategory.Id" class="btn btn-primary btn-xs"><i class="fa fa-pencil"></i> Update</a>
+                                @if (parentCategory.Categories.Count() <= 0 && parentCategory.Categoryy == null)
+                                {
+                                    <a> | </a>
+                                    <a asp-action="Remove" asp-route-id="@parentCategory.Id" class="btn btn-danger btn-xs"><i class="fa fa-trash-o"></i> Remove</a>
+                                }
+                            </td>
                         </tr>
-                     }
-                }
-            </tbody>
-        </table>
+
+                        @foreach (Category subCategory in parentCategory.Categories)
+                        {
+                            <tr>
+                                <td>&nbsp; &nbsp; &nbsp; &nbsp; @subCategory.Name</td>
+                                <td>@(subCategory.Categoryy == null ? "" : subCategory.Categoryy.Name)</td>
+                                <td>
+                                    Status : @(subCategory.Status == true ? "Show" : "Hide") <br />
+                                    Description : @subCategory.Description
+                                </td>
+                                <td>
+                                    <a asp-action="UpdateSubCategory" asp-route-id="@subCategory.Id" class="btn btn-primary btn-xs"><i class="fa fa-pencil"></i> Update</a> |
+                                    <a asp-action="Remove" asp-route-id="@subCategory.Id" class="btn btn-danger btn-xs"><i class="fa fa-trash-o"></i> Remove</a>
+                                </td>
+                            </tr>
+                        }
+                    }
+                </tbody>
+                <tfoot>
+                    <tr>
+                        <th>Name</th>
+                        <th>Parent Name</th>
+                        <th>Information</th>
+                        <th>Action</th>
+                    </tr>
+                </tfoot>
+                @Html.PagedListPager(Model, page => Url.Action("Index", "Category",
+                                new { page = page }),
+                                new PagedListRenderOptions()
+                                {
+                                    Display = X.PagedList.Web.Common.PagedListDisplayMode.IfNeeded,
+                                    DisplayPageCountAndCurrentLocation = true,
+                                    DisplayItemSliceAndTotal = true
+                                })
+            </table>
+        </section>
     </div>
+    <!-- /content-panel -->
 </div>
+
 
