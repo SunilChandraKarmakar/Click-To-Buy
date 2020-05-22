@@ -1,0 +1,90 @@
+﻿
+@{
+    ViewData["Title"] = "Index";
+    Layout = "~/Views/Shared/_AdminLayout.cshtml";
+}
+
+
+<div class="col-lg-4 col-md-4 col-sm-4 mb" style="margin-top:30px">
+    <!-- WHITE PANEL - TOP USER -->
+    <div class="white-panel pn">
+        <div class="white-header">
+            <h3>Brand Details</h3>
+        </div>
+        <h4><b>Total Brand</b></h4>
+        <h2>@ViewBag.BrandCount</h2>
+        <div class="row">
+            <a asp-action="Index" asp-controller="Brand" class="btn btn-theme03">Go To Brand</a>    
+        </div>
+    </div>
+</div>
+
+<div class="col-lg-4 col-md-4 col-sm-4 mb" style="margin-top:30px">
+    <!-- WHITE PANEL - TOP USER -->
+    <div class="white-panel pn">
+        <div class="white-header">
+            <h3>Category Details</h3>
+        </div>
+        <h4><b>Total Category</b></h4>
+        <h2>@ViewBag.BrandCount</h2>
+        <div class="row">
+            <a asp-action="Index" asp-controller="Brand" class="btn btn-theme03">Go To Brand</a>
+        </div>
+    </div>
+</div>
+
+<div class="col-lg-4 col-md-4 col-sm-4 mb" style="margin-top:30px">
+    <!-- WHITE PANEL - TOP USER -->
+    <div class="white-panel pn">
+        <div class="white-header">
+            <h3>Product Details</h3>
+        </div>
+        <h4><b>Total Product</b></h4>
+        <h2>@ViewBag.ProductCount</h2>
+        <div class="row">
+            <a asp-action="Index" asp-controller="Product" class="btn btn-theme03">Go To Brand</a>
+        </div>
+    </div>
+</div>
+
+<div class="col-lg-4 col-md-4 col-sm-4 mb">
+    <!-- WHITE PANEL - TOP USER -->
+    <div class="white-panel pn">
+        <div class="white-header">
+            <h3>Customer Details</h3>
+        </div>
+        <h4><b>Total Customer</b></h4>
+        <h2>@ViewBag.CustomerCount</h2>
+        <div class="row">
+            <a asp-action="Index" asp-controller="Customer" class="btn btn-theme03">Go To Brand</a>
+        </div>
+    </div>
+</div>
+
+<div class="col-lg-4 col-md-4 col-sm-4 mb">
+    <!-- WHITE PANEL - TOP USER -->
+    <div class="white-panel pn">
+        <div class="white-header">
+            <h3>Stock Details</h3>
+        </div>
+        <h4><b>Total Stock</b></h4>
+        <h2>@ViewBag.StockProductCount</h2>
+        <div class="row">
+            <a asp-action="Index" asp-controller="StockProduct" class="btn btn-theme03">Go To Brand</a>
+        </div>
+    </div>
+</div>
+
+<div class="col-lg-4 col-md-4 col-sm-4 mb">
+    <!-- WHITE PANEL - TOP USER -->
+    <div class="white-panel pn">
+        <div class="white-header">
+            <h3>Purchase Details</h3>
+        </div>
+        <h4><b>Total Purchase</b></h4>
+        <h2>@ViewBag.PurchaseCount</h2>
+        <div class="row">
+            <a asp-action="Index" asp-controller="Purchase" class="btn btn-theme03">Go To Brand</a>
+        </div>
+    </div>
+</div>

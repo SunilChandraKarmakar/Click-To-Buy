@@ -38,7 +38,7 @@ namespace ClickToBuy.Controllers
                 if (loginAdminDetails != null)
                 {
                     HttpContext.Session.SetString("AdminId", loginAdminDetails.Id.ToString());
-                    return RedirectToAction("DashboardView", "Dashboard");
+                    return RedirectToAction("Index", "Dashboard");
                 }
                 else
                     ViewBag.ErrorMessage = "Email and Password not match! Please try again.";

@@ -33,7 +33,7 @@ namespace ClickToBuy.Controllers
         }
 
         [HttpGet]
-        public IActionResult DashboardView()
+        public IActionResult Index()
         {
             if (HttpContext.Session.GetString("AdminId") != null)
             {

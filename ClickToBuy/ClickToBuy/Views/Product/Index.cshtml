@@ -8,67 +8,81 @@
     int totalStockProduct = 0;
 }
 
-<h2 id="hadertitle">Product Details</h2>
-<hr />
+<div class="row content-panel mt mb">
+    <h2 id="hadertitle">Product Details</h2>
+</div>
 
 <div class="row">
     <div class="col-md-4">
-        <a asp-action="Create" class="btn btn-primary"><i class="fas fa-plus"></i> Create Product</a>
+        <a asp-action="Create" class="btn btn-success btn-lg btn-block"><i class="fas fa-plus"></i> Create Product</a>
     </div>
 </div>
 
-<div class="row" style="margin-top: 30px">
-    <div class="col-md-12">
-        <table id="myTable" class="display table table-bordered table-striped">
-            <thead>
-                <tr>
-                    <th>Basic Info</th>
-                    <th>Activity</th>
-                    <th>Price</th>
-                    <th>Picture</th>
-                    <th>Action</th>
-                </tr>
-            </thead>
-            <tbody>
-                @foreach (Product item in Model)
-                {
+<div class="col-lg-12" style="margin-top: 20px">
+    <div class="content-panel" style="padding:20px">
+        <section id="unseen">
+            <table id="myTable" class="table table-bordered table-striped table-condensed" width="100%">
+                <thead>
                     <tr>
-                        <td>
-                            Name : @item.Name <br />
-                            Category : @item.Category.Name <br />
-                            Brand : @item.Brand.Name <br />
-                        </td>
-                        <td>
-                            Stock : <a asp-route-id="@item.Id" asp-action="GetStockByProduct">
-                                        @{
-                                            List<StockProduct> stockProducts =stockProductList.Where(s => s.ProductId == item.Id).ToList();
-                                            foreach (StockProduct itemForStock in stockProducts)
-                                            {
-                                                totalStockProduct = totalStockProduct + itemForStock.Quantity;    
-                                            }
-                                         }
-                                    @totalStockProduct</a><br /> 
-                            @{ 
-                                totalStockProduct = 0;
-                            }
-                            Condition : @item.Condition.Name <br />
-                            Status : @item.CloseType.Name <br />
-                            Link : @item.Link <br />
-                            Details : @item.ProductDetails
-                        </td>
-                        <td>
-                            Regular Price : @item.RegularPrice <br />
-                            Offer Price : @item.OfferPrice <br />
-                        </td>
-                        <td><img src="~/@item.Picture" height="110" width="120" /></td>
-                        <td>
-                            <a asp-route-id="@item.Id" asp-action="Update" class="btn btn-info"><i class="far fa-edit"></i> Update</a>
-                            <a asp-route-id="@item.Id" asp-action="Remove" class="btn btn-danger"><i class="far fa-trash-alt"></i> Remove</a>
-                        </td>
+                        <th>Basic Info</th>
+                        <th>Activity</th>
+                        <th>Price</th>
+                        <th>Picture</th>
+                        <th>Action</th>
                     </tr>
-                }
-            </tbody>
-        </table>
+                </thead>
+                <tbody>
+                    @foreach (Product item in Model)
+                    {
+                        <tr>
+                            <td>
+                                Name : @item.Name <br />
+                                Category : @item.Category.Name <br />
+                                Brand : @item.Brand.Name <br />
+                            </td>
+                            <td>
+                                Stock : <a asp-route-id="@item.Id" asp-action="GetStockByProduct">
+                                    @{
+                                        List<StockProduct> stockProducts = stockProductList.Where(s => s.ProductId == item.Id).ToList();
+                                        foreach (StockProduct itemForStock in stockProducts)
+                                        {
+                                            totalStockProduct = totalStockProduct + itemForStock.Quantity;
+                                        }
+                                    }
+                                    @totalStockProduct
+                                </a><br />
+                                @{
+                                    totalStockProduct = 0;
+                                }
+                                Condition : @item.Condition.Name <br />
+                                Status : @item.CloseType.Name <br />
+                                Link : @item.Link <br />
+                                Details : @item.ProductDetails
+                            </td>
+                            <td>
+                                Regular Price : @item.RegularPrice <br />
+                                Offer Price : @item.OfferPrice <br />
+                            </td>
+                            <td><img src="~/@item.Picture" height="110" width="120" /></td>
+                            <td>
+                                <a asp-route-id="@item.Id" asp-action="Update" class="btn btn-primary btn-xs"><i class="fa fa-pencil"></i> Update</a>
+                                <a asp-route-id="@item.Id" asp-action="Remove" class="btn btn-danger btn-xs"><i class="fa fa-trash-o"></i> Remove</a>
+                            </td>
+                        </tr>
+                    }
+                </tbody>
+                <tfoot>
+                    <tr>
+                        <th>Basic Info</th>
+                        <th>Activity</th>
+                        <th>Price</th>
+                        <th>Picture</th>
+                        <th>Action</th>
+                    </tr>
+                </tfoot>
+            </table>
+        </section>
     </div>
+    <!-- /content-panel -->
 </div>
 
