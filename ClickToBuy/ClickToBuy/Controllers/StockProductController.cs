@@ -27,7 +27,7 @@ namespace ClickToBuy.Controllers
             if (HttpContext.Session.GetString("AdminId") != null)
                 return View(_iStockProductManager.GetAll());
             else
-                return RedirectToAction("AdminLogin", "LoginPurchase");
+                return RedirectToAction("AdminLogin", "LoginProcess");
         }
 
         private List<SelectListItem> NonProductInStockList()

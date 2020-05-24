@@ -50,6 +50,17 @@ namespace ClickToBuy.Controllers
             return countryList;
         }
 
+        private List<SelectListItem> CityList()
+        {
+            List<SelectListItem> cityList = _iCityManager.GetAll()
+                                            .Select(c => new SelectListItem
+                                            {
+                                                Value = c.Id.ToString(),
+                                                Text = c.Name
+                                            }).ToList();
+            return cityList;
+        }
+
         [HttpGet]
         public IActionResult Create()
         {
@@ -135,6 +146,7 @@ namespace ClickToBuy.Controllers
                     return NotFound();
 
                 ViewBag.CountryList = CountryList();
+                ViewBag.CityList = CityList();
                 return View(aAdminDetails);
             }
             else
@@ -160,6 +172,7 @@ namespace ClickToBuy.Controllers
                     aAdminDetails.Picture = pic;
 
                 bool isUpdate = _iAdminManager.Update(aAdminDetails);
+                ViewBag.CityList = CityList();
 
                 if (isUpdate)
                     return RedirectToAction("Index");
@@ -185,6 +198,7 @@ namespace ClickToBuy.Controllers
                     return NotFound();
 
                 ViewBag.CountryList = CountryList();
+                ViewBag.CityList = CityList();
                 return View(aAdminDetails);
             }
             else
@@ -195,6 +209,9 @@ namespace ClickToBuy.Controllers
         public IActionResult Remove(Admin aAdmin)
         {
             bool isRemove = _iAdminManager.Remove(aAdmin);
+
+            ViewBag.CountryList = CountryList();
+            ViewBag.CityList = CityList();
 
             if (isRemove)
                 return RedirectToAction("Index");

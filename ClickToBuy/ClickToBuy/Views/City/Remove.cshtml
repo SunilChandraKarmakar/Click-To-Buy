@@ -5,29 +5,28 @@
     Layout = "~/Views/Shared/_AdminLayout.cshtml";
 }
 
-<h2 id="hadertitle">Remove City</h2>
-<hr />
+<div class="row content-panel mt mb">
+        <h2 id="hadertitle">Remove City</h2>
+        <hr />
+        <dl class="dl-horizontal">
+            <dt>
+                @Html.DisplayNameFor(model => model.Name)
+            </dt>
+            <dd>
+                @Html.DisplayFor(model => model.Name)
+            </dd>
+            <dt>
+                @Html.DisplayNameFor(model => model.Country)
+            </dt>
+            <dd>
+                @Html.DisplayFor(model => model.Country.Name)
+            </dd>
+        </dl>
 
-<div>
-    <dl class="dl-horizontal">
-        <dt>
-            @Html.DisplayNameFor(model => model.Name)
-        </dt>
-        <dd>
-            @Html.DisplayFor(model => model.Name)
-        </dd>
-        <dt>
-            @Html.DisplayNameFor(model => model.Country)
-        </dt>
-        <dd>
-            @Html.DisplayFor(model => model.Country.Name)
-        </dd>
-    </dl>
-
-    <form asp-action="Delete" id="createandeditfrom">
-        <input type="hidden" asp-for="Id" />
-        <span class="text-danger">@ViewBag.ErrorMessage</span>
-        <input type="submit" value="Remove" class="btn btn-danger" />
-        <a asp-action="Index" class="btn btn-info"><i class="fas fa-list"></i> Back To List</a>
-    </form>
-</div>
+        <form asp-action="Delete" id="createandeditfrom" style="margin-bottom: 30px">
+            <input type="hidden" asp-for="Id" />
+            <span class="text-danger">@ViewBag.ErrorMessage</span>
+            <input type="submit" value="Remove" class="btn btn-danger" />
+            <a asp-action="Index" class="btn btn-info"><i class="fas fa-list"></i> Back To List</a>
+        </form>
+    </div>

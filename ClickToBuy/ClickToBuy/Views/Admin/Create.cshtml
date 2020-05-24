@@ -6,75 +6,94 @@
     Layout = "~/Views/Shared/_AdminLayout.cshtml";
 }
 
-<h2 id="hadertitle">Create Admin</h2>
-<hr />
-
-<form method="post" asp-action="Create" enctype="multipart/form-data">
-    <div class="row" id="createandeditfrom">
-        <div class="col-md-4">
-            <div class="form-group">
-                <label asp-for="Name" class="control-lable"></label>
-                <input type="text" asp-for="Name" class="form-control" />
-                <span asp-validation-for="Name" class="text-danger"></span>
+<div class="form-panel">
+    <h2 id="hadertitle"> Create Admin</h2>
+    <hr />
+    <div class="form" style="margin-top:50px">
+        <form method="post" asp-action="Create" class="cmxform form-horizontal style-form" enctype="multipart/form-data">
+            <div class="row">
+                <div class="col-md-6">
+                    <div class="form-group">
+                        <label asp-for="Name" class="control-lable col-lg-2"></label>
+                        <div class="col-lg-8">
+                            <input type="text" asp-for="Name" class="form-control" />
+                            <span asp-validation-for="Name" class="text-danger"></span>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label asp-for="ContactNo" class="control-lable col-lg-2"></label>
+                        <div class="col-lg-8">
+                            <input type="number" asp-for="ContactNo" class="form-control" />
+                            <span asp-validation-for="ContactNo" class="text-danger"></span>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label asp-for="Password" class="control-lable col-lg-2"></label>
+                        <div class="col-lg-8">
+                            <input type="password" asp-for="Password" class="form-control" />
+                            <span asp-validation-for="Password" class="text-danger"></span>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label asp-for="CountryId" class="control-label col-lg-2"></label>
+                        <div class="col-lg-8">
+                            <select asp-for="CountryId" asp-items="@ViewBag.CountryList" class="form-control">
+                                <option value="">-- Select Country --</option>
+                            </select>
+                            <span asp-validation-for="CountryId" class="text-danger"></span>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-6">
+                    <div class="form-group">
+                        <label asp-for="Picture" class="control-lable col-lg-2"></label>
+                        <div class="col-lg-8">
+                            <input type="file" name="Picture" asp-for="Picture" class="form-control" />
+                            <span asp-validation-for="Picture" class="text-danger"></span>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label asp-for="Email" class="control-label col-lg-2"></label>
+                        <div class="col-lg-8">
+                            <input type="email" asp-for="Email" class="form-control" />
+                            <span asp-validation-for="Email" class="text-danger"></span>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label asp-for="ConfirmPassword" class="control-lable col-lg-2"></label>
+                        <div class="col-lg-8">
+                            <input type="password" asp-for="ConfirmPassword" class="form-control" />
+                            <span asp-validation-for="ConfirmPassword" class="text-danger"></span>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label asp-for="CityId" class="control-label col-lg-2"></label>
+                        <div class="col-lg-8">
+                            <select asp-for="CityId" class="form-control">
+                                <option value="">-- Select City --</option>
+                            </select>
+                            <span asp-validation-for="CityId" class="text-danger"></span>
+                        </div>
+                    </div>
+                </div>
             </div>
             <div class="form-group">
-                <label asp-for="ContactNo" class="control-lable"></label>
-                <input type="number" asp-for="ContactNo" class="form-control" />
-                <span asp-validation-for="ContactNo" class="text-danger"></span>
+                <label asp-for="Address" class="control-label col-lg-2"></label>
+                <div class="col-lg-8">
+                    <textarea asp-for="Address" class="form-control" placeholder="Type your address"></textarea>
+                    <span asp-validation-for="Address" class="text-danger"></span>
+                </div>
             </div>
             <div class="form-group">
-                <label asp-for="Password" class="control-lable"></label>
-                <input type="password" asp-for="Password" class="form-control" />
-                <span asp-validation-for="Password" class="text-danger"></span>
+                <div class="col-lg-offset-2 col-lg-10">
+                    <span class="text-danger">@ViewBag.ErrorMessage</span>
+                    <input type="submit" value="Create" class="btn btn-theme" />
+                    <a asp-action="Index" class="btn btn-info"><i class="fas fa-list"></i> Back To List</a>
+                </div>
             </div>
-            <div class="form-group">
-                <label asp-for="CountryId" class="control-label"></label>
-                <select asp-for="CountryId" asp-items="@ViewBag.CountryList" class="form-control">
-                    <option value="">-- Select Country --</option>
-                </select>
-                <span asp-validation-for="CountryId" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <label asp-for="Address" class="control-lable"></label>
-                <textarea asp-for="Address" class="form-control" placeholder="Type your address"></textarea>
-                <span asp-validation-for="Address" class="text-danger"></span>
-            </div>
-        </div>
-        <div class="col-md-4">
-            <div class="form-group">
-                <label asp-for="Picture" class="control-lable"></label>
-                <input type="file" name="Picture" asp-for="Picture" class="form-control" />
-                <span asp-validation-for="Picture" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <label asp-for="Email" class="control-label"></label>
-                <input type="email" asp-for="Email" class="form-control" />
-                <span asp-validation-for="Email" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <label asp-for="ConfirmPassword" class="control-lable"></label>
-                <input type="password" asp-for="ConfirmPassword" class="form-control" />
-                <span asp-validation-for="ConfirmPassword" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <label asp-for="CityId" class="control-label"></label>
-                <select asp-for="CityId" class="form-control">
-                    <option value="">-- Select City --</option>
-                </select>
-                <span asp-validation-for="CityId" class="text-danger"></span>
-            </div>              
-        </div>
+        </form>
     </div>
-    <div class="row" style="margin-left: 320px">
-        <div class="col-md-12">
-            <div class="form-group">
-                <span class="text-danger">@ViewBag.ErrorMessage</span>
-                <input type="submit" value="Create" class="btn btn-success" />
-                <a asp-action="Index" class="btn btn-info"><i class="fas fa-list"></i> Back To List</a>
-            </div>
-        </div>
-    </div>
-</form>
+</div>
 
 
 @section Scripts {

@@ -6,53 +6,65 @@
     Layout = "~/Views/Shared/_AdminLayout.cshtml";
 }
 
-<h2 id="hadertitle">Admin Details</h2>
-<hr />
+<div class="row content-panel mt mb">
+    <h2 id="hadertitle">Admin Details</h2>
+</div>
 
 <div class="row">
     <div class="col-md-4">
-        <a asp-action="Create" class="btn btn-primary"><i class="fas fa-plus"></i> Create Admin</a>
+        <a asp-action="Create" class="btn btn-success btn-lg btn-block"><i class="fas fa-plus"></i> Create Admin</a>
     </div>
 </div>
 
-<div class="row" style="margin-top: 30px" id="datatables">
-    <div class="col-md-10">
-        <table id="myTable" class="display table table-bordered table-striped">
-            <thead>
-                <tr>
-                    <th>Basic Info</th>
-                    <th>Address</th>
-                    <th>Picture</th>
-                    <th>Action</th>
-                </tr>
-            </thead>
-            <tbody>
-                @foreach (Admin item in Model)
-                {
+<div class="col-lg-12" style="margin-top: 20px">
+    <div class="content-panel" style="padding:20px">
+        <section id="unseen">
+            <table id="myTable" class="table table-bordered table-striped table-condensed" width="100%">
+                <thead>
                     <tr>
-                        <td>
-                            Name : @item.Name <br />
-                            Contact : @item.ContactNo <br />
-                            Emial : @item.Email <br />
-                        </td>
-                        <td>
-                            @item.Address <br />
-                            <b>
-                                City : @item.City.Name <br />
-                                Country : @item.Country.Name
-                            </b>
-                        </td>
-                        <td>
-                            <img src="~/@item.Picture" height="80" width="90" />
-                        </td>
-                        <td>
-                            <a asp-route-id="@item.Id" asp-action="Update" class="btn btn-info"><i class="far fa-edit"></i> Update</a>
-                            <a asp-route-id="@item.Id" asp-action="Remove" class="btn btn-danger"><i class="far fa-trash-alt"></i> Remove</a>
-                        </td>
+                        <th>Basic Info</th>
+                        <th>Address</th>
+                        <th>Picture</th>
+                        <th>Action</th>
                     </tr>
-                }
-            </tbody>
-        </table>
+                </thead>
+                <tbody>
+                    @foreach (Admin item in Model)
+                    {
+                        <tr>
+                            <td>
+                                Name : @item.Name <br />
+                                Contact : @item.ContactNo <br />
+                                Emial : @item.Email <br />
+                            </td>
+                            <td>
+                                @item.Address <br />
+                                <b>
+                                    City : @item.City.Name <br />
+                                    Country : @item.Country.Name
+                                </b>
+                            </td>
+                            <td>
+                                <img src="~/@item.Picture" height="80" width="90" />
+                            </td>
+                            <td>
+                                <a asp-route-id="@item.Id" asp-action="Update" class="btn btn-primary btn-xs"><i class="fa fa-pencil"></i> Update</a>
+                                <a asp-route-id="@item.Id" asp-action="Remove" class="btn btn-danger btn-xs"><i class="fa fa-trash-o"></i> Remove</a>
+                            </td>
+                        </tr>
+                    }
+                </tbody>
+                <tfoot>
+                    <tr>
+                        <th>Basic Info</th>
+                        <th>Address</th>
+                        <th>Picture</th>
+                        <th>Action</th>
+                    </tr>
+                </tfoot>
+            </table>
+        </section>
     </div>
+    <!-- /content-panel -->
 </div>
 

@@ -5,10 +5,10 @@
     Layout = "~/Views/Shared/_AdminLayout.cshtml";
 }
 
-<h2 id="hadertitle">Remove Condition</h2>
-<hr />
 
-<div>
+<div class="row content-panel mt mb">
+    <h2 id="hadertitle">Remove Condition</h2>
+    <hr />
     <dl class="dl-horizontal">
         <dt>
             @Html.DisplayNameFor(model => model.Name)
@@ -24,7 +24,7 @@
         </dd>
     </dl>
 
-    <form asp-action="Remove" id="createandeditfrom">
+    <form asp-action="Remove" id="createandeditfrom" style="margin-bottom: 30px">
         <input type="hidden" asp-for="Id" />
         <span class="text-danger">@ViewBag.ErrorMessage</span>
         <input type="submit" value="Remove" class="btn btn-danger" />

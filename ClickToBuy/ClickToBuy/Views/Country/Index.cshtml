@@ -6,44 +6,55 @@
     Layout = "~/Views/Shared/_AdminLayout.cshtml";
 }
 
-<h2 id="hadertitle">Country Details</h2>
-<hr />
+<div class="row content-panel mt mb">
+    <h2 id="hadertitle">Country Details</h2>
+</div>
 
 <div class="row">
     <div class="col-md-4">
-        <a asp-action="Create" class="btn btn-primary"><i class="fas fa-plus"></i> Create Country</a>
+        <a asp-action="Create" class="btn btn-success btn-lg btn-block"><i class="fas fa-plus"></i> Create Country</a>
     </div>
 </div>
 
-<div class="row" id="datatables">
-    <div class="col-md-6">
-        <table id="myTable" class="display table table-bordered table-striped">
-            <thead>
-                <tr>
-                    <th>Name</th>
-                    <th>City List</th>
-                    <th>Action</th>
-                </tr>
-            </thead>
-            <tbody>
-                @foreach (Country item in Model)
-                {
+<div class="col-lg-12" style="margin-top: 20px">
+    <div class="content-panel" style="padding:20px">
+        <section id="unseen">
+            <table id="myTable" class="table table-bordered table-striped table-condensed" width="100%">
+                <thead>
                     <tr>
-                        <td>
-                            @item.Name                           
-                        </td>
-                        <td>
-                            <a asp-route-id="@item.Id" asp-action="CityByCountryId">@item.Cities.Count</a>
-                        </td>
-                        <td>
-                            <a asp-route-id="@item.Id" asp-action="Update" class="btn btn-info"><i class="far fa-edit"></i> Update</a>
-                            <a asp-route-id="@item.Id" asp-action="Remove" class="btn btn-danger" onclick="return confirm('Are you sure?')"><i class="far fa-trash-alt"></i> Remove</a>
-                        </td>
+                        <th>Name</th>
+                        <th>City List</th>
+                        <th>Action</th>
                     </tr>
-                }
-            </tbody>
-        </table>
+                </thead>
+                <tbody>
+                    @foreach (Country item in Model)
+                    {
+                        <tr>
+                            <td>
+                                @item.Name
+                            </td>
+                            <td>
+                                <a asp-route-id="@item.Id" asp-action="CityByCountryId">@item.Cities.Count</a>
+                            </td>
+                            <td>
+                                <a asp-route-id="@item.Id" asp-action="Update" class="btn btn-primary btn-xs"><i class="fa fa-pencil"></i> Update</a>
+                                <a asp-route-id="@item.Id" asp-action="Remove" class="btn btn-danger btn-xs"><i class="fa fa-trash-o"></i> Remove</a>
+                            </td>
+                        </tr>
+                    }
+                </tbody>
+                <tfoot>
+                    <tr>
+                        <th>Name</th>
+                        <th>City List</th>
+                        <th>Action</th>
+                    </tr>
+                </tfoot>
+            </table>
+        </section>
     </div>
+    <!-- /content-panel -->
 </div>
 
 

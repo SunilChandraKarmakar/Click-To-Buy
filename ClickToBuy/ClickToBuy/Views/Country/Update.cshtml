@@ -5,21 +5,24 @@
     Layout = "~/Views/Shared/_AdminLayout.cshtml";
 }
 
-<h2 id="hadertitle">Country Update</h2>
-<hr />
-
-<div class="row" id="createandeditfrom">
-    <div class="col-md-4">
-        <form method="post" asp-action="Update">
-            <div class="form-group">
-                <label asp-for="Name" class="control-label"></label>
-                <input type="text" asp-for="Name" value="@Model.Name" class="form-control" />
-                <span asp-validation-for="Name" class="text-danger"></span>
+<div class="form-panel">
+    <h2 id="hadertitle"> Update Country</h2>
+    <hr />
+    <div class="form" style="margin-top:50px">
+        <form method="post" asp-action="Update" class="cmxform form-horizontal style-form">
+            <div class="form-group ">
+                <label asp-for="Name" class="control-label col-lg-2"></label>
+                <div class="col-lg-6">
+                    <input type="text" asp-for="Name" value="@Model.Name" class=" form-control">
+                    <span asp-validation-for="Name" class="text-danger"></span>
+                </div>
             </div>
             <div class="form-group">
-                <span class="text-danger">@ViewBag.ErrorMessage</span>
-                <input type="submit" value="Update" class="btn btn-success" />
-                <a asp-action="Index" class="btn btn-info"><i class="fas fa-list"></i> Back To List</a>
+                <div class="col-lg-offset-2 col-lg-10">
+                    <span class="text-danger">@ViewBag.ErrorMessage</span>
+                    <input type="submit" value="Update" class="btn btn-theme" />
+                    <a asp-action="Index" class="btn btn-info"><i class="fas fa-list"></i> Back To List</a>
+                </div>
             </div>
         </form>
     </div>

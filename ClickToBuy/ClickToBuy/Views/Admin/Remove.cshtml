@@ -5,64 +5,65 @@
     Layout = "~/Views/Shared/_AdminLayout.cshtml";
 }
 
-<h2 id="hadertitle">Delete Admin</h2>
-<hr />
-
-<div>
-    <h4>Admin</h4>
+<div class="row content-panel mt mb">
+    <h2 id="hadertitle">Remove Admin</h2>
     <hr />
-    <dl class="dl-horizontal">
-        <dt>
-            @Html.DisplayNameFor(model => model.Name)
-        </dt>
-        <dd>
-            @Html.DisplayFor(model => model.Name)
-        </dd>
-        <dt>
-            @Html.DisplayNameFor(model => model.ContactNo)
-        </dt>
-        <dd>
-            @Html.DisplayFor(model => model.ContactNo)
-        </dd>
-        <dt>
-            @Html.DisplayNameFor(model => model.Email)
-        </dt>
-        <dd>
-            @Html.DisplayFor(model => model.Email)
-        </dd>
-        <dt>
-            @Html.DisplayNameFor(model => model.Password)
-        </dt>
-        <dd>
-            @Html.DisplayFor(model => model.Password)
-        </dd>
-        <dt>
-            @Html.DisplayNameFor(model => model.Picture)
-        </dt>
-        <dd>
-            @Html.DisplayFor(model => model.Picture)
-        </dd>
-        <dt>
-            @Html.DisplayNameFor(model => model.Address)
-        </dt>
-        <dd>
-            @Html.DisplayFor(model => model.Address)
-        </dd>
-        <dt>
-            @Html.DisplayNameFor(model => model.Country)
-        </dt>
-        <dd>
-            @Html.DisplayFor(model => model.Country.Name)
-        </dd>
-        <dt>
-            @Html.DisplayNameFor(model => model.City)
-        </dt>
-        <dd>
-            @Html.DisplayFor(model => model.City.Name)
-        </dd>
-    </dl>
+    <div class="col-md-6">
+        <dl class="dl-horizontal">
+            <dt>
+                @Html.DisplayNameFor(model => model.Name)
+            </dt>
+            <dd>
+                @Html.DisplayFor(model => model.Name)
+            </dd>
+            <dt>
+                @Html.DisplayNameFor(model => model.ContactNo)
+            </dt>
+            <dd>
+                @Html.DisplayFor(model => model.ContactNo)
+            </dd>
+            <dt>
+                @Html.DisplayNameFor(model => model.Email)
+            </dt>
+            <dd>
+                @Html.DisplayFor(model => model.Email)
+            </dd>
+            <dt>
+                @Html.DisplayNameFor(model => model.Password)
+            </dt>
+            <dd>
+                @Html.DisplayFor(model => model.Password)
+            </dd>
+            <dt>
+                @Html.DisplayNameFor(model => model.Address)
+            </dt>
+            <dd>
+                @Html.DisplayFor(model => model.Address)
+            </dd>
+            <dt>
+                @Html.DisplayNameFor(model => model.Country)
+            </dt>
+            <dd>
+                <select asp-for="@Model.CountryId" asp-items="ViewBag.CountryList">
+                </select>
+            </dd>
+            <dt>
+                @Html.DisplayNameFor(model => model.City)
+            </dt>
+            <dd>
+                <select asp-for="@Model.CityId" asp-items="ViewBag.CityList">
+                </select>
+            </dd>
+        </dl>
+    </div>
+    <div class="col-md-6">
+        @{
+            var photo = Model.Picture == null ? "NoImageFound.png" : Model.Picture;
+            <img src="~/@photo" / class="img-responsive">
+        }
+    </div>        
 
-    <form asp-action="Remove" id="createandeditfrom">
+    <form asp-action="Remove" id="createandeditfrom" style="margin-bottom: 20px">
         <input type="hidden" asp-for="Id" />
         <span class="text-danger">@ViewBag.ErrorMessage</span>
         <input type="submit" value="Remove" class="btn btn-danger" />

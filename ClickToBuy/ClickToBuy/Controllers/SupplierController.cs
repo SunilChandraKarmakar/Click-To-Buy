@@ -44,8 +44,7 @@ namespace ClickToBuy.Controllers
             if (aSupplierDetails != null)
                 return Json(1);
             else
-                return Json(0);
-            
+                return Json(0);               
         }
 
         [Route("api/[controller]/[action]")]
@@ -57,7 +56,6 @@ namespace ClickToBuy.Controllers
                 return Json(1);
             else
                 return Json(0);
-
         }
 
         [HttpPost]
