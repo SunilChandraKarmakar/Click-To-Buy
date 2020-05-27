@@ -74,6 +74,8 @@ namespace ClickToBuy
             services.AddTransient<IPurchasePaymentRepository, PurchasePaymentRepository>();
             services.AddTransient<IAdminManager, AdminManager>();
             services.AddTransient<IAdminRepository, AdminRepository>();
+            services.AddTransient<ISliderRepository, SliderRepository>();
+            services.AddTransient<ISliderManager, SliderManager>();
 
             services.AddDistributedMemoryCache();
             services.AddSession();

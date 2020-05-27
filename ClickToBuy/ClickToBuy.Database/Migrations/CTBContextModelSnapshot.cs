@@ -613,6 +613,29 @@ namespace ClickToBuy.Database.Migrations
                     b.ToTable("ReturnProducts");
                 });
 
+            modelBuilder.Entity("ClickToBuy.Model.Slider", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int")
+                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+
+                    b.Property<string>("PhotoName")
+                        .HasColumnType("nvarchar(50)")
+                        .HasMaxLength(50);
+
+                    b.Property<bool>("Status")
+                        .HasColumnType("bit");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("PhotoName")
+                        .IsUnique()
+                        .HasFilter("[PhotoName] IS NOT NULL");
+
+                    b.ToTable("Sliders");
+                });
+
             modelBuilder.Entity("ClickToBuy.Model.StockProduct", b =>
                 {
                     b.Property<int>("Id")

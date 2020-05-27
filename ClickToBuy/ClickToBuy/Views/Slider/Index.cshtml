@@ -1,0 +1,54 @@
+﻿@using ClickToBuy.Model;
+@model ICollection<Slider>
+ 
+@{
+    ViewData["Title"] = "Index";
+    Layout = "~/Views/Shared/_AdminLayout.cshtml";
+}
+
+<div class="row content-panel mt mb">
+    <h2 id="hadertitle">Slider Details</h2>
+</div>
+
+<div class="row">
+    <div class="col-md-4">
+        <a asp-action="Create" class="btn btn-success btn-lg btn-block"><i class="fas fa-plus"></i> Create Slider</a>
+    </div>
+</div>
+
+<div class="col-lg-12" style="margin-top: 20px">
+    <div class="content-panel" style="padding:20px">
+        <section id="unseen">
+            <table id="myTable" class="table table-bordered table-striped table-condensed" width="100%">
+                <thead>
+                    <tr>
+                        <th>Photo</th>
+                        <th>Status</th>
+                        <th>Action</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @foreach (Slider item in Model)
+                    {
+                        <tr>
+                            <td><img src="~/@item.PhotoName" height="110" width="240" /></td>
+                            <td>@(item.Status == true ? "Show" : "Hide")</td>
+                            <td>
+                                <a asp-route-id="@item.Id" asp-action="Update" class="btn btn-primary btn-xs"><i class="fa fa-pencil"></i> Update</a>
+                                <a asp-route-id="@item.Id" asp-action="Remove" class="btn btn-danger btn-xs" onclick="return confirm('Are you sure?')"><i class="fa fa-trash-o"></i> Remove</a>
+                            </td>
+                        </tr>
+                    }
+                </tbody>
+                <tfoot>
+                    <tr>
+                        <th>Photo</th>
+                        <th>Status</th>
+                        <th>Action</th>
+                    </tr>
+                </tfoot>
+            </table>
+        </section>
+    </div>
+    <!-- /content-panel -->
+</div>
