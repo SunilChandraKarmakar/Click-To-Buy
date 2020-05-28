@@ -4,6 +4,7 @@
     List<Brand> brands = ViewBag.BrandList;
     List<Category> categories = ViewBag.CategoryList;
     List<Product> products = ViewBag.ProductList;
+    List<Slider> sliders = ViewBag.Sliders;
 }
 
 <!DOCTYPE html>
@@ -199,11 +200,14 @@
             <section class="slider">
                 <div class="flexslider">
                     <ul class="slides">
-                        <li>
-                            <div class="w3l_banner_nav_right">
-                                <img src="~/AdminPicture/" />"
-                            </div>
-                        </li>                        
+                        @foreach (Slider item in sliders)
+                        {
+                            <li>
+                                <div>
+                                    <img src="~/@item.PhotoName" height="400" />
+                                </div>
+                            </li>
+                        }
                     </ul>
                 </div>
             </section>

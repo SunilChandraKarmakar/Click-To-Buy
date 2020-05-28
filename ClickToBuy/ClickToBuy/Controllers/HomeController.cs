@@ -17,14 +17,17 @@ namespace ClickToBuy.Controllers
         private readonly IBrandManager _iBrandManager;
         private readonly ICategoryManager _iCategoryManager;
         private readonly IProductManager _iProductManager;
+        private readonly ISliderManager _iSliderManager;
 
         public HomeController(ILogger<HomeController> logger, IBrandManager iBrandManager, 
-                             ICategoryManager iCategoryManager, IProductManager iProductManager)
+                             ICategoryManager iCategoryManager, IProductManager iProductManager,
+                             ISliderManager iSliderManager)
         {
             _logger = logger;
             _iBrandManager = iBrandManager;
             _iCategoryManager = iCategoryManager;
             _iProductManager = iProductManager;
+            _iSliderManager = iSliderManager;
         }
 
         private ICollection<Brand> BrandList()
@@ -51,6 +54,7 @@ namespace ClickToBuy.Controllers
             ViewBag.BrandList = BrandList();
             ViewBag.CategoryList = CategoryList();
             ViewBag.ProductList = ProductList();
+            ViewBag.Sliders = _iSliderManager.GetAll().Where(s => s.Status == true).ToList();
             return View();
         }
 
