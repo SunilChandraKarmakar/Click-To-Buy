@@ -42,7 +42,7 @@
                                 Regular Price : @item.RegularPrice <br />
                                 Offer Price : @item.OfferPrice <br />
                             </td>
-                            <td><img src="~/@item.Picture" height="100" width="90" /></td>
+                            @*<td><img src="~/@item.Picture" height="100" width="90" /></td>*@
                             <td>
                                 <a asp-route-id="@item.Id" asp-action="Update" class="btn btn-primary btn-xs"><i class="fa fa-pencil"></i> Update</a>
                                 <a asp-route-id="@item.Id" asp-action="Remove" class="btn btn-danger btn-xs"><i class="fa fa-trash-o"></i> Remove</a>

@@ -69,10 +69,10 @@
             </dl>
         </div>
         <div class="col-md-6">
-            @{
+            @*@{
                 var photo = (Model.Picture != null ? Model.Picture : "NoImageFound.png");
                 <img src="~/@photo" class="img-responsive"/>
-             }
+             }*@
         </div>
         <form asp-action="Remove" id="createandeditfrom">
             <input type="hidden" asp-for="Id" />

@@ -20,6 +20,7 @@ namespace ClickToBuy.Controllers
         private readonly IConditionManager _iConditionManager;
         private readonly ICloseTypeManager _iCloseTypeManager;
         private readonly IStockProductManager _iStockProductManager;
+        private readonly IProductPhotoManager _iProductPhotoManager;
         [Obsolete]
         private readonly IHostingEnvironment _iHostingEnvironment;
 
@@ -29,7 +30,9 @@ namespace ClickToBuy.Controllers
                                 IBrandManager iBrandManager,
                                 IConditionManager iConditionManager,
                                 ICloseTypeManager iCloseTypeManager, 
-                                IHostingEnvironment iHostingEnvironment, IStockProductManager iStockProductManager)
+                                IHostingEnvironment iHostingEnvironment, 
+                                IStockProductManager iStockProductManager, 
+                                IProductPhotoManager iProductPhotoManager)
         {
             _iProductManager = iProductManager;
             _iCategoryManager = iCategoryManager;
@@ -38,6 +41,7 @@ namespace ClickToBuy.Controllers
             _iCloseTypeManager = iCloseTypeManager;
             _iHostingEnvironment = iHostingEnvironment;
             _iStockProductManager = iStockProductManager;
+            _iProductPhotoManager = iProductPhotoManager;
         }
 
         [HttpGet]
@@ -45,6 +49,7 @@ namespace ClickToBuy.Controllers
         {
             if (HttpContext.Session.GetString("AdminId") != null)
             {
+                ViewBag.ProductPhotos = _iProductPhotoManager.GetAll();
                 ViewBag.StockProductList = _iStockProductManager.GetAll();
                 return View(_iProductManager.GetAll());
             }
@@ -140,17 +145,17 @@ namespace ClickToBuy.Controllers
         {
             if(ModelState.IsValid)
             {
-                if (picture != null)
-                {
-                    string nameAndPath = Path.Combine(_iHostingEnvironment.WebRootPath
-                                                  + "/ProductPicture",
-                                                  Path.GetFileName(picture.FileName));
-                    picture.CopyToAsync(new FileStream(nameAndPath, FileMode.Create));
-                    aProduct.Picture = "ProductPicture/" + picture.FileName;
-                }
+                //if (picture != null)
+                //{
+                //    string nameAndPath = Path.Combine(_iHostingEnvironment.WebRootPath
+                //                                  + "/ProductPicture",
+                //                                  Path.GetFileName(picture.FileName));
+                //    picture.CopyToAsync(new FileStream(nameAndPath, FileMode.Create));
+                //    aProduct.Picture = "ProductPicture/" + picture.FileName;
+                //}
 
-                if (picture == null)
-                    aProduct.Picture = "ProductPicture/NoImageFound.png";
+                //if (picture == null)
+                //    aProduct.Picture = "ProductPicture/NoImageFound.png";
 
                 bool isAdd = _iProductManager.Add(aProduct);
 
@@ -196,17 +201,17 @@ namespace ClickToBuy.Controllers
         {
             if(ModelState.IsValid)
             {
-                if (picture != null)
-                {
-                    string nameAndPath = Path.Combine(_iHostingEnvironment.WebRootPath
-                                                  + "/ProductPicture",
-                                                  Path.GetFileName(picture.FileName));
-                    picture.CopyToAsync(new FileStream(nameAndPath, FileMode.Create));
-                    aProduct.Picture = "ProductPicture/" + picture.FileName;
-                }
+                //if (picture != null)
+                //{
+                //    string nameAndPath = Path.Combine(_iHostingEnvironment.WebRootPath
+                //                                  + "/ProductPicture",
+                //                                  Path.GetFileName(picture.FileName));
+                //    picture.CopyToAsync(new FileStream(nameAndPath, FileMode.Create));
+                //    aProduct.Picture = "ProductPicture/" + picture.FileName;
+                //}
 
-                if (picture == null)
-                    aProduct.Picture = pic;
+                //if (picture == null)
+                //    aProduct.Picture = pic;
 
                 bool isUpdate = _iProductManager.Update(aProduct);
 

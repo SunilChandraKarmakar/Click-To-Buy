@@ -1,0 +1,58 @@
+﻿@using ClickToBuy.Model;
+@model ICollection<ProductPhoto>;
+
+@{
+    ViewData["Title"] = "Index";
+    Layout = "~/Views/Shared/_AdminLayout.cshtml";
+}
+
+<div class="row content-panel mt mb">
+    <h2 id="hadertitle">Product Photo Details</h2>
+</div>
+
+<div class="col-lg-12" style="margin-top: 20px">
+    <div class="content-panel" style="padding:20px">
+        <section id="unseen">
+            <table id="myTable" class="table table-bordered table-striped table-condensed" width="100%">
+                <thead>
+                    <tr>
+                        <th>Photo</th>
+                        <th>Status</th>
+                        <th>Featured</th>
+                        <th>Action</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @foreach (ProductPhoto item in Model)
+                    {
+                        <tr>
+                            <td><img src="~/@item.Photo" /></td>
+                            <td>@(item.Status == true ? "Show" : "Hide")</td>
+                            <td>
+                                @if (item.Featured == false)
+                                {
+                                    <a asp-action="SetFeatured" asp-route-id="@item.Id"><i class="fa fa-check"></i><h3> Set Featured</h3> </a>
+                                }
+                                Featured
+                            </td>
+                            <td>
+                                <a asp-route-id="@item.Id" asp-action="Update" class="btn btn-primary btn-xs"><i class="fa fa-pencil"></i> Update</a>
+                                <a asp-route-id="@item.Id" asp-action="Remove" class="btn btn-danger btn-xs"><i class="fa fa-trash-o"></i> Remove</a>
+                            </td>
+                        </tr>
+                    }
+                </tbody>
+                <tfoot>
+                    <tr>
+                        <th>Photo</th>
+                        <th>Status</th>
+                        <th>Featured</th>
+                        <th>Action</th>
+                    </tr>
+                </tfoot>
+            </table>
+        </section>
+    </div>
+    <!-- /content-panel -->
+</div>
+

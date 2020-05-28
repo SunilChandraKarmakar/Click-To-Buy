@@ -33,6 +33,7 @@ namespace ClickToBuy.Database
         public DbSet<Tag> Tags{ get; set; }
         public DbSet<Admin> Admins { get; set; }
         public DbSet<Slider> Sliders { get; set; }
+        public DbSet<ProductPhoto> ProductPhotos { get; set; }
 
         [Obsolete]
         public DbQuery<NonProductInStock> NonProductInStocks { get; set; }
@@ -56,6 +57,7 @@ namespace ClickToBuy.Database
             modelBuilder.Entity<Tag>().HasIndex(t => t.TagName).IsUnique();
             modelBuilder.Entity<Admin>().HasIndex(a => new { a.ContactNo, a.Email }).IsUnique();
             modelBuilder.Entity<Slider>().HasIndex(s => s.PhotoName).IsUnique();
+            modelBuilder.Entity<ProductPhoto>().HasIndex(pp => pp.Photo).IsUnique();
             modelBuilder.Query<NonProductInStock>().ToView("NonProductInStock");
 
             foreach (var relationship in modelBuilder.Model.GetEntityTypes().SelectMany(e => e.GetForeignKeys()))

@@ -40,9 +40,6 @@ namespace ClickToBuy.Model
         [Range(0, 1000000)]
         public float? OfferPrice { get; set; }
 
-        [DataType(DataType.ImageUrl)]
-        public string Picture { get; set; }
-
         [DataType(DataType.MultilineText)]
         public string Link { get; set; }
 
@@ -61,5 +58,6 @@ namespace ClickToBuy.Model
         public ICollection<OrderDetails> OrderDetails { get; set; }
         public ICollection<ReturnProduct> ReturnProducts { get; set; }
         public ICollection<PurchaseItem> PurchaseItems { get; set; }
+        public ICollection<ProductPhoto> ProductPhotos { get; set; }
     }
 }

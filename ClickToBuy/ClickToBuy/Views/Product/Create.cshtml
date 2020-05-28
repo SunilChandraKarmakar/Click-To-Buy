@@ -54,13 +54,6 @@
             </div>
             <div class="col-md-6">
                 <div class="form-group">
-                    <label asp-for="Picture" class="control-lable col-lg-2"></label>
-                    <div class="col-lg-8">
-                        <input type="file" name="Picture" asp-for="Picture" class="form-control" />
-                        <span asp-validation-for="Picture" class="text-danger"></span>
-                    </div>
-                </div>
-                <div class="form-group">
                     <label asp-for="BrandId" class="control-label col-lg-2">Brand</label>
                     <div class="col-lg-8">
                         <select asp-for="BrandId" asp-items="@ViewBag.BrandList" class="form-control">

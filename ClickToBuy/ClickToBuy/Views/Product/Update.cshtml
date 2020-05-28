@@ -10,7 +10,7 @@
     <h2 id="hadertitle"> Update Product</h2>
     <hr />
     <div class="form" style="margin-top:50px">
-        <form method="post" asp-action="Update" asp-route-pic="@Model.Picture" class="cmxform form-horizontal style-form" enctype="multipart/form-data">
+        <form method="post" asp-action="Update" class="cmxform form-horizontal style-form" enctype="multipart/form-data">
             <div class="col-md-6">
                 <div class="form-group ">
                     <label asp-for="Name" class="control-label col-lg-2"></label>
@@ -51,13 +51,6 @@
                 </div>
             </div>
             <div class="col-md-6">
-                <div class="form-group">
-                    <label asp-for="Picture" class="control-lable col-lg-2"></label>
-                    <div class="col-lg-8">
-                        <input type="file" name="Picture" asp-for="Picture" value="@Model.Picture" class="form-control" />
-                        <span asp-validation-for="Picture" class="text-danger"></span>
-                    </div>
-                </div>
                 <div class="form-group">
                     <label asp-for="BrandId" class="control-label col-lg-2">Brand</label>
                     <div class="col-lg-8">

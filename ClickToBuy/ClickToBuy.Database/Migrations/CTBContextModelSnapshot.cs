@@ -476,9 +476,6 @@ namespace ClickToBuy.Database.Migrations
                     b.Property<float?>("OfferPrice")
                         .HasColumnType("real");
 
-                    b.Property<string>("Picture")
-                        .HasColumnType("nvarchar(max)");
-
                     b.Property<string>("ProductDetails")
                         .IsRequired()
                         .HasColumnType("nvarchar(2000)")
@@ -501,6 +498,37 @@ namespace ClickToBuy.Database.Migrations
                         .IsUnique();
 
                     b.ToTable("Products");
+                });
+
+            modelBuilder.Entity("ClickToBuy.Model.ProductPhoto", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int")
+                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+
+                    b.Property<bool>("Featured")
+                        .HasColumnType("bit");
+
+                    b.Property<string>("Photo")
+                        .HasColumnType("nvarchar(30)")
+                        .HasMaxLength(30);
+
+                    b.Property<int>("ProductId")
+                        .HasColumnType("int");
+
+                    b.Property<bool>("Status")
+                        .HasColumnType("bit");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("Photo")
+                        .IsUnique()
+                        .HasFilter("[Photo] IS NOT NULL");
+
+                    b.HasIndex("ProductId");
+
+                    b.ToTable("ProductPhotos");
                 });
 
             modelBuilder.Entity("ClickToBuy.Model.Purchase", b =>
@@ -854,6 +882,15 @@ namespace ClickToBuy.Database.Migrations
                     b.HasOne("ClickToBuy.Model.Condition", "Condition")
                         .WithMany("Products")
                         .HasForeignKey("ConditionId")
+                        .OnDelete(DeleteBehavior.Restrict)
+                        .IsRequired();
+                });
+
+            modelBuilder.Entity("ClickToBuy.Model.ProductPhoto", b =>
+                {
+                    b.HasOne("ClickToBuy.Model.Product", "Product")
+                        .WithMany("ProductPhotos")
+                        .HasForeignKey("ProductId")
                         .OnDelete(DeleteBehavior.Restrict)
                         .IsRequired();
                 });

@@ -228,7 +228,7 @@
             <div class="agileinfo_single">
                 <h5>@productInfo.Name</h5>
                 <div class="col-md-4 agileinfo_single_left">
-                    <img id="example" src="~/@productInfo.Picture" alt=" " class="img-responsive" />
+                    @*<img id="example" src="~/@productInfo.Picture" alt=" " class="img-responsive" />*@
                 </div>
                 <div class="col-md-8 agileinfo_single_right">
                     <div class="rating1">
@@ -303,7 +303,7 @@
                                                 <figure>
                                                     <div class="snipcart-item block">
                                                         <div class="snipcart-thumb">
-                                                            <a asp-route-id="@product.Id" asp-action="GetProductInfoByProductId" asp-controller="Home"><img src="~/@product.Picture" alt=" " class="img-responsive" /></a>
+                                                            @*<a asp-route-id="@product.Id" asp-action="GetProductInfoByProductId" asp-controller="Home"><img src="~/@product.Picture" alt=" " class="img-responsive" /></a>*@
                                                             <p>@product.Name</p>
                                                             <h4>Price : @product.RegularPrice BDT</h4>
                                                         </div>

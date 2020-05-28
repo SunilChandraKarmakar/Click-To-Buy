@@ -62,6 +62,8 @@ namespace ClickToBuy
             services.AddSingleton<ICloseTypeRepository, CloseTypeRepository>();
             services.AddTransient<IProductManager, ProductManager>();
             services.AddTransient<IProductRepository, ProductRepository>();
+            services.AddTransient<IProductPhotoManager, ProductPhotoManager>();
+            services.AddTransient<IProductPhotoRepository, ProductPhotoRepository>();
             services.AddTransient<IStockProductManager, StockProductManager>();
             services.AddTransient<IStockProductRepository, StockProductRepository>();
             services.AddTransient<ISupplierManager, SupplierManager>();
