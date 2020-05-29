@@ -141,22 +141,10 @@ namespace ClickToBuy.Controllers
 
         [HttpPost]
         [Obsolete]
-        public IActionResult Create(Product aProduct, IFormFile picture)
+        public IActionResult Create(Product aProduct)
         {
             if(ModelState.IsValid)
-            {
-                //if (picture != null)
-                //{
-                //    string nameAndPath = Path.Combine(_iHostingEnvironment.WebRootPath
-                //                                  + "/ProductPicture",
-                //                                  Path.GetFileName(picture.FileName));
-                //    picture.CopyToAsync(new FileStream(nameAndPath, FileMode.Create));
-                //    aProduct.Picture = "ProductPicture/" + picture.FileName;
-                //}
-
-                //if (picture == null)
-                //    aProduct.Picture = "ProductPicture/NoImageFound.png";
-
+            {   
                 bool isAdd = _iProductManager.Add(aProduct);
 
                 if (isAdd)
@@ -197,22 +185,10 @@ namespace ClickToBuy.Controllers
 
         [HttpPost]
         [Obsolete]
-        public IActionResult Update(Product aProduct, IFormFile picture, string pic)
+        public IActionResult Update(Product aProduct)
         {
             if(ModelState.IsValid)
-            {
-                //if (picture != null)
-                //{
-                //    string nameAndPath = Path.Combine(_iHostingEnvironment.WebRootPath
-                //                                  + "/ProductPicture",
-                //                                  Path.GetFileName(picture.FileName));
-                //    picture.CopyToAsync(new FileStream(nameAndPath, FileMode.Create));
-                //    aProduct.Picture = "ProductPicture/" + picture.FileName;
-                //}
-
-                //if (picture == null)
-                //    aProduct.Picture = pic;
-
+            {   
                 bool isUpdate = _iProductManager.Update(aProduct);
 
                 if (isUpdate)
