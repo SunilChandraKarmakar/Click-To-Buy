@@ -18,16 +18,21 @@ namespace ClickToBuy.Controllers
         private readonly ICategoryManager _iCategoryManager;
         private readonly IProductManager _iProductManager;
         private readonly ISliderManager _iSliderManager;
+        private readonly IConditionManager _iConditionManager;
+        private readonly IProductPhotoManager _iProductPhotoManager;
 
         public HomeController(ILogger<HomeController> logger, IBrandManager iBrandManager, 
                              ICategoryManager iCategoryManager, IProductManager iProductManager,
-                             ISliderManager iSliderManager)
+                             ISliderManager iSliderManager, IConditionManager iConditionManager,
+                             IProductPhotoManager iProductPhotoManager)
         {
             _logger = logger;
             _iBrandManager = iBrandManager;
             _iCategoryManager = iCategoryManager;
             _iProductManager = iProductManager;
             _iSliderManager = iSliderManager;
+            _iConditionManager = iConditionManager;
+            _iProductPhotoManager = iProductPhotoManager;
         }
 
         private ICollection<Brand> BrandList()
@@ -48,6 +53,18 @@ namespace ClickToBuy.Controllers
             return productList;
         }
 
+        private ICollection<Condition> ConditionList()
+        {
+            ICollection<Condition> conditions = _iConditionManager.GetAll();
+            return conditions;
+        }
+
+        private ICollection<ProductPhoto> ProductPhotos()
+        {
+            ICollection<ProductPhoto> productPhotos = _iProductPhotoManager.GetAll();
+            return productPhotos;
+        }
+
         [HttpGet]
         public IActionResult Index()
         {
@@ -55,6 +72,8 @@ namespace ClickToBuy.Controllers
             ViewBag.CategoryList = CategoryList();
             ViewBag.ProductList = ProductList();
             ViewBag.Sliders = _iSliderManager.GetAll().Where(s => s.Status == true).ToList();
+            ViewBag.Condition = ConditionList();
+            ViewBag.ProductPhotos = ProductPhotos();
             return View();
         }
 
@@ -65,6 +84,7 @@ namespace ClickToBuy.Controllers
             ViewBag.BrandInfo = _iBrandManager.GetById(id); ;
             ViewBag.BrandList = BrandList();
             ViewBag.CategoryList = CategoryList();
+            ViewBag.Condition = ConditionList();
             return View(getProductsByBrand);
         }
 
@@ -75,6 +95,7 @@ namespace ClickToBuy.Controllers
             ViewBag.CategoryInfo = _iCategoryManager.GetById(id);
             ViewBag.BrandList = BrandList();
             ViewBag.CategoryList = CategoryList();
+            ViewBag.Condition = ConditionList();
             return View(getProductByCategory);
         }
 
@@ -93,6 +114,22 @@ namespace ClickToBuy.Controllers
             ViewBag.BrandList = BrandList();
             ViewBag.CategoryList = CategoryList();
             return View(ProductList());
+        }
+
+        [HttpGet]
+        public IActionResult GetProductByCondition(int? id)
+        {
+            if (id == null)
+                return NotFound();
+
+            ICollection<Product> getProductByCondition = _iProductManager.GetAll()
+                .Where(p => p.ConditionId == id).ToList();
+
+            ViewBag.GetCondition = _iConditionManager.GetById(id);
+            ViewBag.BrandList = BrandList();
+            ViewBag.CategoryList = CategoryList();
+            ViewBag.Condition = ConditionList();
+            return View(getProductByCondition);
         }
 
         [HttpGet]

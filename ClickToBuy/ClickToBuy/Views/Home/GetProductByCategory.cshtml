@@ -5,6 +5,7 @@
     Category categoryInfo = ViewBag.CategoryInfo;
     List<Brand> brands = ViewBag.BrandList;
     List<Category> categories = ViewBag.CategoryList;
+    List<Condition> conditions = ViewBag.Condition;
 }
 
 <!DOCTYPE html>
@@ -200,13 +201,39 @@
                                             }
                                         </div>
                                     </div>
-                                </li> 
+                                </li>
+
                             }
                             else
                             {
                                 <li><a asp-route-id="@category.Id" asp-action="GetProductByCategory" asp-controller="Home">@category.Name</a></li>
                             }
                         }
+                    </ul>
+                </div>
+
+                <div class="collapse navbar-collapse" id="bs-megadropdown-tabs">
+                    <ul class="nav navbar-nav nav_1">
+                        <li class="dropdown mega-dropdown active">
+                            <a href="#" class="dropdown-toggle" data-toggle="dropdown">
+                                Condition Product <span class="caret"></span>
+                            </a>
+                            <div class="dropdown-menu mega-dropdown-menu w3ls_vegetables_menu">
+                                <div class="w3ls_vegetables">
+                                    @foreach (Condition condition in conditions)
+                                    {
+                                        <ul>
+                                            <li>
+                                                <a asp-action="GetProductByCondition" asp-controller="Home"
+                                                   asp-route-id="@condition.Id">
+                                                    @condition.Name ( @condition.Products.Count() )
+                                                </a>
+                                            </li>
+                                        </ul>
+                                    }
+                                </div>
+                            </div>
+                        </li>
                     </ul>
                 </div>
             </nav>

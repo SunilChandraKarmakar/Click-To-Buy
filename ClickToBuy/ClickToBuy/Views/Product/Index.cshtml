@@ -67,7 +67,8 @@
                             <td>
                                 @{
                                     ProductPhoto aProductPhoto = productPhotos
-                                                .Where(pp => pp.ProductId == item.Id && pp.Featured == true)
+                                                .Where(pp => pp.ProductId == item.Id 
+                                                && pp.Featured == true && pp.Status == true)
                                                 .FirstOrDefault();
                                     string productPhotoName = aProductPhoto == null ?
                                                 "productphotos/NoImageFound.png" : aProductPhoto.Photo;

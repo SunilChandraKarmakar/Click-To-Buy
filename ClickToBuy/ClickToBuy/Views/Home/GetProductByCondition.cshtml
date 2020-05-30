@@ -1,28 +1,29 @@
-﻿@using ClickToBuy.Model
-@model  ICollection<Product>
+﻿@using ClickToBuy.Model;
+@model ICollection<Product>; 
+
 @{
     Layout = null;
-    Brand brandInfo = ViewBag.BrandInfo;
+    Condition getCondition = ViewBag.GetCondition;
     List<Brand> brands = ViewBag.BrandList;
     List<Category> categories = ViewBag.CategoryList;
     List<Condition> conditions = ViewBag.Condition;
-}    
+}
 
 <!DOCTYPE html>
 <html>
 <head>
 
-    <title>Get Product By Brand</title>
+    <title>Get Product By Category</title>
 
     <!-- for-mobile-apps -->
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
     <meta name="keywords" content="Grocery Store Responsive web template, Bootstrap Web Templates, Flat Web Templates, Android Compatible web template,
     Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, SonyEricsson, Motorola web design" />
-    
+
     <script type="application/x-javascript">
         addEventListener("load", function() { setTimeout(hideURLbar, 0); }, false);
-               function hideURLbar(){ window.scrollTo(0,1); } 
+               function hideURLbar(){ window.scrollTo(0,1); }
     </script>
     <!-- //for-mobile-apps -->
 
@@ -32,24 +33,23 @@
     <!-- font-awesome icons -->
     <link href="~/ClientLayout/css/font-awesome.css" rel="stylesheet" type="text/css" media="all" />
     <!-- //font-awesome icons -->
-
     <!-- js -->
     <script src="~/ClientLayout/js/jquery-1.11.1.min.js"></script>
     <!-- //js -->
 
     <link href='//fonts.googleapis.com/css?family=Ubuntu:400,300,300italic,400italic,500,500italic,700,700italic' rel='stylesheet' type='text/css'>
     <link href='//fonts.googleapis.com/css?family=Open+Sans:400,300,300italic,400italic,600,600italic,700,700italic,800,800italic' rel='stylesheet' type='text/css'>
-    
+
     <!-- start-smoth-scrolling -->
     <script type="text/javascript" src="~/ClientLayout/js/move-top.js"></script>
     <script type="text/javascript" src="~/ClientLayout/js/easing.js"></script>
 
     <script type="text/javascript">
-	jQuery(document).ready(function($) {
-		$(".scroll").click(function(event){
-			event.preventDefault();
-			$('html,body').animate({scrollTop:$(this.hash).offset().top},1000);
-		});
+	    jQuery(document).ready(function($) {
+		    $(".scroll").click(function(event){
+			    event.preventDefault();
+			    $('html,body').animate({scrollTop:$(this.hash).offset().top},1000);
+		    });
 	});
     </script>
     <!-- start-smoth-scrolling -->
@@ -138,18 +138,16 @@
         </div>
     </div>
     <!-- //header -->
-
     <!-- products-breadcrumb -->
     <div class="products-breadcrumb">
         <div class="container">
             <ul>
                 <li><i class="fa fa-home" aria-hidden="true"></i><a asp-action="Index" asp-controller="Home">Home</a><span>|</span></li>
-                <li>@brandInfo.Name</li>
+                <li>@getCondition.Name</li>
             </ul>
         </div>
     </div>
     <!-- //products-breadcrumb -->
-
     <!-- banner -->
     <div class="banner">
         <div class="w3l_banner_nav_left">
@@ -241,7 +239,7 @@
 
         <div class="w3l_banner_nav_right">
             <div class="w3ls_w3l_banner_nav_right_grid w3ls_w3l_banner_nav_right_grid_sub">
-                <h3 class="w3l_fruit">@brandInfo.Name Product</h3>
+                <h3 class="w3l_fruit">@getCondition.Name Product</h3>
                 <div class="w3ls_w3l_banner_nav_right_grid1 w3ls_w3l_banner_nav_right_grid1_veg">
                     @foreach (Product product in Model)
                     {
@@ -286,7 +284,6 @@
         <div class="clearfix"></div>
     </div>
     <!-- //banner -->
-
     <!-- footer -->
     <div class="footer">
         <div class="container">
@@ -365,7 +362,6 @@
         </div>
     </div>
     <!-- //footer -->
-
     <!-- Bootstrap Core JavaScript -->
     <script src="~/ClientLayout/js/bootstrap.min.js"></script>
 
@@ -426,4 +422,3 @@
     </script>
 </body>
 </html>
-
