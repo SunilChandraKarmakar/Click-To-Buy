@@ -6,30 +6,41 @@
     Layout = "~/Views/Shared/_AdminLayout.cshtml";
 }
 
-<h2 id="hadertitle">Purchase Item Details</h2>
-<hr />
+<div class="row content-panel mt mb">
+    <h2 id="hadertitle">City Details</h2>
+</div>
 
-<div class="row" id="datatables">
-    <div class="col-md-8">
-        <table id="myTable" class="display table table-bordered table-striped">
-            <thead>
-                <tr>
-                    <th>Product Name</th>
-                    <th>Quantity</th>
-                    <th>Price</th>
-                </tr>
-            </thead>
-            <tbody>
-                @foreach (PurchaseItem item in Model)
-                {
+<div class="col-lg-12" style="margin-top: 20px">
+    <div class="content-panel" style="padding:20px">
+        <section id="unseen">
+            <table id="myTable" class="table table-bordered table-striped table-condensed" width="100%">
+                <thead>
                     <tr>
-                        <td>@item.Product.Name</td>
-                        <td>@item.Quantity</td>
-                        <td>@item.Price</td>
+                        <th>Product Name</th>
+                        <th>Quantity</th>
+                        <th>Price</th>
                     </tr>
-                }
-            </tbody>
-        </table>
+                </thead>
+                <tbody>
+                    @foreach (PurchaseItem item in Model)
+                    {
+                        <tr>
+                            <td>@item.Product.Name</td>
+                            <td>@item.Quantity</td>
+                            <td>@item.Price</td>
+                        </tr>
+                    }
+                </tbody>
+                <tfoot>
+                    <tr>
+                        <th>Product Name</th>
+                        <th>Quantity</th>
+                        <th>Price</th>
+                    </tr>
+                </tfoot>
+            </table>
+        </section>
     </div>
+    <!-- /content-panel -->
 </div>
 

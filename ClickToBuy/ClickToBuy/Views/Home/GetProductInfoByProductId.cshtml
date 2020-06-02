@@ -3,7 +3,9 @@
     Layout = null;
     Product productInfo = ViewBag.ProductInfo;
     List<Brand> brands = ViewBag.BrandList;
-    List<Category> categories = ViewBag.CategoryList;           
+    List<Category> categories = ViewBag.CategoryList;
+    List<ProductPhoto> productPhotos = ViewBag.ProductPhotos;
+    List<Condition> conditions = ViewBag.Condition;
 }
 
 <!DOCTYPE html>
@@ -221,6 +223,31 @@
                         }
                     </ul>
                 </div>
+
+                <div class="collapse navbar-collapse" id="bs-megadropdown-tabs">
+                    <ul class="nav navbar-nav nav_1">
+                        <li class="dropdown mega-dropdown active">
+                            <a href="#" class="dropdown-toggle" data-toggle="dropdown">
+                                Condition Product <span class="caret"></span>
+                            </a>
+                            <div class="dropdown-menu mega-dropdown-menu w3ls_vegetables_menu">
+                                <div class="w3ls_vegetables">
+                                    @foreach (Condition condition in conditions)
+                                    {
+                                        <ul>
+                                            <li>
+                                                <a asp-action="GetProductByCondition" asp-controller="Home"
+                                                   asp-route-id="@condition.Id">
+                                                    @condition.Name ( @condition.Products.Count() )
+                                                </a>
+                                            </li>
+                                        </ul>
+                                    }
+                                </div>
+                            </div>
+                        </li>
+                    </ul>
+                </div>
             </nav>
         </div>
 
@@ -228,7 +255,16 @@
             <div class="agileinfo_single">
                 <h5>@productInfo.Name</h5>
                 <div class="col-md-4 agileinfo_single_left">
-                    @*<img id="example" src="~/@productInfo.Picture" alt=" " class="img-responsive" />*@
+
+                    @{
+                        ProductPhoto getProductPhotoByProductId = productPhotos
+                            .Where(pp => pp.ProductId == productInfo.Id &&
+                            pp.Featured == true && pp.Status == true).FirstOrDefault();
+                        string productPhoto = getProductPhotoByProductId == null ?
+                            "productphotos/NoImageFound.png" : getProductPhotoByProductId.Photo;
+                    }
+
+                    <img id="example" src="~/@productPhoto" alt=" " class="img-responsive" />
                 </div>
                 <div class="col-md-8 agileinfo_single_right">
                     <div class="rating1">
@@ -303,7 +339,16 @@
                                                 <figure>
                                                     <div class="snipcart-item block">
                                                         <div class="snipcart-thumb">
-                                                            @*<a asp-route-id="@product.Id" asp-action="GetProductInfoByProductId" asp-controller="Home"><img src="~/@product.Picture" alt=" " class="img-responsive" /></a>*@
+
+                                                            @{
+                                                                ProductPhoto getProductPhotoByProductId2 = productPhotos
+                                                                    .Where(pp => pp.ProductId == product.Id &&
+                                                                    pp.Featured == true && pp.Status == true).FirstOrDefault();
+                                                                string productPhoto2 = getProductPhotoByProductId2 == null ?
+                                                                    "productphotos/NoImageFound.png" : getProductPhotoByProductId2.Photo;
+                                                            }
+
+                                                            <a asp-route-id="@product.Id" asp-action="GetProductInfoByProductId" asp-controller="Home"><img src="~/@productPhoto2" height="200" /></a>
                                                             <p>@product.Name</p>
                                                             <h4>Price : @product.RegularPrice BDT</h4>
                                                         </div>

@@ -1,8 +1,10 @@
 {
   "version": 2,
-  "dgSpecHash": "SYfSjmpYX3hFa2sIdZ3NgBCjUU05b45S6FE8dldOpkeoB2yPnInpPq0hZr9orO2fUdjsJrweLO1f81pdlr6zvw==",
+  "dgSpecHash": "8W2mvpI4tIjSXhi8MyhJly92Hu+9SWWq/es8gOq0A9BW3OFeWRO6tis1oXH7Ck0f1/S4xGpilvsJoFbl5zpAlQ==",
   "success": true,
   "projectFilePath": "F:\\C# Project\\Web Application - CORE\\Click-To-Buy\\ClickToBuy\\ClickToBuy.Model\\ClickToBuy.Model.csproj",
-  "expectedPackageFiles": [],
+  "expectedPackageFiles": [
+    "C:\\Users\\Sunil\\.nuget\\packages\\microsoft.aspnetcore.app.ref\\3.1.2\\microsoft.aspnetcore.app.ref.3.1.2.nupkg.sha512"
+  ],
   "logs": []
 }
