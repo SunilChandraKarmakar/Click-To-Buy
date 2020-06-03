@@ -89,7 +89,8 @@ namespace ClickToBuy.Controllers
         {
             if (HttpContext.Session.GetString("AdminId") != null)
             {
-                ICollection<PurchaseItem> purchaseItem = _iPurchaseItemManager.GetPurchaseItemByPurchaseId(id);
+                ICollection<PurchaseItem> purchaseItem = _iPurchaseItemManager
+                                          .GetPurchaseItemByPurchaseId(id);
                 return View(purchaseItem);
             }
             else

@@ -13,11 +13,15 @@ namespace ClickToBuy.Controllers
     public class StockProductController : Controller
     {
         private readonly IStockProductManager _iStockProductManager;
+        private readonly IPurchaseItemManager _iPurchaseItemManager;
         private readonly IProductManager _iProductManager;
 
-        public StockProductController(IStockProductManager iStockProductManager, IProductManager iProductManager)
+        public StockProductController(IStockProductManager iStockProductManager, 
+                                        IProductManager iProductManager, 
+                                        IPurchaseItemManager iPurchaseItemManager)
         {
             _iStockProductManager = iStockProductManager;
+            _iPurchaseItemManager = iPurchaseItemManager;
             _iProductManager = iProductManager;
         }
 
@@ -30,36 +34,11 @@ namespace ClickToBuy.Controllers
                 return RedirectToAction("AdminLogin", "LoginProcess");
         }
 
-        private List<SelectListItem> NonProductInStockList()
-        {
-            List<SelectListItem> productList = _iStockProductManager.GetAllProductNotInStock()
-                                                                .Select(s => new SelectListItem
-                                                                {
-                                                                    Value = s.Id.ToString(),
-                                                                    Text = s.Name
-                                                                }).ToList();
-
-            return productList;
-        }
-
-        private List<SelectListItem> ProductList()
-        {
-            List<SelectListItem> productList = _iProductManager.GetAll()
-                                                                .Select(s => new SelectListItem
-                                                                {
-                                                                    Value = s.Id.ToString(),
-                                                                    Text = s.Name
-                                                                }).ToList();
-
-            return productList;
-        }
-
         [HttpGet]
         public IActionResult Create()
         {
             if (HttpContext.Session.GetString("AdminId") != null)
-            {
-                ViewBag.ProductList = NonProductInStockList();
+            {                      
                 return View();
             }
             else
@@ -79,7 +58,6 @@ namespace ClickToBuy.Controllers
                     return ViewBag.ErrorMessage = "Stock save has been failed!";
             }
 
-            ViewBag.ProductList = NonProductInStockList();
             return View(aStockProduct);
         }
 
@@ -96,7 +74,6 @@ namespace ClickToBuy.Controllers
                 if (aStockProduct == null)
                     return NotFound();
 
-                ViewBag.ProductList = ProductList();
                 return View(aStockProduct);
             }
             else
@@ -116,7 +93,6 @@ namespace ClickToBuy.Controllers
                     return ViewBag.ErrorMessage = "Stock update has been failed!";
             }
 
-            ViewBag.ProductList = ProductList();
             return View(aStockProduct);
         }
 

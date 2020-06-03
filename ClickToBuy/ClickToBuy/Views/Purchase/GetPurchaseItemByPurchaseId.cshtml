@@ -4,10 +4,14 @@
 @{
     ViewData["Title"] = "GetPurchaseItemByPurchaseId";
     Layout = "~/Views/Shared/_AdminLayout.cshtml";
+    int totalProduct = 0;
+    int totalQuantity = 0;
+    float totalUnitPrice = 0;
+    float totalPrice = 0;
 }
 
 <div class="row content-panel mt mb">
-    <h2 id="hadertitle">City Details</h2>
+    <h2 id="hadertitle">Purchase Item Details</h2>
 </div>
 
 <div class="col-lg-12" style="margin-top: 20px">
@@ -18,7 +22,8 @@
                     <tr>
                         <th>Product Name</th>
                         <th>Quantity</th>
-                        <th>Price</th>
+                        <th>Unit Price</th>
+                        <th>Sub Total</th>
                     </tr>
                 </thead>
                 <tbody>
@@ -28,14 +33,23 @@
                             <td>@item.Product.Name</td>
                             <td>@item.Quantity</td>
                             <td>@item.Price</td>
+                            <td>@(item.Quantity * item.Price)</td>
                         </tr>
+                        
+                        {
+                            totalProduct += 1;
+                            totalQuantity += item.Quantity;
+                            totalUnitPrice += item.Price;
+                            totalPrice += item.Quantity * item.Price;
+                        }
                     }
                 </tbody>
-                <tfoot>
+                <tfoot>                    
                     <tr>
-                        <th>Product Name</th>
-                        <th>Quantity</th>
-                        <th>Price</th>
+                        <th>Total Product : @totalProduct</th>
+                        <th>Total Quantity : @totalQuantity</th>
+                        <th>Total Unit Price : @totalUnitPrice</th>
+                        <th>Total Price : @totalPrice</th>
                     </tr>
                 </tfoot>
             </table>
