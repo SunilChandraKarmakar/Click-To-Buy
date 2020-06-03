@@ -3,6 +3,8 @@
     Layout = null;
     List<Brand> brands = ViewBag.BrandList;
     List<Category> categories = ViewBag.CategoryList;
+    List<Condition> conditions = ViewBag.Condition;
+    ICollection<Product> clinteProductList = ViewBag.ClinteProductList;
 }
 
 <!DOCTYPE html>
@@ -170,7 +172,7 @@
                                     @foreach (Brand brand in brands)
                                     {
                                         <ul>
-                                            <li><a asp-action="GetProductByBrand" asp-controller="Home" asp-route-id="@brand.Id">@brand.Name ( @brand.Products.Count() )</a></li>
+                                            <li><a asp-action="GetProductByBrand" asp-controller="Home" asp-route-id="@brand.Id">@brand.Name ( @clinteProductList.Where(p => p.BrandId == brand.Id).Count() )</a></li>
                                         </ul>
                                     }
                                 </div>
@@ -205,6 +207,31 @@
                                 <li><a asp-route-id="@category.Id" asp-action="GetProductByCategory" asp-controller="Home">@category.Name</a></li>
                             }
                         }
+                    </ul>
+                </div>
+
+                <div class="collapse navbar-collapse" id="bs-megadropdown-tabs">
+                    <ul class="nav navbar-nav nav_1">
+                        <li class="dropdown mega-dropdown active">
+                            <a href="#" class="dropdown-toggle" data-toggle="dropdown">
+                                Condition Product <span class="caret"></span>
+                            </a>
+                            <div class="dropdown-menu mega-dropdown-menu w3ls_vegetables_menu">
+                                <div class="w3ls_vegetables">
+                                    @foreach (Condition condition in conditions)
+                                    {
+                                        <ul>
+                                            <li>
+                                                <a asp-action="GetProductByCondition" asp-controller="Home"
+                                                   asp-route-id="@condition.Id">
+                                                    @condition.Name ( @clinteProductList.Where(p => p.ConditionId == condition.Id).Count() )
+                                                </a>
+                                            </li>
+                                        </ul>
+                                    }
+                                </div>
+                            </div>
+                        </li>
                     </ul>
                 </div>
             </nav>

@@ -212,7 +212,7 @@
                                             <li>
                                                 <a asp-action="GetProductByCondition" asp-controller="Home" 
                                                    asp-route-id="@condition.Id">
-                                                        @condition.Name ( @condition.Products.Count() )
+                                                        @condition.Name ( @clinteProductList.Where(p=>p.ConditionId == condition.Id).Count() )
                                                 </a>
                                             </li>
                                         </ul>

@@ -61,11 +61,20 @@ namespace ClickToBuy.Controllers
 
         private void CommonComponent()
         {
-            ViewBag.BrandList = _iBrandManager.GetAll();
-            ViewBag.CategoryList = _iCategoryManager.GetAll().Where(c => c.Categoryy == null).ToList();
-            ViewBag.Condition = _iConditionManager.GetAll();
-            ViewBag.ProductPhotos = _iProductPhotoManager.GetAll();
             ViewBag.ClinteProductList = ShowClinteSiteProduct();
+            List<Brand> getBrandForShowClinteSiteProduct = new List<Brand>();
+            List<Condition> getConditionForShowClinteSiteProduct = new List<Condition>();
+
+            foreach (Product product in ViewBag.ClinteProductList)
+            {
+                getBrandForShowClinteSiteProduct.Add(product.Brand);
+                getConditionForShowClinteSiteProduct.Add(product.Condition);
+            }
+
+            ViewBag.BrandList = getBrandForShowClinteSiteProduct.Distinct().ToList();
+            ViewBag.CategoryList = _iCategoryManager.GetAll().Where(c => c.Categoryy == null).ToList();
+            ViewBag.Condition = getConditionForShowClinteSiteProduct.Distinct().ToList();
+            ViewBag.ProductPhotos = _iProductPhotoManager.GetAll();                     
         }        
 
         [HttpGet]
@@ -79,9 +88,9 @@ namespace ClickToBuy.Controllers
 
         [HttpGet]
         public IActionResult GetProductByBrand(int id)
-        {                
-            ICollection<Product> getProductsByBrand = _iProductManager
-                                .GetAll().Where(p => p.BrandId == id).ToList();
+        {
+            ICollection<Product> getProductsByBrand = ShowClinteSiteProduct()
+                                .Where(s => s.BrandId == id).ToList();
             ViewBag.BrandInfo = _iBrandManager.GetById(id); ;
             CommonComponent();
             return View(getProductsByBrand);
@@ -90,8 +99,8 @@ namespace ClickToBuy.Controllers
         [HttpGet]
         public IActionResult GetProductByCategory(int id)
         {
-            ICollection<Product> getProductByCategory = _iProductManager
-                                .GetAll().Where(p => p.CategoryId == id).ToList();
+            ICollection<Product> getProductByCategory = ShowClinteSiteProduct()
+                                .Where(s => s.CategoryId == id).ToList();
             ViewBag.CategoryInfo = _iCategoryManager.GetById(id);
             CommonComponent();
             return View(getProductByCategory);
@@ -119,9 +128,8 @@ namespace ClickToBuy.Controllers
             if (id == null)
                 return NotFound();
 
-            ICollection<Product> getProductByCondition = _iProductManager.GetAll()
-                .Where(p => p.ConditionId == id).ToList();
-
+            ICollection<Product> getProductByCondition = ShowClinteSiteProduct()
+                                .Where(p => p.ConditionId == id).ToList();
             ViewBag.GetCondition = _iConditionManager.GetById(id);
             CommonComponent();
             return View(getProductByCondition);

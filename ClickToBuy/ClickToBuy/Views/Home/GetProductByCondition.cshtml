@@ -7,6 +7,8 @@
     List<Brand> brands = ViewBag.BrandList;
     List<Category> categories = ViewBag.CategoryList;
     List<Condition> conditions = ViewBag.Condition;
+    List<ProductPhoto> productPhotos = ViewBag.ProductPhotos;
+    ICollection<Product> clinteProductList = ViewBag.ClinteProductList;
 }
 
 <!DOCTYPE html>
@@ -172,7 +174,7 @@
                                     @foreach (Brand brand in brands)
                                     {
                                         <ul>
-                                            <li><a asp-action="GetProductByBrand" asp-controller="Home" asp-route-id="@brand.Id">@brand.Name ( @brand.Products.Count() )</a></li>
+                                            <li><a asp-action="GetProductByBrand" asp-controller="Home" asp-route-id="@brand.Id">@brand.Name ( @clinteProductList.Where(p=>p.BrandId == brand.Id).Count() )</a></li>
                                         </ul>
                                     }
                                 </div>
@@ -224,7 +226,7 @@
                                             <li>
                                                 <a asp-action="GetProductByCondition" asp-controller="Home"
                                                    asp-route-id="@condition.Id">
-                                                    @condition.Name ( @condition.Products.Count() )
+                                                    @condition.Name ( @clinteProductList.Where(p=>p.ConditionId == condition.Id).Count() )
                                                 </a>
                                             </li>
                                         </ul>
@@ -250,7 +252,16 @@
                                         <figure>
                                             <div class="snipcart-item block">
                                                 <div class="snipcart-thumb">
-                                                    @*<a asp-route-id="@product.Id" asp-action="GetProductInfoByProductId" asp-controller="Home"><img title=" " alt=" " src="~/@product.Picture" class="img-responsive" /></a>*@
+
+                                                    @{
+                                                        ProductPhoto getProductPhotoByProductId = productPhotos
+                                                            .Where(pp => pp.ProductId == product.Id &&
+                                                            pp.Featured == true && pp.Status == true).FirstOrDefault();
+                                                        string productPhoto = getProductPhotoByProductId == null ?
+                                                            "productphotos/NoImageFound.png" : getProductPhotoByProductId.Photo;
+                                                    }
+
+                                                    <a asp-route-id="@product.Id" asp-action="GetProductInfoByProductId" asp-controller="Home"><img title=" " alt=" " src="~/@productPhoto" height="200" /></a>
                                                     <p>@product.Name</p>
                                                     <h4>Price : @product.RegularPrice BDT</h4>
                                                 </div>
