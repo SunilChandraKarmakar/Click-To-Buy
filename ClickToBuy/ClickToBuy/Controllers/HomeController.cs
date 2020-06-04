@@ -72,7 +72,7 @@ namespace ClickToBuy.Controllers
             }
 
             ViewBag.BrandList = getBrandForShowClinteSiteProduct.Distinct().ToList();
-            ViewBag.CategoryList = _iCategoryManager.GetAll().Where(c => c.Categoryy == null).ToList();
+            ViewBag.CategoryList = _iCategoryManager.GetCategoryForPurchaseProduct();
             ViewBag.Condition = getConditionForShowClinteSiteProduct.Distinct().ToList();
             ViewBag.ProductPhotos = _iProductPhotoManager.GetAll();                     
         }        

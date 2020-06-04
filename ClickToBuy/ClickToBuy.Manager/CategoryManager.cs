@@ -1,4 +1,5 @@
-﻿using ClickToBuy.Manager.Base;
+﻿using ClickToBuy.Database.Migrations;
+using ClickToBuy.Manager.Base;
 using ClickToBuy.Manager.Contracts;
 using ClickToBuy.Model;
 using ClickToBuy.Repository.Contracts;
@@ -25,6 +26,11 @@ namespace ClickToBuy.Manager
         public Category CheckName(string name)
         {
             return _iCategoryRepository.CheckName(name);
+        }
+
+        public ICollection<Category> GetCategoryForPurchaseProduct()
+        {
+            return _iCategoryRepository.GetCategoryForPurchaseProduct();
         }
     }
 }
