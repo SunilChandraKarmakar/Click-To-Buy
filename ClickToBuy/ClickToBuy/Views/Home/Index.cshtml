@@ -66,10 +66,8 @@
             </form>
         </div>
         <div class="product_list_header">
-            <form action="#" method="post" class="last">
+            <form method="get" asp-controller="Cart" asp-action="Index">
                 <fieldset>
-                    <input type="hidden" name="cmd" value="_cart" />
-                    <input type="hidden" name="display" value="1" />
                     <input type="submit" name="submit" value="View your cart" class="button" />
                 </fieldset>
             </form>
@@ -476,29 +474,5 @@
         });
     </script>
     <!-- //here ends scrolling icon -->
-
-    <script src="~/ClientLayout/js/minicart.js"></script>
-
-    <script>
-        paypal.minicart.render();
-
-        paypal.minicart.cart.on('checkout', function (evt) {
-            var items = this.items(),
-                len = items.length,
-                total = 0,
-                i;
-
-            // Count the number of each item in the cart
-            for (i = 0; i < len; i++) {
-                total += items[i].get('quantity');
-            }
-
-            if (total < 1) {
-                alert('The minimum order quantity is 1. Please add more to your shopping cart before checking out');
-                evt.preventDefault();
-            }
-        });
-
-    </script>
 </body>
 </html>             

@@ -70,6 +70,8 @@ namespace ClickToBuy.Controllers
             return genderList;
         }
 
+
+
         [HttpGet]
         public IActionResult Index()
         {

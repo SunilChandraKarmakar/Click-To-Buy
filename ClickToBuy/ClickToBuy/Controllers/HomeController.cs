@@ -55,7 +55,7 @@ namespace ClickToBuy.Controllers
         private List<Product> HotOfferProduct()
         {
             ICollection<Product> getClinteSiteProduct = ShowClinteSiteProduct();
-            List<Product> hotOfferProducts = getClinteSiteProduct.Where(p => p.OfferPrice != 0).ToList();
+            List<Product> hotOfferProducts = getClinteSiteProduct.Where(p => p.OfferPrice > 0).ToList();
             return hotOfferProducts;
         }
 
@@ -140,19 +140,6 @@ namespace ClickToBuy.Controllers
         {
             CommonComponent();
             return View();
-        }
-
-        [HttpPost]
-        public IActionResult Checkout()
-        {
-            CommonComponent();
-            return View();
-        }
-
-        public string AddToCardProductList(int id)
-        {
-            
-            return "";
         }
 
         public IActionResult Privacy()

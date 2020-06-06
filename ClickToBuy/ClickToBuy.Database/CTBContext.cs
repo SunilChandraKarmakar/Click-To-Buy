@@ -72,6 +72,7 @@ namespace ClickToBuy.Database
                                     Initial Catalog = ClickToBuy; 
                                     Integrated Security = SSPI;";
             optionsBuilder.UseSqlServer(connectionString);
+            optionsBuilder.EnableSensitiveDataLogging();
         }
     }
 }

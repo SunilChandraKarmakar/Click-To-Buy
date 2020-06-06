@@ -221,7 +221,6 @@ F:\C# Project\Web Application - CORE\Click-To-Buy\ClickToBuy\ClickToBuy\obj\Debu
 F:\C# Project\Web Application - CORE\Click-To-Buy\ClickToBuy\ClickToBuy\obj\Debug\netcoreapp3.1\Razor\Views\Home\GetProductInfoByProductId.cshtml.g.cs
 F:\C# Project\Web Application - CORE\Click-To-Buy\ClickToBuy\ClickToBuy\obj\Debug\netcoreapp3.1\Razor\Views\Home\GetAllProduct.cshtml.g.cs
 F:\C# Project\Web Application - CORE\Click-To-Buy\ClickToBuy\ClickToBuy\obj\Debug\netcoreapp3.1\Razor\Views\Home\ContactUs.cshtml.g.cs
-F:\C# Project\Web Application - CORE\Click-To-Buy\ClickToBuy\ClickToBuy\obj\Debug\netcoreapp3.1\Razor\Views\Home\Checkout.cshtml.g.cs
 F:\C# Project\Web Application - CORE\Click-To-Buy\ClickToBuy\ClickToBuy\obj\Debug\netcoreapp3.1\ClickToBuy.genruntimeconfig.cache
 F:\C# Project\Web Application - CORE\Click-To-Buy\ClickToBuy\ClickToBuy\obj\Debug\netcoreapp3.1\Razor\Views\Category\AddParentCategory.cshtml.g.cs
 F:\C# Project\Web Application - CORE\Click-To-Buy\ClickToBuy\ClickToBuy\obj\Debug\netcoreapp3.1\Razor\Views\Category\AddSubCategory.cshtml.g.cs
@@ -245,3 +244,4 @@ F:\C# Project\Web Application - CORE\Click-To-Buy\ClickToBuy\ClickToBuy\obj\Debu
 F:\C# Project\Web Application - CORE\Click-To-Buy\ClickToBuy\ClickToBuy\obj\Debug\netcoreapp3.1\Razor\Views\ProductPhoto\Create.cshtml.g.cs
 F:\C# Project\Web Application - CORE\Click-To-Buy\ClickToBuy\ClickToBuy\obj\Debug\netcoreapp3.1\Razor\Views\ProductPhoto\Update.cshtml.g.cs
 F:\C# Project\Web Application - CORE\Click-To-Buy\ClickToBuy\ClickToBuy\obj\Debug\netcoreapp3.1\Razor\Views\Home\GetProductByCondition.cshtml.g.cs
+F:\C# Project\Web Application - CORE\Click-To-Buy\ClickToBuy\ClickToBuy\obj\Debug\netcoreapp3.1\Razor\Views\LoginProcess\CustomerLogin.cshtml.g.cs
