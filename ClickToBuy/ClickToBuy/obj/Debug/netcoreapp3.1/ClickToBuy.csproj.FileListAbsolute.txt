@@ -245,3 +245,4 @@ F:\C# Project\Web Application - CORE\Click-To-Buy\ClickToBuy\ClickToBuy\obj\Debu
 F:\C# Project\Web Application - CORE\Click-To-Buy\ClickToBuy\ClickToBuy\obj\Debug\netcoreapp3.1\Razor\Views\ProductPhoto\Update.cshtml.g.cs
 F:\C# Project\Web Application - CORE\Click-To-Buy\ClickToBuy\ClickToBuy\obj\Debug\netcoreapp3.1\Razor\Views\Home\GetProductByCondition.cshtml.g.cs
 F:\C# Project\Web Application - CORE\Click-To-Buy\ClickToBuy\ClickToBuy\obj\Debug\netcoreapp3.1\Razor\Views\LoginProcess\CustomerLogin.cshtml.g.cs
+F:\C# Project\Web Application - CORE\Click-To-Buy\ClickToBuy\ClickToBuy\obj\Debug\netcoreapp3.1\Razor\Views\Customer\Dashboard.cshtml.g.cs

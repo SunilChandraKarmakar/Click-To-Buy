@@ -1,4 +1,4 @@
-﻿@using ClickToBuy.Model; 
+﻿@using ClickToBuy.Model;
 @model ClickToBuy.Model.ViewModels.CustomerLogin;
 @{
     Layout = null;
@@ -6,6 +6,7 @@
     List<Category> categories = ViewBag.CategoryList;
     List<Condition> conditions = ViewBag.Condition;
     ICollection<Product> clinteProductList = ViewBag.ClinteProductList;
+    Customer aCustomerInfo = new Customer();
 }
 
 <!DOCTYPE html>
@@ -93,17 +94,17 @@
 
     <!-- script-for sticky-nav -->
     <script>
-	$(document).ready(function() {
-		 var navoffeset=$(".agileits_header").offset().top;
-		 $(window).scroll(function(){
-			var scrollpos=$(window).scrollTop();
-			if(scrollpos >=navoffeset){
-				$(".agileits_header").addClass("fixed");
-			}else{
-				$(".agileits_header").removeClass("fixed");
-			}
-		 });
-	});
+        $(document).ready(function () {
+            var navoffeset = $(".agileits_header").offset().top;
+            $(window).scroll(function () {
+                var scrollpos = $(window).scrollTop();
+                if (scrollpos >= navoffeset) {
+                    $(".agileits_header").addClass("fixed");
+                } else {
+                    $(".agileits_header").removeClass("fixed");
+                }
+            });
+        });
     </script>
     <!-- //script-for sticky-nav -->
 
@@ -130,7 +131,6 @@
         </div>
     </div>
     <!-- //header -->
-
     <!-- products-breadcrumb -->
     <div class="products-breadcrumb">
         <div class="container">
@@ -141,7 +141,6 @@
         </div>
     </div>
     <!-- //products-breadcrumb -->
-
     <!-- banner -->
     <div class="banner">
         <div class="w3l_banner_nav_left">
@@ -240,7 +239,7 @@
                 </div>
             </nav>
         </div>
-        
+
         <div class="w3l_banner_nav_right">
             <!-- login -->
             <div class="w3_login">
@@ -253,38 +252,51 @@
                         </div>
                         <div class="form">
                             <h2>Login to your account</h2>
-                            <form action="#" method="post">
+                            <form asp-controller="LoginProcess" asp-action="CustomerLogin" method="post">
                                 <input type="email" asp-for="Email" placeholder="Email" required="required">
                                 <input type="password" asp-for="Password" placeholder="Password" required="required">
+                                <span class="text-danger">@ViewBag.ErrorMessage</span>
                                 <input type="submit" value="Login">
                             </form>
                         </div>
                         <div class="form">
                             <h2>Create an account</h2>
                             <form action="#" method="post">
-                                <input type="text" name="Username" placeholder="Username" required=" ">
-                                <input type="password" name="Password" placeholder="Password" required=" ">
-                                <input type="email" name="Email" placeholder="Email Address" required=" ">
-                                <input type="text" name="Phone" placeholder="Phone Number" required=" ">
+                                <input type="text" asp-for="@aCustomerInfo.Name" placeholder="Name" required="required">
+                                <input type="text" id="contact" placeholder="Phone" required="required">
+                                <input type="email" asp-for="@aCustomerInfo.Email" placeholder="Email Address" required="required">
+                                <select asp-for="@aCustomerInfo.Gender" class="form-control">
+                                    <option value="">-- Select Gender -</option>
+                                    <option value="1">Male</option>
+                                    <option value="2">Female</option>
+                                </select> <br />
+                                <input type="password" asp-for="@aCustomerInfo.Password" placeholder="Password" required="required">
+                                <input type="password" asp-for="@aCustomerInfo.ConfirmPassword" placeholder="Confirm Password" required="required">
+                                <select asp-for="@aCustomerInfo.CountryId" asp-items="ViewBag.CountryList" class="form-control">
+                                    <option value="">-- Select Country -</option>
+                                </select> <br />
+                                <select asp-for="@aCustomerInfo.CityId" class="form-control">
+                                    <option value="">-- Select City -</option>
+                                </select> <br />
                                 <input type="submit" value="Register">
                             </form>
                         </div>
                         <div class="cta"><a href="#">Forgot your password?</a></div>
                     </div>
                 </div>
-                
+
                 <script>
-				$('.toggle').click(function(){
-				  // Switches the Icon
-				  $(this).children('i').toggleClass('fa-pencil');
-				  // Switches the forms
-				  $('.form').animate({
-					height: "toggle",
-					'padding-top': 'toggle',
-					'padding-bottom': 'toggle',
-					opacity: "toggle"
-				  }, "slow");
-				});
+                    $('.toggle').click(function () {
+                        // Switches the Icon
+                        $(this).children('i').toggleClass('fa-pencil');
+                        // Switches the forms
+                        $('.form').animate({
+                            height: "toggle",
+                            'padding-top': 'toggle',
+                            'padding-bottom': 'toggle',
+                            opacity: "toggle"
+                        }, "slow");
+                    });
                 </script>
 
             </div>
@@ -294,7 +306,6 @@
         <div class="clearfix"></div>
     </div>
     <!-- //banner -->
-
     <!-- footer -->
     <div class="footer">
         <div class="container">
@@ -373,19 +384,18 @@
         </div>
     </div>
     <!-- //footer -->
-
     <!-- Bootstrap Core JavaScript -->
     <script src="js/bootstrap.min.js"></script>
 
     <script>
-        $(document).ready(function(){
+        $(document).ready(function () {
             $(".dropdown").hover(
-                function() {
-                    $('.dropdown-menu', this).stop( true, true ).slideDown("fast");
+                function () {
+                    $('.dropdown-menu', this).stop(true, true).slideDown("fast");
                     $(this).toggleClass('open');
                 },
-                function() {
-                    $('.dropdown-menu', this).stop( true, true ).slideUp("fast");
+                function () {
+                    $('.dropdown-menu', this).stop(true, true).slideUp("fast");
                     $(this).toggleClass('open');
                 }
             );
@@ -394,20 +404,74 @@
     <!-- here stars scrolling icon -->
 
     <script type="text/javascript">
-		$(document).ready(function() {
-			/*
-				var defaults = {
-				containerID: 'toTop', // fading element id
-				containerHoverID: 'toTopHover', // fading element hover id
-				scrollSpeed: 1200,
-				easingType: 'linear'
-				};
-			*/
+        $(document).ready(function () {
+            /*
+                var defaults = {
+                containerID: 'toTop', // fading element id
+                containerHoverID: 'toTopHover', // fading element hover id
+                scrollSpeed: 1200,
+                easingType: 'linear'
+                };
+            */
 
-			$().UItoTop({ easingType: 'easeOutQuart' });
+            $().UItoTop({ easingType: 'easeOutQuart' });
 
-			});
+        });
     </script>
     <!-- //here ends scrolling icon -->
+
+    <script>
+        $(document).ready(function () {
+            $("#contact").change(function () {
+                var contactNo = $("#contact").val();
+                var serverUrl = '/api/LoginProcess/CheckContact?contactno=' + contactNo;
+
+                $.ajax({
+                    url: serverUrl,
+                    success: function (response) {
+                        if (response == 1) {
+                            alert("Contact is exist! Please try new one.");
+                            $('#contact').val('');
+                        }
+                    }
+                });
+            });
+
+            $("#Email").change(function () {
+                var email = $("#Email").val();
+                var serverUrl = '/api/LoginProcess/CheckEmail?email=' + email;
+
+                $.ajax({
+                    url: serverUrl,
+                    success: function (response) {
+                        if (response == 1) {
+                            alert("email is exist! Please try new one.");
+                            $('#Email').val('');
+                        }
+                    }
+                });
+            });
+
+            $("#CountryId").change(function () {
+                var countryId = $("#CountryId").val();
+                $("#CityId").empty();
+                $("#CityId").append('<option value="">-- Select City --</option>');
+                var serverUrl = '/api/LoginProcess/GetCityByCountry?countryId=' + countryId;
+
+                $.ajax({
+                    url: serverUrl,
+                    success: function (response) {
+                        $.each(response, (key, value) => {
+                            $("#CityId").append('<option value=' + value.id + '>' + value.name + '</option>');
+                        });
+                    },
+                    error: function (response) {
+                        alert("Error Happend");
+                    }
+                });
+            });
+        });
+    </script>
+
 </body>
 </html>

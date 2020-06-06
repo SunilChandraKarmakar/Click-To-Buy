@@ -19,6 +19,9 @@ namespace ClickToBuy.Controllers
         private readonly ICityManager _iCityManager;
         private readonly IGenderManager _iGenderManager;
         private IHttpContextAccessor _iAccessor;
+        private readonly IProductManager _iProductManager;
+        private readonly IPurchaseItemManager _iPurchaseItemManager;
+        private readonly ICategoryManager _iCategoryManager;
         [Obsolete]
         private readonly IHostingEnvironment _iHostingEnvironment;
 
@@ -27,14 +30,51 @@ namespace ClickToBuy.Controllers
                                   ICountryManager iCountryManager,
                                   ICityManager iCityManager, 
                                   IGenderManager iGenderManager, 
-                                  IHostingEnvironment iHostingEnvironment, IHttpContextAccessor iAccessor)
+                                  IHostingEnvironment iHostingEnvironment, IHttpContextAccessor iAccessor,
+                                  IPurchaseItemManager iPurchaseItemManager, IProductManager iProductManager,
+                                  ICategoryManager iCategoryManager)
         {
             _iCustomerManager = iCustomerManager;
             _iCountryManager = iCountryManager;
             _iCityManager = iCityManager;
             _iGenderManager = iGenderManager;
             _iHostingEnvironment = iHostingEnvironment;
+            _iPurchaseItemManager = iPurchaseItemManager;
+            _iProductManager = iProductManager;
             _iAccessor = iAccessor;
+            _iCategoryManager = iCategoryManager;
+        }
+
+        private ICollection<Product> ShowClinteSiteProduct()
+        {
+            ICollection<PurchaseItem> getAllPurchaseItem = _iPurchaseItemManager.GetAll();
+            List<Product> storePurchaseProduct = new List<Product>();
+
+            foreach (PurchaseItem item in getAllPurchaseItem)
+            {
+                Product purchaseProductDetails = _iProductManager.GetById(item.ProductId);
+                storePurchaseProduct.Add(purchaseProductDetails);
+            }
+
+            List<Product> removeDuplicateProductForPurchaseProduct = storePurchaseProduct.Distinct().ToList();
+            return removeDuplicateProductForPurchaseProduct;
+        }
+
+        private void CommonComponent()
+        {
+            ViewBag.ClinteProductList = ShowClinteSiteProduct();
+            List<Brand> getBrandForShowClinteSiteProduct = new List<Brand>();
+            List<Condition> getConditionForShowClinteSiteProduct = new List<Condition>();
+
+            foreach (Product product in ViewBag.ClinteProductList)
+            {
+                getBrandForShowClinteSiteProduct.Add(product.Brand);
+                getConditionForShowClinteSiteProduct.Add(product.Condition);
+            }
+
+            ViewBag.BrandList = getBrandForShowClinteSiteProduct.Distinct().ToList();
+            ViewBag.CategoryList = _iCategoryManager.GetCategoryForPurchaseProduct();
+            ViewBag.Condition = getConditionForShowClinteSiteProduct.Distinct().ToList();
         }
 
         private List<SelectListItem> CountryList()
@@ -70,6 +110,18 @@ namespace ClickToBuy.Controllers
             return genderList;
         }
 
+
+        [HttpGet]
+        public IActionResult Dashboard()
+        {
+            if (HttpContext.Session.GetString("CustomerId") != null)
+            {
+                CommonComponent();
+                return View();
+            }
+
+            return RedirectToAction("CustomerLogin", "LoginProcess");
+        }
 
 
         [HttpGet]
@@ -135,14 +187,14 @@ namespace ClickToBuy.Controllers
                 if (pictuer != null)
                 {
                     string nameAndPath = Path.Combine(_iHostingEnvironment.WebRootPath
-                                                  + "/CustomerPicture",
+                                                  + "/customerPicture",
                                                   Path.GetFileName(pictuer.FileName));
                     pictuer.CopyToAsync(new FileStream(nameAndPath, FileMode.Create));
-                    aCustomer.Pictuer = "CustomerPicture/" + pictuer.FileName;
+                    aCustomer.Pictuer = "customerPicture/" + pictuer.FileName;
                 }
 
                 if (pictuer == null)
-                    aCustomer.Pictuer = "CustomerPicture/NoImageFound.png";
+                    aCustomer.Pictuer = "customercicture/NoImageFound.png";
 
                 bool isAdd = _iCustomerManager.Add(aCustomer);
 

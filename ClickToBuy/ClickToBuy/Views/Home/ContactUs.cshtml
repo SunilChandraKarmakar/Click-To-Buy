@@ -1,4 +1,5 @@
 ﻿@using ClickToBuy.Model
+@using Microsoft.AspNetCore.Http;
 @{
     Layout = null;
     List<Brand> brands = ViewBag.BrandList;
@@ -67,29 +68,51 @@
             </form>
         </div>
         <div class="product_list_header">
-            <form action="#" method="post" class="last">
+            <form method="get" asp-controller="Cart" asp-action="Index">
                 <fieldset>
-                    <input type="hidden" name="cmd" value="_cart" />
-                    <input type="hidden" name="display" value="1" />
                     <input type="submit" name="submit" value="View your cart" class="button" />
                 </fieldset>
             </form>
         </div>
-        <div class="w3l_header_right">
-            <ul>
-                <li class="dropdown profile_details_drop">
-                    <a href="#" class="dropdown-toggle" data-toggle="dropdown"><i class="fa fa-user" aria-hidden="true"></i><span class="caret"></span></a>
-                    <div class="mega-dropdown-menu">
-                        <div class="w3ls_vegetables">
-                            <ul class="dropdown-menu drp-mnu">
-                                <li><a asp-action="AdminLogin" asp-controller="LoginProcess">Admin</a></li>
-                                <li><a href="login.html">Sign Up</a></li>
-                            </ul>
+
+        @if (Context.Session.GetString("CustomerId") == null)
+        {
+            <div class="w3l_header_right">
+                <ul>
+                    <li class="dropdown profile_details_drop">
+                        <a href="#" class="dropdown-toggle" data-toggle="dropdown"><i class="fa fa-user" aria-hidden="true"></i><span class="caret"></span></a>
+                        <div class="mega-dropdown-menu">
+                            <div class="w3ls_vegetables">
+                                <ul class="dropdown-menu drp-mnu">
+                                    <li><a asp-action="AdminLogin" asp-controller="LoginProcess">Admin</a></li>
+                                    <li><a href="login.html">Sign Up</a></li>
+                                </ul>
+                            </div>
                         </div>
-                    </div>
-                </li>
-            </ul>
-        </div>
+                    </li>
+                </ul>
+            </div>
+        }
+        else
+        {
+            <div class="w3l_header_right">
+                <ul>
+                    <li class="dropdown profile_details_drop">
+                        <a href="#" class="dropdown-toggle" data-toggle="dropdown"><i class="fa fa-user" aria-hidden="true"></i><span class="caret"></span></a>
+                        <div class="mega-dropdown-menu">
+                            <div class="w3ls_vegetables">
+                                <ul class="dropdown-menu drp-mnu">
+                                    <li><a asp-action="AdminLogin" asp-controller="LoginProcess">My Profile</a></li>
+                                    <li><a href="login.html">Invoice Management</a></li>
+                                    <li><a href="login.html">Logout</a></li>
+                                </ul>
+                            </div>
+                        </div>
+                    </li>
+                </ul>
+            </div>
+        }
+
         <div class="w3l_header_right1">
             <h2><a asp-action="ContactUs" asp-controller="Home">Contact Us</a></h2>
         </div>

@@ -7,6 +7,7 @@ using ClickToBuy.Model;
 using ClickToBuy.Model.ViewModels;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.Mvc.Rendering;
 
 namespace ClickToBuy.Controllers
 {
@@ -17,16 +18,21 @@ namespace ClickToBuy.Controllers
         private readonly ICategoryManager _iCategoryManager;
         private readonly IProductManager _iProductManager;
         private readonly IPurchaseItemManager _iPurchaseItemManager;
+        private readonly ICountryManager _iCountryManager;
+        private readonly ICityManager _iCityManager;
 
         public LoginProcessController(IAdminManager iAdminManager, 
             ICustomerManager iCustomerManager, ICategoryManager iCategoryManager,
-            IProductManager iProductManager, IPurchaseItemManager iPurchaseItemManager)
+            IProductManager iProductManager, IPurchaseItemManager iPurchaseItemManager,
+            ICountryManager iCountryManager, ICityManager iCityManager)
         {
             _iAdminManager = iAdminManager;
             _iCustomerManager = iCustomerManager;
             _iCategoryManager = iCategoryManager;
             _iProductManager = iProductManager;
             _iPurchaseItemManager = iPurchaseItemManager;
+            _iCountryManager = iCountryManager;
+            _iCityManager = iCityManager;
         }
 
         private ICollection<Product> ShowClinteSiteProduct()
@@ -56,9 +62,17 @@ namespace ClickToBuy.Controllers
                 getConditionForShowClinteSiteProduct.Add(product.Condition);
             }
 
+            List<SelectListItem> countrys = _iCountryManager.GetAll()
+                .Select(c => new SelectListItem
+                {
+                    Value = c.Id.ToString(),
+                    Text = c.Name
+                }).ToList();
+
             ViewBag.BrandList = getBrandForShowClinteSiteProduct.Distinct().ToList();
             ViewBag.CategoryList = _iCategoryManager.GetCategoryForPurchaseProduct();
             ViewBag.Condition = getConditionForShowClinteSiteProduct.Distinct().ToList();
+            ViewBag.CountryList = countrys;            
         }
 
         [HttpGet]
@@ -111,14 +125,51 @@ namespace ClickToBuy.Controllers
                     .Where(c => c.Email == aCustomerLoginInfo.Email && 
                     c.Password == aCustomerLoginInfo.Password).FirstOrDefault();
 
-                if (loginCustomerInfo == null)
-                    return NotFound();
-
-                HttpContext.Session.SetString("CustomerId", loginCustomerInfo.Id.ToString());
-                return RedirectToAction("Dashboard", "CustomerController");
+                if (loginCustomerInfo != null)
+                {
+                    HttpContext.Session.SetString("CustomerId", loginCustomerInfo.Id.ToString());
+                    return RedirectToAction("Dashboard", "Customer");
+                }
+                else
+                {
+                    CommonComponent();
+                    ViewBag.ErrorMessage = "Email or password not match! Try again.";
+                    return View(aCustomerLoginInfo);
+                }
             }
 
+            CommonComponent();
+            ViewBag.ErrorMessage = "Email or password not match! Try again.";
             return View(aCustomerLoginInfo);
+        }
+
+        [Route("api/[controller]/[action]")]
+        public JsonResult CheckContact(string contactno)
+        {
+            Customer checkContact = _iCustomerManager.CheckContact(contactno);
+
+            if (checkContact != null)
+                return Json(1);
+            else
+                return Json(0);
+        }
+
+        [Route("api/[controller]/[action]")]
+        public JsonResult CheckEmail(string email)
+        {
+            Customer checkEmail = _iCustomerManager.CheckEmail(email);
+
+            if (checkEmail != null)
+                return Json(1);
+            else
+                return Json(0);
+        }
+
+        [Route("api/[controller]/[action]")]
+        public JsonResult GetCityByCountry(int countryId)
+        {
+            List<City> cityByCountryId = _iCityManager.FindCityByCountryId(countryId);
+            return Json(cityByCountryId);
         }
     }
 }
