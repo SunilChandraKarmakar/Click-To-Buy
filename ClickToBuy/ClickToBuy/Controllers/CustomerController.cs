@@ -210,16 +210,21 @@ namespace ClickToBuy.Controllers
         [Obsolete]
         public IActionResult Create(Customer aCustomer, IFormFile pictuer)
         {
-            bool isAdd = IsAddCustomer(aCustomer, pictuer);
+            if(HttpContext.Session.GetString("AdminId") != null)
+            {
+                bool isAdd = IsAddCustomer(aCustomer, pictuer);
 
-            if (isAdd)
-                return RedirectToAction("Index");
-            else
-                ViewBag.ErrorMessage = "Customer save has been failed!";
+                if (isAdd)
+                    return RedirectToAction("Index");
+                else
+                    ViewBag.ErrorMessage = "Customer save has been failed!";
 
-            ViewBag.CountryList = CountryList();
-            ViewBag.GenderList = GenderList();
-            return View(aCustomer);
+                ViewBag.CountryList = CountryList();
+                ViewBag.GenderList = GenderList();
+                return View(aCustomer);
+            }
+
+            return RedirectToAction("AdminLogin", "LoginProcess");
         }
 
         [HttpPost]
@@ -241,9 +246,23 @@ namespace ClickToBuy.Controllers
         [HttpGet]
         public IActionResult Profile()
         {
-            Customer loginCustomerInfo = LoginCustomerInfo();
-            CommonComponent();
-            return View(loginCustomerInfo);
+            if(HttpContext.Session.GetString("CustomerId") != null)
+            {
+                Customer loginCustomerInfo = LoginCustomerInfo();
+                CommonComponent();
+                ViewBag.CountryList = CountryList();
+                ViewBag.CityList = CityList();
+                ViewBag.GenderList = GenderList();
+                return View(loginCustomerInfo);
+            }
+
+            return RedirectToAction("CustomerLogin", "LoginProcess");
+        }
+
+        [HttpPost]
+        public IActionResult Update(Customer aCustomerInfo, IFormFile photo, string pic)
+        {
+
         }
 
         [HttpGet]

@@ -12,7 +12,6 @@
 <html>
 <head>
     <title>Profile</title>
-
     <!-- for-mobile-apps -->
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
@@ -29,6 +28,7 @@
     <!-- font-awesome icons -->
     <link href="~/ClientLayout/css/font-awesome.css" rel="stylesheet" type="text/css" media="all" />
     <!-- //font-awesome icons -->
+
     <!-- js -->
     <script src="~/ClientLayout/js/jquery-1.11.1.min.js"></script>
     <!-- //js -->
@@ -136,8 +136,8 @@
     <div class="products-breadcrumb">
         <div class="container">
             <ul>
-                <li><i class="fa fa-home" aria-hidden="true"></i><a asp-controller="Home" asp-action="Index">Home</a><span>|</span></li>
-                <li>Dashboard</li>
+                <li><i class="fa fa-home" aria-hidden="true"></i><a asp-controller="Customer" asp-action="Dashboard">Dashboard</a><span>|</span></li>
+                <li>Profile</li>
             </ul>
         </div>
     </div>
@@ -243,12 +243,43 @@
         </div>
 
         <div class="w3l_banner_nav_right" style="padding:50px; text-align:center">
-            
+            <div class="mail">
+                <h3>Profile</h3>
+                <div class="agileinfo_mail_grids">
+                    <div class="col-md-12 agileinfo_mail_grid_right">
+                        <form method="post" asp-action="Update" asp-route-pic="@Model.Pictuer" enctype="multipart/form-data">
+                            <div class="col-md-6 wthree_contact_left_grid">
+                                <input type="text" asp-for="Name" value="@Model.Name" required="required">
+                                <input type="text" asp-for="Email" value="@Model.Email" required="required">
+                                <input type="text" asp-for="Password" value="@Model.Password" required="required" style="margin-top: 15px"> 
+                                <select asp-for="CountryId" asp-items="ViewBag.CountryList" class="form-control" style="margin-top: 15px">
+                                </select>
+                                <input type="file" asp-for="Pictuer" value="@Model.Pictuer" name="photo" class="form-control" style="margin-top: 15px">
+                                <img src="~/@Model.Pictuer" width="200" height="220" style="margin-top: 15px"/>
+                            </div>
+                            <div class="col-md-6 wthree_contact_left_grid">
+                                <input type="text" asp-for="Contact" value="@Model.Contact" required="required">
+                                <select asp-for="GenderId" asp-items="ViewBag.GenderList" class="form-control" style="margin-top: 15px">
+                                </select>
+                                <input type="text" asp-for="ConfirmPassword" value="@Model.Password" style="margin-top: 15px">
+                                <select asp-for="CityId" asp-items="ViewBag.CityList" class="form-control" style="margin-top: 15px">
+                                </select>
+                                <textarea asp-for="Address" required="required">@Model.Address</textarea>
+                            </div>
+                            <div class="clearfix"> </div>
+                            
+                            <input type="submit" value="Update">
+                        </form>
+                    </div>
+                    <div class="clearfix"> </div>
+                </div>
+            </div>    
         </div>
 
         <div class="clearfix"></div>
     </div>
     <!-- //banner -->
+
     <!-- footer -->
     <div class="footer">
         <div class="container">
@@ -327,6 +358,7 @@
         </div>
     </div>
     <!-- //footer -->
+    
     <!-- Bootstrap Core JavaScript -->
     <script src="js/bootstrap.min.js"></script>
 
