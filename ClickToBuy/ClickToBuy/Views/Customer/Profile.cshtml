@@ -1,5 +1,5 @@
 ﻿@using ClickToBuy.Model;
-@model ClickToBuy.Model.ViewModels.CustomerLogin;
+@model Customer;
 @{
     Layout = null;
     List<Brand> brands = ViewBag.BrandList;
@@ -11,7 +11,7 @@
 <!DOCTYPE html>
 <html>
 <head>
-    <title>Customre</title>
+    <title>Profile</title>
 
     <!-- for-mobile-apps -->
     <meta name="viewport" content="width=device-width, initial-scale=1">
@@ -243,19 +243,12 @@
         </div>
 
         <div class="w3l_banner_nav_right" style="padding:50px; text-align:center">
-            <!-- login -->
-            <div class="w3ls_vegetables">
-                <h3 style="margin-bottom:10px"><a asp-action="Profile"><i class="fa fa-male"></i> - My Profile - <i class="fa fa-male"></i></a></h3>
-                <h3 style="margin-bottom:10px"><a asp-action="MyProfile"><i class="fa fa-qrcode"></i> - Invoice Management - <i class="fa fa-qrcode"></i></a></h3>
-                <h3 style="margin-bottom:10px"><a asp-action="MyProfile"><i class="fa fa-power-off"></i> - Logout - <i class="fa fa-power-off"></i></a></h3>
-            </div>
-            <!-- //login -->
+            
         </div>
 
         <div class="clearfix"></div>
     </div>
     <!-- //banner -->
-    
     <!-- footer -->
     <div class="footer">
         <div class="container">
@@ -334,7 +327,6 @@
         </div>
     </div>
     <!-- //footer -->
-
     <!-- Bootstrap Core JavaScript -->
     <script src="js/bootstrap.min.js"></script>
 

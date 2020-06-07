@@ -45,6 +45,13 @@ namespace ClickToBuy.Controllers
             _iCategoryManager = iCategoryManager;
         }
 
+        private Customer LoginCustomerInfo()
+        {
+            int customerId = Convert.ToInt32(HttpContext.Session.GetString("CustomerId"));
+            Customer aLoginCustomerInfo = _iCustomerManager.GetById(customerId);
+            return aLoginCustomerInfo;
+        }
+
         private ICollection<Product> ShowClinteSiteProduct()
         {
             ICollection<PurchaseItem> getAllPurchaseItem = _iPurchaseItemManager.GetAll();
@@ -229,6 +236,14 @@ namespace ClickToBuy.Controllers
             ViewBag.CountryList = CountryList();
             ViewBag.GenderList = GenderList();
             return View(aCustomerInfo);
+        }
+
+        [HttpGet]
+        public IActionResult Profile()
+        {
+            Customer loginCustomerInfo = LoginCustomerInfo();
+            CommonComponent();
+            return View(loginCustomerInfo);
         }
 
         [HttpGet]
