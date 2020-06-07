@@ -110,7 +110,6 @@ namespace ClickToBuy.Controllers
             return genderList;
         }
 
-
         [HttpGet]
         public IActionResult Dashboard()
         {
@@ -122,7 +121,6 @@ namespace ClickToBuy.Controllers
 
             return RedirectToAction("CustomerLogin", "LoginProcess");
         }
-
 
         [HttpGet]
         public IActionResult Index()
@@ -175,38 +173,62 @@ namespace ClickToBuy.Controllers
             return Json(cityByCountryId);
         }
 
+        [Obsolete]
+        private bool IsAddCustomer(Customer aCustomerInfo, IFormFile picture)
+        {
+            aCustomerInfo.CustomerIPAddress = _iAccessor.HttpContext.Connection.RemoteIpAddress.ToString();
+            aCustomerInfo.JoinDate = DateTime.Now.Date;
+
+            if (ModelState.IsValid)
+            {
+                if (picture != null)
+                {
+                    string nameAndPath = Path.Combine(_iHostingEnvironment.WebRootPath
+                                                  + "/customerpicture",
+                                                  Path.GetFileName(picture.FileName));
+                    picture.CopyToAsync(new FileStream(nameAndPath, FileMode.Create));
+                    aCustomerInfo.Pictuer = "customerPicture/" + picture.FileName;
+                }
+
+                if (picture == null)
+                    aCustomerInfo.Pictuer = "customerpicture/NoImageFound.png";
+
+                return _iCustomerManager.Add(aCustomerInfo);
+            }
+
+            return false;
+        }
+
         [HttpPost]
         [Obsolete]
         public IActionResult Create(Customer aCustomer, IFormFile pictuer)
         {
-            aCustomer.CustomerIPAddress = _iAccessor.HttpContext.Connection.RemoteIpAddress.ToString();
-            aCustomer.JoinDate = DateTime.Now.Date;
+            bool isAdd = IsAddCustomer(aCustomer, pictuer);
 
-            if (ModelState.IsValid)
-            {
-                if (pictuer != null)
-                {
-                    string nameAndPath = Path.Combine(_iHostingEnvironment.WebRootPath
-                                                  + "/customerPicture",
-                                                  Path.GetFileName(pictuer.FileName));
-                    pictuer.CopyToAsync(new FileStream(nameAndPath, FileMode.Create));
-                    aCustomer.Pictuer = "customerPicture/" + pictuer.FileName;
-                }
-
-                if (pictuer == null)
-                    aCustomer.Pictuer = "customercicture/NoImageFound.png";
-
-                bool isAdd = _iCustomerManager.Add(aCustomer);
-
-                if (isAdd)
-                    return RedirectToAction("Index");
-                else
-                    ViewBag.ErrorMessage = "Customer save has been failed!";
-            }
+            if (isAdd)
+                return RedirectToAction("Index");
+            else
+                ViewBag.ErrorMessage = "Customer save has been failed!";
 
             ViewBag.CountryList = CountryList();
             ViewBag.GenderList = GenderList();
             return View(aCustomer);
+        }
+
+        [HttpPost]
+        [Obsolete]
+        public IActionResult Registration(Customer aCustomerInfo, IFormFile picture)
+        {
+            bool isRegister = IsAddCustomer(aCustomerInfo, picture);
+
+            if (isRegister)
+                return RedirectToAction("CustomerLogin", "LoginProcess");
+            else
+                ViewBag.ErrorMessage = "Registration save has been failed!";
+
+            ViewBag.CountryList = CountryList();
+            ViewBag.GenderList = GenderList();
+            return View(aCustomerInfo);
         }
 
         [HttpGet]

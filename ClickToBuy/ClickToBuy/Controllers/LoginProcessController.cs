@@ -20,11 +20,13 @@ namespace ClickToBuy.Controllers
         private readonly IPurchaseItemManager _iPurchaseItemManager;
         private readonly ICountryManager _iCountryManager;
         private readonly ICityManager _iCityManager;
+        private readonly IGenderManager _iGanderManager;
 
         public LoginProcessController(IAdminManager iAdminManager, 
             ICustomerManager iCustomerManager, ICategoryManager iCategoryManager,
             IProductManager iProductManager, IPurchaseItemManager iPurchaseItemManager,
-            ICountryManager iCountryManager, ICityManager iCityManager)
+            ICountryManager iCountryManager, ICityManager iCityManager,
+            IGenderManager iGenderManager)
         {
             _iAdminManager = iAdminManager;
             _iCustomerManager = iCustomerManager;
@@ -33,6 +35,7 @@ namespace ClickToBuy.Controllers
             _iPurchaseItemManager = iPurchaseItemManager;
             _iCountryManager = iCountryManager;
             _iCityManager = iCityManager;
+            _iGanderManager = iGenderManager;
         }
 
         private ICollection<Product> ShowClinteSiteProduct()
@@ -69,10 +72,17 @@ namespace ClickToBuy.Controllers
                     Text = c.Name
                 }).ToList();
 
+            List<SelectListItem> genders = _iGanderManager.GetAll()
+                .Select(g => new SelectListItem {
+                    Value = g.Id.ToString(),
+                    Text = g.Name
+                }).ToList();
+
             ViewBag.BrandList = getBrandForShowClinteSiteProduct.Distinct().ToList();
             ViewBag.CategoryList = _iCategoryManager.GetCategoryForPurchaseProduct();
             ViewBag.Condition = getConditionForShowClinteSiteProduct.Distinct().ToList();
-            ViewBag.CountryList = countrys;            
+            ViewBag.CountryList = countrys;
+            ViewBag.GenderList = genders;
         }
 
         [HttpGet]

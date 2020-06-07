@@ -131,6 +131,7 @@
         </div>
     </div>
     <!-- //header -->
+
     <!-- products-breadcrumb -->
     <div class="products-breadcrumb">
         <div class="container">
@@ -141,6 +142,7 @@
         </div>
     </div>
     <!-- //products-breadcrumb -->
+    
     <!-- banner -->
     <div class="banner">
         <div class="w3l_banner_nav_left">
@@ -172,7 +174,7 @@
                             </div>
                         </li>
                     </ul>
-                </div><!-- /.navbar-collapse -->
+                </div> 
 
                 <div class="collapse navbar-collapse" id="bs-megadropdown-tabs">
                     <ul class="nav navbar-nav nav_1">
@@ -261,23 +263,23 @@
                         </div>
                         <div class="form">
                             <h2>Create an account</h2>
-                            <form action="#" method="post">
+                            <form asp-controller="Customer" asp-action="Registration" method="post" enctype="multipart/form-data">
                                 <input type="text" asp-for="@aCustomerInfo.Name" placeholder="Name" required="required">
-                                <input type="text" id="contact" placeholder="Phone" required="required">
-                                <input type="email" asp-for="@aCustomerInfo.Email" placeholder="Email Address" required="required">
-                                <select asp-for="@aCustomerInfo.Gender" class="form-control">
+                                <input type="text" asp-for="@aCustomerInfo.Contact" id="contact" placeholder="Phone" required="required">
+                                <input type="email" asp-for="@aCustomerInfo.Email" id="email" placeholder="Email Address" required="required">
+                                <select asp-for="@aCustomerInfo.GenderId" asp-items="ViewBag.GenderList" class="form-control">
                                     <option value="">-- Select Gender -</option>
-                                    <option value="1">Male</option>
-                                    <option value="2">Female</option>
                                 </select> <br />
                                 <input type="password" asp-for="@aCustomerInfo.Password" placeholder="Password" required="required">
                                 <input type="password" asp-for="@aCustomerInfo.ConfirmPassword" placeholder="Confirm Password" required="required">
-                                <select asp-for="@aCustomerInfo.CountryId" asp-items="ViewBag.CountryList" class="form-control">
+                                <select asp-for="@aCustomerInfo.CountryId" id="countryId" asp-items="ViewBag.CountryList" class="form-control">
                                     <option value="">-- Select Country -</option>
                                 </select> <br />
-                                <select asp-for="@aCustomerInfo.CityId" class="form-control">
+                                <select asp-for="@aCustomerInfo.CityId" id="cityId" class="form-control">
                                     <option value="">-- Select City -</option>
                                 </select> <br />
+                                <input type="file" asp-for="@aCustomerInfo.Pictuer" name="picture" class="form-control"> <br />
+                                <textarea asp-for="@aCustomerInfo.Address" class="form-control" placeholder="Your address hare" required="required"></textarea> <br />
                                 <input type="submit" value="Register">
                             </form>
                         </div>
@@ -437,32 +439,32 @@
                 });
             });
 
-            $("#Email").change(function () {
-                var email = $("#Email").val();
+            $("#email").change(function () {
+                var email = $("#email").val();
                 var serverUrl = '/api/LoginProcess/CheckEmail?email=' + email;
 
                 $.ajax({
                     url: serverUrl,
                     success: function (response) {
                         if (response == 1) {
-                            alert("email is exist! Please try new one.");
-                            $('#Email').val('');
+                            alert("Email is exist! Please try new one.");
+                            $('#email').val('');
                         }
                     }
                 });
             });
 
-            $("#CountryId").change(function () {
-                var countryId = $("#CountryId").val();
-                $("#CityId").empty();
-                $("#CityId").append('<option value="">-- Select City --</option>');
+            $("#countryId").change(function () {
+                var countryId = $("#countryId").val();
+                $("#cityId").empty();
+                $("#cityId").append('<option value="">-- Select City --</option>');
                 var serverUrl = '/api/LoginProcess/GetCityByCountry?countryId=' + countryId;
 
                 $.ajax({
                     url: serverUrl,
                     success: function (response) {
                         $.each(response, (key, value) => {
-                            $("#CityId").append('<option value=' + value.id + '>' + value.name + '</option>');
+                            $("#cityId").append('<option value=' + value.id + '>' + value.name + '</option>');
                         });
                     },
                     error: function (response) {

@@ -25,8 +25,9 @@ namespace ClickToBuy.Repository
                                                   .Include(c => c.City)
                                                   .Include(c => c.Country)
                                                   .Include(c => c.Gender)
-                                                  .Include(c => c.Coupons).FirstOrDefault();
-            return aCustomerDetails;
+                                                  .Include(c => c.Coupons)
+                                                  .Where(c => c.Id == id).FirstOrDefault();
+                                                  return aCustomerDetails;
         }
 
         public Customer CheckContact(string contact)
