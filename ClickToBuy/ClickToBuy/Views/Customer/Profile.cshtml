@@ -79,7 +79,7 @@
                             <ul class="dropdown-menu drp-mnu">
                                 <li><a asp-controller="Customer" asp-action="Profile">My Profile</a></li>
                                 <li><a href="login.html">Invoice Management</a></li>
-                                <li><a href="login.html">Logout</a></li>
+                                <li><a asp-controller="LoginProcess" asp-action="CustomerLogout">Logout</a></li>
                             </ul>
                         </div>
                     </div>
@@ -255,7 +255,7 @@
                                 <select asp-for="CountryId" asp-items="ViewBag.CountryList" class="form-control" style="margin-top: 15px">
                                 </select>
                                 <input type="file" asp-for="Pictuer" value="@Model.Pictuer" name="photo" class="form-control" style="margin-top: 15px">
-                                <img src="~/@Model.Pictuer" width="200" height="220" style="margin-top: 15px"/>
+                                <img src="~/@Model.Pictuer" width="200" height="200" style="margin-top: 15px; margin-bottom: 10px"/>
                             </div>
                             <div class="col-md-6 wthree_contact_left_grid">
                                 <input type="text" asp-for="Contact" value="@Model.Contact" required="required">
@@ -268,6 +268,10 @@
                             </div>
                             <div class="clearfix"> </div>
                             
+                            <span class="text-danger">@ViewBag.ErrorMessage</span>
+                            <input type="hidden" asp-for="Id"/>
+                            <input type="hidden" asp-for="CustomerIPAddress"/>
+                            <input type="hidden" asp-for="JoinDate"/>
                             <input type="submit" value="Update">
                         </form>
                     </div>

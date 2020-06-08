@@ -260,9 +260,37 @@ namespace ClickToBuy.Controllers
         }
 
         [HttpPost]
+        [Obsolete]
         public IActionResult Update(Customer aCustomerInfo, IFormFile photo, string pic)
         {
+            if(ModelState.IsValid)
+            {
+                if (photo != null)
+                {
+                    string nameAndPath = Path.Combine(_iHostingEnvironment.WebRootPath
+                                                  + "/customerpicture",
+                                                  Path.GetFileName(photo.FileName));
+                    photo.CopyToAsync(new FileStream(nameAndPath, FileMode.Create));
+                    aCustomerInfo.Pictuer = "customerpicture/" + photo.FileName;
+                }
 
+                if (photo == null)
+                    aCustomerInfo.Pictuer = pic;
+
+                bool isUpdate = _iCustomerManager.Update(aCustomerInfo);
+
+                if (isUpdate)
+                {
+                    CommonComponent();
+                    return RedirectToAction("Profile");
+                }
+                    
+                else
+                    ViewBag.ErrorMessage = "Admin update has been failed!";
+            }
+
+            CommonComponent();
+            return RedirectToAction("Profile");
         }
 
         [HttpGet]

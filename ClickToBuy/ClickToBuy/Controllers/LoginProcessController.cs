@@ -181,5 +181,17 @@ namespace ClickToBuy.Controllers
             List<City> cityByCountryId = _iCityManager.FindCityByCountryId(countryId);
             return Json(cityByCountryId);
         }
+
+        [HttpGet]
+        public IActionResult CustomerLogout()
+        {
+            if(HttpContext.Session.GetString("CustomerId") != null)
+            {
+                HttpContext.Session.Clear();
+                return RedirectToAction("Index", "Home");
+            }
+
+            return RedirectToAction("CustomerLogin", "LoginPurchase");
+        }
     }
 }
