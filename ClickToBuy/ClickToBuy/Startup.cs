@@ -34,6 +34,15 @@ namespace ClickToBuy
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
+            services.AddDistributedMemoryCache();
+
+            services.AddSession(options =>
+            {
+                options.IdleTimeout = TimeSpan.FromMinutes(10);
+                options.Cookie.HttpOnly = true;
+                options.Cookie.IsEssential = true;
+            });
+
             services.AddDbContext<ApplicationDbContext>(options =>
                 options.UseSqlServer(
                     Configuration.GetConnectionString("DefaultConnection")));
@@ -78,14 +87,6 @@ namespace ClickToBuy
             services.AddTransient<IAdminRepository, AdminRepository>();
             services.AddTransient<ISliderRepository, SliderRepository>();
             services.AddTransient<ISliderManager, SliderManager>();
-
-            services.AddDistributedMemoryCache();
-            services.AddSession();
-
-            services.AddSession(options =>
-            {
-                options.IdleTimeout = TimeSpan.FromMinutes(10);
-            });
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
