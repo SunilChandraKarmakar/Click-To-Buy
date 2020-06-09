@@ -115,14 +115,6 @@ namespace ClickToBuy.Controllers
         }
 
         [HttpGet]
-        public IActionResult GetAllProduct()
-        {
-            ICollection<Product> products = _iProductManager.GetAll();
-            CommonComponent();
-            return View(products);
-        }
-
-        [HttpGet]
         public IActionResult GetProductByCondition(int? id)
         {
             if (id == null)
