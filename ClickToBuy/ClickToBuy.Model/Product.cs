@@ -29,6 +29,9 @@ namespace ClickToBuy.Model
         [Display(Name = "Status")]
         public int CloseTypeId { get; set; }
 
+        [DataType(DataType.PhoneNumber)]
+        public int Quantity { get; set; }
+
         [Required(ErrorMessage = "Provide regular price.")]
         [DataType(DataType.Currency)]
         [Display(Name = "Regular Price")]

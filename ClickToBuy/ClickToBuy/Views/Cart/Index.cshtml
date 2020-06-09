@@ -1,10 +1,14 @@
-﻿@using ClickToBuy.Model; 
+﻿@using ClickToBuy.Model;
+@using ClickToBuy.Model.ViewModels; 
+@model ICollection<AddProductViewModel>;
 @{
     Layout = null;
+    int i = 0;
     List<Brand> brands = ViewBag.BrandList;
     List<Category> categories = ViewBag.CategoryList;
     List<Condition> conditions = ViewBag.ConditionList;
     List<Product> clinteProductList = ViewBag.ClinteProductList;
+    List<ProductPhoto> productPhotos = ViewBag.ProductPhotos;
 }
 
 <!DOCTYPE html>
@@ -232,7 +236,7 @@
                 <h3>Chec<span>kout</span></h3>
 
                 <div class="checkout-right">
-                    <h4>Your shopping cart contains: <span>3 Products</span></h4>
+                    <h4>Your shopping cart contains: <span> @Model.Count() Products</span></h4>
                     <table class="timetable_sub">
                         <thead>
                             <tr>
@@ -246,73 +250,42 @@
                             </tr>
                         </thead>
                         <tbody>
-                            <tr class="rem1">
-                                <td class="invert">1</td>
-                                <td class="invert-image"><a href="single.html"><img src="images/1.png" alt=" " class="img-responsive"></a></td>
-                                <td class="invert">
-                                    <div class="quantity">
-                                        <div class="quantity-select">
-                                            <div class="entry value-minus">&nbsp;</div>
-                                            <div class="entry value"><span>1</span></div>
-                                            <div class="entry value-plus active">&nbsp;</div>
+                            @foreach (AddProductViewModel product in Model)
+                            {
+                                <tr class="rem1">
+                                    <td class="invert">@(i = i + 1)</td>
+                                    <td>
+                                        @{
+                                            ProductPhoto getProductPhotoByProductId = productPhotos
+                                                .Where(pp => pp.ProductId == product.Id &&
+                                                pp.Featured == true && pp.Status == true).FirstOrDefault();
+                                            string productPhoto = getProductPhotoByProductId == null ?
+                                                "productphotos/NoImageFound.png" : getProductPhotoByProductId.Photo;
+                                        }
+                                        <a>
+                                            <img src="@productPhoto" width="80" height="100">
+                                        </a>
+                                    </td>
+                                    <td class="invert">
+                                        <div class="quantity">
+                                            <div class="quantity-select">
+                                                <div class="entry value-minus">&nbsp;</div>
+                                                <div class="entry value"><span>1</span></div>
+                                                <div class="entry value-plus active">&nbsp;</div>
+                                            </div>
                                         </div>
-                                    </div>
-                                </td>
-                                <td class="invert">Fortune Sunflower Oil</td>
-
-                                <td class="invert">$290.00</td>
-                                <td class="invert">
-                                    <div class="rem">
-                                        <div class="close1"> </div>
-                                    </div>
-
-                                </td>
-                            </tr>
-                            <tr class="rem2">
-                                <td class="invert">2</td>
-                                <td class="invert-image"><a href="single.html"><img src="images/3.png" alt=" " class="img-responsive"></a></td>
-                                <td class="invert">
-                                    <div class="quantity">
-                                        <div class="quantity-select">
-                                            <div class="entry value-minus">&nbsp;</div>
-                                            <div class="entry value"><span>1</span></div>
-                                            <div class="entry value-plus active">&nbsp;</div>
+                                    </td>
+                                    <td class="invert">@product.Name</td>
+                                    
+                                    <td class="invert">@product.Price</td>
+                                    <td class="invert">
+                                        <div class="rem">
+                                            <div class="close1"> </div>
                                         </div>
-                                    </div>
-                                </td>
-                                <td class="invert">Basmati Rise (5 Kg)</td>
 
-                                <td class="invert">$250.00</td>
-                                <td class="invert">
-                                    <div class="rem">
-                                        <div class="close2"> </div>
-                                    </div>
-
-                                </td>
-                            </tr>
-                            <tr class="rem3">
-                                <td class="invert">3</td>
-                                <td class="invert-image"><a href="single.html"><img src="images/2.png" alt=" " class="img-responsive"></a></td>
-                                <td class="invert">
-                                    <div class="quantity">
-                                        <div class="quantity-select">
-                                            <div class="entry value-minus">&nbsp;</div>
-                                            <div class="entry value"><span>1</span></div>
-                                            <div class="entry value-plus active">&nbsp;</div>
-                                        </div>
-                                    </div>
-                                </td>
-                                <td class="invert">Pepsi Soft Drink (2 Ltr)</td>
-
-                                <td class="invert">$15.00</td>
-                                <td class="invert">
-                                    <div class="rem">
-                                        <div class="close3"> </div>
-                                    </div>
-
-                                </td>
-                            </tr>
-
+                                    </td>
+                                </tr>                                
+                            }
                         </tbody>
                     </table>
                 </div>

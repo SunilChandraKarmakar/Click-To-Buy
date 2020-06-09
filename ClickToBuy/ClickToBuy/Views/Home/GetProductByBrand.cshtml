@@ -108,7 +108,7 @@
                                 <ul class="dropdown-menu drp-mnu">
                                     <li><a asp-action="AdminLogin" asp-controller="LoginProcess">My Profile</a></li>
                                     <li><a href="login.html">Invoice Management</a></li>
-                                    <li><a href="login.html">Logout</a></li>
+                                    <li><a asp-controller="LoginProcess" asp-action="CustomerLogout">Logout</a></li>
                                 </ul>
                             </div>
                         </div>
@@ -301,17 +301,10 @@
                                                     <h4>Price : @product.RegularPrice BDT</h4>
                                                 </div>
                                                 <div class="snipcart-details top_brand_home_details">
-                                                    <form action="#" method="post">
+                                                    <form asp-controller="Cart" asp-action="AddProduct" asp-route-id="@product.Id" method="post">
                                                         <fieldset>
-                                                            <input type="hidden" name="cmd" value="_cart" />
-                                                            <input type="hidden" name="add" value="1" />
-                                                            <input type="hidden" name="business" value=" " />
                                                             <input type="hidden" name="item_name" value="@product.Name.ToString()" />
                                                             <input type="hidden" name="amount" value="@Convert.ToDouble(product.RegularPrice)" />
-                                                            <input type="hidden" name="discount_amount" value=" " />
-                                                            <input type="hidden" name="currency_code" value="USD" />
-                                                            <input type="hidden" name="return" value=" " />
-                                                            <input type="hidden" name="cancel_return" value=" " />
                                                             <input type="submit" name="submit" value="Add to cart" class="button" />
                                                         </fieldset>
                                                     </form>

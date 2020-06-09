@@ -19,6 +19,9 @@ using ClickToBuy.Repository;
 using Microsoft.AspNetCore.Http;
 using ClickToBuy.Database;
 using AutoMapper;
+using Microsoft.AspNetCore.Mvc;
+using Newtonsoft.Json;
+using Microsoft.CodeAnalysis.Options;
 
 namespace ClickToBuy
 {
@@ -33,16 +36,7 @@ namespace ClickToBuy
 
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
-        {
-            services.AddDistributedMemoryCache();
-
-            services.AddSession(options =>
-            {
-                options.IdleTimeout = TimeSpan.FromMinutes(10);
-                options.Cookie.HttpOnly = true;
-                options.Cookie.IsEssential = true;
-            });
-
+        {   
             services.AddDbContext<ApplicationDbContext>(options =>
                 options.UseSqlServer(
                     Configuration.GetConnectionString("DefaultConnection")));
@@ -51,6 +45,14 @@ namespace ClickToBuy
             services.AddControllersWithViews();
             services.AddRazorPages();
 
+            services.AddDistributedMemoryCache();
+            services.AddSession(options =>
+            {
+                options.IdleTimeout = TimeSpan.FromMinutes(10);
+                //options.Cookie.HttpOnly = true;
+                //options.Cookie.IsEssential = true;
+            });
+            
             services.AddAutoMapper(typeof(Startup));
             services.AddTransient<ICountryManager, CountryManager>();
             services.AddTransient<ICountryRepository, CountryRepository>();
@@ -86,7 +88,7 @@ namespace ClickToBuy
             services.AddTransient<IAdminManager, AdminManager>();
             services.AddTransient<IAdminRepository, AdminRepository>();
             services.AddTransient<ISliderRepository, SliderRepository>();
-            services.AddTransient<ISliderManager, SliderManager>();
+            services.AddTransient<ISliderManager, SliderManager>();                
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
