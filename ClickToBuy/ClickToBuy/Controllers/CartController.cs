@@ -64,7 +64,7 @@ namespace ClickToBuy.Controllers
         {
             if(HttpContext.Session.GetString("CustomerId") != null)
             {
-                List<AddProductViewModel> addProducts = HttpContext.Session.Get<List<AddProductViewModel>>("addProducts");
+                List<AddProductViewModel> addProducts = HttpContext.Session.Get<List<AddProductViewModel>>("AddProducts");
 
                 if (addProducts == null)
                     addProducts = new List<AddProductViewModel>();
@@ -94,10 +94,10 @@ namespace ClickToBuy.Controllers
                     Id = selectedProductInfo.Id,
                     Name = selectedProductInfo.Name,
                     Price = (float)(selectedProductInfo.OfferPrice <= 0 ? selectedProductInfo.RegularPrice : selectedProductInfo.OfferPrice),
-                    Quantity = selectedProductInfo.Quantity
+                    Quantity = 1
                 };
 
-                List<AddProductViewModel>  addProducts = HttpContext.Session.Get<List<AddProductViewModel>>("addProducts");
+                List<AddProductViewModel>  addProducts = HttpContext.Session.Get<List<AddProductViewModel>>("AddProducts");
 
                 if (addProducts == null)
                     addProducts = new List<AddProductViewModel>();
@@ -114,7 +114,7 @@ namespace ClickToBuy.Controllers
                         existProduct.Quantity = existProduct.Quantity + (int)quantity;
 
                     addProducts.Add(existProduct);
-                    HttpContext.Session.Set("addProducts", addProducts);
+                    HttpContext.Session.Set("AddProducts", addProducts);
                 }
                 else
                 {
@@ -124,8 +124,46 @@ namespace ClickToBuy.Controllers
                         selectedProductInfo.Quantity = (int)quantity;
 
                     addProducts.Add(addProductViewModel);
-                    HttpContext.Session.Set("addProducts", addProducts);
+                    HttpContext.Session.Set("AddProducts", addProducts);
                 }
+
+                return RedirectToAction("Index");
+            }
+
+            return RedirectToAction("CustomerLogin", "LoginProcess");
+        }
+
+        [HttpPost]
+        public IActionResult Update(int[] quantity)
+        {
+            if (HttpContext.Session.GetString("CustomerId") != null)
+            {
+                List<AddProductViewModel> addProductList = HttpContext.Session.Get<List<AddProductViewModel>>("AddProducts");
+
+                for (int i = 0; i < addProductList.Count(); i++)
+                {
+                    addProductList[i].Quantity = quantity[i];
+                }
+
+                HttpContext.Session.Set("AddProducts", addProductList);
+                return RedirectToAction("Index");
+            }
+
+            return RedirectToAction("CustomerLogin", "LoginProcess");
+        }
+
+        [HttpGet]
+        public IActionResult Remove(int? id)
+        {
+            if (HttpContext.Session.GetString("CustomerId") != null)
+            {
+                if (id == null)
+                    return NotFound();
+
+                List<AddProductViewModel> products = HttpContext.Session.Get<List<AddProductViewModel>>("AddProducts");
+                AddProductViewModel existProduct = products.Where(p => p.Id == id).FirstOrDefault();
+                products.Remove(existProduct);
+                HttpContext.Session.Set("AddProducts", products);
 
                 return RedirectToAction("Index");
             }

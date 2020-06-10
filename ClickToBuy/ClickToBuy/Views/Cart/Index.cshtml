@@ -4,6 +4,7 @@
 @{
     Layout = null;
     int i = 0;
+    float totalPrice = 0, subTotal = 0;
     List<Brand> brands = ViewBag.BrandList;
     List<Category> categories = ViewBag.CategoryList;
     List<Condition> conditions = ViewBag.ConditionList;
@@ -29,10 +30,9 @@
     <link href="~/ClientLayout/css/bootstrap.css" rel="stylesheet" type="text/css" media="all" />
     <link href="~/ClientLayout/css/style.css" rel="stylesheet" type="text/css" media="all" />
 
-    <!-- font-awesome icons -->
-    <link href="~/ClientLayout/css/font-awesome.css" rel="stylesheet" type="text/css" media="all" />
-    <!-- //font-awesome icons -->
-
+    <!-- FontAwesome 4.3.0 -->
+    <link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css" rel="stylesheet" type="text/css" />
+   
     <!-- js -->
     <script src="~/ClientLayout/js/jquery-1.11.1.min.js"></script>
     <!-- //js -->
@@ -237,68 +237,62 @@
 
                 <div class="checkout-right">
                     <h4>Your shopping cart contains: <span> @Model.Count() Products</span></h4>
-                    <table class="timetable_sub">
-                        <thead>
-                            <tr>
-                                <th>SL No.</th>
-                                <th>Product</th>
-                                <th>Quality</th>
-                                <th>Product Name</th>
-
-                                <th>Price</th>
-                                <th>Remove</th>
-                            </tr>
-                        </thead>
-                        <tbody>
-                            @foreach (AddProductViewModel product in Model)
-                            {
-                                <tr class="rem1">
-                                    <td class="invert">@(i = i + 1)</td>
-                                    <td>
-                                        @{
-                                            ProductPhoto getProductPhotoByProductId = productPhotos
-                                                .Where(pp => pp.ProductId == product.Id &&
-                                                pp.Featured == true && pp.Status == true).FirstOrDefault();
-                                            string productPhoto = getProductPhotoByProductId == null ?
-                                                "productphotos/NoImageFound.png" : getProductPhotoByProductId.Photo;
-                                        }
-                                        <a>
-                                            <img src="@productPhoto" width="80" height="100">
-                                        </a>
-                                    </td>
-                                    <td class="invert">
-                                        <div class="quantity">
-                                            <div class="quantity-select">
-                                                <div class="entry value-minus">&nbsp;</div>
-                                                <div class="entry value"><span>1</span></div>
-                                                <div class="entry value-plus active">&nbsp;</div>
+                    <form method="post" asp-controller="Cart" asp-action="Update">
+                        <table class="timetable_sub">
+                            <thead>
+                                <tr>
+                                    <th>SL No.</th>
+                                    <th>Product</th>
+                                    <th>Product Name</th>
+                                    <th>Unit Price</th>
+                                    <th>Quality</th>
+                                    <th>Sub Total</th>
+                                    <th>Remove</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                @foreach (AddProductViewModel product in Model)
+                                {
+                                    <tr class="rem1">
+                                        <td class="invert">@(i = i + 1)</td>
+                                        <td>
+                                            @{
+                                                ProductPhoto getProductPhotoByProductId = productPhotos
+                                                    .Where(pp => pp.ProductId == product.Id &&
+                                                    pp.Featured == true && pp.Status == true).FirstOrDefault();
+                                                string productPhoto = getProductPhotoByProductId == null ?
+                                                    "productphotos/NoImageFound.png" : getProductPhotoByProductId.Photo;
+                                            }
+                                            <a>
+                                                <img src="@productPhoto" width="80" height="100">
+                                            </a>
+                                        </td>
+                                        <td class="invert">@product.Name</td>
+                                        <td class="invert">@product.Price</td>
+                                        <td class="invert">
+                                            <div class="input-append">
+                                                <input style="max-width:34px" placeholder="1" min="1" type="number" value="@product.Quantity" name="quantity">
+                                                <button type="submit" class="btn btn-info"><i class="fas fa-pencil-alt"></i> Update</button>
                                             </div>
-                                        </div>
-                                    </td>
-                                    <td class="invert">@product.Name</td>
-                                    
-                                    <td class="invert">@product.Price</td>
-                                    <td class="invert">
-                                        <div class="rem">
-                                            <div class="close1"> </div>
-                                        </div>
-
-                                    </td>
-                                </tr>                                
-                            }
-                        </tbody>
-                    </table>
+                                        </td>
+                                        <td>@(subTotal = product.Price * product.Quantity)</td>
+                                        @{
+                                            totalPrice = totalPrice + subTotal;
+                                         }
+                                        <td class="invert">
+                                            <div class="rem">
+                                                <div class="close1"><a asp-controller="Cart" asp-action="Remove" asp-route-id="@product.Id">.</a> </div>
+                                            </div>
+                                        </td>
+                                    </tr>
+                                }
+                            </tbody>
+                        </table>
+                    </form>
                 </div>
                 <div class="checkout-left">
                     <div class="col-md-4 checkout-left-basket">
-                        <h4>Continue to basket</h4>
-                        <ul>
-                            <li>Product1 <i>-</i> <span>$15.00 </span></li>
-                            <li>Product2 <i>-</i> <span>$25.00 </span></li>
-                            <li>Product3 <i>-</i> <span>$29.00 </span></li>
-                            <li>Total Service Charges <i>-</i> <span>$15.00</span></li>
-                            <li>Total <i>-</i> <span>$84.00</span></li>
-                        </ul>
+                        <h4>Total Price : @totalPrice</h4>
                     </div>
                     <div class="col-md-8 address_form_agile">
                         <h4>Add a new Details</h4>
