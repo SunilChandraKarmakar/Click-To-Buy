@@ -99,8 +99,8 @@
                         <div class="mega-dropdown-menu">
                             <div class="w3ls_vegetables">
                                 <ul class="dropdown-menu drp-mnu">
-                                    <li><a asp-action="AdminLogin" asp-controller="LoginProcess">Admin</a></li>
-                                    <li><a href="login.html">Sign Up</a></li>
+                                    <li><a asp-controller="LoginProcess" asp-action="CustomerLogin">Login</a></li>
+                                    <li><a asp-action="CustomerLogin" asp-controller="LoginProcess">Sign Up</a></li>
                                 </ul>
                             </div>
                         </div>
@@ -328,17 +328,11 @@
                             <h4>Price : @productInfo.RegularPrice BDT</h4>
                         </div>
                         <div class="snipcart-details agileinfo_single_right_details">
-                            <form action="#" method="post">
+                            <form method="post" asp-controller="Cart" asp-action="AddProduct" asp-route-id="@productInfo.Id">                                 
                                 <fieldset>
-                                    <input type="hidden" name="cmd" value="_cart" />
-                                    <input type="hidden" name="add" value="1" />
-                                    <input type="hidden" name="business" value=" " />
+                                    <input type="number" min="1" value="1" asp-for="@productInfo.Quantity" name="quantity" style="max-width:50px; margin-bottom:10px">
                                     <input type="hidden" name="item_name" value="@productInfo.Name.ToString()" />
                                     <input type="hidden" name="amount" value="@Convert.ToDouble(productInfo.RegularPrice)" />
-                                    <input type="hidden" name="discount_amount" value=" " />
-                                    <input type="hidden" name="currency_code" value="USD" />
-                                    <input type="hidden" name="return" value=" " />
-                                    <input type="hidden" name="cancel_return" value=" " />
                                     <input type="submit" name="submit" value="Add to cart" class="button" />
                                 </fieldset>
                             </form>

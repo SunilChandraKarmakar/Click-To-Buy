@@ -119,9 +119,9 @@ namespace ClickToBuy.Controllers
                 else
                 {
                     if (quantity == null)
-                        selectedProductInfo.Quantity = 1;
+                        addProductViewModel.Quantity = 1;
                     else
-                        selectedProductInfo.Quantity = (int)quantity;
+                        addProductViewModel.Quantity = (int)quantity;
 
                     addProducts.Add(addProductViewModel);
                     HttpContext.Session.Set("AddProducts", addProducts);
