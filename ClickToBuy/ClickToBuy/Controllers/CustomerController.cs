@@ -22,6 +22,9 @@ namespace ClickToBuy.Controllers
         private readonly IProductManager _iProductManager;
         private readonly IPurchaseItemManager _iPurchaseItemManager;
         private readonly ICategoryManager _iCategoryManager;
+        private readonly IOrderManager _iOrderManager;
+        private readonly IOrderDetailsManager _iOrderDetailsManager;
+
         [Obsolete]
         private readonly IHostingEnvironment _iHostingEnvironment;
 
@@ -32,7 +35,8 @@ namespace ClickToBuy.Controllers
                                   IGenderManager iGenderManager, 
                                   IHostingEnvironment iHostingEnvironment, IHttpContextAccessor iAccessor,
                                   IPurchaseItemManager iPurchaseItemManager, IProductManager iProductManager,
-                                  ICategoryManager iCategoryManager)
+                                  ICategoryManager iCategoryManager,
+                                  IOrderManager iOrderManager, IOrderDetailsManager iOrderDetailsManager)
         {
             _iCustomerManager = iCustomerManager;
             _iCountryManager = iCountryManager;
@@ -43,6 +47,8 @@ namespace ClickToBuy.Controllers
             _iProductManager = iProductManager;
             _iAccessor = iAccessor;
             _iCategoryManager = iCategoryManager;
+            _iOrderManager = iOrderManager;
+            _iOrderDetailsManager = iOrderDetailsManager;
         }
 
         private Customer LoginCustomerInfo()
@@ -328,7 +334,11 @@ namespace ClickToBuy.Controllers
         {
             if(HttpContext.Session.GetString("CustomerId") != null)
             {
+                ICollection<Order> cutomerOrder = _iOrderManager.GetAll()
+                    .Where(o => o.CustomerId == LoginCustomerInfo().Id).ToList();
+                CommonComponent();
 
+                return View(cutomerOrder);
             }
 
             return RedirectToAction("CustomerLogin", "LoginProcess");

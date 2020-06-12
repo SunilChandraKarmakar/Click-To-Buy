@@ -21,10 +21,12 @@ namespace ClickToBuy.Controllers
         private readonly ICityManager _iCityManager;
         private readonly IOrderManager _iOrderManager;
         private readonly IOrderDetailsManager _iOrderDetailsManager;
+        private readonly ICustomerBillingAddressesManager _iCustomerBillingAddressesManager;
 
         public CartController(IPurchaseItemManager iPurchaseItemManager, IProductManager iProductManager,
             ICategoryManager iCategoryManager, IProductPhotoManager iProductPhotoManager,
-            ICityManager iCityManager, IOrderManager iOrderManager, IOrderDetailsManager iOrderDetailsManager)
+            ICityManager iCityManager, IOrderManager iOrderManager, IOrderDetailsManager iOrderDetailsManager,
+            ICustomerBillingAddressesManager iCustomerBillingAddressesManager)
         {
             _iPurchaseItemManager = iPurchaseItemManager;
             _iProductManager = iProductManager;
@@ -33,6 +35,7 @@ namespace ClickToBuy.Controllers
             _iCityManager = iCityManager;
             _iOrderManager = iOrderManager;
             _iOrderDetailsManager = iOrderDetailsManager;
+            _iCustomerBillingAddressesManager = iCustomerBillingAddressesManager;
         }
 
         private ICollection<Product> ShowClinteSiteProduct()
@@ -220,6 +223,7 @@ namespace ClickToBuy.Controllers
                 };
 
                 bool isSaveCustomerOrder = _iOrderManager.Add(customerOrder);
+                bool isSaveCustomerBillingAddress = _iCustomerBillingAddressesManager.Add(customerOrderBillingAddress);
                 bool isSaveCustomerOrderDetails = false;
 
                 List<AddProductViewModel> addProducts = HttpContext.Session.Get<List<AddProductViewModel>>("AddProducts");
@@ -237,7 +241,7 @@ namespace ClickToBuy.Controllers
                     isSaveCustomerOrderDetails = _iOrderDetailsManager.Add(customerOrderDetails);
                 }
 
-                if (isSaveCustomerOrder && isSaveCustomerOrderDetails)
+                if (isSaveCustomerOrder && isSaveCustomerOrderDetails && isSaveCustomerBillingAddress)
                 {
                     HttpContext.Session.Remove("AddProducts");
                     return RedirectToAction("InvoiceManagement", "Customer");

@@ -16,5 +16,10 @@ namespace ClickToBuy.Manager
         {
             _iOrderRepository = iOrderRepository;
         }
+
+        public override ICollection<Order> GetAll()
+        {
+            return _iOrderRepository.GetAll();
+        }
     }
 }
