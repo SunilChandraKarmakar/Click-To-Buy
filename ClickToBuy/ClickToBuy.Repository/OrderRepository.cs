@@ -11,6 +11,16 @@ namespace ClickToBuy.Repository
 {
     public class OrderRepository : BaseRepository<Order>, IOrderRepository
     {
+        public override Order GetById(int? id)
+        {
+            return ctbContext.Orders
+                    .Include(o => o.Customer)
+                    .Include(o => o.OrderDetails)
+                    .Include(o => o.ReturnProducts)
+                    .Include(o => o.DeliveryCharge)
+                    .Where(o => o.Id == id).FirstOrDefault();
+        }
+
         public override ICollection<Order> GetAll()
         {
             return ctbContext.Orders

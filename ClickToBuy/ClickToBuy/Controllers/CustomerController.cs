@@ -24,6 +24,7 @@ namespace ClickToBuy.Controllers
         private readonly ICategoryManager _iCategoryManager;
         private readonly IOrderManager _iOrderManager;
         private readonly IOrderDetailsManager _iOrderDetailsManager;
+        private readonly ICustomerBillingAddressesManager _iCustomerBillingAddressesManager;
 
         [Obsolete]
         private readonly IHostingEnvironment _iHostingEnvironment;
@@ -36,7 +37,8 @@ namespace ClickToBuy.Controllers
                                   IHostingEnvironment iHostingEnvironment, IHttpContextAccessor iAccessor,
                                   IPurchaseItemManager iPurchaseItemManager, IProductManager iProductManager,
                                   ICategoryManager iCategoryManager,
-                                  IOrderManager iOrderManager, IOrderDetailsManager iOrderDetailsManager)
+                                  IOrderManager iOrderManager, IOrderDetailsManager iOrderDetailsManager,
+                                  ICustomerBillingAddressesManager iCustomerBillingAddressesManager)
         {
             _iCustomerManager = iCustomerManager;
             _iCountryManager = iCountryManager;
@@ -49,6 +51,7 @@ namespace ClickToBuy.Controllers
             _iCategoryManager = iCategoryManager;
             _iOrderManager = iOrderManager;
             _iOrderDetailsManager = iOrderDetailsManager;
+            _iCustomerBillingAddressesManager = iCustomerBillingAddressesManager;
         }
 
         private Customer LoginCustomerInfo()
@@ -339,6 +342,37 @@ namespace ClickToBuy.Controllers
                 CommonComponent();
 
                 return View(cutomerOrder);
+            }
+
+            return RedirectToAction("CustomerLogin", "LoginProcess");
+        }
+
+        [HttpGet]
+        public IActionResult InvoiceDetails(int? id)
+        { 
+            if(HttpContext.Session.GetString("CustomerId") != null)
+            {
+                if (id == null)
+                    return NotFound();
+
+                ICollection<OrderDetails> customerOrderDetails = _iOrderDetailsManager.GetAll()
+                    .Where(od => od.OrderId == id).ToList();
+
+                Order customerOrderInfo = _iOrderManager.GetById(id);
+                CustomerBillingAddress customerBillingAddress = _iCustomerBillingAddressesManager.GetAll()
+                    .Where(cba => cba.CustomerId == LoginCustomerInfo().Id).LastOrDefault();
+
+                if (customerBillingAddress == null)
+                    customerBillingAddress = new CustomerBillingAddress();
+
+                if (customerOrderInfo == null)
+                    return NotFound();
+
+                CommonComponent();
+                ViewBag.CustomerInfo = LoginCustomerInfo();
+                ViewBag.CustomerOrderInfo = customerOrderInfo;
+                ViewBag.CustomerBillingAddress = customerBillingAddress;
+                return View(customerOrderDetails);
             }
 
             return RedirectToAction("CustomerLogin", "LoginProcess");
