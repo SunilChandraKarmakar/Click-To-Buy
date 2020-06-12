@@ -88,7 +88,11 @@ namespace ClickToBuy
             services.AddTransient<IAdminManager, AdminManager>();
             services.AddTransient<IAdminRepository, AdminRepository>();
             services.AddTransient<ISliderRepository, SliderRepository>();
-            services.AddTransient<ISliderManager, SliderManager>();                
+            services.AddTransient<ISliderManager, SliderManager>();
+            services.AddTransient<IOrderRepository, OrderRepository>();
+            services.AddTransient<IOrderManager, OrderManager>();
+            services.AddTransient<IOrderDetailsRepository, OrderDetailsRepository>();
+            services.AddTransient<IOrderDetailsManager, OrderDetailsManager>();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.

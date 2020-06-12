@@ -26,6 +26,8 @@ namespace ClickToBuy.Model
         [Display(Name = "Delivary please.")]
         public int DeliveryChargeId { get; set; }
 
+        public bool Status { get; set; }
+
         [Required]
         [Display(Name = "Order Date")]
         [DataType(DataType.Date)]

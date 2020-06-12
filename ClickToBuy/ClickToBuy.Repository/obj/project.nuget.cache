@@ -1,6 +1,6 @@
 {
   "version": 2,
-  "dgSpecHash": "T1QslZQip+iFMpK3htC4ZkIWwaj9mkMwdPHfqYxhwweCteLqIzmpmjS5GONHI6Yrg7sOBS7N9CsqZk5VY1NINA==",
+  "dgSpecHash": "8fer+9qOwvGdsl6icjeMMquWOvnsb6du3EtUw96Ofb9mNm4bUMZbWgVraPg9EVBMhrXv5AfyR8GpJoviEwANQQ==",
   "success": true,
   "projectFilePath": "F:\\C# Project\\Web Application - CORE\\Click-To-Buy\\ClickToBuy\\ClickToBuy.Repository\\ClickToBuy.Repository.csproj",
   "expectedPackageFiles": [
@@ -89,8 +89,7 @@
     "C:\\Program Files\\dotnet\\sdk\\NuGetFallbackFolder\\system.xml.readerwriter\\4.3.0\\system.xml.readerwriter.4.3.0.nupkg.sha512",
     "C:\\Program Files\\dotnet\\sdk\\NuGetFallbackFolder\\system.xml.xdocument\\4.3.0\\system.xml.xdocument.4.3.0.nupkg.sha512",
     "C:\\Program Files\\dotnet\\sdk\\NuGetFallbackFolder\\system.xml.xmldocument\\4.3.0\\system.xml.xmldocument.4.3.0.nupkg.sha512",
-    "C:\\Program Files\\dotnet\\sdk\\NuGetFallbackFolder\\system.xml.xmlserializer\\4.3.0\\system.xml.xmlserializer.4.3.0.nupkg.sha512",
-    "C:\\Users\\Sunil\\.nuget\\packages\\microsoft.aspnetcore.app.ref\\3.1.2\\microsoft.aspnetcore.app.ref.3.1.2.nupkg.sha512"
+    "C:\\Program Files\\dotnet\\sdk\\NuGetFallbackFolder\\system.xml.xmlserializer\\4.3.0\\system.xml.xmlserializer.4.3.0.nupkg.sha512"
   ],
   "logs": []
 }

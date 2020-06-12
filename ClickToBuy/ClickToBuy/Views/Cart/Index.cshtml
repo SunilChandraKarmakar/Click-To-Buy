@@ -11,6 +11,7 @@
     List<Product> clinteProductList = ViewBag.ClinteProductList;
     List<ProductPhoto> productPhotos = ViewBag.ProductPhotos;
     CustomerBillingAddress customerBillingAddress = new CustomerBillingAddress();
+    DeliveryCharge deliveryCharge = new DeliveryCharge();
 }
 
 <!DOCTYPE html>
@@ -297,13 +298,19 @@
                     </div>
                     <div class="col-md-8 address_form_agile">
                         <h4>Add a new Details</h4>
-                        <form action="payment.html" method="post" class="creditly-card-form agileinfo_form">
+                        <form method="post" class="creditly-card-form agileinfo_form" asp-controller="Cart" asp-action="Checkout">
                             <section class="creditly-wrapper wthree, w3_agileits_wrapper">
                                 <div class="information-wrapper">
                                     <div class="first-row form-group">
                                         <div class="controls">
                                             <label class="control-label">Address type: </label>
                                             <textarea class="form-control" required="required" asp-for="@customerBillingAddress.BillingAddress" placeholder="Type your delivery address"></textarea>
+                                        </div>
+                                        <div class="controls">
+                                            <label class="control-label">City type: </label>
+                                            <select class="form-control option-w3ls" asp-for="@deliveryCharge.CityId" asp-items="ViewBag.Citys" required="required">
+                                                <option value="">-- Select City --</option>
+                                            </select>
                                         </div>
                                     </div>
                                     <button class="submit check_out">Delivery to this Address</button>

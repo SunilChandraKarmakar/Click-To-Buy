@@ -188,6 +188,7 @@ namespace ClickToBuy.Controllers
             if(HttpContext.Session.GetString("CustomerId") != null)
             {
                 HttpContext.Session.Clear();
+                HttpContext.Session.Remove("AddProducts");
                 return RedirectToAction("Index", "Home");
             }
 

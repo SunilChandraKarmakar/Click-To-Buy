@@ -1,6 +1,6 @@
 {
   "version": 2,
-  "dgSpecHash": "BddjwT0MreOUtRtcD5Yi44asupAiIXgEI3IGXzDxdA2eeXkD5qZXCr9KzsPXXwlmyIwuWuuMfYZqSYFxiLNmIw==",
+  "dgSpecHash": "IOMCFKrKP2ZHzrAZHwsFOpoy/sqtZXKzny8c6pcXOmWuVkMgfRq/h65KvY+eXNfjERdJFhBPXK8pfiTkSn+vlQ==",
   "success": true,
   "projectFilePath": "F:\\C# Project\\Web Application - CORE\\Click-To-Buy\\ClickToBuy\\ClickToBuy\\ClickToBuy.csproj",
   "expectedPackageFiles": [
@@ -209,8 +209,7 @@
     "C:\\Program Files\\dotnet\\sdk\\NuGetFallbackFolder\\system.xml.xmlserializer\\4.3.0\\system.xml.xmlserializer.4.3.0.nupkg.sha512",
     "C:\\Users\\Sunil\\.nuget\\packages\\x.pagedlist\\8.0.7\\x.pagedlist.8.0.7.nupkg.sha512",
     "C:\\Users\\Sunil\\.nuget\\packages\\x.pagedlist.mvc.core\\8.0.7\\x.pagedlist.mvc.core.8.0.7.nupkg.sha512",
-    "C:\\Users\\Sunil\\.nuget\\packages\\x.pagedlist.web.common\\8.0.7\\x.pagedlist.web.common.8.0.7.nupkg.sha512",
-    "C:\\Users\\Sunil\\.nuget\\packages\\microsoft.aspnetcore.app.ref\\3.1.2\\microsoft.aspnetcore.app.ref.3.1.2.nupkg.sha512"
+    "C:\\Users\\Sunil\\.nuget\\packages\\x.pagedlist.web.common\\8.0.7\\x.pagedlist.web.common.8.0.7.nupkg.sha512"
   ],
   "logs": []
 }

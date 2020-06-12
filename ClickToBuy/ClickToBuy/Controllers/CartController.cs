@@ -8,6 +8,7 @@ using ClickToBuy.Model.ViewModels;
 using ClickToBuy.Utility;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.Mvc.Rendering;
 
 namespace ClickToBuy.Controllers
 {
@@ -17,14 +18,21 @@ namespace ClickToBuy.Controllers
         private readonly IProductManager _iProductManager;
         private readonly ICategoryManager _iCategoryManager;
         private readonly IProductPhotoManager _iProductPhotoManager;
+        private readonly ICityManager _iCityManager;
+        private readonly IOrderManager _iOrderManager;
+        private readonly IOrderDetailsManager _iOrderDetailsManager;
 
         public CartController(IPurchaseItemManager iPurchaseItemManager, IProductManager iProductManager,
-            ICategoryManager iCategoryManager, IProductPhotoManager iProductPhotoManager)
+            ICategoryManager iCategoryManager, IProductPhotoManager iProductPhotoManager,
+            ICityManager iCityManager, IOrderManager iOrderManager, IOrderDetailsManager iOrderDetailsManager)
         {
             _iPurchaseItemManager = iPurchaseItemManager;
             _iProductManager = iProductManager;
             _iCategoryManager = iCategoryManager;
             _iProductPhotoManager = iProductPhotoManager;
+            _iCityManager = iCityManager;
+            _iOrderManager = iOrderManager;
+            _iOrderDetailsManager = iOrderDetailsManager;
         }
 
         private ICollection<Product> ShowClinteSiteProduct()
@@ -58,6 +66,13 @@ namespace ClickToBuy.Controllers
             ViewBag.CategoryList = _iCategoryManager.GetCategoryForPurchaseProduct();
             ViewBag.ConditionList = getConditionForShowClinteSiteProduct.Distinct().ToList();
             ViewBag.ProductPhotos = _iProductPhotoManager.GetAll();
+
+            List<SelectListItem> citys = _iCityManager.GetAll()
+                .Select(c => new SelectListItem {
+                    Value = c.Id.ToString(),
+                    Text = c.Name
+                }).ToList();
+            ViewBag.Citys = citys;
         }
 
         public IActionResult Index()
@@ -166,6 +181,72 @@ namespace ClickToBuy.Controllers
                 HttpContext.Session.Set("AddProducts", products);
 
                 return RedirectToAction("Index");
+            }
+
+            return RedirectToAction("CustomerLogin", "LoginProcess");
+        }
+
+        [HttpPost]
+        public IActionResult Checkout(CustomerBillingAddress customerBillingAddress, DeliveryCharge deliveryCharge)
+        {
+            if (HttpContext.Session.GetString("CustomerId") != null)
+            {
+                int loginCustomerId = Convert.ToInt32(HttpContext.Session.GetString("CustomerId"));
+                Order lastOrderInfo = _iOrderManager.GetAll().LastOrDefault();
+
+                if (lastOrderInfo == null)
+                {
+                    lastOrderInfo = new Order();
+                    lastOrderInfo.OrderNo = "10001";
+                }
+
+                int conOrderNoInt = Convert.ToInt32(lastOrderInfo.OrderNo);
+                conOrderNoInt = conOrderNoInt + 1;
+
+                Order customerOrder = new Order()
+                {
+                    OrderNo = conOrderNoInt.ToString(),
+                    CustomerId = loginCustomerId,
+                    CouponNumber = "Na",
+                    DeliveryChargeId = deliveryCharge.CityId,
+                    Status = false,
+                    OrderDate = DateTime.Now.Date
+                };
+
+                CustomerBillingAddress customerOrderBillingAddress = new CustomerBillingAddress()
+                {
+                    CustomerId = loginCustomerId,
+                    BillingAddress = customerBillingAddress.BillingAddress,
+                };
+
+                bool isSaveCustomerOrder = _iOrderManager.Add(customerOrder);
+                bool isSaveCustomerOrderDetails = false;
+
+                List<AddProductViewModel> addProducts = HttpContext.Session.Get<List<AddProductViewModel>>("AddProducts");
+                lastOrderInfo = _iOrderManager.GetAll().LastOrDefault();
+               
+                foreach (AddProductViewModel product in addProducts)
+                {
+                    OrderDetails customerOrderDetails = new OrderDetails()
+                    {
+                        OrderId = lastOrderInfo.Id,
+                        ProductId = product.Id,
+                        Quantity = product.Quantity
+                    };
+
+                    isSaveCustomerOrderDetails = _iOrderDetailsManager.Add(customerOrderDetails);
+                }
+
+                if (isSaveCustomerOrder && isSaveCustomerOrderDetails)
+                {
+                    HttpContext.Session.Remove("AddProducts");
+                    return RedirectToAction("InvoiceManagement", "Customer");
+                }
+                else
+                {
+                    ViewBag.ErrorMessage = "Chack out is failed! Try Again";
+                    return View("Index");
+                }
             }
 
             return RedirectToAction("CustomerLogin", "LoginProcess");

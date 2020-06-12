@@ -322,5 +322,16 @@ namespace ClickToBuy.Controllers
             else
                 return ViewBag.ErrorMessage = "Customer remove has been failed!";
         }
+
+        [HttpGet]
+        public IActionResult InvoiceManagement()
+        {
+            if(HttpContext.Session.GetString("CustomerId") != null)
+            {
+
+            }
+
+            return RedirectToAction("CustomerLogin", "LoginProcess");
+        }
     }
 }

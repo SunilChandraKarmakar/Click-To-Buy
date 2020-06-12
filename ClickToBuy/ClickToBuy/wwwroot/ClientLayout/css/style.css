@@ -796,6 +796,7 @@ a.btn.btn-primary {
 }
  select.form-control.option-w3ls {
     width: 100%;
+	height: auto;
     padding: 1em 1em 1em 1em;
     font-size: 0.8em;
     margin: 0.5em 0;
