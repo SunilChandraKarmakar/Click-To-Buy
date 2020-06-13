@@ -17,12 +17,13 @@ namespace ClickToBuy.Controllers
         private readonly ICustomerManager _iCustomerManager;
         private readonly IStockProductManager _iStockProductManager;
         private readonly IPurchaseManager _iPurchaseManager;
+        private readonly IOrderManager _iOrderManager;
 
         public DashboardController(IProductManager iProductManager,
                                     IBrandManager iBrandManager,
                                     ICategoryManager iCategoryManager, 
                                     ICustomerManager iCustomerManager, IStockProductManager iStockProductManager,
-                                    IPurchaseManager iPurchaseManager)
+                                    IPurchaseManager iPurchaseManager, IOrderManager iOrderManager)
         {
             _iProductManager = iProductManager;
             _iBrandManager = iBrandManager;
@@ -30,6 +31,7 @@ namespace ClickToBuy.Controllers
             _iCustomerManager = iCustomerManager;
             _iStockProductManager = iStockProductManager;
             _iPurchaseManager = iPurchaseManager;
+            _iOrderManager = iOrderManager;
         }
 
         [HttpGet]
@@ -43,6 +45,8 @@ namespace ClickToBuy.Controllers
                 ICollection<Customer> customers = _iCustomerManager.GetAll();
                 ICollection<StockProduct> stockProducts = _iStockProductManager.GetAll();
                 ICollection<Purchase> purchasesList = _iPurchaseManager.GetAll();
+                ICollection<Order> customerOrder = _iOrderManager.GetAll()
+                                                   .Where(co => co.Status == false).ToList();
 
                 int toralQuantityOfProduct = 0;
                 foreach (StockProduct item in stockProducts)
@@ -57,6 +61,7 @@ namespace ClickToBuy.Controllers
                 ViewBag.CustomerCount = customers.Count();
                 ViewBag.StockProductCount = toralQuantityOfProduct;
                 ViewBag.PurchaseCount = purchasesList.Count();
+                ViewBag.CustomerOrder = customerOrder.Count();
                 return View();
             }
             else

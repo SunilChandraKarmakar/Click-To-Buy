@@ -104,7 +104,7 @@
                                     <td class="text-left">@orderDetails.Quantity</td>
                                     @{ 
                                         double unitPrice = Convert.ToDouble(orderDetails.Product.OfferPrice > 0 ? orderDetails.Product.OfferPrice : orderDetails.Product.RegularPrice);
-                                        double total = unitPrice * orderDetails.Quantity;
+                                        total = unitPrice * orderDetails.Quantity;
                                     }
                                     <td class="text-right">@unitPrice</td>
                                     <td class="text-right">@total</td>

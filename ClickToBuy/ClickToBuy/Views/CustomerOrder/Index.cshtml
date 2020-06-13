@@ -1,0 +1,55 @@
+﻿@using ClickToBuy.Model;
+@model ICollection<Order>;
+
+@{
+    ViewData["Title"] = "Index";
+    Layout = "~/Views/Shared/_AdminLayout.cshtml";
+}
+
+<div class="row content-panel mt mb">
+    <h2 id="hadertitle">Customer Order Details</h2>
+</div>
+
+
+<div class="col-lg-12" style="margin-top: 20px">
+    <div class="content-panel" style="padding:20px">
+        <section id="unseen">
+            <table id="myTable" class="table table-bordered table-striped table-condensed" width="100%">
+                <thead>
+                    <tr>
+                        <th>Basic Info</th>
+                        <th>Date Time</th>
+                        <th>Action</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @foreach (Order item in Model)
+                    {
+                        <tr>
+                            <td>
+                                Order Number : @item.OrderNo <br />
+                                Customer Name : @item.Customer.Name <br />
+                            </td>
+                            <td>                                        
+                                Date: @item.OrderDate.ToString("dd/MM/yyyy") <br />
+                                Status: <b>@(item.Status == false ? " Pending " : " Accept ")</b> <br />
+                            </td>
+                            <td>
+                                <a class="btn btn-primary btn-xs" asp-action="OrderDetails" asp-route-id="@item.Id"><i class="fa fa-shopping-cart"></i> Order Details</a>
+                            </td>
+                        </tr>
+                    }
+                </tbody>
+                <tfoot>
+                    <tr>
+                        <th>Basic Info</th>
+                        <th>Date Time</th>
+                        <th>Action</th>
+                    </tr>
+                </tfoot>
+            </table>
+        </section>
+    </div>
+    <!-- /content-panel -->
+</div>
+

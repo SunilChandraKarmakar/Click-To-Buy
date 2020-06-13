@@ -1,0 +1,126 @@
+﻿@using ClickToBuy.Model;
+@model ICollection<OrderDetails>;
+
+@{
+    ViewData["Title"] = "OrderDetails";
+    Layout = "~/Views/Shared/_AdminLayout.cshtml";
+    CustomerBillingAddress customerBillingAddress = ViewBag.CustomerOrderBillingAddress;
+    Order customerOrderInfo = ViewBag.CustomerOrderInfo;
+    double unitPrice = 0, total = 0, subTotal = 0;
+}
+
+    <div class="row content-panel" style="margin-top: 30px">
+        <div class="col-lg-10 col-lg-offset-1">
+            <div class="invoice-body">
+                <div class="pull-left">
+                    <h1>Click To Buy</h1>
+                    <address>
+                        <strong>H# 880, Adarsho Road,</strong><br>
+                        Moddho Monipur,<br>
+                        Mirpur 2, Dhaka,<br>
+                        Bangladesh.<br>
+                        <abbr title="Phone">P:</abbr> 01743909840
+                    </address>
+                </div>
+                <!-- /pull-left -->
+                <div class="pull-right">
+                    <h3>Delivery Address</h3>
+                    <address>
+                        @customerBillingAddress.BillingAddress <br>
+                        @customerBillingAddress.Customer.City.Name
+                    </address>
+                </div>
+                <!-- /pull-right -->
+                <div class="clearfix"></div>
+                <br>
+                <div class="row">
+                    <div class="col-md-9">
+                        <h4>@customerOrderInfo.Customer.Name</h4>
+                        <address>
+                            <strong>@customerOrderInfo.Customer.Email</strong><br>
+                            <abbr title="Phone">P:</abbr> @customerOrderInfo.Customer.Contact <br>
+                            @customerOrderInfo.Customer.Address<br>
+                            @customerOrderInfo.Customer.City.Name<br>
+                            @customerOrderInfo.Customer.Country.Name
+                        </address>
+                    </div>
+                    <!-- /col-md-9 -->
+                    <div class="col-md-3">
+                        <br>
+                        <br>
+                        <br>
+                        <div>
+                            <div class="pull-left"> ORDER NO : </div>
+                            <div class="pull-right"> @customerOrderInfo.OrderNo </div>
+                            <div class="clearfix"></div>
+                        </div>
+                        <div>
+                            <!-- /col-md-3 -->
+                            <div class="pull-left"> ORDER DATE : </div>
+                            <div class="pull-right"> @customerOrderInfo.OrderDate.ToString("d/M/yyyy") </div>
+                            <div class="clearfix"></div>
+                        </div>
+                        <!-- /row -->
+                    </div>
+                    <!-- /invoice-body -->
+                </div>
+                <!-- /col-lg-10 -->
+                <br>
+                <table class="table">
+                    <thead>
+                        <tr>
+                            <th style="width:160px" class="text-center">Product Name</th>
+                            <th style="width:40px" class="text-left">Qty</th>
+                            <th style="width:40px" class="text-right">UNIT PRICE</th>
+                            <th style="width:90px" class="text-right">TOTAL</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        @foreach (OrderDetails orderDetails in Model)
+                        {
+                            <tr>
+                                <td class="text-center">@orderDetails.Product.Name</td>
+                                <td class="text-left">@orderDetails.Quantity</td>
+                                @{
+                                    unitPrice = Convert.ToDouble(orderDetails.Product.OfferPrice > 0 ? orderDetails.Product.OfferPrice : orderDetails.Product.RegularPrice);
+                                    total = unitPrice * orderDetails.Quantity;
+                                }
+                                <td class="text-right">@unitPrice</td>
+                                <td class="text-right">@total</td>
+                            </tr>
+
+                            { subTotal = subTotal + total; }
+                        }
+
+                        <tr>
+                            <td colspan="2" rowspan="4">
+                                <h4>Terms and Conditions</h4>
+                                <p>Thank you for your business. We do expect payment within 21 days, so please process this invoice within that time. There will be a 1.5% interest charge per month on late invoices.</p>
+                            </td>
+                            <td class="text-right"><strong>Subtotal</strong></td>
+                            <td class="text-right">@subTotal</td>
+                        </tr>
+                        <tr>
+                            <td class="text-right no-border"><strong>Shipping</strong></td>
+                            <td class="text-right">@customerOrderInfo.DeliveryCharge.Ammount</td>
+                        </tr>
+                        <tr>
+                            <td class="text-right no-border">
+                                <div class="well well-small green"><strong>Total</strong></div>
+                            </td>
+                            <td class="text-right">
+                                @{
+                                    total = subTotal + customerOrderInfo.DeliveryCharge.Ammount;
+                                }
+                                <strong>@total</strong>
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+                <br>
+                <br>
+            </div>
+            <!--/col-lg-12 mt -->
+        </div>
+    </div>
+
