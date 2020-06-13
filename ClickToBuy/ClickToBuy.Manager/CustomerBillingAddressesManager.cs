@@ -16,5 +16,10 @@ namespace ClickToBuy.Manager
         {
             _iCustomerBillingAddressesRepository = iCustomerBillingAddressesRepository;
         }
+
+        public override ICollection<CustomerBillingAddress> GetAll()
+        {
+            return _iCustomerBillingAddressesRepository.GetAll();
+        }
     }
 }

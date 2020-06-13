@@ -41,13 +41,11 @@
                                 Gender : @item.Gender.Name
                             </td>
                             <td>
-                                Join : @item.JoinDate <br />
+                                Join : @item.JoinDate.ToString("dd/MM/yyyy") <br />
                                 IP : @item.CustomerIPAddress
                             </td>
-                            <td>
-                                Comment : <br />
-                                Like : <br />
-                                Product : <br />
+                            <td>                               
+                                Product : @item.Products.Count()<br />
                             </td>
                             <td>
                                 Address : @item.Address <br />

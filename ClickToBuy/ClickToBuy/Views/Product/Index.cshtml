@@ -6,6 +6,7 @@
     Layout = "~/Views/Shared/_AdminLayout.cshtml";
     List<ProductPhoto> productPhotos = ViewBag.ProductPhotos;
     List<StockProduct> stockProductList = ViewBag.StockProductList;
+    List<PurchaseItem> purchaseItems = ViewBag.PurchaseItems;
     int totalStockProduct = 0;
 }
 
@@ -60,7 +61,15 @@
                                 Link : @item.Link <br />
                                 Details : @item.ProductDetails
                             </td>
-                            <td>
+                            <td>          
+                                @{ 
+                                    PurchaseItem purchaseItemInfo = purchaseItems.Where(pi => pi.ProductId == item.Id).LastOrDefault();
+
+                                    if (purchaseItemInfo == null)
+                                        purchaseItemInfo = new PurchaseItem();
+                                }
+
+                                Pu. Price : @purchaseItemInfo.Price <br />
                                 Re. Price : @item.RegularPrice <br />
                                 Off. Price : @item.OfferPrice <br />
                             </td>

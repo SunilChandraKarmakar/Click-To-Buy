@@ -15,6 +15,7 @@ namespace ClickToBuy.Controllers
     public class ProductController : Controller
     {
         private readonly IProductManager _iProductManager;
+        private readonly IPurchaseItemManager _iPurchaseItemManager;
         private readonly ICategoryManager _iCategoryManager;
         private readonly IBrandManager _iBrandManager;
         private readonly IConditionManager _iConditionManager;
@@ -32,7 +33,7 @@ namespace ClickToBuy.Controllers
                                 ICloseTypeManager iCloseTypeManager, 
                                 IHostingEnvironment iHostingEnvironment, 
                                 IStockProductManager iStockProductManager, 
-                                IProductPhotoManager iProductPhotoManager)
+                                IProductPhotoManager iProductPhotoManager, IPurchaseItemManager iPurchaseItemManager)
         {
             _iProductManager = iProductManager;
             _iCategoryManager = iCategoryManager;
@@ -42,6 +43,7 @@ namespace ClickToBuy.Controllers
             _iHostingEnvironment = iHostingEnvironment;
             _iStockProductManager = iStockProductManager;
             _iProductPhotoManager = iProductPhotoManager;
+            _iPurchaseItemManager = iPurchaseItemManager;
         }
 
         [HttpGet]
@@ -51,6 +53,7 @@ namespace ClickToBuy.Controllers
             {
                 ViewBag.ProductPhotos = _iProductPhotoManager.GetAll();
                 ViewBag.StockProductList = _iStockProductManager.GetAll();
+                ViewBag.PurchaseItems = _iPurchaseItemManager.GetAll();
                 return View(_iProductManager.GetAll());
             }
             else

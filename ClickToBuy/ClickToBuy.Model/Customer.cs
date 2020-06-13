@@ -8,6 +8,11 @@ namespace ClickToBuy.Model
 {
     public class Customer
     {
+        public Customer()
+        {
+            Products = new List<Product>();
+        }
+
         public int Id { get; set; }
 
         [Required]
@@ -71,7 +76,6 @@ namespace ClickToBuy.Model
         public ICollection<CustomerBillingAddress> CustomerBillingAddresses { get; set; }
         public ICollection<Coupon> Coupons { get; set; }
         public ICollection<Order> Orders { get; set; }
-
-
+        public ICollection<Product> Products { get; set; }
     }
 }

@@ -52,6 +52,7 @@ namespace ClickToBuy.Model
         [Display(Name = "Product Details")]
         public string ProductDetails { get; set; }
 
+        public Customer Customer { get; set; }
         public Category Category { get; set; }
         public Brand Brand { get; set; }
         public Condition Condition { get; set; }

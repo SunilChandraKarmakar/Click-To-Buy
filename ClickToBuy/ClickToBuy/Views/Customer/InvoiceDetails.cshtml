@@ -6,6 +6,7 @@
     Order CustomerOrderInfo = ViewBag.CustomerOrderInfo;
     CustomerBillingAddress customerBillingAddress = ViewBag.CustomerBillingAddress;
     double subTotal = 0;
+    double total = 0;
 }
 
 <!DOCTYPE html>
@@ -46,7 +47,8 @@
                     <div class="pull-right">
                         <h3>Delivery Address</h3>
                         <address>
-                            @customerBillingAddress.BillingAddress <br>    
+                            @customerBillingAddress.BillingAddress <br> 
+                            @customerBillingAddress.Customer.City.Name
                         </address>
                     </div>
                     <!-- /pull-right -->
@@ -99,7 +101,7 @@
                             {
                                 <tr>
                                     <td class="text-center">@orderDetails.Product.Name</td>
-                                    <td>@orderDetails.Quantity</td>
+                                    <td class="text-left">@orderDetails.Quantity</td>
                                     @{ 
                                         double unitPrice = Convert.ToDouble(orderDetails.Product.OfferPrice > 0 ? orderDetails.Product.OfferPrice : orderDetails.Product.RegularPrice);
                                         double total = unitPrice * orderDetails.Quantity;
@@ -107,7 +109,8 @@
                                     <td class="text-right">@unitPrice</td>
                                     <td class="text-right">@total</td>
                                 </tr>
-                                @(subTotal = subTotal + total)
+                                
+                                {  subTotal = subTotal + total; }
                              }
 
                             <tr>
@@ -126,7 +129,12 @@
                                 <td class="text-right no-border">
                                     <div class="well well-small green"><strong>Total</strong></div>
                                 </td>
-                                <td class="text-right"><strong>$1029.00</strong></td>
+                                <td class="text-right">
+                                    @{ 
+                                        total = subTotal + CustomerOrderInfo.DeliveryCharge.Ammount;
+                                    }
+                                    <strong>@total</strong>
+                                </td>
                             </tr>
                         </tbody>
                     </table>
