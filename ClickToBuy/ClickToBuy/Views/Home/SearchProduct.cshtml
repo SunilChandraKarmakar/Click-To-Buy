@@ -14,7 +14,7 @@
 <!DOCTYPE html>
 <html>
 <head>
-    <title>Get Product By Category</title>
+    <title>Search Product</title>
 
     <!-- for-mobile-apps -->
     <meta name="viewport" content="width=device-width, initial-scale=1">
@@ -104,9 +104,9 @@
                         <div class="mega-dropdown-menu">
                             <div class="w3ls_vegetables">
                                 <ul class="dropdown-menu drp-mnu">
-                                    <li><a asp-action="AdminLogin" asp-controller="LoginProcess">My Profile</a></li>
-                                    <li><a href="login.html">Invoice Management</a></li>
-                                    <li><a href="login.html">Logout</a></li>
+                                    <li><a asp-controller="Customer" asp-action="Profile">My Profile</a></li>
+                                    <li><a asp-controller="Customer" asp-action="InvoiceManagement">Invoice Management</a></li>
+                                    <li><a asp-controller="LoginProcess" asp-action="CustomerLogout">Logout</a></li>
                                 </ul>
                             </div>
                         </div>
@@ -166,8 +166,16 @@
     <div class="products-breadcrumb">
         <div class="container">
             <ul>
-                <li><i class="fa fa-home" aria-hidden="true"></i><a asp-action="Index" asp-controller="Home">Home</a><span>|</span></li>
-                <li>Search Product</li>
+                @if (Context.Session.GetString("CustomerId") != null)
+                {
+                    <li><i class="fa fa-home" aria-hidden="true"></i><a asp-controller="Customer" asp-action="Dashboard">Dashboard</a><span>|</span></li>
+                    <li>Search Product</li>
+                }
+                else
+                {
+                    <li><i class="fa fa-home" aria-hidden="true"></i><a asp-controller="Home" asp-action="Index">Home</a><span>|</span></li>
+                    <li>Search Product</li>
+                }
             </ul>
         </div>
     </div>

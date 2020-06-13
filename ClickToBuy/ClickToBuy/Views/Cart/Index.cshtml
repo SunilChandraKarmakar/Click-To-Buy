@@ -64,8 +64,8 @@
             <a href="#">Provied special Offers !</a>
         </div>
         <div class="w3l_search">
-            <form action="#" method="post">
-                <input type="text" name="Product" value="Search a product..." onfocus="this.value = '';" onblur="if (this.value == '') {this.value = 'Search a product...';}" required="">
+            <form method="get" asp-controller="Home" asp-action="SearchProduct">
+                <input type="text" name="productname" placeholder="Search a product..." required="required">
                 <input type="submit" value=" ">
             </form>
         </div>
@@ -84,7 +84,7 @@
                         <div class="w3ls_vegetables">
                             <ul class="dropdown-menu drp-mnu">
                                 <li><a asp-controller="Customer" asp-action="Profile">My Profile</a></li>
-                                <li><a href="login.html">Invoice Management</a></li>
+                                <li><a asp-controller="Customer" asp-action="InvoiceManagement">Invoice Management</a></li>
                                 <li><a asp-controller="LoginProcess" asp-action="CustomerLogout">Logout</a></li>
                             </ul>
                         </div>
@@ -313,7 +313,12 @@
                                             </select>
                                         </div>
                                     </div>
-                                    <button class="submit check_out">Delivery to this Address</button>
+
+                                    @if (Model.Count() > 0)
+                                    {
+                                        <button class="submit check_out">Delivery to this Address</button>
+                                    }
+
                                 </div>
                             </section>
                         </form>
