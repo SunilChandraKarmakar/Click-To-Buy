@@ -1,30 +1,30 @@
-﻿@using ClickToBuy.Model
-@using Microsoft.AspNetCore.Http; 
+﻿@using ClickToBuy.Model;
+@using Microsoft.AspNetCore.Http;
+@model ICollection<Product>;
+
 @{
     Layout = null;
-    Product productInfo = ViewBag.ProductInfo;
     List<Brand> brands = ViewBag.BrandList;
     List<Category> categories = ViewBag.CategoryList;
-    List<ProductPhoto> productPhotos = ViewBag.ProductPhotos;
     List<Condition> conditions = ViewBag.Condition;
+    List<ProductPhoto> productPhotos = ViewBag.ProductPhotos;
     ICollection<Product> clinteProductList = ViewBag.ClinteProductList;
 }
 
 <!DOCTYPE html>
 <html>
 <head>
-
-    <title>Product Details</title>
+    <title>Get Product By Category</title>
 
     <!-- for-mobile-apps -->
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
     <meta name="keywords" content="Grocery Store Responsive web template, Bootstrap Web Templates, Flat Web Templates, Android Compatible web template,
     Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, SonyEricsson, Motorola web design" />
-    
+
     <script type="application/x-javascript">
         addEventListener("load", function() { setTimeout(hideURLbar, 0); }, false);
-               function hideURLbar(){ window.scrollTo(0,1); } 
+               function hideURLbar(){ window.scrollTo(0,1); }
     </script>
     <!-- //for-mobile-apps -->
 
@@ -39,21 +39,9 @@
     <script src="~/ClientLayout/js/jquery-1.11.1.min.js"></script>
     <!-- //js -->
 
-    <script src='~/ClientLayout/js/okzoom.js'></script>
-    <script>
-        $(function() {
-            $('#example').okzoom({
-            width: 150,
-            height: 150,
-            border: "1px solid black",
-            shadow: "0 0 5px #000"
-            });
-        });
-    </script>
-
     <link href='//fonts.googleapis.com/css?family=Ubuntu:400,300,300italic,400italic,500,500italic,700,700italic' rel='stylesheet' type='text/css'>
     <link href='//fonts.googleapis.com/css?family=Open+Sans:400,300,300italic,400italic,600,600italic,700,700italic,800,800italic' rel='stylesheet' type='text/css'>
-   
+
     <!-- start-smoth-scrolling -->
     <script type="text/javascript" src="~/ClientLayout/js/move-top.js"></script>
     <script type="text/javascript" src="~/ClientLayout/js/easing.js"></script>
@@ -64,10 +52,9 @@
 			    event.preventDefault();
 			    $('html,body').animate({scrollTop:$(this.hash).offset().top},1000);
 		    });
-	    });
+	});
     </script>
     <!-- start-smoth-scrolling -->
-
 </head>
 
 <body>
@@ -99,7 +86,7 @@
                         <div class="mega-dropdown-menu">
                             <div class="w3ls_vegetables">
                                 <ul class="dropdown-menu drp-mnu">
-                                    <li><a asp-controller="LoginProcess" asp-action="CustomerLogin">Login</a></li>
+                                    <li><a asp-action="CustomerLogin" asp-controller="LoginProcess">Login</a></li>
                                     <li><a asp-action="CustomerLogin" asp-controller="LoginProcess">Sign Up</a></li>
                                 </ul>
                             </div>
@@ -180,7 +167,7 @@
         <div class="container">
             <ul>
                 <li><i class="fa fa-home" aria-hidden="true"></i><a asp-action="Index" asp-controller="Home">Home</a><span>|</span></li>
-                <li>@productInfo.Name</li>
+                <li>Search Product</li>
             </ul>
         </div>
     </div>
@@ -210,7 +197,7 @@
                                     @foreach (Brand brand in brands)
                                     {
                                         <ul>
-                                            <li><a asp-action="GetProductByBrand" asp-controller="Home" asp-route-id="@brand.Id">@brand.Name ( @clinteProductList.Where(p=>p.BrandId == brand.Id).Count() )</a></li>
+                                            <li><a asp-action="GetProductByBrand" asp-controller="Home" asp-route-id="@brand.Id">@brand.Name ( @clinteProductList.Where(p => p.BrandId == brand.Id).Count() )</a></li>
                                         </ul>
                                     }
                                 </div>
@@ -272,7 +259,7 @@
                                             <li>
                                                 <a asp-action="GetProductByCondition" asp-controller="Home"
                                                    asp-route-id="@condition.Id">
-                                                    @condition.Name ( @clinteProductList.Where(p=>p.ConditionId == condition.Id).Count() )
+                                                    @condition.Name ( @clinteProductList.Where(p => p.ConditionId == condition.Id).Count() )
                                                 </a>
                                             </li>
                                         </ul>
@@ -286,124 +273,54 @@
         </div>
 
         <div class="w3l_banner_nav_right">
-            <div class="agileinfo_single">
-                <h5>@productInfo.Name</h5>
-                <div class="col-md-4 agileinfo_single_left">
+            <div class="w3ls_w3l_banner_nav_right_grid w3ls_w3l_banner_nav_right_grid_sub">
+                <h3 class="w3l_fruit">Search Product List</h3>
+                <div class="w3ls_w3l_banner_nav_right_grid1 w3ls_w3l_banner_nav_right_grid1_veg">
+                    @foreach (Product product in Model)
+                    {
+                        <div class="col-md-3 top_brand_left" style="margin-bottom: 20px">
+                            <div class="hover14 column">
+                                <div class="agile_top_brand_left_grid">
+                                    <div class="agile_top_brand_left_grid1">
+                                        <figure>
+                                            <div class="snipcart-item block">
+                                                <div class="snipcart-thumb">
 
-                    @{
-                        ProductPhoto getProductPhotoByProductId = productPhotos
-                            .Where(pp => pp.ProductId == productInfo.Id &&
-                            pp.Featured == true && pp.Status == true).FirstOrDefault();
-                        string productPhoto = getProductPhotoByProductId == null ?
-                            "productphotos/NoImageFound.png" : getProductPhotoByProductId.Photo;
+                                                    @{
+                                                        ProductPhoto getProductPhotoByProductId = productPhotos
+                                                            .Where(pp => pp.ProductId == product.Id &&
+                                                            pp.Featured == true && pp.Status == true).FirstOrDefault();
+                                                        string productPhoto = getProductPhotoByProductId == null ?
+                                                            "productphotos/NoImageFound.png" : getProductPhotoByProductId.Photo;
+                                                    }
+
+                                                    <a asp-route-id="@product.Id" asp-action="GetProductInfoByProductId" asp-controller="Home"><img title=" " alt=" " src="~/@productPhoto" height="200" /></a>
+                                                    <p>@product.Name</p>
+                                                    <h4>Price : @product.RegularPrice BDT</h4>
+                                                </div>
+                                                <div class="snipcart-details top_brand_home_details">
+                                                    <form method="post" asp-controller="Cart" asp-action="AddProduct" asp-route-id="@product.Id">
+                                                        <fieldset>
+                                                            <input type="hidden" name="item_name" value="@product.Name.ToString()" />
+                                                            <input type="hidden" name="amount" value="@Convert.ToDouble(product.RegularPrice)" />
+                                                            <input type="submit" name="submit" value="Add to cart" class="button" />
+                                                        </fieldset>
+                                                    </form>
+                                                </div>
+                                            </div>
+                                        </figure>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
                     }
-
-                    <img id="example" src="~/@productPhoto" alt=" " class="img-responsive" />
+                    <div class="clearfix"> </div>
                 </div>
-                <div class="col-md-8 agileinfo_single_right">
-                    <div class="rating1">
-                        <span class="starRating">
-                            <input id="rating5" type="radio" name="rating" value="5">
-                            <label for="rating5">5</label>
-                            <input id="rating4" type="radio" name="rating" value="4">
-                            <label for="rating4">4</label>
-                            <input id="rating3" type="radio" name="rating" value="3" checked>
-                            <label for="rating3">3</label>
-                            <input id="rating2" type="radio" name="rating" value="2">
-                            <label for="rating2">2</label>
-                            <input id="rating1" type="radio" name="rating" value="1">
-                            <label for="rating1">1</label>
-                        </span>
-                    </div>
-                    <div class="w3agile_description">
-                        <h4>Description :</h4>
-                        <p>
-                            Condition : @productInfo.Condition.Name <br />
-                            Status : @productInfo.CloseType.Name <br />
-                            About : @productInfo.ProductDetails  <br />
-                        </p>
-                    </div>
-                    <div class="snipcart-item block">
-                        <div class="snipcart-thumb agileinfo_single_right_snipcart">
-                            <h4>Price : @productInfo.RegularPrice BDT</h4>
-                        </div>
-                        <div class="snipcart-details agileinfo_single_right_details">
-                            <form method="post" asp-controller="Cart" asp-action="AddProduct" asp-route-id="@productInfo.Id">                                 
-                                <fieldset>
-                                    <input type="number" min="1" value="1" asp-for="@productInfo.Quantity" name="quantity" style="max-width:50px; margin-bottom:10px">
-                                    <input type="hidden" name="item_name" value="@productInfo.Name.ToString()" />
-                                    <input type="hidden" name="amount" value="@Convert.ToDouble(productInfo.RegularPrice)" />
-                                    <input type="submit" name="submit" value="Add to cart" class="button" />
-                                </fieldset>
-                            </form>
-                        </div>
-                    </div>
-                </div>
-                <div class="clearfix"> </div>
             </div>
         </div>
         <div class="clearfix"></div>
     </div>
     <!-- //banner -->
-
-    <!-- brands -->
-    <div class="w3ls_w3l_banner_nav_right_grid w3ls_w3l_banner_nav_right_grid_popular">
-        <div class="container">
-            <h3>Popular Brands</h3>
-            @foreach (Brand brand in brands)
-            {
-                if (brand.Products.Count() > 0)
-                {
-                    <div class="w3ls_w3l_banner_nav_right_grid1">
-                        <h6>@brand.Name</h6>
-                        @if (brand.Products.Count() > 0)
-                        {
-                            @foreach (Product product in brand.Products)
-                            {
-                                <div class="col-md-3 w3ls_w3l_banner_left" style="margin-bottom: 8px">
-                                    <div class="hover14 column">
-                                        <div class="agile_top_brand_left_grid w3l_agile_top_brand_left_grid">
-                                            <div class="agile_top_brand_left_grid1">
-                                                <figure>
-                                                    <div class="snipcart-item block">
-                                                        <div class="snipcart-thumb">
-
-                                                            @{
-                                                                ProductPhoto getProductPhotoByProductId2 = productPhotos
-                                                                    .Where(pp => pp.ProductId == product.Id &&
-                                                                    pp.Featured == true && pp.Status == true).FirstOrDefault();
-                                                                string productPhoto2 = getProductPhotoByProductId2 == null ?
-                                                                    "productphotos/NoImageFound.png" : getProductPhotoByProductId2.Photo;
-                                                            }
-
-                                                            <a asp-route-id="@product.Id" asp-action="GetProductInfoByProductId" asp-controller="Home"><img src="~/@productPhoto2" height="200" /></a>
-                                                            <p>@product.Name</p>
-                                                            <h4>Price : @product.RegularPrice BDT</h4>
-                                                        </div>
-                                                        <div class="snipcart-details">
-                                                            <form method="post" asp-controller="Cart" asp-action="AddProduct" asp-route-id="@product.Id">
-                                                                <fieldset>
-                                                                    <input type="hidden" name="item_name" value="@product.Name.ToString()" />
-                                                                    <input type="hidden" name="amount" value="@Convert.ToDouble(product.RegularPrice)" />
-                                                                    <input type="submit" name="submit" value="Add to cart" class="button" />
-                                                                </fieldset>
-                                                            </form>
-                                                        </div>
-                                                    </div>
-                                                </figure>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                            }
-                        }
-                        <div class="clearfix"> </div>
-                    </div>
-                }
-            }
-        </div>
-    </div>
-    <!-- //brands -->
 
     <!-- footer -->
     <div class="footer">
@@ -483,7 +400,7 @@
         </div>
     </div>
     <!-- //footer -->
-    
+
     <!-- Bootstrap Core JavaScript -->
     <script src="~/ClientLayout/js/bootstrap.min.js"></script>
 
@@ -518,8 +435,8 @@
 
         });
     </script>
-
     <!-- //here ends scrolling icon -->
+
     <script src="~/ClientLayout/js/minicart.js"></script>
     <script>
         paypal.minicart.render();

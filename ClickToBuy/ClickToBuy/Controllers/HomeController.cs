@@ -134,6 +134,15 @@ namespace ClickToBuy.Controllers
             return View();
         }
 
+        [HttpGet]
+        public IActionResult SearchProduct(string productname)
+        {
+            ICollection<Product> searchProducts = ShowClinteSiteProduct()
+                .Where(p => p.Name.Contains(productname)).ToList();
+            CommonComponent();
+            return View(searchProducts);
+        }
+
         public IActionResult Privacy()
         {
             return View();
