@@ -11,6 +11,16 @@ namespace ClickToBuy.Repository
 {
     public class PurchaseRepository : BaseRepository<Purchase>, IPurchaseRepository 
     {
+        public override Purchase GetById(int? id)
+        {
+            return ctbContext.Purchases
+                .Include(p => p.PurchaseItems)
+                .Include(p => p.PurchasePayment)
+                .Include(p => p.StockProducts)
+                .Include(p => p.Supplier)
+                .Where(p => p.Id == id).FirstOrDefault();
+        }
+
         public override ICollection<Purchase> GetAll()
         {
             List<Purchase> purchaseList = ctbContext.Purchases

@@ -35,18 +35,18 @@ namespace ClickToBuy.Model.ViewModels
 
         [Required]
         [DataType(DataType.Currency)]
-        [Range(1, 1000000)]
+        [Range(1, 10000000000000)]
         public float Price { get; set; }
 
         [Required]
         [DataType(DataType.Currency)]
-        [Range(0, 100000)]
+        [Range(0, 1000000000000)]
         [Display(Name = "Pay Amount")]
         public float PayAmount { get; set; }
 
         [Required]
         [DataType(DataType.Currency)]
-        [Range(0, 100000)]
+        [Range(0, 100000000000)]
         [Display(Name = "Due Amount")]
         public float DueAmount { get; set; }
 

@@ -91,6 +91,8 @@ namespace ClickToBuy.Controllers
             {
                 ICollection<PurchaseItem> purchaseItem = _iPurchaseItemManager
                                           .GetPurchaseItemByPurchaseId(id);
+                ViewBag.PurchaseInfo = _iPurchaseManager.GetById(id);
+                ViewBag.PurchasePaymentInfo = _iPurchasePaymentManager.GetAll().Where(pp => pp.PurchaseId == id).FirstOrDefault();
                 return View(purchaseItem);
             }
             else

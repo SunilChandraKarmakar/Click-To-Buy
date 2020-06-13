@@ -4,63 +4,104 @@
 @{
     ViewData["Title"] = "GetPurchaseItemByPurchaseId";
     Layout = "~/Views/Shared/_AdminLayout.cshtml";
-    int totalProduct = 0;
-    int totalQuantity = 0;
-    float totalUnitPrice = 0;
-    float totalPrice = 0;
+    float total = 0;
+    float subTotal = 0;
+    Purchase purchaseInfo = ViewBag.PurchaseInfo;
+    PurchasePayment purchasePaymentInfo = ViewBag.PurchasePaymentInfo;
 }
 
-<div class="row content-panel mt mb">
-    <h2 id="hadertitle">Purchase Item Details</h2>
-</div>
-
-<div class="row">
-    <div class="col-md-4">
-        <a asp-controller="Purchase" asp-action="Index" class="btn btn-info btn-xs"><i class="fa fa-bars"></i> Back To Purchase</a>
-    </div>
-</div>
-
-<div class="col-lg-12" style="margin-top: 20px">
-    <div class="content-panel" style="padding:20px">
-        <section id="unseen">
-            <table id="myTable" class="table table-bordered table-striped table-condensed" width="100%">
-                <thead>
-                    <tr>
-                        <th>Product Name</th>
-                        <th>Quantity</th>
-                        <th>Unit Price</th>
-                        <th>Sub Total</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    @foreach (PurchaseItem item in Model)
-                    {
+    <div class="row content-panel">
+        <div class="col-lg-10 col-lg-offset-1">
+            <div class="invoice-body">
+                <!-- /pull-left -->
+                <div class="pull-right">
+                    <h2>invoice</h2>
+                </div>
+                <!-- /pull-right -->
+                <div class="clearfix"></div>
+                <br>
+                <div class="row">
+                    <div class="col-md-9">
+                        <h4>@purchaseInfo.Supplier.Name</h4>
+                        <address>
+                            @purchaseInfo.Supplier.Email<br />
+                            @purchaseInfo.Supplier.Address<br />
+                            <abbr title="Phone">P :</abbr> @purchaseInfo.Supplier.ContactNo
+                        </address>
+                    </div>
+                    <!-- /col-md-9 -->
+                    <div class="col-md-3">
+                        <br>
+                        <div>
+                            <div class="pull-left"> INVOICE NO : </div>
+                            <div class="pull-right"> @purchaseInfo.PurchaseNumber </div>
+                            <div class="clearfix"></div>
+                        </div>
+                        <div>
+                            <!-- /col-md-3 -->
+                            <div class="pull-left"> INVOICE DATE : </div>
+                            <div class="pull-right"> @purchaseInfo.Date.ToString("dd/MM/yyyy") </div>
+                            <div class="clearfix"></div>
+                        </div>
+                        <!-- /row -->
+                        <br>
+                        <div class="well well-small green">
+                            <div class="pull-left">
+                                Total Payment :  <br />
+                                Total Due :
+                            </div>
+                            <div class="pull-right">
+                                @purchasePaymentInfo.PayAmount <br>
+                                @purchasePaymentInfo.DueAmount
+                            </div>
+                            <div class="clearfix"></div>
+                        </div>                          
+                    </div>
+                    <!-- /invoice-body -->
+                </div>
+                <!-- /col-lg-10 -->
+                <table class="table">
+                    <thead>
                         <tr>
-                            <td>@item.Product.Name</td>
-                            <td>@item.Quantity</td>
-                            <td>@item.Price</td>
-                            <td>@(item.Quantity * item.Price)</td>
+                            <th style="width:70px" class="text-left">DESCRIPTION</th>
+                            <th style="width:30px" class="text-center">QTY</th>
+                            <th style="width:140px" class="text-right">UNIT PRICE</th>
+                            <th style="width:90px" class="text-right">TOTAL</th>
                         </tr>
-                        
+                    </thead>
+                    <tbody>
+                        @foreach (PurchaseItem item in Model)
                         {
-                            totalProduct += 1;
-                            totalQuantity += item.Quantity;
-                            totalUnitPrice += item.Price;
-                            totalPrice += item.Quantity * item.Price;
+                            <tr>
+                                <td>@item.Product.Name</td>
+                                <td class="text-center">@item.Quantity</td>
+                                <td class="text-right">@item.Price</td>
+                                @{
+                                    total = item.Quantity * item.Price;
+                                    subTotal = subTotal + total;
+                                }
+                                <td class="text-right">@total</td>
+                            </tr>
                         }
-                    }
-                </tbody>
-                <tfoot>                    
-                    <tr>
-                        <th>Total Product : @totalProduct</th>
-                        <th>Total Quantity : @totalQuantity</th>
-                        <th>Total Unit Price : @totalUnitPrice</th>
-                        <th>Total Price : @totalPrice</th>
-                    </tr>
-                </tfoot>
-            </table>
-        </section>
+
+                        <tr>
+                            <td colspan="2" rowspan="4">
+                            </td>
+                            <td class="text-right"><strong>Subtotal</strong></td>
+                            <td class="text-right">@subTotal</td>
+                        </tr>
+                        <tr>
+                            <td class="text-right no-border">
+                                <div class="well well-small green"><strong>Total</strong></div>
+                            </td>
+                            <td class="text-right"><strong>@subTotal</strong></td>
+                        </tr>
+                    </tbody>
+                </table>
+                <br>
+                <br>
+            </div>
+            <!--/col-lg-12 mt -->
+        </div>
     </div>
-    <!-- /content-panel -->
-</div>
 

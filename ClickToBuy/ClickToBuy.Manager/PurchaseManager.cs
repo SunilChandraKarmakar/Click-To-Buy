@@ -17,6 +17,11 @@ namespace ClickToBuy.Manager
             _iPurchaseRepository = iPurchaseRepository;
         }
 
+        public override Purchase GetById(int? id)
+        {
+            return _iPurchaseRepository.GetById(id);
+        }
+
         public override ICollection<Purchase> GetAll()
         {
             return _iPurchaseRepository.GetAll();
