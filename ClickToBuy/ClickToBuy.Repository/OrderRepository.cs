@@ -15,11 +15,11 @@ namespace ClickToBuy.Repository
         {
             return ctbContext.Orders
                     .Include(o => o.Customer)
-                    .Include(o => o.Customer.City)
-                    .Include(o => o.Customer.Country)
                     .Include(o => o.OrderDetails)
                     .Include(o => o.ReturnProducts)
+                    .Include(o=>o.CustomerBillingAddress)
                     .Include(o => o.DeliveryCharge)
+                    .Include(o => o.DeliveryCharge.City)
                     .Where(o => o.Id == id).FirstOrDefault();
         }
 

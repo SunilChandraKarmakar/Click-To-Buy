@@ -206,24 +206,26 @@ namespace ClickToBuy.Controllers
                 int conOrderNoInt = Convert.ToInt32(lastOrderInfo.OrderNo);
                 conOrderNoInt = conOrderNoInt + 1;
 
-                Order customerOrder = new Order()
-                {
-                    OrderNo = conOrderNoInt.ToString(),
-                    CustomerId = loginCustomerId,
-                    CouponNumber = "Na",
-                    DeliveryChargeId = deliveryCharge.CityId,
-                    Status = false,
-                    OrderDate = DateTime.Now.Date
-                };
-
                 CustomerBillingAddress customerOrderBillingAddress = new CustomerBillingAddress()
                 {
                     CustomerId = loginCustomerId,
                     BillingAddress = customerBillingAddress.BillingAddress,
                 };
 
-                bool isSaveCustomerOrder = _iOrderManager.Add(customerOrder);
                 bool isSaveCustomerBillingAddress = _iCustomerBillingAddressesManager.Add(customerOrderBillingAddress);
+                customerBillingAddress = _iCustomerBillingAddressesManager.GetAll().LastOrDefault();
+                Order customerOrder = new Order()
+                {
+                    OrderNo = conOrderNoInt.ToString(),
+                    CustomerId = loginCustomerId,
+                    CustomerBillingAddressId = customerBillingAddress.Id,
+                    CouponNumber = "Na",
+                    DeliveryChargeId = deliveryCharge.CityId,
+                    Status = false,
+                    OrderDate = DateTime.Now.Date
+                };                
+
+                bool isSaveCustomerOrder = _iOrderManager.Add(customerOrder);                
                 bool isSaveCustomerOrderDetails = false;
 
                 List<AddProductViewModel> addProducts = HttpContext.Session.Get<List<AddProductViewModel>>("AddProducts");

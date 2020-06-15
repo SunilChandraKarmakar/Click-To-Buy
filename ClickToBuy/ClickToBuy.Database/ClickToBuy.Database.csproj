@@ -9,6 +9,8 @@
     <Compile Remove="Migrations\20200307060810_AddModel_Customer.Designer.cs" />
     <Compile Remove="Migrations\20200309065838_AddView_NonProductInStock.cs" />
     <Compile Remove="Migrations\20200309065838_AddView_NonProductInStock.Designer.cs" />
+    <Compile Remove="Migrations\20200615041959_UM_Order_CustomerB_A.cs" />
+    <Compile Remove="Migrations\20200615041959_UM_Order_CustomerB_A.Designer.cs" />
   </ItemGroup>
 
   <ItemGroup>

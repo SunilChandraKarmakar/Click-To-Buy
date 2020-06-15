@@ -20,5 +20,6 @@ namespace ClickToBuy.Model
         public string BillingAddress { get; set; }
 
         public Customer Customer { get; set; }
+        public ICollection<Order> Orders { get; set; }
     }
 }

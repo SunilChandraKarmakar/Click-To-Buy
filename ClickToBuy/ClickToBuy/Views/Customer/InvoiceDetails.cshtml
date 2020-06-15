@@ -3,7 +3,7 @@
 @{
     Layout = null;
     Customer customerInfo = ViewBag.CustomerInfo;
-    Order CustomerOrderInfo = ViewBag.CustomerOrderInfo;
+    Order customerOrderInfo = ViewBag.CustomerOrderInfo;
     CustomerBillingAddress customerBillingAddress = ViewBag.CustomerBillingAddress;
     double subTotal = 0;
     double total = 0;
@@ -47,8 +47,8 @@
                     <div class="pull-right">
                         <h3>Delivery Address</h3>
                         <address>
-                            @customerBillingAddress.BillingAddress <br> 
-                            @customerBillingAddress.Customer.City.Name
+                            @customerOrderInfo.CustomerBillingAddress.BillingAddress <br> 
+                            @customerOrderInfo.DeliveryCharge.City.Name
                         </address>
                     </div>
                     <!-- /pull-right -->
@@ -72,13 +72,13 @@
                             <br>
                             <div>
                                 <div class="pull-left"> ORDER NO : </div>
-                                <div class="pull-right"> @CustomerOrderInfo.OrderNo </div>
+                                <div class="pull-right"> @customerOrderInfo.OrderNo </div>
                                 <div class="clearfix"></div>
                             </div>
                             <div>
                                 <!-- /col-md-3 -->
                                 <div class="pull-left"> ORDER DATE : </div>
-                                <div class="pull-right"> @CustomerOrderInfo.OrderDate.ToString("d/M/yyyy") </div>
+                                <div class="pull-right"> @customerOrderInfo.OrderDate.ToString("d/M/yyyy") </div>
                                 <div class="clearfix"></div>
                             </div>
                             <!-- /row -->
@@ -123,7 +123,7 @@
                             </tr>
                             <tr>
                                 <td class="text-right no-border"><strong>Shipping</strong></td>
-                                <td class="text-right">@CustomerOrderInfo.DeliveryCharge.Ammount</td>
+                                <td class="text-right">@customerOrderInfo.DeliveryCharge.Ammount</td>
                             </tr>
                             <tr>
                                 <td class="text-right no-border">
@@ -131,7 +131,7 @@
                                 </td>
                                 <td class="text-right">
                                     @{ 
-                                        total = subTotal + CustomerOrderInfo.DeliveryCharge.Ammount;
+                                        total = subTotal + customerOrderInfo.DeliveryCharge.Ammount;
                                     }
                                     <strong>@total</strong>
                                 </td>

@@ -22,6 +22,9 @@ namespace ClickToBuy.Model
         [StringLength(20, MinimumLength = 8)]
         public string CouponNumber { get; set; }
 
+        [Required(ErrorMessage = "Provied customer billing address.")]
+        public int CustomerBillingAddressId { get; set; }
+
         [Required(ErrorMessage = "Select delivary please.")]
         [Display(Name = "Delivary please.")]
         public int DeliveryChargeId { get; set; }
@@ -34,6 +37,7 @@ namespace ClickToBuy.Model
         public DateTime OrderDate { get; set; }
 
         public Customer Customer { get; set; }
+        public CustomerBillingAddress CustomerBillingAddress { get; set; }
         public DeliveryCharge DeliveryCharge { get; set; }
         public ICollection<OrderDetails> OrderDetails { get; set; }
         public ICollection<ReturnProduct> ReturnProducts { get; set; }
