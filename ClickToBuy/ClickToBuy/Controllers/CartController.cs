@@ -22,11 +22,13 @@ namespace ClickToBuy.Controllers
         private readonly IOrderManager _iOrderManager;
         private readonly IOrderDetailsManager _iOrderDetailsManager;
         private readonly ICustomerBillingAddressesManager _iCustomerBillingAddressesManager;
+        private readonly IDeliveryChargeManager _iDeliveryChargeManager;
 
         public CartController(IPurchaseItemManager iPurchaseItemManager, IProductManager iProductManager,
             ICategoryManager iCategoryManager, IProductPhotoManager iProductPhotoManager,
             ICityManager iCityManager, IOrderManager iOrderManager, IOrderDetailsManager iOrderDetailsManager,
-            ICustomerBillingAddressesManager iCustomerBillingAddressesManager)
+            ICustomerBillingAddressesManager iCustomerBillingAddressesManager,
+            IDeliveryChargeManager iDeliveryChargeManager)
         {
             _iPurchaseItemManager = iPurchaseItemManager;
             _iProductManager = iProductManager;
@@ -36,6 +38,7 @@ namespace ClickToBuy.Controllers
             _iOrderManager = iOrderManager;
             _iOrderDetailsManager = iOrderDetailsManager;
             _iCustomerBillingAddressesManager = iCustomerBillingAddressesManager;
+            _iDeliveryChargeManager = iDeliveryChargeManager;
         }
 
         private ICollection<Product> ShowClinteSiteProduct()
@@ -187,6 +190,15 @@ namespace ClickToBuy.Controllers
             }
 
             return RedirectToAction("CustomerLogin", "LoginProcess");
+        }
+
+        [Route("api/[controller]/[action]")]
+        public JsonResult GetChargeByCityId(int id)
+        {
+            DeliveryCharge productDeliveryChardeInfo = _iDeliveryChargeManager.GetAll()
+                .Where(dc => dc.CityId == id).FirstOrDefault();
+            float deliveryCharge = productDeliveryChardeInfo.Ammount;
+            return Json(deliveryCharge);
         }
 
         [HttpPost]

@@ -12,6 +12,7 @@
     List<ProductPhoto> productPhotos = ViewBag.ProductPhotos;
     CustomerBillingAddress customerBillingAddress = new CustomerBillingAddress();
     DeliveryCharge deliveryCharge = new DeliveryCharge();
+    var charge = 0;
 }
 
 <!DOCTYPE html>
@@ -255,16 +256,15 @@
                             <tbody>
                                 @foreach (AddProductViewModel product in Model)
                                 {
+                                    ProductPhoto getProductPhotoByProductId = productPhotos
+                                                    .Where(pp => pp.ProductId == product.Id &&
+                                                    pp.Featured == true && pp.Status == true).FirstOrDefault();
+                                    string productPhoto = getProductPhotoByProductId == null ?
+                                        "productphotos/NoImageFound.png" : getProductPhotoByProductId.Photo;
+
                                     <tr class="rem1">
                                         <td class="invert">@(i = i + 1)</td>
                                         <td>
-                                            @{
-                                                ProductPhoto getProductPhotoByProductId = productPhotos
-                                                    .Where(pp => pp.ProductId == product.Id &&
-                                                    pp.Featured == true && pp.Status == true).FirstOrDefault();
-                                                string productPhoto = getProductPhotoByProductId == null ?
-                                                    "productphotos/NoImageFound.png" : getProductPhotoByProductId.Photo;
-                                            }
                                             <a>
                                                 <img src="@productPhoto" width="80" height="100">
                                             </a>
@@ -294,7 +294,10 @@
                 </div>
                 <div class="checkout-left">
                     <div class="col-md-4 checkout-left-basket">
-                        <h4>Total Price : @totalPrice</h4>
+                        <h4>
+                            Price : @totalPrice <br />
+                            <label id="charge"> Charge : @charge </label>
+                        </h4>
                     </div>
                     <div class="col-md-8 address_form_agile">
                         <h4>Add a new Details</h4>
@@ -303,12 +306,12 @@
                                 <div class="information-wrapper">
                                     <div class="first-row form-group">
                                         <div class="controls">
-                                            <label class="control-label">Address type: </label>
+                                            <label class="control-label">Address: </label>
                                             <textarea class="form-control" required="required" asp-for="@customerBillingAddress.BillingAddress" placeholder="Type your delivery address"></textarea>
                                         </div>
                                         <div class="controls">
-                                            <label class="control-label">City type: </label>
-                                            <select class="form-control option-w3ls" asp-for="@deliveryCharge.CityId" asp-items="ViewBag.Citys" required="required">
+                                            <label class="control-label">Select City: </label>
+                                            <select class="form-control option-w3ls" asp-for="@deliveryCharge.CityId" id="cityId" asp-items="ViewBag.Citys" required="required">
                                                 <option value="">-- Select City --</option>
                                             </select>
                                         </div>
@@ -429,6 +432,27 @@
         });
     </script>
     <!--quantity-->
+
+    <script>
+        $(document).ready(function () {
+            $("#cityId").change(function () {
+                $("#charge").empty();
+                var cityId = $("#cityId").val();
+                var serverUrl = '/api/Cart/GetChargeByCityId?id=' + cityId;
+
+                $.ajax({
+                    url: serverUrl,
+                    success: function (response) {
+                        change = response;
+                        $("#charge").append('Charge : ' + change);
+                    },
+                    error: function (response) {
+                        alert(response);
+                    }
+                });
+            });    
+        });
+    </script>
 
     <script>
         $(document).ready(function (c) {

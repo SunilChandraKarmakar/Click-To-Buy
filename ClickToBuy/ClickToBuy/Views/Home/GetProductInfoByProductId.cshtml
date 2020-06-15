@@ -1,5 +1,6 @@
 ﻿@using ClickToBuy.Model
 @using Microsoft.AspNetCore.Http; 
+@model List<Product>;
 @{
     Layout = null;
     Product productInfo = ViewBag.ProductInfo;
@@ -325,7 +326,7 @@
                     </div>
                     <div class="snipcart-item block">
                         <div class="snipcart-thumb agileinfo_single_right_snipcart">
-                            <h4>Price : @productInfo.RegularPrice BDT</h4>
+                            <h4>Price : @(productInfo.OfferPrice > 0 ? productInfo.OfferPrice : productInfo.RegularPrice) BDT</h4>
                         </div>
                         <div class="snipcart-details agileinfo_single_right_details">
                             <form method="post" asp-controller="Cart" asp-action="AddProduct" asp-route-id="@productInfo.Id">                                 
@@ -349,55 +350,74 @@
     <!-- brands -->
     <div class="w3ls_w3l_banner_nav_right_grid w3ls_w3l_banner_nav_right_grid_popular">
         <div class="container">
-            <h3>Popular Brands</h3>
-            @foreach (Brand brand in brands)
+            <h3>Related Product</h3>
+            @foreach (Product product in Model)
             {
-                if (brand.Products.Count() > 0)
+                ProductPhoto getProductPhotoByProductId2 = productPhotos
+                                                    .Where(pp => pp.ProductId == product.Id &&
+                                                    pp.Featured == true && pp.Status == true).FirstOrDefault();
+                string productPhoto2 = getProductPhotoByProductId2 == null ?
+                    "productphotos/NoImageFound.png" : getProductPhotoByProductId2.Photo;
+
+                if (product.OfferPrice > 0)
                 {
-                    <div class="w3ls_w3l_banner_nav_right_grid1">
-                        <h6>@brand.Name</h6>
-                        @if (brand.Products.Count() > 0)
-                        {
-                            @foreach (Product product in brand.Products)
-                            {
-                                <div class="col-md-3 w3ls_w3l_banner_left" style="margin-bottom: 8px">
-                                    <div class="hover14 column">
-                                        <div class="agile_top_brand_left_grid w3l_agile_top_brand_left_grid">
-                                            <div class="agile_top_brand_left_grid1">
-                                                <figure>
-                                                    <div class="snipcart-item block">
-                                                        <div class="snipcart-thumb">
-
-                                                            @{
-                                                                ProductPhoto getProductPhotoByProductId2 = productPhotos
-                                                                    .Where(pp => pp.ProductId == product.Id &&
-                                                                    pp.Featured == true && pp.Status == true).FirstOrDefault();
-                                                                string productPhoto2 = getProductPhotoByProductId2 == null ?
-                                                                    "productphotos/NoImageFound.png" : getProductPhotoByProductId2.Photo;
-                                                            }
-
-                                                            <a asp-route-id="@product.Id" asp-action="GetProductInfoByProductId" asp-controller="Home"><img src="~/@productPhoto2" height="200" /></a>
-                                                            <p>@product.Name</p>
-                                                            <h4>Price : @product.RegularPrice BDT</h4>
-                                                        </div>
-                                                        <div class="snipcart-details">
-                                                            <form method="post" asp-controller="Cart" asp-action="AddProduct" asp-route-id="@product.Id">
-                                                                <fieldset>
-                                                                    <input type="hidden" name="item_name" value="@product.Name.ToString()" />
-                                                                    <input type="hidden" name="amount" value="@Convert.ToDouble(product.RegularPrice)" />
-                                                                    <input type="submit" name="submit" value="Add to cart" class="button" />
-                                                                </fieldset>
-                                                            </form>
-                                                        </div>
-                                                    </div>
-                                                </figure>
+                    <div class="col-md-3 top_brand_left" style="margin-top: 40px">
+                        <div class="hover14 column">
+                            <div class="agile_top_brand_left_grid">
+                                <div class="agile_top_brand_left_grid_pos">
+                                    <img src="~/ClientLayout/images/offer.png" alt=" " class="img-responsive" />
+                                </div>
+                                <div class="agile_top_brand_left_grid1">
+                                    <figure>
+                                        <div class="snipcart-item block">
+                                            <div class="snipcart-thumb">
+                                                <a asp-route-id="@product.Id" asp-action="GetProductInfoByProductId" asp-controller="Home"><img src="~/@productPhoto2" height="200" /></a>
+                                                <p>@product.Name</p>
+                                                <h4>Offer Price : @product.OfferPrice BDT</h4>
+                                            </div>
+                                            <div class="snipcart-details top_brand_home_details">
+                                                <form asp-controller="Cart" asp-action="AddProduct" asp-route-id="@product.Id" method="post">
+                                                    <fieldset>
+                                                        <input type="hidden" name="item_name" value="@product.Name.ToString()" />
+                                                        <input type="hidden" name="amount" value="@Convert.ToDouble(product.RegularPrice)" />
+                                                        <input type="submit" name="submit" value="Add to cart" class="button" />
+                                                    </fieldset>
+                                                </form>
                                             </div>
                                         </div>
-                                    </div>
+                                    </figure>
                                 </div>
-                            }
-                        }
-                        <div class="clearfix"> </div>
+                            </div>
+                        </div>
+                    </div>
+                }
+                else
+                {
+                    <div class="col-md-3 top_brand_left" style="margin-top: 40px">
+                        <div class="hover14 column">
+                            <div class="agile_top_brand_left_grid">
+                                <div class="agile_top_brand_left_grid1">
+                                    <figure>
+                                        <div class="snipcart-item block">
+                                            <div class="snipcart-thumb">
+                                                <a asp-route-id="@product.Id" asp-action="GetProductInfoByProductId" asp-controller="Home"><img src="~/@productPhoto2" height="200" /></a>
+                                                <p>@product.Name</p>
+                                                <h4>Price : @product.RegularPrice BDT</h4>
+                                            </div>
+                                            <div class="snipcart-details top_brand_home_details">
+                                                <form asp-controller="Cart" asp-action="AddProduct" asp-route-id="@product.Id" method="post">
+                                                    <fieldset>
+                                                        <input type="hidden" name="item_name" value="@product.Name.ToString()" />
+                                                        <input type="hidden" name="amount" value="@Convert.ToDouble(product.RegularPrice)" />
+                                                        <input type="submit" name="submit" value="Add to cart" class="button" />
+                                                    </fieldset>
+                                                </form>
+                                            </div>
+                                        </div>
+                                    </figure>
+                                </div>
+                            </div>
+                        </div>
                     </div>
                 }
             }

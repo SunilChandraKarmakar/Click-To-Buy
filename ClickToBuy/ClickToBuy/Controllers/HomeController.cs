@@ -109,9 +109,13 @@ namespace ClickToBuy.Controllers
         [HttpGet]
         public IActionResult GetProductInfoByProductId(int id)
         {
-            ViewBag.ProductInfo = _iProductManager.GetById(id);
+            Product selectedProductInfo = _iProductManager.GetById(id);
+            List<Product> relatedProductList = ShowClinteSiteProduct()
+                .Where(scp => scp.BrandId == selectedProductInfo.BrandId).ToList();
+            relatedProductList.Remove(selectedProductInfo);
             CommonComponent();
-            return View();
+            ViewBag.ProductInfo = selectedProductInfo;
+            return View(relatedProductList);
         }
 
         [HttpGet]
