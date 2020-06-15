@@ -58,5 +58,28 @@ namespace ClickToBuy.Controllers
 
             return RedirectToAction("AdminLogin", "LoginProcess");
         }
+
+        [HttpGet]
+        public IActionResult AcceptOrder(int? id)
+        {
+            if(HttpContext.Session.GetString("AdminId") != null)
+            {
+                if (id == null)
+                    return NotFound();
+
+                Order selectedOrderDetails = _iOrderManager.GetById(id);
+
+                if (selectedOrderDetails == null)
+                    return NotFound();
+
+                selectedOrderDetails.Status = true;
+                bool isUpdate = _iOrderManager.Update(selectedOrderDetails);
+
+                if (isUpdate)
+                    return RedirectToAction("Index");
+            }
+
+            return RedirectToAction("AdminLogin", "LoginProcess");
+        }
     }
 }
