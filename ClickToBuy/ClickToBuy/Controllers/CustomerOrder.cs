@@ -81,5 +81,18 @@ namespace ClickToBuy.Controllers
 
             return RedirectToAction("AdminLogin", "LoginProcess");
         }
+
+        [HttpPost]
+        public IActionResult SearchOrder(DateTime from, DateTime to)
+        {
+            if(HttpContext.Session.GetString("AdminId") != null)
+            {
+                ICollection<Order> customerOrder = _iOrderManager.GetAll()
+                    .Where(o => o.OrderDate >= from && o.OrderDate <= to).ToList();
+                return View(customerOrder);
+            }
+
+            return RedirectToAction("AdminLogin", "LoginProcess");
+        }
     }
 }
