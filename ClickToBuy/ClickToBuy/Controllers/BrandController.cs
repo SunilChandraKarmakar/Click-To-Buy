@@ -13,11 +13,19 @@ namespace ClickToBuy.Controllers
     {
         private readonly IBrandManager _iBrandManager;
         private readonly IProductManager _iProductManager;
+        private readonly IStockProductManager _iStockProductManager;
+        private readonly IPurchaseItemManager _iPurchaseItemManager;
+        private readonly IProductPhotoManager _iProductPhotoManager;
         
-        public BrandController(IBrandManager iBrandManager, IProductManager iProductManager)
+        public BrandController(IBrandManager iBrandManager, IProductManager iProductManager,
+            IStockProductManager iStockProductManager, IPurchaseItemManager iPurchaseItemManager,
+            IProductPhotoManager iProductPhotoManager)
         {
             _iBrandManager = iBrandManager;
             _iProductManager = iProductManager;
+            _iStockProductManager = iStockProductManager;
+            _iPurchaseItemManager = iPurchaseItemManager;
+            _iProductPhotoManager = iProductPhotoManager;
         }
 
         [HttpGet]
@@ -34,6 +42,9 @@ namespace ClickToBuy.Controllers
         public IActionResult GetProductByBrand(int id)
         {
             List<Product> productList = _iProductManager.GetAll().Where(p => p.BrandId == id).ToList();
+            ViewBag.StockProductList = _iStockProductManager.GetAll();
+            ViewBag.PurchaseItems = _iPurchaseItemManager.GetAll();
+            ViewBag.ProductPhotos = _iProductPhotoManager.GetAll();
             return View(productList);
         }
 

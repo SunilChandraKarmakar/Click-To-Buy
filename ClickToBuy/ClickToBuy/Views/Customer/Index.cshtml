@@ -4,6 +4,7 @@
 @{
     ViewData["Title"] = "Index";
     Layout = "~/Views/Shared/_AdminLayout.cshtml";
+    List<Order> orders = ViewBag.Orders;
 }
 
 <div class="row content-panel mt mb">
@@ -44,8 +45,12 @@
                                 Join : @item.JoinDate.ToString("dd/MM/yyyy") <br />
                                 IP : @item.CustomerIPAddress
                             </td>
-                            <td>                               
-                                Product : @item.Products.Count()<br />
+                            <td>           
+                                @{ 
+                                    List<Order> customerOrder = orders.Where(o => o.CustomerId == item.Id 
+                                    && o.Status == true).ToList();
+                                }
+                                Order : @customerOrder.Count() <br />
                             </td>
                             <td>
                                 Address : @item.Address <br />

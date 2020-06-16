@@ -135,6 +135,7 @@
         </div>
     </div>
     <!-- //header -->
+
     <!-- products-breadcrumb -->
     <div class="products-breadcrumb">
         <div class="container">
@@ -145,6 +146,7 @@
         </div>
     </div>
     <!-- //products-breadcrumb -->
+
     <!-- banner -->
     <div class="banner">
         <div class="w3l_banner_nav_left">
@@ -252,8 +254,7 @@
                         <table id="myTable" class="table table-bordered table-striped table-condensed" width="100%">
                             <thead>
                                 <tr>
-                                    <th>Order Number</th>
-                                    <th>Date Of Order</th>
+                                    <th>Order Number / Date Of Order</th>
                                     <th>Status</th>
                                     <th>Details</th>
                                 </tr>
@@ -262,21 +263,24 @@
                                 @foreach (Order item in Model)
                                 {
                                     <tr>
-                                        <td>@item.OrderNo</td>
-                                        <td>@item.OrderDate</td>
-                                        <td>@(item.Status == false ? "Pending" : "Accept")</td>
-                                        <td><a asp-controller="Customer" asp-action="InvoiceDetails" asp-route-id="@item.Id" class="btn btn-info"><i class="fas fa-info-circle"></i> Details</a></td>
+                                        <td>
+                                            Order No : @item.OrderNo <br />
+                                            Date : @item.OrderDate.ToString("dd/MM/yyyy") <br />
+                                        </td> 
+                                        <td>
+                                            @if (item.Status == false)
+                                            {
+                                                <span class="badge badge-danger">Pending</span> <br />
+                                            }
+                                            else
+                                            {
+                                                <span class="badge badge-success">Accept</span> <br />
+                                            }
+                                        </td>
+                                        <td><a asp-controller="Customer" asp-action="InvoiceDetails" asp-route-id="@item.Id" class="btn btn-info"><i class="fas fa-info-circle"></i>&nbsp; Details</a></td>
                                     </tr>
                                 }
                             </tbody>
-                            <tfoot>
-                                <tr>
-                                    <th>Order Number</th>
-                                    <th>Date Of Order</th>
-                                    <th>Status</th>
-                                    <th>Details</th>
-                                </tr>
-                            </tfoot>
                         </table>
                     </div>
                     <div class="clearfix"> </div>
@@ -287,6 +291,7 @@
         <div class="clearfix"></div>
     </div>
     <!-- //banner -->
+
     <!-- footer -->
     <div class="footer">
         <div class="container">
@@ -365,6 +370,7 @@
         </div>
     </div>
     <!-- //footer -->
+
     <!-- Bootstrap Core JavaScript -->
     <script src="js/bootstrap.min.js"></script>
 

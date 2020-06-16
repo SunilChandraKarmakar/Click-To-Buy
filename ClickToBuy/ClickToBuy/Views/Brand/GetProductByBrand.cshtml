@@ -4,51 +4,93 @@
 @{
     ViewData["Title"] = "Get Product By Brand";
     Layout = "~/Views/Shared/_AdminLayout.cshtml";
+    List<StockProduct> stockProductList = ViewBag.StockProductList;
+    List<PurchaseItem> purchaseItems = ViewBag.PurchaseItems;
+    List<ProductPhoto> productPhotos = ViewBag.ProductPhotos;
+    int totalStockProduct = 0;
 }
 
-<h2 id="hadertitle">Product Details</h2>
-<hr />
+<div class="row content-panel mt mb">
+    <h2 id="hadertitle">Product Details</h2>
+</div>
 
-<div class="row" style="margin-top: 30px">
-    <div class="col-md-12">
-        <table id="myTable" class="display table table-bordered table-striped">
-            <thead>
-                <tr>
-                    <th>Basic Info</th>
-                    <th>Activity</th>
-                    <th>Price</th>
-                    <th>Picture</th>
-                    <th>Action</th>
-                </tr>
-            </thead>
-            <tbody>
-                @foreach (Product item in Model)
-                {
+<div class="col-lg-12" style="margin-top: 20px">
+    <div class="content-panel" style="padding:20px">
+        <section id="unseen">
+            <table id="myTable" class="table table-bordered table-striped table-condensed" width="100%">
+                <thead>
                     <tr>
-                        <td>
-                            Name : @item.Name <br />
-                            Category : @item.Category.Name <br />
-                            Brand : @item.Brand.Name <br />
-                        </td>
-                        <td>
-                            Condition : @item.Condition.Name <br />
-                            Status : @item.CloseType.Name <br />
-                            Link : @item.Link <br />
-                            Details : @item.ProductDetails
-                        </td>
-                        <td>
-                            Regular Price : @item.RegularPrice <br />
-                            Offer Price : @item.OfferPrice <br />
-                        </td>
-                        @*<td><img src="~/@item.Picture" height="100" width="90" /></td>*@
-                        <td>
-                            <a asp-route-id="@item.Id" asp-action="Update" asp-controller="Product" class="btn btn-info"><i class="far fa-edit"></i> Update</a>
-                            <a asp-route-id="@item.Id" asp-action="Remove" asp-controller="Product" class="btn btn-danger"><i class="far fa-trash-alt"></i> Remove</a>
-                        </td>
+                        <th>Basic Info</th>
+                        <th>Activity</th>
+                        <th>Price</th>
+                        <th>Picture</th>
                     </tr>
-                }
-            </tbody>
-        </table>
+                </thead>
+                <tbody>
+                    @foreach (Product item in Model)
+                    {
+                        <tr>
+                            <td>
+                                <b>Name : @item.Name</b><br />
+                                Category : @item.Category.Name <br />
+                                Brand : @item.Brand.Name <br />
+                            </td>
+                            <td>
+                                Stock : <a href="#">
+                                    @{
+                                        List<StockProduct> stockProducts = stockProductList.Where(s => s.ProductId == item.Id).ToList();
+                                        foreach (StockProduct itemForStock in stockProducts)
+                                        {
+                                            totalStockProduct = totalStockProduct + itemForStock.Quantity;
+                                        }
+                                    }
+                                    <span class="badge bg-info"> @totalStockProduct </span>
+                                </a><br />
+                                @{
+                                    totalStockProduct = 0;
+                                }
+                                Condition : @item.Condition.Name <br />
+                                Status : @item.CloseType.Name <br />
+                                Link : @item.Link <br />
+                                Details : @item.ProductDetails
+                            </td>
+                            <td>
+                                @{
+                                    PurchaseItem purchaseItemInfo = purchaseItems.Where(pi => pi.ProductId == item.Id).LastOrDefault();
+
+                                    if (purchaseItemInfo == null)
+                                        purchaseItemInfo = new PurchaseItem();
+                                }
+
+                                Pu. Price : @purchaseItemInfo.Price <br />
+                                Re. Price : @item.RegularPrice <br />
+                                Off. Price : @item.OfferPrice <br />
+                            </td>
+                            <td>
+                                @{
+                                    ProductPhoto aProductPhoto = productPhotos
+                                                .Where(pp => pp.ProductId == item.Id
+                                                && pp.Featured == true && pp.Status == true)
+                                                .FirstOrDefault();
+                                    string productPhotoName = aProductPhoto == null ?
+                                                "productphotos/NoImageFound.png" : aProductPhoto.Photo;
+                                }
+                                <img src="~/@productPhotoName" height="110" width="120" />
+                            </td>
+                        </tr>
+                    }
+                </tbody>
+                <tfoot>
+                    <tr>
+                        <th>Basic Info</th>
+                        <th>Activity</th>
+                        <th>Price</th>
+                        <th>Picture</th>
+                    </tr>
+                </tfoot>
+            </table>
+        </section>
     </div>
+    <!-- /content-panel -->
 </div>
 

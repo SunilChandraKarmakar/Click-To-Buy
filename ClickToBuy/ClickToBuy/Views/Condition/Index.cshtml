@@ -24,7 +24,6 @@
                     <tr>
                         <th>Name</th>
                         <th>Description</th>
-                        <th>Product List</th>
                         <th>Action</th>
                     </tr>
                 </thead>
@@ -33,8 +32,10 @@
                     {
                         <tr>
                             <td>@item.Name</td>
-                            <td>@item.Description</td>
-                            <td><a asp-route-id="@item.Id" asp-action="GetProductByCondition">@item.Products.Count</a></td>
+                            <td>
+                                Discription : @item.Description <br />
+                                Products : <a asp-route-id="@item.Id" asp-action="GetProductByCondition"><span class="badge bg-theme">@item.Products.Count</span></a>
+                            </td>
                             <td>
                                 <a asp-route-id="@item.Id" asp-action="Update" class="btn btn-primary btn-xs"><i class="fa fa-pencil"></i> Update</a>
                                 <a asp-route-id="@item.Id" asp-action="Remove" class="btn btn-danger btn-xs"><i class="fa fa-trash-o"></i> Remove</a>
@@ -46,7 +47,6 @@
                     <tr>
                         <th>Name</th>
                         <th>Description</th>
-                        <th>Product List</th>
                         <th>Action</th>
                     </tr>
                 </tfoot>

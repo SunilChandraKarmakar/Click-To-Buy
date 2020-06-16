@@ -142,7 +142,10 @@ namespace ClickToBuy.Controllers
         public IActionResult Index()
         {
             if (HttpContext.Session.GetString("AdminId") != null)
+            {
+                ViewBag.Orders = _iOrderManager.GetAll();
                 return View(_iCustomerManager.GetAll());
+            }
             else
                 return RedirectToAction("AdminLogin", "LoginProcess");
         }

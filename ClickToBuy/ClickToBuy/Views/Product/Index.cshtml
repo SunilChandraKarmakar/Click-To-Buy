@@ -51,7 +51,7 @@
                                             totalStockProduct = totalStockProduct + itemForStock.Quantity;
                                         }
                                     }
-                                    @totalStockProduct
+                                    <span class="badge bg-info"> @totalStockProduct </span>
                                 </a><br />
                                 @{
                                     totalStockProduct = 0;
@@ -84,11 +84,11 @@
                                 }
                                 <img src="~/@productPhotoName" height="110" width="120" />
                             </td>
-                        <td>
-                            <a asp-controller="ProductPhoto" asp-action="Create" asp-route-id="@item.Id" class="btn btn-success btn-xs"><i class="fa fa-plus-square"></i> Add Photo</a>
-                            <a asp-controller="ProductPhoto" asp-action="Index" asp-route-id="@item.Id" class="btn btn-theme02 btn-xs"><i class="fa fa-camera"></i> Photos</a>
-                            <a asp-route-id="@item.Id" asp-action="Update" class="btn btn-primary btn-xs"><i class="fa fa-pencil"></i> Update</a>
-                            <a asp-route-id="@item.Id" asp-action="Remove" class="btn btn-danger btn-xs"><i class="fa fa-trash-o"></i> Remove</a>
+                            <td>
+                                <a asp-controller="ProductPhoto" asp-action="Create" asp-route-id="@item.Id" class="btn btn-success btn-xs"><i class="fa fa-plus-square"></i> Add Photo</a>
+                                <a asp-controller="ProductPhoto" asp-action="Index" asp-route-id="@item.Id" class="btn btn-theme02 btn-xs"><i class="fa fa-camera"></i> Photos</a>
+                                <a asp-route-id="@item.Id" asp-action="Update" class="btn btn-primary btn-xs"><i class="fa fa-pencil"></i> Update</a>
+                                <a asp-route-id="@item.Id" asp-action="Remove" class="btn btn-danger btn-xs"><i class="fa fa-trash-o"></i> Remove</a>
                         </td>
                         </tr>
                     }

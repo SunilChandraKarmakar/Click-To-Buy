@@ -24,7 +24,6 @@
                     <tr>
                         <th>Name</th>
                         <th>Origin and Description</th>
-                        <th>Product List</th>
                         <th>Action</th>
                     </tr>
                 </thead>
@@ -36,9 +35,10 @@
                             <td>
                                 Origin: @item.Origin <br />
                                 Description: @item.Description <br />
-                            </td>
-                            <td>
-                                <a asp-route-id="@item.Id" asp-action="GetProductByBrand">@item.Products.Count</a>
+                                Products : 
+                                <a asp-route-id="@item.Id" asp-action="GetProductByBrand">
+                                    <span class="badge bg-info"> @item.Products.Count </span>
+                                </a>
                             </td>
                             <td>
                                 <a asp-route-id="@item.Id" asp-action="Update" class="btn btn-primary btn-xs"><i class="fa fa-pencil"></i> Update</a>
@@ -51,7 +51,6 @@
                     <tr>
                         <th>Name</th>
                         <th>Origin and Description</th>
-                        <th>Product List</th>
                         <th>Action</th>
                     </tr>
                 </tfoot>
