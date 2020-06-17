@@ -79,6 +79,7 @@ namespace ClickToBuy.Controllers
             if (HttpContext.Session.GetString("AdminId") != null)
             {
                 ViewBag.PurchasePaymentList = _iPurchasePaymentManager.GetAll();
+                ViewBag.SupplierList = SupplierList();
                 return View(_iPurchaseManager.GetAll());
             }
             else
@@ -187,6 +188,34 @@ namespace ClickToBuy.Controllers
             }
 
             return View(aPurchasePayment);
+        }
+
+        [Route("api/[controller]/[action]")]
+        public JsonResult SupplierInfo(int supplierId)
+        {
+            ICollection<Purchase> purchaseList = _iPurchaseManager.GetAll().
+                Where(p => p.SupplierId == supplierId).ToList();
+            ICollection<PurchasePayment> purchasePayments = _iPurchasePaymentManager.GetAll();
+
+            PurchasePayment supplierPurchasePayment = new PurchasePayment();
+            float payAmount = 0, dueAmount = 0;
+           
+            foreach (Purchase purchaseListItem in purchaseList)
+            {
+                foreach (PurchasePayment purchasePaymentItem in purchasePayments)
+                {
+                    if(purchasePaymentItem.PurchaseId == purchaseListItem.Id)
+                    {
+                        payAmount = payAmount + purchasePaymentItem.PayAmount;
+                        dueAmount = dueAmount + purchasePaymentItem.DueAmount;
+                    }
+                }    
+            }
+
+            supplierPurchasePayment.PayAmount = payAmount;
+            supplierPurchasePayment.DueAmount = dueAmount;
+            ViewBag.Purchases = purchaseList;
+            return Json(supplierPurchasePayment);
         }
     }
 }

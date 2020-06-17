@@ -15,6 +15,17 @@
     <div class="col-md-4">
         <a asp-action="Create" class="btn btn-success btn-lg btn-block"><i class="fas fa-plus"></i> Create Purchase</a>
     </div>
+    <select class="btn-secondary btn btn-theme02" id="supplierId" asp-items="ViewBag.SupplierList">
+        <option value=""> -- Select Supplier -- </option>
+    </select>
+</div>
+
+<div class="content-panel col-md-4" id="info" style="margin-top: 15px">
+    <div class="panel-body text-center">
+        <h3>Supplier Info</h3>
+        <hr />
+        <p style="font-size:18px" id="showInfo"></p>
+    </div>
 </div>
 
 <div class="col-lg-12" style="margin-top: 20px">
@@ -38,12 +49,12 @@
                                 Purchase Date : @item.Date
                             </td>
                             <td>
-                                Total Item : <a asp-route-id="@item.Id" asp-action="GetPurchaseItemByPurchaseId">@item.PurchaseItems.Count</a> <br />
+                                Total Item : <a asp-route-id="@item.Id" asp-action="GetPurchaseItemByPurchaseId">&nbsp; &nbsp; <span class="badge bg-warning" style="font-size: 15px"> @item.PurchaseItems.Count </span></a> <br />
                                 @{
                                     PurchasePayment aPurchasePaymentDetails = purchasePaymentList.Where(p => p.PurchaseId == item.Id).FirstOrDefault();
                                 }
-                                Pay Amount : @aPurchasePaymentDetails.PayAmount <br />
-                                Due Amount : @aPurchasePaymentDetails.DueAmount
+                                Pay Amount : <span class="badge bg-success" style="font-size: 15px"> @aPurchasePaymentDetails.PayAmount </span><br />
+                                Due Amount : <span class="badge bg-important" style="font-size: 15px"> @aPurchasePaymentDetails.DueAmount </span>
                             </td>
                             <td>
                                 <a asp-route-id="@item.Id" asp-action="Update" class="btn btn-primary btn-xs"><i class="fa fa-pencil"></i> Update</a>
@@ -64,4 +75,36 @@
     </div>
     <!-- /content-panel -->
 </div>
+
+
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+    
+    <script>
+        $(document).ready(function () {
+            $("#info").hide();
+            $("#supplierId").change(function () {
+                $("#info").show();
+                $("#showInfo").empty();
+                var supplierId = $("#supplierId").val();
+                var serverUrl = 'api/Purchase/SupplierInfo?supplierId=' + supplierId;
+
+                if (supplierId == "") {
+                    $("#info").hide();
+                }
+
+                $.ajax({
+                    url: serverUrl,
+                    success: function (response) {
+                        $('#showInfo').append("Total Payment : " + response.payAmount + "<br />"
+                                             + "Total Due : " + response.dueAmount);    
+                    },
+                    error: function (response) {
+                        alert(response);
+                    }
+                });                         
+            });
+        });
+    </script>    
+}
 
