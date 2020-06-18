@@ -7,7 +7,8 @@
     List<ProductPhoto> productPhotos = ViewBag.ProductPhotos;
     List<StockProduct> stockProductList = ViewBag.StockProductList;
     List<PurchaseItem> purchaseItems = ViewBag.PurchaseItems;
-    int totalStockProduct = 0;
+    List<OrderDetails> orderDetailsList = ViewBag.OrderDetails;
+    int stockProduct = 0, sellProduct = 0, totalStock = 0;
 }
 
 <div class="row content-panel mt mb">
@@ -36,28 +37,41 @@
                 <tbody>
                     @foreach (Product item in Model)
                     {
+                        List<StockProduct> stockProducts = stockProductList.Where(s => s.ProductId == item.Id).ToList();
+                        List<OrderDetails> sellProducts = orderDetailsList.Where(od => od.ProductId == item.Id).ToList();
+
+                        foreach (StockProduct itemForStock in stockProducts)
+                        {
+                            stockProduct = stockProduct + itemForStock.Quantity;
+                        }
+
+                        foreach (OrderDetails itemForSellProduct in sellProducts)
+                        {
+                            sellProduct = sellProduct + itemForSellProduct.Quantity;
+                        }
+
+                        totalStock = stockProduct - sellProduct;
+
                         <tr>
                             <td>
                                 <b>Name : @item.Name</b><br />
                                 Category : @item.Category.Name <br />
                                 Brand : @item.Brand.Name <br />
-                            </td>
-                            <td>
-                                Stock : <a asp-route-id="@item.Id" asp-action="GetStockByProduct">
-                                    @{
-                                        List<StockProduct> stockProducts = stockProductList.Where(s => s.ProductId == item.Id).ToList();
-                                        foreach (StockProduct itemForStock in stockProducts)
-                                        {
-                                            totalStockProduct = totalStockProduct + itemForStock.Quantity;
-                                        }
-                                    }
-                                    <span class="badge bg-info"> @totalStockProduct </span>
-                                </a><br />
-                                @{
-                                    totalStockProduct = 0;
-                                }
                                 Condition : @item.Condition.Name <br />
                                 Status : @item.CloseType.Name <br />
+                            </td>
+                            <td>
+                                Stock : <span class="badge bg-primary"> @stockProduct </span> ----> 
+                                Sell :  <span class="badge bg-warning"> @sellProduct </span> <br />
+                                Total Stock : <span class="badge bg-success"> @totalStock </span> <br />
+                                @*<a asp-route-id="@item.Id" asp-action="GetStockByProduct"></a> <br />*@
+
+                                @{
+                                    stockProduct = 0;
+                                    sellProduct = 0;
+                                    totalStock = 0;
+                                }
+
                                 Link : @item.Link <br />
                                 Details : @item.ProductDetails
                             </td>
