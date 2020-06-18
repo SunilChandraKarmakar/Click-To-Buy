@@ -217,5 +217,19 @@ namespace ClickToBuy.Controllers
             ViewBag.Purchases = purchaseList;
             return Json(supplierPurchasePayment);
         }
+
+        [HttpPost]
+        public IActionResult SearchPurchase(DateTime from, DateTime to)
+        {
+            if(HttpContext.Session.GetString("AdminId") != null)
+            {
+                ICollection<Purchase> purchases = _iPurchaseManager.GetAll()
+                    .Where(p => p.Date >= from && p.Date <= to).ToList();
+                ViewBag.PurchasePaymentList = _iPurchasePaymentManager.GetAll();
+                return View(purchases);
+            }
+
+            return RedirectToAction("AdminLogin", "LoginProcess");
+        }
     }
 }

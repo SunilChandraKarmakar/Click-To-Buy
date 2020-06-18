@@ -1,20 +1,17 @@
-﻿@using ClickToBuy.Model
-@model IEnumerable<Purchase>
+﻿@using ClickToBuy.Model;
+@model ICollection<Purchase>;
 
 @{
-    ViewData["Title"] = "Index";
+    ViewData["Title"] = "SearchPurchase";
     Layout = "~/Views/Shared/_AdminLayout.cshtml";
     List<PurchasePayment> purchasePaymentList = ViewBag.PurchasePaymentList;
 }
 
 <div class="row content-panel mt mb">
-    <h2 id="hadertitle">Purchase Details</h2>
+    <h2 id="hadertitle">Search Purchase Details</h2>
 </div>
 
 <div class="col-md-12">
-    <div class="col-md-2">
-        <a asp-action="Create" class="btn btn-success"><i class="fas fa-plus"></i> Create Purchase</a>
-    </div>
     <div class="col-md-8">
         <form method="post" asp-controller="Purchase" asp-action="SearchPurchase">
             <div class="col-md-9">
@@ -28,21 +25,11 @@
             <input type="submit" class="btn btn-theme" value="Search" />
         </form>
     </div>
-    <div class="col-md-2">
-        <select class="btn btn-theme02" id="supplierId" asp-items="ViewBag.SupplierList">
-            <option value=""> -- Select Supplier -- </option>
-        </select>
-    </div>
 </div>
-
-<div class="content-panel col-md-4" id="info" style="margin-top: 15px; margin-left: 350px">
-    <div class="panel-body text-center">
-        <h3>Supplier Info</h3>
-        <hr />
-        <p style="font-size:18px" id="showInfo">
-        </p>
-    </div>
-</div>
+<br />
+<br />
+<br />
+&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; <a asp-controller="Purchase" asp-action="Index" class="btn btn-info btn-xs"><i class="fa fa-bars"></i> Back To Purchase</a>
 
 <div class="col-lg-12" style="margin-top: 20px">
     <div class="content-panel" style="padding:20px">
@@ -91,36 +78,4 @@
     </div>
     <!-- /content-panel -->
 </div>
-
-
-@section Scripts {
-    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
-    
-    <script>
-        $(document).ready(function () {
-            $("#info").hide();
-            $("#supplierId").change(function () {
-                $("#info").show();
-                $("#showInfo").empty();
-                var supplierId = $("#supplierId").val();
-                var serverUrl = 'api/Purchase/SupplierInfo?supplierId=' + supplierId;
-
-                if (supplierId == "") {
-                    $("#info").hide();
-                }
-
-                $.ajax({
-                    url: serverUrl,
-                    success: function (response) {
-                        $('#showInfo').append("Total Payment : " + response.payAmount + "<br />"
-                                             + "Total Due : " + response.dueAmount);    
-                    },
-                    error: function (response) {
-                        alert(response);
-                    }
-                });                         
-            });
-        });
-    </script>    
-}
 
