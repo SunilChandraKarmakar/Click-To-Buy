@@ -2,6 +2,8 @@
 @model IEnumerable<Product>
 
 @{
+    ViewData["Title"] = "Search Product By Price";
+    Layout = "~/Views/Shared/_AdminLayout.cshtml";
     ViewData["Title"] = "Index";
     Layout = "~/Views/Shared/_AdminLayout.cshtml";
     List<ProductPhoto> productPhotos = ViewBag.ProductPhotos;
@@ -16,38 +18,8 @@
     <h2 id="hadertitle">Product Details</h2>
 </div>
 
-<div class="col-md-12">
-    <div class="col-md-2">
-        <a asp-action="Create" class="btn btn-success"><i class="fas fa-plus"></i> Create Product</a>
-    </div>
-    <div class="col-md-5">
-        <form asp-controller="Product" asp-action="SPCategoryOrBrand" method="post">
-            <select class="btn btn-theme02" id="categoryId" name="categoryId">
-                <option value="">-- Select Category --</option>
-                @foreach (Category parentCategory in categories)
-                {
-                    <option value="@parentCategory.Id">@parentCategory.Name</option>
+<a asp-controller="Product" asp-action="Index" class="btn btn-info btn-xs"><i class="fa fa-bars"></i> Back To Product</a>
 
-                    @foreach (Category subCategory in parentCategory.Categories)
-                    {
-                        <option value="@subCategory.Id">&nbsp; &nbsp; &nbsp; @subCategory.Name</option>
-                    }
-                }
-            </select>
-            <select class="btn btn-theme03" id="brandId" name="brandId" asp-items="ViewBag.Brands">
-                <option value="">-- Select Brand --</option>
-            </select>
-            <input type="submit" class="btn btn-theme04" value="Search" style="margin-left: 145px; margin-top: 5px" />
-        </form>
-    </div>
-    <div class="col-md-5">
-        <form asp-controller="Product" asp-action="SearchProductByPrice" method="post">
-            <input type="number" placeholder="Enter start price" name="startPrice" class="form-control" required="required" style="max-width:143px; float: left" />
-            <input type="number" placeholder="Enter end price" name="endPrice" class="form-control" required="required" style="max-width:143px; float: left" />
-            <input type="submit" class="btn btn-theme04" value="Search" style="margin-left: 6px" />
-        </form>
-    </div>
-</div>
 
 <div class="col-lg-12" style="margin-top: 20px">
     <div class="content-panel" style="padding:20px">
@@ -89,7 +61,7 @@
                                 Status : @item.CloseType.Name <br />
                             </td>
                             <td>
-                                Stock : <span class="badge bg-primary"> @stockProduct </span> ----> 
+                                Stock : <span class="badge bg-primary"> @stockProduct </span> ---->
                                 Sell :  <span class="badge bg-warning"> @sellProduct </span> <br />
                                 Total Stock : <span class="badge bg-success"> @totalStock </span> <br />
                                 @*<a asp-route-id="@item.Id" asp-action="GetStockByProduct"></a> <br />*@
@@ -103,8 +75,8 @@
                                 Link : @item.Link <br />
                                 Details : @item.ProductDetails
                             </td>
-                            <td>          
-                                @{ 
+                            <td>
+                                @{
                                     PurchaseItem purchaseItemInfo = purchaseItems.Where(pi => pi.ProductId == item.Id).LastOrDefault();
 
                                     if (purchaseItemInfo == null)
@@ -118,7 +90,7 @@
                             <td>
                                 @{
                                     ProductPhoto aProductPhoto = productPhotos
-                                                .Where(pp => pp.ProductId == item.Id 
+                                                .Where(pp => pp.ProductId == item.Id
                                                 && pp.Featured == true && pp.Status == true)
                                                 .FirstOrDefault();
                                     string productPhotoName = aProductPhoto == null ?
@@ -131,7 +103,7 @@
                                 <a asp-controller="ProductPhoto" asp-action="Index" asp-route-id="@item.Id" class="btn btn-theme02 btn-xs"><i class="fa fa-camera"></i> Photos</a>
                                 <a asp-route-id="@item.Id" asp-action="Update" class="btn btn-primary btn-xs"><i class="fa fa-pencil"></i> Update</a>
                                 <a asp-route-id="@item.Id" asp-action="Remove" class="btn btn-danger btn-xs"><i class="fa fa-trash-o"></i> Remove</a>
-                        </td>
+                            </td>
                         </tr>
                     }
                 </tbody>

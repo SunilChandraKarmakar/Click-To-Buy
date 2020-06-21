@@ -9,6 +9,7 @@ using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
+using Newtonsoft.Json;
 
 namespace ClickToBuy.Controllers
 {
@@ -47,21 +48,6 @@ namespace ClickToBuy.Controllers
             _iProductPhotoManager = iProductPhotoManager;
             _iPurchaseItemManager = iPurchaseItemManager;
             _iOrderDetailsManager = iOrderDetailsManager;
-        }
-
-        [HttpGet]
-        public IActionResult Index()
-        {
-            if (HttpContext.Session.GetString("AdminId") != null)
-            {
-                ViewBag.ProductPhotos = _iProductPhotoManager.GetAll();
-                ViewBag.StockProductList = _iStockProductManager.GetAll();
-                ViewBag.PurchaseItems = _iPurchaseItemManager.GetAll();
-                ViewBag.OrderDetails = _iOrderDetailsManager.GetAll(); 
-                return View(_iProductManager.GetAll());
-            }
-            else
-                return RedirectToAction("AdminLogin", "LoginProcess");
         }
 
         private List<SelectListItem> CategoryList()
@@ -108,6 +94,31 @@ namespace ClickToBuy.Controllers
             return closeTypeList;
         }
 
+        private void CommonComponent()
+        {
+            ViewBag.ProductPhotos = _iProductPhotoManager.GetAll();
+            ViewBag.StockProductList = _iStockProductManager.GetAll();
+            ViewBag.PurchaseItems = _iPurchaseItemManager.GetAll();
+            ViewBag.OrderDetails = _iOrderDetailsManager.GetAll();
+            ViewBag.Brands = BrandList();
+            ViewBag.CategoryList = CategoryList();
+            ViewBag.ConditionList = ConditionList();
+            ViewBag.CloseTypeList = CloseTypeList();
+            ViewBag.Categorys = _iCategoryManager.GetAll().Where(c => c.Categoryy == null).ToList();
+        }
+
+        [HttpGet]
+        public IActionResult Index()
+        {
+            if (HttpContext.Session.GetString("AdminId") != null)
+            {
+                CommonComponent();                  
+                return View(_iProductManager.GetAll());
+            }
+            else
+                return RedirectToAction("AdminLogin", "LoginProcess");
+        }
+
         [HttpGet]
         public IActionResult GetStockByProduct(int id)
         {
@@ -125,10 +136,7 @@ namespace ClickToBuy.Controllers
         {
             if (HttpContext.Session.GetString("AdminId") != null)
             {
-                ViewBag.CategoryList = CategoryList();
-                ViewBag.BrandList = BrandList();
-                ViewBag.ConditionList = ConditionList();
-                ViewBag.CloseTypeList = CloseTypeList();
+                CommonComponent();
                 return View();
             }
             else
@@ -160,10 +168,7 @@ namespace ClickToBuy.Controllers
                     ViewBag.ErrorMessage = "Product save has been failed!";
             }
 
-            ViewBag.CategoryList = CategoryList();
-            ViewBag.BrandList = BrandList();
-            ViewBag.ConditionList = ConditionList();
-            ViewBag.CloseTypeList = CloseTypeList();
+            CommonComponent();
             return View(aProduct);
         }
 
@@ -180,10 +185,7 @@ namespace ClickToBuy.Controllers
                 if (aProductDetails == null)
                     return NotFound();
 
-                ViewBag.CategoryList = CategoryList();
-                ViewBag.BrandList = BrandList();
-                ViewBag.ConditionList = ConditionList();
-                ViewBag.CloseTypeList = CloseTypeList();
+                CommonComponent();
                 return View(aProductDetails);
             }
             else
@@ -204,10 +206,7 @@ namespace ClickToBuy.Controllers
                     ViewBag.ErrorMessage = "Product update has been failed!";
             }
 
-            ViewBag.CategoryList = CategoryList();
-            ViewBag.BrandList = BrandList();
-            ViewBag.ConditionList = ConditionList();
-            ViewBag.CloseTypeList = CloseTypeList();
+            CommonComponent();
             return View(aProduct);
         }
 
@@ -224,10 +223,7 @@ namespace ClickToBuy.Controllers
                 if (aProductDetails == null)
                     return NotFound();
 
-                ViewBag.CategoryList = CategoryList();
-                ViewBag.BrandList = BrandList();
-                ViewBag.ConditionList = ConditionList();
-                ViewBag.CloseTypeList = CloseTypeList();
+                CommonComponent();
                 return View(aProductDetails);
             }
             else
@@ -243,6 +239,79 @@ namespace ClickToBuy.Controllers
                 return RedirectToAction("Index");
             else
                 return ViewBag.ErrorMessage = "Product remove has been failed!";
+        }
+
+        [HttpPost]
+        public IActionResult SPCategoryOrBrand(int? categoryId, int? brandId)
+        {
+            if(HttpContext.Session.GetString("AdminId") != null)
+            {
+                if(categoryId != null && brandId != null)
+                {                       
+                    return RedirectToAction("CategoryAndBrandProducts", new { categoryId = categoryId, brandId = brandId});
+                }
+
+                if (categoryId != null && brandId == null)
+                    return RedirectToAction("GetProductByCategory", new { categoryId = categoryId });
+
+                if (categoryId == null && brandId != null)
+                    return RedirectToAction("GetProductByBrand", new { brandId = brandId });
+
+                return RedirectToAction("Index");
+            }
+            return RedirectToAction("AdminLogin", "LoginProcess");
+        }
+
+        [HttpGet]
+        public IActionResult CategoryAndBrandProducts(int categoryId, int brandId)
+        {
+            if(HttpContext.Session.GetString("AdminId") != null)
+            {
+                List<Product> getProductByCategoryAndBrand = _iProductManager.GetAll()
+                .Where(p => p.CategoryId == categoryId && p.BrandId == brandId).ToList();
+
+                CommonComponent();
+                return View(getProductByCategoryAndBrand);
+            }
+
+            return RedirectToAction("AdminLogin", "LoginProcess");
+        }
+
+        [HttpGet]
+        public IActionResult GetProductByCategory(int categoryId)
+        {
+            if(HttpContext.Session.GetString("AdminId") != null)
+            {
+                CommonComponent();
+                return View(_iProductManager.GetAll().Where(p => p.CategoryId == categoryId).ToList());
+            }
+
+            return RedirectToAction("AdminLogin", "LoginProcess");
+        }
+
+        [HttpGet]
+        public IActionResult GetProductByBrand(int brandId)
+        {
+            if(HttpContext.Session.GetString("AdminId") != null)
+            {
+                CommonComponent();
+                return View(_iProductManager.GetAll().Where(p => p.BrandId == brandId).ToList());
+            }
+
+            return RedirectToAction("AdminLogin", "LoginProcess");
+        }
+
+        [HttpPost]
+        public IActionResult SearchProductByPrice(float startPrice, float endPrice)
+        {
+            if(HttpContext.Session.GetString("AdminId") != null)
+            {
+                CommonComponent();
+                return View(_iProductManager.GetAll().Where(p => p.RegularPrice >= startPrice &&
+                p.RegularPrice <= endPrice).ToList());
+            }
+
+            return RedirectToAction("AdminLogin", "LoginProcess");
         }
     }
 }

@@ -1,8 +1,10 @@
-﻿@model ClickToBuy.Model.Product
+﻿@using ClickToBuy.Model;
+@model Product
 
 @{
     ViewData["Title"] = "Remove";
     Layout = "~/Views/Shared/_AdminLayout.cshtml";
+    List<ProductPhoto> productPhotos = ViewBag.ProductPhotos;
 }
 
 <div class="row content-panel mt mb">
@@ -69,10 +71,13 @@
             </dl>
         </div>
         <div class="col-md-6">
-            @*@{
-                var photo = (Model.Picture != null ? Model.Picture : "NoImageFound.png");
-                <img src="~/@photo" class="img-responsive"/>
-             }*@
+            @{ 
+                ProductPhoto productPhoto = productPhotos.Where(pp => pp.ProductId == Model.Id
+                && pp.Status == true && pp.Featured == true).FirstOrDefault();
+                string photoName = productPhoto.Photo == null ? "NoImageFound.png" : productPhoto.Photo;
+            }
+
+            <img src="~/@photoName" class="img-responsive"/>
         </div>
         <form asp-action="Remove" id="createandeditfrom">
             <input type="hidden" asp-for="Id" />

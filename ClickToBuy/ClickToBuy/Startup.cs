@@ -22,6 +22,7 @@ using AutoMapper;
 using Microsoft.AspNetCore.Mvc;
 using Newtonsoft.Json;
 using Microsoft.CodeAnalysis.Options;
+using Newtonsoft.Json.Serialization;
 
 namespace ClickToBuy
 {

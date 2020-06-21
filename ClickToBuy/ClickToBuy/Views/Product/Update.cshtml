@@ -54,7 +54,7 @@
                 <div class="form-group">
                     <label asp-for="BrandId" class="control-label col-lg-2">Brand</label>
                     <div class="col-lg-8">
-                        <select asp-for="BrandId" asp-items="@ViewBag.BrandList" class="form-control">
+                        <select asp-for="BrandId" asp-items="@ViewBag.Brands" class="form-control">
                         </select>
                         <span asp-validation-for="BrandId" class="text-danger"></span>
                     </div>
