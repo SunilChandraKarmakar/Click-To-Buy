@@ -73,8 +73,10 @@
                                 Due Amount : <span class="badge bg-warning" style="font-size: 15px"> @aPurchasePaymentDetails.DueAmount </span>
                             </td>
                             <td>
-                                <a asp-route-id="@item.Id" asp-action="Update" class="btn btn-primary btn-xs"><i class="fa fa-pencil"></i> Update</a>
-                                <a asp-route-id="@item.Id" asp-action="Remove" class="btn btn-danger btn-xs"><i class="fa fa-trash-o"></i> Remove</a>
+                                @if (item.PurchasePayment.DueAmount > 0)
+                                {
+                                    <a asp-route-id="@item.Id" asp-action="Update" class="btn btn-primary btn-xs"><i class="fa fa-pencil"></i> Update</a>
+                                }
                             </td>
                         </tr>
                     }

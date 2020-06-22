@@ -18,12 +18,16 @@ namespace ClickToBuy.Controllers
         private readonly IStockProductManager _iStockProductManager;
         private readonly IPurchaseManager _iPurchaseManager;
         private readonly IOrderManager _iOrderManager;
+        private readonly IPurchasePaymentManager _iPurchasePaymentManager;
+        private readonly IOrderDetailsManager _iOrderDetailsManager;
 
         public DashboardController(IProductManager iProductManager,
                                     IBrandManager iBrandManager,
                                     ICategoryManager iCategoryManager, 
                                     ICustomerManager iCustomerManager, IStockProductManager iStockProductManager,
-                                    IPurchaseManager iPurchaseManager, IOrderManager iOrderManager)
+                                    IPurchaseManager iPurchaseManager, IOrderManager iOrderManager,
+                                    IPurchasePaymentManager iPurchasePaymentManager,
+                                    IOrderDetailsManager iOrderDetailsManager)
         {
             _iProductManager = iProductManager;
             _iBrandManager = iBrandManager;
@@ -32,6 +36,32 @@ namespace ClickToBuy.Controllers
             _iStockProductManager = iStockProductManager;
             _iPurchaseManager = iPurchaseManager;
             _iOrderManager = iOrderManager;
+            _iPurchasePaymentManager = iPurchasePaymentManager;
+            _iOrderDetailsManager = iOrderDetailsManager;
+        }
+
+        private double TotalSell()
+        {
+            double total = 0, subTotal = 0;
+            ICollection<Order> orders = _iOrderManager.GetAll().Where(o => o.Status == true).ToList();
+            ICollection<OrderDetails> orderDetails = _iOrderDetailsManager.GetAll();
+            
+            foreach (Order orderItem in orders)
+            {
+                foreach (OrderDetails orderDetailsItem in orderDetails)
+                {
+                    if (orderDetailsItem.OrderId == orderItem.Id)
+                    {
+                        Product aProductInfo = _iProductManager.GetById(orderDetailsItem.ProductId);
+                        double price = Convert.ToDouble(aProductInfo.OfferPrice > 0 ? 
+                            aProductInfo.OfferPrice : aProductInfo.RegularPrice);
+                        subTotal = price * orderDetailsItem.Quantity;
+                        total = total + subTotal;
+                    }
+                }
+            }
+
+            return total;
         }
 
         [HttpGet]
@@ -47,6 +77,7 @@ namespace ClickToBuy.Controllers
                 ICollection<Purchase> purchasesList = _iPurchaseManager.GetAll();
                 ICollection<Order> customerOrder = _iOrderManager.GetAll()
                                                    .Where(co => co.Status == false).ToList();
+                ICollection<PurchasePayment> purchasePayments = _iPurchasePaymentManager.GetAll();
 
                 int toralQuantityOfProduct = 0;
                 foreach (StockProduct item in stockProducts)
@@ -55,6 +86,10 @@ namespace ClickToBuy.Controllers
                     toralQuantityOfProduct = itemQuantity + toralQuantityOfProduct;
                 }
 
+                double totalPurhase = 0;
+                foreach (PurchasePayment item in purchasePayments)
+                    totalPurhase = totalPurhase + item.PayAmount;
+
                 ViewBag.ProductCount = products.Count();
                 ViewBag.BrandCount = brands.Count();
                 ViewBag.CategoryCount = categories.Count();
@@ -62,6 +97,8 @@ namespace ClickToBuy.Controllers
                 ViewBag.StockProductCount = toralQuantityOfProduct;
                 ViewBag.PurchaseCount = purchasesList.Count();
                 ViewBag.CustomerOrder = customerOrder.Count();
+                ViewBag.TotalPurchase = totalPurhase;
+                ViewBag.TotalSell = TotalSell();
                 return View();
             }
             else

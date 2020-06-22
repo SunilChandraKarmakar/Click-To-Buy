@@ -163,8 +163,8 @@ namespace ClickToBuy.Controllers
                     return NotFound();
 
                 PurchasePayment aPurchasePaymentDetails = _iPurchasePaymentManager.GetAll()
-                                                                                  .Where(p => p.PurchaseId == id)
-                                                                                  .FirstOrDefault();
+                                                            .Where(p => p.PurchaseId == id)
+                                                            .FirstOrDefault();
                 if (aPurchasePaymentDetails == null)
                     return NotFound();
 
