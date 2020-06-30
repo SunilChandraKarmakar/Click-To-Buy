@@ -278,6 +278,13 @@
                     </ul>
                 </div>
             </nav>
+            
+            <form method="post" asp-controller="Home" asp-action="SearchProductByPrice" style="text-align:center">
+                <input type="number" name="startprice" placeholder="Start Price" class="form-control" min="1" required="required" />
+                <input type="number" name="endprice" placeholder="End Price" class="form-control" min="100" required="required" />
+                <input type="submit" value="Search Product" class="btn btn-info text-center" />
+            </form>
+
         </div>
 
         <div class="w3l_banner_nav_right">

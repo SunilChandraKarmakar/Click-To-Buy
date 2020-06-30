@@ -78,7 +78,7 @@
                         <div class="w3ls_vegetables">
                             <ul class="dropdown-menu drp-mnu">
                                 <li><a asp-controller="Customer" asp-action="Profile">My Profile</a></li>
-                                <li><a href="login.html">Invoice Management</a></li>
+                                <li><a asp-controller="Customer" asp-action="InvoiceManagement">Invoice Management</a></li>
                                 <li><a asp-controller="LoginProcess" asp-action="CustomerLogout">Logout</a></li>
                             </ul>
                         </div>
@@ -239,6 +239,13 @@
                         </li>
                     </ul>
                 </div>
+
+                <form method="post" asp-controller="Home" asp-action="SearchProductByPrice" style="text-align:center">
+                    <input type="number" name="startprice" placeholder="Start Price" class="form-control" min="1" required="required" />
+                    <input type="number" name="endprice" placeholder="End Price" class="form-control" min="100" required="required" />
+                    <input type="submit" value="Search Product" class="btn btn-info text-center" />
+                </form>
+
             </nav>
         </div>
 

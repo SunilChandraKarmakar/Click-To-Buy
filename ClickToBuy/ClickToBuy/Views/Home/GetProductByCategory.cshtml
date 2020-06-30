@@ -199,7 +199,7 @@
                                     @foreach (Brand brand in brands)
                                     {
                                         <ul>
-                                            <li><a asp-action="GetProductByBrand" asp-controller="Home" asp-route-id="@brand.Id">@brand.Name ( @clinteProductList.Where(p=>p.BrandId == brand.Id).Count() )</a></li>
+                                            <li><a asp-action="GetProductByBrand" asp-controller="Home" asp-route-id="@brand.Id">@brand.Name ( @clinteProductList.Where(p => p.BrandId == brand.Id).Count() )</a></li>
                                         </ul>
                                     }
                                 </div>
@@ -272,6 +272,13 @@
                     </ul>
                 </div>
             </nav>
+
+            <form method="post" asp-controller="Home" asp-action="SearchProductByPrice" style="text-align:center">
+                <input type="number" name="startprice" placeholder="Start Price" class="form-control" min="1" required="required" />
+                <input type="number" name="endprice" placeholder="End Price" class="form-control" min="100" required="required" />
+                <input type="submit" value="Search Product" class="btn btn-info text-center" />
+            </form>
+
         </div>
 
         <div class="w3l_banner_nav_right">

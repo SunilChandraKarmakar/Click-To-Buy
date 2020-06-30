@@ -8,6 +8,7 @@ using Microsoft.Extensions.Logging;
 using ClickToBuy.Models;
 using ClickToBuy.Manager.Contracts;
 using ClickToBuy.Model;
+using System.Security;
 
 namespace ClickToBuy.Controllers
 {
@@ -145,6 +146,20 @@ namespace ClickToBuy.Controllers
                 .Where(p => p.Name.Contains(productname)).ToList();
             CommonComponent();
             return View(searchProducts);
+        }
+
+        [HttpPost]
+        public IActionResult SearchProductByPrice(float? startprice, float? endprice)
+        {
+            if (startprice == null || endprice == null || startprice < 0 || endprice < 100)
+                return RedirectToAction("Index");
+
+            ICollection<Product> searchProductByPrice = ShowClinteSiteProduct()
+                .Where(p => p.RegularPrice >= startprice && p.RegularPrice <= endprice ||
+                p.OfferPrice >= startprice && p.OfferPrice <= endprice).ToList();
+
+            CommonComponent();
+            return View(searchProductByPrice);
         }
 
         public IActionResult Privacy()
