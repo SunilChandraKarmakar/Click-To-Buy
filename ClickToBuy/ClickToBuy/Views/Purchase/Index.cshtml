@@ -73,7 +73,12 @@
                                 Due Amount : <span class="badge bg-warning" style="font-size: 15px"> @aPurchasePaymentDetails.DueAmount </span>
                             </td>
                             <td>
-                                @if (item.PurchasePayment.DueAmount > 0)
+                                @{ 
+                                    PurchasePayment purchasePaymentInfo = purchasePaymentList
+                                        .Where(pp => pp.PurchaseId == item.Id).FirstOrDefault();
+                                 }
+
+                                @if (purchasePaymentInfo.DueAmount > 0)
                                 {
                                     <a asp-route-id="@item.Id" asp-action="Update" class="btn btn-primary btn-xs"><i class="fa fa-pencil"></i> Update</a>
                                 }
